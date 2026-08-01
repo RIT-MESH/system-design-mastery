@@ -1,0 +1,8 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Limiter store down"]
+  R2["fail-open allow to avoid blocking all tr"]
+  C1 --> R2
+  C3["In-process cache skew"]
+  R4["slight over-allow on some gateways."]
+  C3 --> R4

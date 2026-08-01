@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 double-entry ledger + sync replication."]
+  S2["Stage 2 sharded by account + reconciliation."]
+  S3["Stage 3 cross-region DR, regulatory retention."]
+  S4["Stage 4 globally-consistent multi-region, real-time r"]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4

@@ -121,8 +121,42 @@ Clarify burstiness, isolation, caching. Surface queue + ephemeral runners + dep 
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/ci-platform/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/ci-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Trigger svc
+  participant P1 as Job queue
+  P0 ->> P1: request
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Runner dies mid-job"]
+  R2["requeue idempotent"]
+  C1 --> R2
+  C3["Cache miss"]
+  R4["slower build, no failure"]
+  C3 --> R4
+  C5["Artifact store down"]
+  R6["uploads retry."]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 queue + runners."]
+  S2["Stage 2 autoscaling + dep caching."]
+  S3["Stage 3 hosted runners, flaky-test detection."]
+  S4["Stage 4 multi-region, predictive pre-warm."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 29. Further reading
 
 Queues: Level 2; isolation/containers: Level 9; caching: Level 2.

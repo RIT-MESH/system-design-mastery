@@ -16,8 +16,42 @@ flowchart LR
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/iot-platform/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/iot-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Devices, intermittent
+  participant P1 as IoT gateway broker
+  P0 ->> P1: request
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Broker down"]
+  R2["devices reconnect to another stagger to"]
+  C1 --> R2
+  C3["Twin shard down"]
+  R4["those twins unavailable read last-known"]
+  C3 --> R4
+  C5["Command queue down"]
+  R6["commands re-queued."]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 gateway + twins + commands."]
+  S2["Stage 2 sharded brokers + tiered telemetry."]
+  S3["Stage 3 reconnect staggering, fan-out analytics."]
+  S4["Stage 4 edge compute, OTA, multi-region."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 1. Problem statement
 
 Ingest telemetry from billions of intermittently-connected devices, maintain per-device digital twins, and support bidirectional commands at fleet scale.

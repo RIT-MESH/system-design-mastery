@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Online Multiplayer Game
+  participant P2 as Store
+  P0 ->> P1: request
+  P1 ->> P2: process
+  P2 -->> P1: response
+  P1 -->> P0: response

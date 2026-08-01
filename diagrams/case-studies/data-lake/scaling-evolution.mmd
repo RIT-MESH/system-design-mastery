@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 ingest + object storage + catalog."]
+  S2["Stage 2 partitioning + scan engine."]
+  S3["Stage 3 governance, lineage, lifecycle."]
+  S4["Stage 4 lakehouse ACID, federated query."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4

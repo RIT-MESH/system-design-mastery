@@ -120,8 +120,45 @@ Clarify offline, concurrency, no-lost-edits. Surface CRDT/OT, op log, offline me
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/collaborative-document-editor/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/collaborative-document-editor/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Collaborative Document Edito
+  participant P2 as Store
+  P0 ->> P1: request
+  P1 ->> P2: process
+  P2 -->> P1: response
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Relay down"]
+  R2["clients reconnect to another"]
+  C1 --> R2
+  C3["Doc shard down"]
+  R4["promote"]
+  C3 --> R4
+  C5["Offline"]
+  R6["local ops merge later."]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 op relay + CRDT."]
+  S2["Stage 2 per-doc sharding + snapshots."]
+  S3["Stage 3 offline + merge at scale."]
+  S4["Stage 4 large docs, presence fan-out."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 29. Further reading
 
 CRDTs: Level 4; real-time: Level 10; op log/event sourcing: Level 5.

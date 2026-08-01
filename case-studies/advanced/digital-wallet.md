@@ -121,8 +121,45 @@ Clarify double-spend, latency, rails. Surface atomic debit/credit, the append-on
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/digital-wallet/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/digital-wallet/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Digital Wallet
+  participant P2 as Store
+  P0 ->> P1: request
+  P1 ->> P2: process
+  P2 -->> P1: response
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Transfer mid-way fail"]
+  R2["atomic rollback no partial"]
+  C1 --> R2
+  C3["Rail timeout"]
+  R4["pending + reconcile"]
+  C3 --> R4
+  C5["Ledger shard down"]
+  R6["transfers for those accounts fail no dou"]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 balances + transfers."]
+  S2["Stage 2 sharded accounts + ledger."]
+  S3["Stage 3 multi-currency, cards."]
+  S4["Stage 4 multi-region with regional balances."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 29. Further reading
 
 Ledger/payment: Level 10; transactions: Level 4; idempotency: Level 4.

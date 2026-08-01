@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 rules-based scoring."]
+  S2["Stage 2 ML scoring + feature store."]
+  S3["Stage 3 real-time features + hourly retrain."]
+  S4["Stage 4 graph-based rings, multi-region."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4

@@ -1,4 +1,4 @@
-﻿# Case Study: Search Autocomplete
+# Case Study: Search Autocomplete
 
 > **Tier:** intermediate · **Status:** draft · Original numbers and diagrams.
 
@@ -116,8 +116,46 @@ Clarify QPS, latency SLA, personalization. Surface the per-keystroke latency con
 in-memory index, and graceful degradation.
 
 ## 28. Original Mermaid diagrams
-`diagrams/case-studies/search-autocomplete/context.mmd`; key diagram inline above.
 
+Standalone sources under `diagrams/case-studies/search-autocomplete/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
+
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Search Autocomplete
+  participant P2 as Store
+  P0 ->> P1: request
+  P1 ->> P2: process
+  P2 -->> P1: response
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Suggest service down"]
+  R2["degrade to no-suggestions or static top"]
+  C1 --> R2
+  C3["replica stale"]
+  R4["slightly old results"]
+  C3 --> R4
+  C5["Hot prefix overwhelms a shard"]
+  R6["replicate it."]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 in-memory trie + edge cache."]
+  S2["Stage 2 sharded prefix index + read replicas."]
+  S3["Stage 3 per-prefix top-k precomputation + trends."]
+  S4["Stage 4 ML ranking, personalization."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 29. Further reading
 Search/inverted index: Level 2/3; caching: Level 2; skew/hot keys: Level 3.
 

@@ -1,4 +1,4 @@
-﻿# Level 3 — Data and Storage Architecture
+# Level 3 — Data and Storage Architecture
 
 Choosing, structuring, distributing, and operating data stores. The core of most design decisions.
 
@@ -6,14 +6,13 @@ Choosing, structuring, distributing, and operating data stores. The core of most
 
 | Status | File | Topic |
 |:------:|------|-------|
-| PLANNED | $ch.f | RDBMS and the NoSQL families (key-value, document, column-family, graph, time-series, search, vector); SQL vs NoSQL |
-| PLANNED | $ch.f | Normalization, denormalization, indexing, composite and covering indexes |
-| PLANNED | $ch.f | Replication: leader-follower, multi-leader, leaderless |
-| PLANNED | $ch.f | Partitioning, sharding, consistent hashing, federation |
-| PLANNED | $ch.f | Change Data Capture, materialized views, hot/warm/cold storage, data lifecycle |
-| PLANNED | $ch.f | Multi-tenancy, unique ID generation (Snowflake, UUIDs) |
-| PLANNED | $ch.f | Database migrations, backup, restoration, point-in-time recovery |
-
+| Done | `00-rdbms-vs-nosql.md` | RDBMS and the NoSQL Families |
+| Done | `01-normalization-indexing.md` | Normalization, Denormalization & Indexing |
+| Done | `02-replication.md` | Replication Topologies |
+| Done | `03-partitioning-sharding.md` | Partitioning, Sharding & Consistent Hashing |
+| Done | `04-cdc-materialized-views.md` | CDC, Materialized Views & Data Lifecycle |
+| Done | `05-id-generation.md` | ID Generation & Multi-tenancy |
+| Done | `06-migrations-backups.md` | Database Migrations, Backup & Point-in-Time Recovery |
 ## How to read this level
 
 Read chapters in order. Each chapter is independently navigable and ends with

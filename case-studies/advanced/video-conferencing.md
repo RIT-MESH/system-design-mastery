@@ -15,8 +15,42 @@ flowchart LR
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/video-conferencing/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/video-conferencing/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Signaling
+  participant P1 as Room svc
+  P0 ->> P1: request
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["SFU down"]
+  R2["call drops or migrates to another SFU be"]
+  C1 --> R2
+  C3["Participant network loss"]
+  R4["jitter buffer"]
+  C3 --> R4
+  C5["Signaling down"]
+  R6["can't start calls."]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 signaling + SFU."]
+  S2["Stage 2 per-call SFU + presence."]
+  S3["Stage 3 simulcast multilayer + recording."]
+  S4["Stage 4 large webinars one-to-many , multi-region."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 1. Problem statement
 
 Real-time multiparty audio/video calls: low-latency media transport, selective forwarding, and presence — a stateful, real-time media system.

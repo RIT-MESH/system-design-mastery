@@ -1,4 +1,4 @@
-﻿# Case Study: Web Crawler
+# Case Study: Web Crawler
 
 > **Tier:** beginner · **Status:** draft · Original numbers and diagrams.
 
@@ -119,8 +119,43 @@ Clarify scale, politeness, recrawl policy, dedup. Surface per-host frontier and 
 politeness-vs-throughput trade.
 
 ## 28. Original Mermaid diagrams
-`diagrams/case-studies/web-crawler/context.mmd`; key diagram inline above.
 
+Standalone sources under `diagrams/case-studies/web-crawler/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
+
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Seed URLs
+  participant P1 as URL frontier<br > per-host q
+  P0 ->> P1: request
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Worker dies mid-fetch"]
+  R2["URL requeued idempotent fetch"]
+  C1 --> R2
+  C3["Frontier shard down"]
+  R4["its hosts"]
+  C3 --> R4
+  C5["Store down"]
+  R6["workers backpressure, pause."]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 single queue + workers."]
+  S2["Stage 2 per-host frontier for politeness."]
+  S3["Stage 3 sharded frontier + content dedup + recrawl pr"]
+  S4["Stage 4 prioritized"]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 29. Further reading
 Queues: Level 2; dedup/hashing: Level 4; object storage: Level 2.
 

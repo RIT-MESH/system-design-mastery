@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Leader down"]
+  R2["elect new"]
+  C1 --> R2
+  C3["leases via TTL expire"]
+  R4["reassign"]
+  C3 --> R4
+  C5["Worker down"]
+  R6["lease expires -> rerun idempotent jobs"]
+  C5 --> R6

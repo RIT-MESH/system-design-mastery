@@ -15,8 +15,42 @@ flowchart LR
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/search-engine/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/search-engine/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Crawl
+  participant P1 as Index builder
+  P0 ->> P1: request
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Shard down"]
+  R2["partial results warn or fail"]
+  C1 --> R2
+  C3["Index rebuild slow"]
+  R4["serve old version"]
+  C3 --> R4
+  C5["Gather node down"]
+  R6["retry."]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 crawl + index + query."]
+  S2["Stage 2 sharded index + gather."]
+  S3["Stage 3 streaming freshness + ranking signals."]
+  S4["Stage 4 multi-region, personalization."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 1. Problem statement
 
 Crawl, index, and rank web-scale documents and answer text queries in milliseconds — a sharded inverted-index + ranking system.

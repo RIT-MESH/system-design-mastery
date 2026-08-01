@@ -1,4 +1,4 @@
-﻿# Level 1 — System Design Foundations
+# Level 1 — System Design Foundations
 
 The vocabulary and estimating skills that make every later level intelligible: requirements, quality attributes, capacity, scaling, redundancy.
 
@@ -6,11 +6,10 @@ The vocabulary and estimating skills that make every later level intelligible: r
 
 | Status | File | Topic |
 |:------:|------|-------|
-| DONE | $ch.f | Functional/non-functional requirements, constraints, assumptions, availability, reliability, durability, maintainability |
-| DONE | $ch.f | Capacity planning: RPS, storage, bandwidth, latency, throughput, read/write heavy, vertical/horizontal scaling |
-| PLANNED | $ch.f | Scaling in practice; stateless vs stateful services |
-| PLANNED | $ch.f | Redundancy, fault tolerance, single points of failure, graceful degradation |
-
+| Done | `00-requirements-and-quality-attributes.md` | Requirements & Quality Attributes |
+| Done | `01-capacity-planning.md` | Capacity Planning |
+| Done | `02-scalability.md` | Scalability: Stateless vs Stateful |
+| Done | `03-redundancy-fault-tolerance.md` | Redundancy, Fault Tolerance & Graceful Degradation |
 ## How to read this level
 
 Read chapters in order. Each chapter is independently navigable and ends with

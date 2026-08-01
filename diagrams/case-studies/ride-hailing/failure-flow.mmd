@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Matching slow"]
+  R2["degrade expand radius, queue"]
+  C1 --> R2
+  C3["Location gateway down"]
+  R4["drivers reconnect to another"]
+  C3 --> R4
+  C5["Payment fail"]
+  R6["trip still completes, fare retried."]
+  C5 --> R6

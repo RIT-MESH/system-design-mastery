@@ -1,0 +1,8 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Inventory shard down"]
+  R2["bookings for those hotels fail no double"]
+  C1 --> R2
+  C3["Payment fail"]
+  R4["release hold."]
+  C3 --> R4

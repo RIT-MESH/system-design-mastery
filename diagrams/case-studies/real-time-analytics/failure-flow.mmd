@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Processor failure"]
+  R2["restore from checkpoint, replay idempote"]
+  C1 --> R2
+  C3["Aggregate store down"]
+  R4["dashboard degrades to cached last"]
+  C3 --> R4
+  C5["Raw retention gap"]
+  R6["historical loss alert ."]
+  C5 --> R6

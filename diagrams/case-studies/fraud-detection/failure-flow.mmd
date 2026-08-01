@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Model serving down"]
+  R2["fail-closed hold for review or rule-base"]
+  C1 --> R2
+  C3["Feature store lag"]
+  R4["stale features bounded"]
+  C3 --> R4
+  C5["Scoring backlog"]
+  R6["degrade to rules."]
+  C5 --> R6

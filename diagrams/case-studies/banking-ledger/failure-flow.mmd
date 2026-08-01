@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Mid-transfer failure"]
+  R2["atomic rollback no partial"]
+  C1 --> R2
+  C3["Ledger shard down"]
+  R4["those transfers fail no loss duplicate"]
+  C3 --> R4
+  C5["Sync replica loss"]
+  R6["still quorum-safe"]
+  C5 --> R6

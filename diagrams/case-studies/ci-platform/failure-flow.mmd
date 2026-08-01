@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Runner dies mid-job"]
+  R2["requeue idempotent"]
+  C1 --> R2
+  C3["Cache miss"]
+  R4["slower build, no failure"]
+  C3 --> R4
+  C5["Artifact store down"]
+  R6["uploads retry."]
+  C5 --> R6

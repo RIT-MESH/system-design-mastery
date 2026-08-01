@@ -1,4 +1,4 @@
-﻿# Level 8 — Observability and Operations
+# Level 8 — Observability and Operations
 
 Knowing what your system is doing, why it broke, and how to run it on-call.
 
@@ -6,13 +6,12 @@ Knowing what your system is doing, why it broke, and how to run it on-call.
 
 | Status | File | Topic |
 |:------:|------|-------|
-| PLANNED | $ch.f | Logging, metrics, tracing, distributed tracing, correlation IDs |
-| PLANNED | $ch.f | OpenTelemetry |
-| PLANNED | $ch.f | Monitoring, golden signals, RED, USE, alerting, dashboards |
-| PLANNED | $ch.f | Log aggregation, root-cause analysis, incident response |
-| PLANNED | $ch.f | On-call practices, runbooks, postmortems, capacity monitoring |
-| PLANNED | $ch.f | Cost observability, synthetic monitoring, real-user monitoring, profiling, continuous verification |
-
+| Done | `00-logs-metrics-traces.md` | Logs, Metrics, Traces, Correlation IDs |
+| Done | `01-opentelemetry.md` | OpenTelemetry |
+| Done | `02-golden-signals-red-use.md` | Golden Signals, RED, USE, Alerting & Dashboards |
+| Done | `03-rca-incident-response.md` | Root-Cause Analysis & Incident Response |
+| Done | `04-on-call-runbooks-postmortems.md` | On-Call, Runbooks, Postmortems, Capacity Monitoring |
+| Done | `05-cost-synthetic-rum-profiling.md` | Cost Observability, Synthetic/RUM, Profiling, Continuous Verification |
 ## How to read this level
 
 Read chapters in order. Each chapter is independently navigable and ends with

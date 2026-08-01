@@ -120,8 +120,39 @@ Clarify date-range inventory, hold/expiry, overbooking. Surface atomic reservati
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/hotel-booking/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/hotel-booking/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Search svc
+  participant P1 as Inventory date-range
+  P0 ->> P1: request
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Inventory shard down"]
+  R2["bookings for those hotels fail no double"]
+  C1 --> R2
+  C3["Payment fail"]
+  R4["release hold."]
+  C3 --> R4
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 search + hold + book."]
+  S2["Stage 2 sharded date-range inventory."]
+  S3["Stage 3 dynamic pricing + recommendations."]
+  S4["Stage 4 multi-region, overbooking-aware."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 29. Further reading
 
 Inventory/transactions: Level 4; search: Level 2; payment: Level 10.

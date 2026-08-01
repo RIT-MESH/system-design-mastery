@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 order + dispatch."]
+  S2["Stage 2 geo-partitioned dispatch + tracking."]
+  S3["Stage 3 batching, predicted ETAs."]
+  S4["Stage 4 multi-region, marketplace balancing."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4

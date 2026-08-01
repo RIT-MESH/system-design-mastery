@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["KV leader down"]
+  R2["promote follower"]
+  C1 --> R2
+  C3["Cache down"]
+  R4["read KV"]
+  C3 --> R4
+  C5["Sweeper lag"]
+  R6["expired pastes served briefly bounded by"]
+  C5 --> R6

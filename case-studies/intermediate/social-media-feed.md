@@ -1,4 +1,4 @@
-﻿# Case Study: Social-Media Feed
+# Case Study: Social-Media Feed
 
 > **Tier:** intermediate · **Status:** draft · Original numbers and diagrams.
 
@@ -122,8 +122,43 @@ Clarify scale, celebrity ratio, latency, ranking. Surface the fan-out trade and 
 hybrid celebrity handling — the core of this problem.
 
 ## 28. Original Mermaid diagrams
-`diagrams/case-studies/social-media-feed/context.mmd`; key diagram inline above.
 
+Standalone sources under `diagrams/case-studies/social-media-feed/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
+
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Author posts
+  participant P1 as Post service
+  P0 ->> P1: request
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Fan-out lag"]
+  R2["feeds slightly stale acceptable, bounded"]
+  C1 --> R2
+  C3["Feed cache shard loss"]
+  R4["rebuild"]
+  C3 --> R4
+  C5["Celebrity spike"]
+  R6["pull-on-read absorbs no fan-out storm ."]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 pull-on-read simple, slow ."]
+  S2["Stage 2 fan-out-on-write for normal users."]
+  S3["Stage 3 hybrid celebrities pull-on-read ."]
+  S4["Stage 4 ML ranking + multi-region feed"]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 29. Further reading
 Caching: Level 2; fan-out/queues: Level 2; ranking/ML: Level 10.
 

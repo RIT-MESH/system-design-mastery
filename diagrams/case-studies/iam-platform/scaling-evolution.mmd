@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 authN + sessions + tokens."]
+  S2["Stage 2 stateless JWT validation JWKS + RBAC."]
+  S3["Stage 3 SCIM + adaptive auth."]
+  S4["Stage 4 multi-region, passwordless."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4

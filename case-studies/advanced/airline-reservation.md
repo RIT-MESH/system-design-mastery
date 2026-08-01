@@ -121,8 +121,42 @@ Clarify multi-segment, seat inventory, overbooking. Surface atomic multi-segment
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/airline-reservation/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/airline-reservation/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Airline-Reservation Platform
+  participant P2 as Store
+  P0 ->> P1: request
+  P1 ->> P2: process
+  P2 -->> P1: response
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["A segment unavailable mid-booking"]
+  R2["release all held segments"]
+  C1 --> R2
+  C3["Payment fail"]
+  R4["release."]
+  C3 --> R4
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 search+hold+book."]
+  S2["Stage 2 segment-sharded inventory."]
+  S3["Stage 3 fare classes, multi-city."]
+  S4["Stage 4 multi-region, GDS integration."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 29. Further reading
 
 Inventory: Level 4; search: Level 2; payment: Level 10.

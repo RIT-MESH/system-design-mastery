@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 matching + geo index."]
+  S2["Stage 2 region-partitioned geo + live tracking."]
+  S3["Stage 3 dynamic pricing + pooled."]
+  S4["Stage 4 multi-region, predictive pre-positioning."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4

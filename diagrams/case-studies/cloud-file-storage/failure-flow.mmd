@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Object store down"]
+  R2["uploads downloads for those files fail m"]
+  C1 --> R2
+  C3["Metadata leader down"]
+  R4["promote"]
+  C3 --> R4
+  C5["CDN down"]
+  R6["origin serves slower ."]
+  C5 --> R6

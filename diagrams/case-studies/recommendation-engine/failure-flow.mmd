@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["ANN shard down"]
+  R2["partial candidates serve best-available"]
+  C1 --> R2
+  C3["Model serving down"]
+  R4["fallback to cached popular recs"]
+  C3 --> R4
+  C5["Training lag"]
+  R6["older model serves graceful ."]
+  C5 --> R6

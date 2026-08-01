@@ -1,0 +1,8 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Message store shard down"]
+  R2["promote follower"]
+  C1 --> R2
+  C3["conflict"]
+  R4["last-seen wins."]
+  C3 --> R4

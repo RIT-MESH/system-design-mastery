@@ -1,0 +1,6 @@
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Services
+  participant P1 as Ingest batched, LZ4
+  P0 ->> P1: request
+  P1 -->> P0: response

@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Game server crash"]
+  R2["match ends or handoff to a standby for h"]
+  C1 --> R2
+  C3["Player disconnect"]
+  R4["timeout -> forfeit stand-in"]
+  C3 --> R4
+  C5["Matchmaker down"]
+  R6["no new matches."]
+  C5 --> R6

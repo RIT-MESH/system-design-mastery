@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 gateway + message store."]
+  S2["Stage 2 shard by channel, connection-scale gateways."]
+  S3["Stage 3 presence fanout for large channels read-repli"]
+  S4["Stage 4 multi-region, large-channel fanout Level 10 ."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4

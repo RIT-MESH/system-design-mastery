@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 single queue + workers."]
+  S2["Stage 2 per-channel queues + provider rate limiting."]
+  S3["Stage 3 user preferences + templating + A B timing."]
+  S4["Stage 4 multi-region delivery,"]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4

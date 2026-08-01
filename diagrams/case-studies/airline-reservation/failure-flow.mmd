@@ -1,0 +1,8 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["A segment unavailable mid-booking"]
+  R2["release all held segments"]
+  C1 --> R2
+  C3["Payment fail"]
+  R4["release."]
+  C3 --> R4

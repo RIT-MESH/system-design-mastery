@@ -120,8 +120,42 @@ Clarify three-sided timing, dispatch radius, ETA. Surface geo dispatch, real-tim
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/food-delivery/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/food-delivery/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Order svc
+  participant P1 as Restaurant accept
+  P0 ->> P1: request
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["No courier nearby"]
+  R2["expand radius + queue + notify customer"]
+  C1 --> R2
+  C3["Tracking gateway down"]
+  R4["reconnect"]
+  C3 --> R4
+  C5["Payment fail"]
+  R6["retry"]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 order + dispatch."]
+  S2["Stage 2 geo-partitioned dispatch + tracking."]
+  S3["Stage 3 batching, predicted ETAs."]
+  S4["Stage 4 multi-region, marketplace balancing."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 29. Further reading
 
 Geo: Level 3; real-time: Level 10; payment: Level 10 ledger.

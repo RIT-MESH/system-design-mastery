@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Payment fail"]
+  R2["release reservation"]
+  C1 --> R2
+  C3["Inventory shard down"]
+  R4["checkout for those products fails better"]
+  C3 --> R4
+  C5["Catalog CDN down"]
+  R6["origin serves slower ."]
+  C5 --> R6

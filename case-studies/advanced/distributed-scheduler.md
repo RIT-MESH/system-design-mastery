@@ -120,8 +120,42 @@ Clarify single-execution, retry, spikes. Surface leader election + leases + idem
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/distributed-scheduler/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/distributed-scheduler/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Jobs store
+  participant P1 as Leader-elected scheduler
+  P0 ->> P1: request
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Leader down"]
+  R2["elect new"]
+  C1 --> R2
+  C3["leases via TTL expire"]
+  R4["reassign"]
+  C3 --> R4
+  C5["Worker down"]
+  R6["lease expires -> rerun idempotent jobs"]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 leader + workers."]
+  S2["Stage 2 leases + idempotency."]
+  S3["Stage 3 worker autoscaling + stagger."]
+  S4["Stage 4 DAG workflows, multi-region."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 29. Further reading
 
 Consensus/leases: Level 4; idempotency: Level 4; schedulers: Level 2.

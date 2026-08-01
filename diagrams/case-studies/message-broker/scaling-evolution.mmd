@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 brokers + replicated logs."]
+  S2["Stage 2 partitioning + consumer groups."]
+  S3["Stage 3 tiered retention + schema registry."]
+  S4["Stage 4 exactly-once transactions, multi-region."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4

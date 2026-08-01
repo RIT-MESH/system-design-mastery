@@ -1,4 +1,4 @@
-﻿# Level 10 — Advanced and Extreme-Scale Systems
+# Level 10 — Advanced and Extreme-Scale Systems
 
 Patterns and constraints that only matter past millions of users, petabytes, or globally distributed writes.
 
@@ -6,19 +6,18 @@ Patterns and constraints that only matter past millions of users, petabytes, or 
 
 | Status | File | Topic |
 |:------:|------|-------|
-| PLANNED | $ch.f | Global traffic routing, multi-region writes, globally distributed databases, cross-region replication |
-| PLANNED | $ch.f | Geo-partitioning, data sovereignty |
-| PLANNED | $ch.f | Edge caching and computation, millions of concurrent connections |
-| PLANNED | $ch.f | Billion-user systems, petabyte and exabyte platforms |
-| PLANNED | $ch.f | High-frequency event processing, stream processing, real-time analytics |
-| PLANNED | $ch.f | Large-scale graph processing and search |
-| PLANNED | $ch.f | Distributed ML, feature stores, model-serving systems |
-| PLANNED | $ch.f | Vector search, RAG systems |
-| PLANNED | $ch.f | GPU clusters, batch scheduling |
-| PLANNED | $ch.f | Data lakes, lakehouses, data meshes, recommendation/ad systems |
-| PLANNED | $ch.f | Payment systems, financial ledgers, fraud-detection platforms |
-| PLANNED | $ch.f | Internet-scale identity, IoT/digital twins, P2P, blockchain, intermittently connected systems |
-
+| Done | `00-global-routing-multi-region.md` | Global Routing, Multi-Region Writes & Cross-Region Replication |
+| Done | `01-geo-partitioning-sovereignty.md` | Geo-Partitioning & Data Sovereignty |
+| Done | `02-edge-compute.md` | Edge Compute & Millions of Concurrent Connections |
+| Done | `03-billion-user-pb-eb.md` | Billion-User Systems & Petabyte/Exabyte Platforms |
+| Done | `04-stream-realtime-analytics.md` | High-Frequency Event Processing, Stream & Real-Time Analytics |
+| Done | `05-large-scale-graph-search.md` | Large-Scale Graph Processing & Search |
+| Done | `06-ml-feature-stores-serving.md` | Distributed ML, Feature Stores & Model Serving |
+| Done | `07-vector-search-rag.md` | Vector Search & Retrieval-Augmented Generation (RAG) |
+| Done | `08-gpu-batch-scheduling.md` | GPU Clusters & Batch Scheduling |
+| Done | `09-lakehouse-data-mesh.md` | Data Lakes, Lakehouses & Data Mesh |
+| Done | `10-payment-ledger-systems.md` | Payment Systems, Financial Ledgers & Fraud Detection |
+| Done | `11-identity-iot-p2p-blockchain.md` | Internet-Scale Identity, IoT/Digital Twins, P2P & Blockchain |
 ## How to read this level
 
 Read chapters in order. Each chapter is independently navigable and ends with

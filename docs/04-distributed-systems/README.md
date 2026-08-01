@@ -1,4 +1,4 @@
-﻿# Level 4 — Distributed Systems
+# Level 4 — Distributed Systems
 
 What changes when a system spans multiple machines that can fail independently and communicate over an unreliable network.
 
@@ -6,14 +6,13 @@ What changes when a system spans multiple machines that can fail independently a
 
 | Status | File | Topic |
 |:------:|------|-------|
-| PLANNED | $ch.f | Distributed-system characteristics, partitions, partial failures, CAP, PACELC |
-| PLANNED | $ch.f | Strong, eventual, causal, read-after-write consistency; quorum reads/writes |
-| PLANNED | $ch.f | Distributed locks, leases, leader election, Raft, Paxos, Byzantine fault tolerance |
-| PLANNED | $ch.f | Lamport and vector clocks, gossip, anti-entropy, Merkle trees |
-| PLANNED | $ch.f | 2PC, 3PC, Saga, orchestration vs choreography |
-| PLANNED | $ch.f | Idempotency, deduplication, retry/backoff/jitter, poison messages, DLQs, delivery guarantees |
-| PLANNED | $ch.f | CRDTs and distributed snapshots |
-
+| Done | `00-cap-pacelc.md` | CAP, PACELC, Partitions & Partial Failure |
+| Done | `01-consistency-spectrum.md` | The Consistency Spectrum & Quorums |
+| Done | `02-consensus.md` | Consensus: Locks, Leases, Leader Election, Raft, Paxos, BFT |
+| Done | `03-clocks-gossip.md` | Clocks, Gossip & Anti-entropy |
+| Done | `04-distributed-transactions.md` | Distributed Transactions: 2PC, 3PC, Saga, Orchestration vs Choreography |
+| Done | `05-delivery-semantics.md` | Delivery Semantics: Idempotency, Retries, DLQs, At-most/least/Exactly-once |
+| Done | `06-crdts-snapshots.md` | CRDTs & Distributed Snapshots |
 ## How to read this level
 
 Read chapters in order. Each chapter is independently navigable and ends with

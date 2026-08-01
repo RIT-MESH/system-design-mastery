@@ -1,4 +1,4 @@
-﻿# Case Study: Paste Service
+# Case Study: Paste Service
 
 > **Tier:** beginner · **Status:** draft · Original numbers and diagrams.
 
@@ -115,8 +115,46 @@ Clarify expiry, read/write ratio, viral behavior. Surface hot-key handling and t
 read-heavy, cache-dominated shape first.
 
 ## 28. Original Mermaid diagrams
-`diagrams/case-studies/paste-service/context.mmd`; key diagrams inline above.
 
+Standalone sources under `diagrams/case-studies/paste-service/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
+
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Paste Service
+  participant P2 as Store
+  P0 ->> P1: request
+  P1 ->> P2: process
+  P2 -->> P1: response
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["KV leader down"]
+  R2["promote follower"]
+  C1 --> R2
+  C3["Cache down"]
+  R4["read KV"]
+  C3 --> R4
+  C5["Sweeper lag"]
+  R6["expired pastes served briefly bounded by"]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 single region KV+cache+edge."]
+  S2["Stage 2 shard KV by code, read replicas."]
+  S3["Stage 3 multi-region reads, cross-region replication."]
+  S4["Stage 4 edge coalescing for viral"]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 29. Further reading
 KV/sharding: Level 3; caching: Level 2; capacity worksheet in `calculations/`.
 

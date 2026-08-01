@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Shard down"]
+  R2["partial results warn or fail"]
+  C1 --> R2
+  C3["Index rebuild slow"]
+  R4["serve old version"]
+  C3 --> R4
+  C5["Gather node down"]
+  R6["retry."]
+  C5 --> R6

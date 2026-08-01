@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 authoritative servers + matchmaker."]
+  S2["Stage 2 region placement + UDP state sync."]
+  S3["Stage 3 server handoff on crash, anti-cheat."]
+  S4["Stage 4 large-world sharding, persistence."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4

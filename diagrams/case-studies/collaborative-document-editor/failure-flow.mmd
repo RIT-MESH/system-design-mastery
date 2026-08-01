@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Relay down"]
+  R2["clients reconnect to another"]
+  C1 --> R2
+  C3["Doc shard down"]
+  R4["promote"]
+  C3 --> R4
+  C5["Offline"]
+  R6["local ops merge later."]
+  C5 --> R6

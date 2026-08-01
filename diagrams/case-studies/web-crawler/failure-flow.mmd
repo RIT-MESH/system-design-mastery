@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Worker dies mid-fetch"]
+  R2["URL requeued idempotent fetch"]
+  C1 --> R2
+  C3["Frontier shard down"]
+  R4["its hosts"]
+  C3 --> R4
+  C5["Store down"]
+  R6["workers backpressure, pause."]
+  C5 --> R6

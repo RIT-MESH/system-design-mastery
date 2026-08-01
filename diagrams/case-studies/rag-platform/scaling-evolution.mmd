@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 ingest + retrieve + generate."]
+  S2["Stage 2 caching + citations + filtering."]
+  S3["Stage 3 hybrid search, re-ranking."]
+  S4["Stage 4 agentic multi-step, multi-region."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4

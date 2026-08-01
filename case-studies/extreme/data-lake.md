@@ -15,8 +15,42 @@ flowchart LR
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/data-lake/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/data-lake/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Sources
+  participant P1 as Ingest batch stream
+  P0 ->> P1: request
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Catalog down"]
+  R2["can't find data queries fail"]
+  C1 --> R2
+  C3["Scan engine failure"]
+  R4["query retries"]
+  C3 --> R4
+  C5["Ingest backlog"]
+  R6["data lags."]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 ingest + object storage + catalog."]
+  S2["Stage 2 partitioning + scan engine."]
+  S3["Stage 3 governance, lineage, lifecycle."]
+  S4["Stage 4 lakehouse ACID, federated query."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 1. Problem statement
 
 Store petabytes of raw data in any format cheaply, with a catalog and governance so it is discoverable and queryable — a foundational analytics store.

@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Online store down"]
+  R2["serving degrades stale cached features o"]
+  C1 --> R2
+  C3["Model serving down"]
+  R4["fallback model"]
+  C3 --> R4
+  C5["Drift undetected"]
+  R6["monitor freshness."]
+  C5 --> R6

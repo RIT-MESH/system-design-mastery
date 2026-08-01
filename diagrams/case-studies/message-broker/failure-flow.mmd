@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Leader down"]
+  R2["elect an ISR follower"]
+  C1 --> R2
+  C3["Consumer down"]
+  R4["rebalance partitions"]
+  C3 --> R4
+  C5["Partition skew"]
+  R6["add partitions consumers."]
+  C5 --> R6

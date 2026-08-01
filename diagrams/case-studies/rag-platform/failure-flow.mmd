@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Vector DB down"]
+  R2["degraded no grounding, refuse or ungroun"]
+  C1 --> R2
+  C3["LLM down"]
+  R4["retry queue"]
+  C3 --> R4
+  C5["Cache stale"]
+  R6["recompute on model corpus change."]
+  C5 --> R6

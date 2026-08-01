@@ -1,4 +1,4 @@
-﻿# Level 7 — Security Architecture
+# Level 7 — Security Architecture
 
 Protecting identity, data, and supply chain across the architecture.
 
@@ -6,14 +6,13 @@ Protecting identity, data, and supply chain across the architecture.
 
 | Status | File | Topic |
 |:------:|------|-------|
-| PLANNED | $ch.f | Authentication, authorization, sessions, cookies, tokens, API keys |
-| PLANNED | $ch.f | OAuth 2.0, OpenID Connect, SAML, JWT |
-| PLANNED | $ch.f | RBAC, ABAC, policy-based access control, zero-trust, mTLS |
-| PLANNED | $ch.f | Encryption in transit and at rest, key, secret, and certificate management |
-| PLANNED | $ch.f | WAF, DDoS protection, rate limiting, input validation, secure API design, multi-tenant isolation |
-| PLANNED | $ch.f | Audit logs, data masking/classification, privacy-by-design, threat modeling (STRIDE) |
-| PLANNED | $ch.f | Supply-chain security |
-
+| Done | `00-authn-authz.md` | Authentication, Authorization, Sessions, Cookies, Tokens, API Keys |
+| Done | `01-oauth-oidc-saml-jwt.md` | OAuth 2.0, OpenID Connect, SAML, JWT |
+| Done | `02-rbac-abac-pbac-zero-trust.md` | RBAC, ABAC, PBAC, Zero-Trust, mTLS |
+| Done | `03-encryption-kms-secrets.md` | Encryption in Transit & at Rest, KMS, Secrets, Certificates |
+| Done | `04-waf-ddos-secure-api.md` | WAF, DDoS Protection, Secure API Design, Tenant Isolation |
+| Done | `05-audit-privacy-threat-modeling.md` | Audit Logs, Data Masking, Privacy-by-Design, Threat Modeling (STRIDE) |
+| Done | `06-supply-chain-security.md` | Supply-Chain Security |
 ## How to read this level
 
 Read chapters in order. Each chapter is independently navigable and ends with

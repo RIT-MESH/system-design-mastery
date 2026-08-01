@@ -1,4 +1,4 @@
-﻿# Case Study: Rate Limiter
+# Case Study: Rate Limiter
 
 > **Tier:** beginner · **Status:** draft · Original numbers and diagrams.
 
@@ -119,9 +119,43 @@ Clarify limits, burst, distributed vs per-instance, fail-open policy. Surface th
 latency/availability-vs-exactness trade.
 
 ## 28. Original Mermaid diagrams
-`diagrams/case-studies/rate-limiter/context.mmd`; key diagram inline above. See
-`examples/rate_limiter.py`.
 
+Standalone sources under `diagrams/case-studies/rate-limiter/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
+
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Rate Limiter
+  participant P2 as Store
+  P0 ->> P1: request
+  P1 ->> P2: process
+  P2 -->> P1: response
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Limiter store down"]
+  R2["fail-open allow to avoid blocking all tr"]
+  C1 --> R2
+  C3["In-process cache skew"]
+  R4["slight over-allow on some gateways."]
+  C3 --> R4
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 in-process buckets per gateway."]
+  S2["Stage 2 shared store for cluster-wide limits."]
+  S3["Stage 3 per-tenant dedicated capacity for hot tenants"]
+  S4["Stage 4 adaptive limits from"]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 29. Further reading
 Resilience patterns: Level 5; load shedding: Level 6; rate_limiter.py.
 

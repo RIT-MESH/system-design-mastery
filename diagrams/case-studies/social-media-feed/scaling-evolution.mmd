@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 pull-on-read simple, slow ."]
+  S2["Stage 2 fan-out-on-write for normal users."]
+  S3["Stage 3 hybrid celebrities pull-on-read ."]
+  S4["Stage 4 ML ranking + multi-region feed"]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4

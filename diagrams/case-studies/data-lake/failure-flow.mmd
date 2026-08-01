@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Catalog down"]
+  R2["can't find data queries fail"]
+  C1 --> R2
+  C3["Scan engine failure"]
+  R4["query retries"]
+  C3 --> R4
+  C5["Ingest backlog"]
+  R6["data lags."]
+  C5 --> R6

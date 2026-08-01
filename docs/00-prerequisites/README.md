@@ -1,4 +1,4 @@
-﻿# Level 0 — Prerequisites
+# Level 0 — Prerequisites
 
 Foundations you need before "system design" means anything concrete. No prior distributed-systems knowledge assumed.
 
@@ -6,12 +6,11 @@ Foundations you need before "system design" means anything concrete. No prior di
 
 | Status | File | Topic |
 |:------:|------|-------|
-| DONE | $ch.f | Computing fundamentals: how computers run applications, processes and threads, CPU/memory/disk/network |
-| DONE | $ch.f | Networking fundamentals: DNS, HTTP/HTTPS, TCP/UDP, TLS, REST, RPC/gRPC, JSON/Protobuf/Avro |
-| PLANNED | $ch.f | Operating-system and Linux fundamentals |
-| PLANNED | $ch.f | Time and space complexity; basic data structures |
-| PLANNED | $ch.f | Basic database concepts |
-
+| Done | `00-computing-fundamentals.md` | Computing Fundamentals |
+| Done | `01-networking-http.md` | Networking & HTTP |
+| Done | `02-os-linux.md` | Operating-System & Linux Fundamentals |
+| Done | `03-complexity-data-structures.md` | Complexity & Basic Data Structures |
+| Done | `05-db-basics.md` | Basic Database Concepts |
 ## How to read this level
 
 Read chapters in order. Each chapter is independently navigable and ends with

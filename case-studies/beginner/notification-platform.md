@@ -1,4 +1,4 @@
-﻿# Case Study: Notification Platform
+# Case Study: Notification Platform
 
 > **Tier:** beginner · **Status:** draft · Original numbers and diagrams.
 
@@ -124,9 +124,44 @@ Clarify channels, volume, latency (real-time vs eventual), dedup. Surface async 
 at-least-once + idempotency, and provider rate limits.
 
 ## 28. Original Mermaid diagrams
-`diagrams/case-studies/notification-platform/context.mmd`; key diagram inline above. See
-`examples/queue_retry.py`.
 
+Standalone sources under `diagrams/case-studies/notification-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
+
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Notification Platform
+  participant P2 as Store
+  P0 ->> P1: request
+  P1 ->> P2: process
+  P2 -->> P1: response
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Provider down"]
+  R2["backoff + queue backlog grows acceptable"]
+  C1 --> R2
+  C3["Worker loss"]
+  C4["Queue full"]
+  R5["backpressure to API 429 ."]
+  C4 --> R5
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 single queue + workers."]
+  S2["Stage 2 per-channel queues + provider rate limiting."]
+  S3["Stage 3 user preferences + templating + A B timing."]
+  S4["Stage 4 multi-region delivery,"]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 29. Further reading
 Queues/retries/DLQ: Level 2 & 4; queue_retry.py; backpressure: Level 6.
 

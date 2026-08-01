@@ -1,4 +1,4 @@
-﻿# Level 6 — Reliability and Resilience
+# Level 6 — Reliability and Resilience
 
 Keeping systems dependable under failures and overload, with measurable objectives.
 
@@ -6,12 +6,11 @@ Keeping systems dependable under failures and overload, with measurable objectiv
 
 | Status | File | Topic |
 |:------:|------|-------|
-| PLANNED | $ch.f | SLI/SLO/SLA, error budgets, high availability |
-| PLANNED | $ch.f | Disaster recovery, RTO, RPO, active-active, active-passive, multi-zone, multi-region, failover |
-| PLANNED | $ch.f | Health checks, readiness/liveness, backpressure, overload protection |
-| PLANNED | $ch.f | Cascading failures, retry storms, thundering herd, split-brain |
-| PLANNED | $ch.f | Chaos engineering, game days, fault injection, capacity buffers, graceful shutdown, brownouts, dependency isolation |
-
+| Done | `00-sli-slo-sla-error-budgets.md` | SLI, SLO, SLA & Error Budgets |
+| Done | `01-dr-rto-rpo.md` | Disaster Recovery, RTO/RPO, Active-Active/Passive, Failover |
+| Done | `02-health-overload.md` | Health, Readiness, Liveness, Backpressure, Overload Protection |
+| Done | `03-cascading-failure.md` | Cascading Failure, Retry Storms, Thundering Herd, Split-brain |
+| Done | `04-chaos-graceful-shutdown.md` | Chaos Engineering, Fault Injection, Graceful Shutdown, Brownouts |
 ## How to read this level
 
 Read chapters in order. Each chapter is independently navigable and ends with

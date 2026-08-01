@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Matching engine down"]
+  R2["failover to standby replaying the order"]
+  C1 --> R2
+  C3["Hot symbol skew"]
+  R4["dedicated engine"]
+  C3 --> R4
+  C5["Order spike"]
+  R6["backpressure throttle ."]
+  C5 --> R6

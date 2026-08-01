@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Auction slow"]
+  R2["serve a default house ad latency, not er"]
+  C1 --> R2
+  C3["Budget store down"]
+  R4["fail-safe stop serving, never overspend"]
+  C3 --> R4
+  C5["Event log lag"]
+  R6["attribution delayed."]
+  C5 --> R6

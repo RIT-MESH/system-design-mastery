@@ -122,8 +122,39 @@ Clarify availability target, revocation, MFA. Surface stateless JWKS validation,
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/iam-platform/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/iam-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Identity Access-Management P
+  participant P2 as Store
+  P0 ->> P1: request
+  P1 ->> P2: process
+  P2 -->> P1: response
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["IdP down"]
+  R2["logins fail high impact so multi-AZ + re"]
+  C1 --> R2
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 authN + sessions + tokens."]
+  S2["Stage 2 stateless JWT validation JWKS + RBAC."]
+  S3["Stage 3 SCIM + adaptive auth."]
+  S4["Stage 4 multi-region, passwordless."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 29. Further reading
 
 Auth/OIDC/JWT: Level 7; RBAC/zero-trust: Level 7.

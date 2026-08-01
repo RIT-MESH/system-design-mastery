@@ -17,8 +17,42 @@ flowchart LR
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/fraud-detection/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/fraud-detection/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Confirmed outcomes
+  participant P1 as Training
+  P0 ->> P1: request
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Model serving down"]
+  R2["fail-closed hold for review or rule-base"]
+  C1 --> R2
+  C3["Feature store lag"]
+  R4["stale features bounded"]
+  C3 --> R4
+  C5["Scoring backlog"]
+  R6["degrade to rules."]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 rules-based scoring."]
+  S2["Stage 2 ML scoring + feature store."]
+  S3["Stage 3 real-time features + hourly retrain."]
+  S4["Stage 4 graph-based rings, multi-region."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 1. Problem statement
 
 Score every transaction in real time for fraud, block/alert high-risk ones, and learn from outcomes — a low-latency stream + ML pipeline with strict false-positive cost.

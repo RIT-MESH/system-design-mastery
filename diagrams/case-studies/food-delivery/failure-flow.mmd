@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["No courier nearby"]
+  R2["expand radius + queue + notify customer"]
+  C1 --> R2
+  C3["Tracking gateway down"]
+  R4["reconnect"]
+  C3 --> R4
+  C5["Payment fail"]
+  R6["retry"]
+  C5 --> R6

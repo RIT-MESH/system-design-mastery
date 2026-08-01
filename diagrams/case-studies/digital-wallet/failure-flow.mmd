@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Transfer mid-way fail"]
+  R2["atomic rollback no partial"]
+  C1 --> R2
+  C3["Rail timeout"]
+  R4["pending + reconcile"]
+  C3 --> R4
+  C5["Ledger shard down"]
+  R6["transfers for those accounts fail no dou"]
+  C5 --> R6

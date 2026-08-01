@@ -1,4 +1,4 @@
-﻿# Level 9 — Cloud-Native and Platform Design
+# Level 9 — Cloud-Native and Platform Design
 
 How modern systems are packaged, scheduled, deployed, and operated on cloud platforms.
 
@@ -6,16 +6,15 @@ How modern systems are packaged, scheduled, deployed, and operated on cloud plat
 
 | Status | File | Topic |
 |:------:|------|-------|
-| PLANNED | $ch.f | VMs, containers, container orchestration |
-| PLANNED | $ch.f | Kubernetes architecture |
-| PLANNED | $ch.f | Service mesh, ingress controllers |
-| PLANNED | $ch.f | Serverless and Functions as a Service |
-| PLANNED | $ch.f | IaC, immutable infrastructure, GitOps |
-| PLANNED | $ch.f | CI/CD, blue-green/canary/rolling, feature flags |
-| PLANNED | $ch.f | HPA, VPA, cluster autoscaling |
-| PLANNED | $ch.f | Cloud networking, VPCs, hybrid/multi-cloud, edge |
-| PLANNED | $ch.f | Platform engineering, internal developer platforms |
-
+| Done | `00-containers-orchestration.md` | VMs, Containers & Container Orchestration |
+| Done | `01-k8s-architecture.md` | Kubernetes Architecture |
+| Done | `02-service-mesh-ingress.md` | Service Mesh & Ingress |
+| Done | `03-serverless-faas.md` | Serverless & Functions as a Service |
+| Done | `04-iac-immutable-gitops.md` | IaC, Immutable Infrastructure & GitOps |
+| Done | `05-ci-cd-deployment-feature-flags.md` | CI/CD, Deployment Strategies & Feature Flags |
+| Done | `06-autoscaling.md` | Autoscaling: HPA, VPA, Cluster Autoscaling |
+| Done | `07-cloud-networking.md` | Cloud Networking, VPC, Hybrid/Multi-Cloud & Edge |
+| Done | `08-platform-engineering-idp.md` | Platform Engineering & Internal Developer Platforms |
 ## How to read this level
 
 Read chapters in order. Each chapter is independently navigable and ends with

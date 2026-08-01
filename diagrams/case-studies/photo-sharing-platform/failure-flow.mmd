@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Thumb worker dies"]
+  R2["requeue idempotent overwrite"]
+  C1 --> R2
+  C3["Origin down"]
+  R4["CDN serves cached"]
+  C3 --> R4
+  C5["Metadata leader down"]
+  R6["promote follower."]
+  C5 --> R6

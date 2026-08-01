@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Ingest backlog"]
+  R2["metrics lag alert on lag"]
+  C1 --> R2
+  C3["Raw shard down"]
+  R4["partial recent query"]
+  C3 --> R4
+  C5["Cardinality explosion"]
+  R6["cap + alert."]
+  C5 --> R6

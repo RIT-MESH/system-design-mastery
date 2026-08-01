@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 authorize capture + idempotency."]
+  S2["Stage 2 tokenization + ledger sharding."]
+  S3["Stage 3 3DS, recurring, fraud."]
+  S4["Stage 4 multi-region active-active for the auth path."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4

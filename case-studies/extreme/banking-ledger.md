@@ -16,8 +16,42 @@ flowchart LR
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/banking-ledger/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/banking-ledger/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Transfer tx
+  participant P1 as Validate + double-entry
+  P0 ->> P1: request
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Mid-transfer failure"]
+  R2["atomic rollback no partial"]
+  C1 --> R2
+  C3["Ledger shard down"]
+  R4["those transfers fail no loss duplicate"]
+  C3 --> R4
+  C5["Sync replica loss"]
+  R6["still quorum-safe"]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 double-entry ledger + sync replication."]
+  S2["Stage 2 sharded by account + reconciliation."]
+  S3["Stage 3 cross-region DR, regulatory retention."]
+  S4["Stage 4 globally-consistent multi-region, real-time r"]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 1. Problem statement
 
 The core ledger of a bank: immutable, double-entry, strongly-durable, auditable, reconcilable — money never lost or duplicated.

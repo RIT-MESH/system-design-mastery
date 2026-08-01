@@ -18,8 +18,45 @@ flowchart LR
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/rag-platform/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/rag-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Retrieval-Augmented Generati
+  participant P2 as Store
+  P0 ->> P1: request
+  P1 ->> P2: process
+  P2 -->> P1: response
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Vector DB down"]
+  R2["degraded no grounding, refuse or ungroun"]
+  C1 --> R2
+  C3["LLM down"]
+  R4["retry queue"]
+  C3 --> R4
+  C5["Cache stale"]
+  R6["recompute on model corpus change."]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 ingest + retrieve + generate."]
+  S2["Stage 2 caching + citations + filtering."]
+  S3["Stage 3 hybrid search, re-ranking."]
+  S4["Stage 4 agentic multi-step, multi-region."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 1. Problem statement
 
 Answer questions grounded in a private corpus by retrieving relevant context and generating with an LLM — orchestration of retrieval + generation with caching and grounding.

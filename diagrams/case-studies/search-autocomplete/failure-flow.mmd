@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Suggest service down"]
+  R2["degrade to no-suggestions or static top"]
+  C1 --> R2
+  C3["replica stale"]
+  R4["slightly old results"]
+  C3 --> R4
+  C5["Hot prefix overwhelms a shard"]
+  R6["replicate it."]
+  C5 --> R6

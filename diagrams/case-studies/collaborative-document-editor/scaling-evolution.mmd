@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 op relay + CRDT."]
+  S2["Stage 2 per-doc sharding + snapshots."]
+  S3["Stage 3 offline + merge at scale."]
+  S4["Stage 4 large docs, presence fan-out."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4

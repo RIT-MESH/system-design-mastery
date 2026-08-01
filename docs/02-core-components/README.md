@@ -1,4 +1,4 @@
-﻿# Level 2 — Core Infrastructure Components
+# Level 2 — Core Infrastructure Components
 
 The building-block services most production architectures compose. Learn each in isolation before composing them.
 
@@ -6,14 +6,13 @@ The building-block services most production architectures compose. Learn each in
 
 | Status | File | Topic |
 |:------:|------|-------|
-| PLANNED | $ch.f | DNS, forward and reverse proxies |
-| PLANNED | $ch.f | Load balancers, Layer 4 vs Layer 7 |
-| PLANNED | $ch.f | API gateways and service discovery |
-| PLANNED | $ch.f | Content delivery networks and caching (distributed caches, strategies) |
-| PLANNED | $ch.f | Object, block, and file storage |
-| PLANNED | $ch.f | Message queues, event streams, and search engines |
-| PLANNED | $ch.f | Connection pools, background workers, schedulers, cron, notifications |
-
+| Done | `00-dns-proxies.md` | DNS, Forward & Reverse Proxies |
+| Done | `01-load-balancers.md` | Load Balancers: Layer 4 vs Layer 7 |
+| Done | `02-api-gateway-service-discovery.md` | API Gateway & Service Discovery |
+| Done | `03-cdn-caching.md` | CDN & Caching |
+| Done | `04-storage-classes.md` | Storage Classes: Object, Block, File |
+| Done | `05-queues-streams-search.md` | Message Queues, Event Streams & Search Engines |
+| Done | `06-workers-schedulers-notifications.md` | Workers, Schedulers, Cron & Notifications |
 ## How to read this level
 
 Read chapters in order. Each chapter is independently navigable and ends with

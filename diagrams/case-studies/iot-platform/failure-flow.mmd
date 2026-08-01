@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Broker down"]
+  R2["devices reconnect to another stagger to"]
+  C1 --> R2
+  C3["Twin shard down"]
+  R4["those twins unavailable read last-known"]
+  C3 --> R4
+  C5["Command queue down"]
+  R6["commands re-queued."]
+  C5 --> R6

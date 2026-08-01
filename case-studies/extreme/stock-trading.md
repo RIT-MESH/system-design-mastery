@@ -17,8 +17,42 @@ flowchart LR
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/stock-trading/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/stock-trading/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Order entry
+  participant P1 as Matching engine
+  P0 ->> P1: request
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Matching engine down"]
+  R2["failover to standby replaying the order"]
+  C1 --> R2
+  C3["Hot symbol skew"]
+  R4["dedicated engine"]
+  C3 --> R4
+  C5["Order spike"]
+  R6["backpressure throttle ."]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 matching engine + book."]
+  S2["Stage 2 per-symbol partitioning + failover."]
+  S3["Stage 3 market-data fan-out, clearing."]
+  S4["Stage 4 multi-region, derivatives, dark pools."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 1. Problem statement
 
 Match buy/sell orders in real time with an order book, execute, and clear — ultra-low-latency matching with strict price-time ordering and no double-execution.

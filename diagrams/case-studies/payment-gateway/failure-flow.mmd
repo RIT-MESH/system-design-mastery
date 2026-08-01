@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Bank timeout"]
+  R2["safe-fail mark unknown, reconcile via we"]
+  C1 --> R2
+  C3["Ledger shard down"]
+  R4["payment fails better than lost duplicate"]
+  C3 --> R4
+  C5["Idempotency store down"]
+  R6["fail-safe."]
+  C5 --> R6

@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Counter store down"]
+  R2["fail-open rate-limit over-allow to keep"]
+  C1 --> R2
+  C3["Config service down"]
+  R4["keep last config"]
+  C3 --> R4
+  C5["A backend down"]
+  R6["circuit-break 503."]
+  C5 --> R6

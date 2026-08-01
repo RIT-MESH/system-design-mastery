@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 single index + search."]
+  S2["Stage 2 sharded index + fan-out merge."]
+  S3["Stage 3 filters, incremental index update."]
+  S4["Stage 4 hybrid search, multi-region, model versioning"]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4

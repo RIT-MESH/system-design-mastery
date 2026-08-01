@@ -18,8 +18,42 @@ flowchart LR
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/feature-store-model-serving/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/feature-store-model-serving/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Data sources
+  participant P1 as Feature store
+  P0 ->> P1: request
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Online store down"]
+  R2["serving degrades stale cached features o"]
+  C1 --> R2
+  C3["Model serving down"]
+  R4["fallback model"]
+  C3 --> R4
+  C5["Drift undetected"]
+  R6["monitor freshness."]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 features + serving."]
+  S2["Stage 2 online offline store + model registry."]
+  S3["Stage 3 drift monitoring + auto-retrain."]
+  S4["Stage 4 streaming features, multi-region."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 1. Problem statement
 
 Provide consistent features for training and serving and serve models at low latency — the data backbone of an ML platform (expanded from the Level 10 chapter).

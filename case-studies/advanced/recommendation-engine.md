@@ -120,8 +120,42 @@ Clarify latency, item scale, freshness. Surface the retrieval+ranking funnel, fe
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/recommendation-engine/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/recommendation-engine/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Interactions
+  participant P1 as Training
+  P0 ->> P1: request
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["ANN shard down"]
+  R2["partial candidates serve best-available"]
+  C1 --> R2
+  C3["Model serving down"]
+  R4["fallback to cached popular recs"]
+  C3 --> R4
+  C5["Training lag"]
+  R6["older model serves graceful ."]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 retrieval + rank + serve."]
+  S2["Stage 2 feature store + ANN sharding."]
+  S3["Stage 3 real-time features + hourly retrain."]
+  S4["Stage 4 multi-objective, cold-start, multi-region."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 29. Further reading
 
 ML/feature stores: Level 10; vector search: Level 10; streams: Level 10.

@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 git transport + objects + metadata."]
+  S2["Stage 2 object cache CDN + sharding."]
+  S3["Stage 3 large-repo handling partial clone ."]
+  S4["Stage 4 multi-region clone mirrors."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4

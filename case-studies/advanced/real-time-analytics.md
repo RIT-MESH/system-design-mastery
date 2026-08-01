@@ -121,8 +121,42 @@ Clarify event rate, dashboard latency, retention. Surface stream + aggregates + 
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/real-time-analytics/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/real-time-analytics/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Sources
+  participant P1 as Stream
+  P0 ->> P1: request
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Processor failure"]
+  R2["restore from checkpoint, replay idempote"]
+  C1 --> R2
+  C3["Aggregate store down"]
+  R4["dashboard degrades to cached last"]
+  C3 --> R4
+  C5["Raw retention gap"]
+  R6["historical loss alert ."]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 stream + aggregates + dashboards."]
+  S2["Stage 2 windowed processors + checkpointing."]
+  S3["Stage 3 tiered raw, rollups."]
+  S4["Stage 4 federated queries, ML features."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 29. Further reading
 
 Streams: Level 10; checkpointing/CDC: Level 4; dashboards: Level 8.

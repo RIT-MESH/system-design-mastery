@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Fan-out lag"]
+  R2["feeds slightly stale acceptable, bounded"]
+  C1 --> R2
+  C3["Feed cache shard loss"]
+  R4["rebuild"]
+  C3 --> R4
+  C5["Celebrity spike"]
+  R6["pull-on-read absorbs no fan-out storm ."]
+  C5 --> R6

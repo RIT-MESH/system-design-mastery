@@ -122,8 +122,45 @@ Clarify QPS, policies, aggregation. Surface stateless edge, hot-reload config, f
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/api-gateway-system/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/api-gateway-system/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as API Gateway
+  participant P2 as Store
+  P0 ->> P1: request
+  P1 ->> P2: process
+  P2 -->> P1: response
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Counter store down"]
+  R2["fail-open rate-limit over-allow to keep"]
+  C1 --> R2
+  C3["Config service down"]
+  R4["keep last config"]
+  C3 --> R4
+  C5["A backend down"]
+  R6["circuit-break 503."]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 auth+route+ratelimit."]
+  S2["Stage 2 aggregation + config hot-reload."]
+  S3["Stage 3 service-mesh integration + WAF."]
+  S4["Stage 4 multi-region, edge auth."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 29. Further reading
 
 API gateway: Level 2; rate limiting: Level 5; auth: Level 7.

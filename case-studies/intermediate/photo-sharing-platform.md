@@ -1,4 +1,4 @@
-﻿# Case Study: Photo-Sharing Platform
+# Case Study: Photo-Sharing Platform
 
 > **Tier:** intermediate · **Status:** draft · Original numbers and diagrams.
 
@@ -119,8 +119,43 @@ Clarify sizes, retention, views. Surface object storage + CDN + the egress/stora
 dominance. Compare to the video-streaming case.
 
 ## 28. Original Mermaid diagrams
-`diagrams/case-studies/photo-sharing-platform/context.mmd`; key diagram inline above.
 
+Standalone sources under `diagrams/case-studies/photo-sharing-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
+
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Uploader
+  participant P1 as API presigned URL
+  P0 ->> P1: request
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Thumb worker dies"]
+  R2["requeue idempotent overwrite"]
+  C1 --> R2
+  C3["Origin down"]
+  R4["CDN serves cached"]
+  C3 --> R4
+  C5["Metadata leader down"]
+  R6["promote follower."]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 object storage + thumb workers + simple CDN."]
+  S2["Stage 2 global CDN, multi-region"]
+  S3["Stage 3 tier cold originals, on-demand resizing."]
+  S4["Stage 4 ML-based"]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 29. Further reading
 Object storage/CDN: Level 2; image pipeline like video-streaming case study; tiering: L3.
 

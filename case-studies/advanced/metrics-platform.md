@@ -119,8 +119,42 @@ Clarify ingest rate, retention, cardinality, query patterns. Surface time-series
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/metrics-platform/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/metrics-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Agents
+  participant P1 as Ingest batched
+  P0 ->> P1: request
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Ingest backlog"]
+  R2["metrics lag alert on lag"]
+  C1 --> R2
+  C3["Raw shard down"]
+  R4["partial recent query"]
+  C3 --> R4
+  C5["Cardinality explosion"]
+  R6["cap + alert."]
+  C5 --> R6
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 ingest + raw + query."]
+  S2["Stage 2 rollups + tiering."]
+  S3["Stage 3 cardinality caps + federated query."]
+  S4["Stage 4 multi-region ingest, long-term lake."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 29. Further reading
 
 Time-series: Level 3; observability: Level 8; tiering: Level 3.
