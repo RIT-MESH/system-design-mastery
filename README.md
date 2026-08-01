@@ -1,136 +1,170 @@
+<div align="center">
+
 # System Design Mastery
 
-A practical, structured learning project for understanding how reliable, scalable, secure, and maintainable software systems are designed.
+### Learn how scalable, reliable, secure, and maintainable systems are designed
 
-This repository is being built as a complete system design learning path. It starts with the fundamentals of operating systems, networking, databases, and distributed computing, then progresses to architecture patterns, reliability, security, observability, cloud platforms, and large-scale system design.
+A structured system design learning repository covering foundational concepts, distributed systems, cloud architecture, reliability, security, observability, and real-world design problems.
 
-> **Status:** Work in progress. The curriculum, diagrams, exercises, calculations, and case studies will be added chapter by chapter.
+[![Status](https://img.shields.io/badge/status-in%20development-orange)](#project-status)
+[![Learning](https://img.shields.io/badge/focus-system%20design-blue)](#learning-roadmap)
+[![GitHub](https://img.shields.io/badge/maintainer-RIT--MESH-black)](https://github.com/RIT-MESH)
 
-## Why This Repository Exists
+</div>
 
-System design is often learned through disconnected interview questions, architecture diagrams, and technology lists. That approach may help with memorization, but it does not always explain how engineers make design decisions.
+---
 
-This project focuses on the reasoning behind a design:
+## Overview
 
-- What requirements must the system satisfy?
-- What assumptions and constraints affect the architecture?
-- How much traffic, storage, and bandwidth must it support?
-- Where are the bottlenecks and single points of failure?
-- Which trade-offs are introduced by each decision?
-- How will the system behave during failures or sudden traffic growth?
-- How can the design be operated, secured, monitored, and improved?
+System design is not only about drawing architecture diagrams or memorizing technology names. A good design begins with requirements, validates assumptions with calculations, identifies bottlenecks, prepares for failure, and explains the trade-offs behind every major decision.
 
-The objective is not to memorize one “correct” architecture. It is to learn how to evaluate alternatives and justify engineering decisions.
+**System Design Mastery** is being developed as a practical, step-by-step learning path for building that reasoning ability.
 
-## Who It Is For
+The repository will connect fundamental topics such as networking, operating systems, databases, caching, and messaging with advanced topics including distributed systems, reliability engineering, cloud-native architecture, security, observability, and multi-region design.
 
-This repository is intended for:
+> This project is under active development. Learning material will be added progressively as structured chapters, diagrams, calculations, exercises, and complete case studies.
 
-- beginners starting system design;
-- backend and software engineers;
-- infrastructure and network engineers;
-- cloud, DevOps, platform, and SRE professionals;
-- engineers preparing for system design interviews;
-- anyone interested in architecture, scalability, and reliability.
+## Objectives
+
+This project aims to help learners understand:
+
+- how to convert business requirements into technical requirements;
+- how to estimate traffic, bandwidth, storage, and infrastructure needs;
+- how common infrastructure components work together;
+- how systems scale as traffic and data increase;
+- how replication, partitioning, caching, and asynchronous processing affect a design;
+- how distributed systems handle consistency, coordination, and failure;
+- how to design for security, observability, resilience, and disaster recovery;
+- how to explain architecture decisions and trade-offs clearly.
+
+## Who This Repository Is For
+
+- Software and backend engineers
+- Infrastructure and network engineers
+- Cloud, DevOps, platform, and SRE professionals
+- Engineers preparing for system design interviews
+- Students learning architecture and distributed systems
+- Anyone who wants to understand how large systems work
 
 ## Learning Roadmap
 
-| Level | Area | Topics |
+| Stage | Area | Main Topics |
 |---:|---|---|
-| 0 | Prerequisites | Operating systems, Linux, networking, HTTP, TLS, databases, data structures, and complexity |
-| 1 | Design Foundations | Requirements, constraints, capacity estimation, latency, throughput, availability, and scalability |
-| 2 | Infrastructure Components | DNS, proxies, load balancers, API gateways, CDNs, caches, message queues, and search systems |
-| 3 | Data Systems | Relational databases, NoSQL, indexing, replication, partitioning, transactions, and ID generation |
-| 4 | Distributed Systems | Consistency, CAP, PACELC, consensus, clocks, coordination, and failure handling |
-| 5 | Architecture Patterns | Monoliths, microservices, event-driven architecture, CQRS, and domain-driven design |
-| 6 | Reliability Engineering | SLI, SLO, SLA, error budgets, redundancy, disaster recovery, overload protection, and resilience |
-| 7 | Security | Authentication, authorization, OAuth 2.0, OIDC, encryption, secrets, zero trust, and threat modeling |
-| 8 | Observability | Logs, metrics, traces, alerting, incident response, debugging, and root-cause analysis |
-| 9 | Cloud-Native Systems | Containers, Kubernetes, infrastructure as code, GitOps, autoscaling, and serverless architecture |
-| 10 | Large-Scale Design | Multi-region systems, high-volume data platforms, streaming systems, and ML or LLM serving |
+| 1 | Computing Foundations | Operating systems, processes, threads, memory, Linux, and concurrency |
+| 2 | Networking Foundations | DNS, TCP/IP, HTTP, TLS, proxies, routing, latency, and bandwidth |
+| 3 | Database Foundations | Relational databases, NoSQL, indexing, transactions, and data modeling |
+| 4 | System Design Fundamentals | Requirements, constraints, capacity estimation, availability, and scalability |
+| 5 | Core Components | Load balancers, API gateways, caches, CDNs, queues, streams, and search systems |
+| 6 | Data at Scale | Replication, partitioning, sharding, consistency, and distributed transactions |
+| 7 | Distributed Systems | CAP, PACELC, consensus, clocks, coordination, retries, and idempotency |
+| 8 | Architecture Patterns | Monoliths, microservices, event-driven systems, CQRS, and service decomposition |
+| 9 | Reliability Engineering | SLI, SLO, SLA, redundancy, failover, disaster recovery, and resilience |
+| 10 | Security | Authentication, authorization, OAuth 2.0, OIDC, encryption, secrets, and threat modeling |
+| 11 | Observability | Logs, metrics, traces, alerting, incident response, and root-cause analysis |
+| 12 | Cloud-Native Design | Containers, Kubernetes, infrastructure as code, autoscaling, and serverless systems |
+| 13 | Large-Scale Architecture | Multi-region platforms, streaming systems, data-intensive services, and AI serving |
 
-## System Design Method
+## System Design Workflow
 
-Each design will use a consistent process:
+Every design in this repository will follow a consistent process:
 
-1. Clarify functional requirements.
-2. Define non-functional requirements and constraints.
-3. State assumptions explicitly.
-4. Estimate traffic, bandwidth, storage, and growth.
+1. Clarify the problem and functional requirements.
+2. Define non-functional requirements such as availability, latency, durability, and consistency.
+3. State assumptions and constraints explicitly.
+4. Estimate traffic, bandwidth, storage, and expected growth.
 5. Define the main APIs and data model.
 6. Create a simple high-level architecture.
 7. Identify bottlenecks and single points of failure.
-8. Add scaling, caching, replication, and asynchronous processing only where justified.
-9. Evaluate consistency, reliability, security, and operational concerns.
-10. Explain failure scenarios, recovery mechanisms, and trade-offs.
+8. Add caching, replication, partitioning, and asynchronous processing where justified.
+9. Evaluate security, observability, reliability, and operational concerns.
+10. Explain failure scenarios, recovery mechanisms, alternatives, and trade-offs.
 
-## Planned Repository Structure
+## Planned Content
+
+The repository will be organized into the following areas as content is developed:
 
 ```text
 system-design-mastery/
-├── docs/                  # Learning chapters and technical explanations
-├── case-studies/          # End-to-end system design examples
+├── fundamentals/          # Operating systems, networking, databases, and core concepts
+├── components/            # Load balancers, caches, queues, CDNs, gateways, and search
+├── distributed-systems/   # Consistency, consensus, clocks, coordination, and failures
+├── architecture-patterns/ # Monoliths, microservices, event-driven architecture, and CQRS
+├── reliability/           # SLOs, resilience, disaster recovery, and capacity planning
+├── security/              # Identity, access control, encryption, and threat modeling
+├── observability/         # Logging, metrics, tracing, alerting, and incident response
+├── case-studies/          # Complete end-to-end system designs
+├── calculations/          # Capacity, storage, latency, and availability calculations
 ├── diagrams/              # Architecture diagrams and Mermaid source files
-├── exercises/             # Practice questions and design challenges
-├── calculations/          # Capacity, latency, storage, and availability estimates
-├── examples/              # Small demonstrations and simulations
-├── interview-framework/   # Interview workflow and communication guidance
-├── templates/             # Reusable design documents and review checklists
-└── references/            # Primary documentation, papers, and further reading
+├── exercises/             # Practice problems and design challenges
+└── templates/             # Reusable system design and review templates
 ```
 
-The directories will be created as their content is developed.
+These directories will be created when their corresponding material is added.
 
 ## Planned Case Studies
 
-The project will gradually include designs for systems such as:
+Future case studies will include:
 
 - URL shortener
 - Rate limiter
 - Notification service
-- File storage and sharing service
+- File storage and sharing platform
 - Real-time chat application
 - Video streaming platform
-- Search autocomplete
+- Search autocomplete service
 - Distributed job scheduler
 - Monitoring and log aggregation platform
-- Multi-region e-commerce platform
+- E-commerce platform
+- Multi-region web application
+- Machine learning or LLM inference platform
 
-Each case study will include requirements, assumptions, calculations, architecture, component-level explanations, failure analysis, security considerations, observability, and design trade-offs.
+Each case study will include requirements, assumptions, calculations, APIs, data models, architecture diagrams, scaling decisions, failure analysis, security considerations, observability, and trade-offs.
 
-## Core Principles
+## Design Principles
 
-- Start with requirements, not product names.
-- Prefer the simplest architecture that satisfies the constraints.
-- Make assumptions visible and testable.
-- Support important decisions with estimates.
+- Start with requirements, not technology names.
+- Prefer the simplest design that satisfies the constraints.
+- Make assumptions visible and measurable.
+- Use calculations to support important decisions.
 - Treat failures as normal operating conditions.
-- Avoid adding complexity without a clear reason.
-- Explain trade-offs rather than presenting universal answers.
-- Separate vendor-neutral concepts from vendor-specific implementations.
-- Design for operation, monitoring, security, and recovery from the beginning.
+- Avoid complexity without a clear reason.
+- Design for security and operations from the beginning.
+- Explain alternatives and trade-offs instead of presenting one universal answer.
+- Separate vendor-neutral concepts from product-specific implementations.
 
-## Current Progress
+## Project Status
 
 | Area | Status |
 |---|---|
-| Repository foundation | In progress |
-| Curriculum structure | In progress |
-| Fundamental chapters | Planned |
+| Project definition | Complete |
+| Learning roadmap | Complete |
+| Repository structure | Planned |
+| Foundation chapters | Planned |
 | Architecture diagrams | Planned |
 | Capacity calculations | Planned |
 | Exercises | Planned |
 | Case studies | Planned |
-| Interview framework | Planned |
+
+## How to Use This Repository
+
+When content becomes available, follow the roadmap in order if you are new to system design. Experienced engineers may use individual chapters, calculations, templates, and case studies as reference material.
+
+For each topic:
+
+1. Study the underlying concept.
+2. Review the architecture or data-flow diagram.
+3. Work through the related calculation or example.
+4. Complete the exercise without looking at the solution.
+5. Compare alternatives and explain the trade-offs in your own words.
 
 ## Contributing
 
-Suggestions, corrections, examples, and additional system design scenarios are welcome. Contribution guidelines will be added when the initial repository structure and content format are established.
+Suggestions, corrections, diagrams, examples, exercises, and additional system design scenarios are welcome. Contribution guidelines will be added after the initial content structure is established.
 
 ## Author
 
-Created and maintained by [RIT-MESH](https://github.com/RIT-MESH).
+Created and maintained by **[RIT-MESH](https://github.com/RIT-MESH)**.
 
 ## License
 
-A license will be added before reusable code or substantial curriculum material is published.
+A license will be added before substantial reusable learning material or code is published.
