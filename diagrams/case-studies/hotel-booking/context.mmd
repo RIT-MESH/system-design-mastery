@@ -1,0 +1,7 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  User --> Search[Search svc] --> Inv[Inventory (date-range)]
+  Search --> Results
+  User --> Hold[Hold svc] --> Inv
+  Hold --> Expire[Hold expiry]
+  User --> Book[Book svc] --> Inv & Pay[Payment]

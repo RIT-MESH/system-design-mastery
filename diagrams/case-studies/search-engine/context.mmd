@@ -1,0 +1,6 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Crawl[Crawl] --> Index[Index builder] --> Shards[Sharded inverted index]
+  Query --> Qry[Query svc] --> Shards
+  Shards --> Topk[per-shard top-k] --> Gather[Gather + rank]
+  Gather --> Results

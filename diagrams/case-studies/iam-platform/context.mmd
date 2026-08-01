@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  App --> IdP[IdP]
+  IdP --> AuthN[AuthN + MFA]
+  IdP --> Token[Token issuance]
+  IdP --> Store[(User/session/token store)]
+  App --> Val[Token validation] --> Store
+  IdP --> Audit[Audit log]
+  SCIM[SCIM] --> Store

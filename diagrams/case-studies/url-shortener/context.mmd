@@ -1,0 +1,15 @@
+﻿%% origin: original to system-design-mastery
+%% url-shortener high-level context
+flowchart LR
+  Client --> CDN["Edge cache / CDN<br/>(short_code -> long_url cached)"]
+  CDN -.miss.-> GW["API gateway<br/>rate-limit + auth"]
+  GW --> Shorten["Shorten service<br/>(stateless)"]
+  GW --> Resolve["Resolve service<br/>(stateless)"]
+  Shorten --> IDS["ID / code generator"]
+  Shorten --> DB[("KV store<br/>sharded by short_code")]
+  Resolve --> DB
+  Resolve --> Cache[("Distributed cache")]
+  Cache --> DB
+  Shorten --> Cache
+  AnalyticsQ["Analytics queue"] <-. redirect event .-> Resolve
+  AnalyticsQ --> Workers["Analytics workers"]

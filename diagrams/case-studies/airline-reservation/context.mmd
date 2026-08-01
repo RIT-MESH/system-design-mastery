@@ -1,0 +1,8 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  User --> Search --> Inv[Flight/seat inventory]
+  User --> Hold --> Inv
+  Hold --> Expire[TTL]
+  User --> Book --> Inv & Pay[Payment]
+  Book --> Ticket[Ticketing]
+  Inv -.segment availability.-> Seg[Segment aggregator]

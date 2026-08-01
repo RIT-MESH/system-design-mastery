@@ -1,0 +1,7 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Cust --> Order[Order svc] --> Rest[Restaurant accept]
+  Rest --> Dispatch[Dispatch svc] --> Geo[Courier geo index]
+  Dispatch --> Courier[Courier]
+  Courier & Cust --> Track[Live tracking WS]
+  Order --> Pay[Payment split]

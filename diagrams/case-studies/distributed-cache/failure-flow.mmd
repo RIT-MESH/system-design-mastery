@@ -1,0 +1,9 @@
+﻿%% origin: original to system-design-mastery
+%% distributed-cache failure flow
+flowchart LR
+  F{"Failure"}
+  F -->|"primary down"| Promote["next replica -> primary"]
+  F -->|"replica down"| Recruit["recruit + backfill"]
+  F -->|"split"| Side["each side serves owned keys"]
+  F -->|"hot key"| Extra["extra read replicas"]
+  Promote & Recruit --> Heal["re-merge on heal"]

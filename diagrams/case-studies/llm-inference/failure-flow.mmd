@@ -1,0 +1,8 @@
+﻿%% origin: original to system-design-mastery
+%% llm-inference failure flow
+flowchart LR
+  F{"Failure"}
+  F -->|"GPU crash"| Reroute["re-route in-flight; replace replica"]
+  F -->|"scarcity"| Four["429 (graceful), bounded queue"]
+  F -->|"cold start"| Floor["warm-floor replicas; scale up early"]
+  F -->|"quota store down"| Open["fail-open with cap + reconcile"]

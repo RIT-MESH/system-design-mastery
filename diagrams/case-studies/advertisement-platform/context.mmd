@@ -1,0 +1,7 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Page --> AdReq[Ad request] --> Match[Eligibility match]
+  Match --> Auction[Auction] --> Serve[Serve ad]
+  Serve --> Pace[Budget pacing]
+  Serve --> Log[Event log]
+  Log --> Attr[Attribution]

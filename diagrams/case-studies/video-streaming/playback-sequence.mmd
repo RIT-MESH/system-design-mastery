@@ -1,0 +1,19 @@
+﻿%% origin: original to system-design-mastery
+%% video-streaming playback sequence
+sequenceDiagram
+  participant P as Player
+  participant CDN as Edge/CDN
+  participant O as Origin (object storage)
+  participant API as API
+  participant Ana as Analytics
+  P->>API: get manifest (video id)
+  API-->>P: manifest URLs per rendition
+  P->>CDN: GET segment .ts
+  alt edge hit
+    CDN-->>P: segment
+  else miss
+    CDN->>O: fetch segment
+    O-->>CDN: segment
+    CDN-->>P: segment (now cached)
+  end
+  P-->>Ana: watch progress (async)

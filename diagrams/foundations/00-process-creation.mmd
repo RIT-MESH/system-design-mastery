@@ -1,0 +1,8 @@
+﻿%% origin: original to system-design-mastery
+%% level-0 computing: process creation and execution
+flowchart LR
+  A["Source code<br/>(file on disk)"] --> B["Compiler / interpreter"]
+  B --> C["Executable / bytecode<br/>(file on disk)"]
+  C --> D["OS creates a process"]
+  D --> E["Address space + main thread"]
+  E --> F["Running instructions on CPU"]

@@ -1,0 +1,6 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Ingest --> Store[(Vector store)] --> Index[ANN index builder]
+  Query --> Search[ANN search] --> Index
+  Search --> Filter[Metadata filter]
+  Search --> TopK[top-k]

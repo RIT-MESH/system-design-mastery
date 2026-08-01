@@ -1,0 +1,8 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Src[Sources] --> Stream[Stream] --> Proc[Stream processors]
+  Proc --> Agg[Aggregates store]
+  Proc --> Raw[Raw retention]
+  Dash[Dashboard API] --> Agg
+  Dash --> Cache[Result cache]
+  Alert[Alert engine] --> Agg

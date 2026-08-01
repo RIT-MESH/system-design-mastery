@@ -1,0 +1,8 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Trader --> OE[Order entry] --> Match[Matching engine]
+  Match --> Book[(Order book, in-memory)]
+  Match --> Trade[Trades]
+  Trade --> Clear[Clearing + positions]
+  Match --> MD[Market data fan-out]
+  MD --> Traders

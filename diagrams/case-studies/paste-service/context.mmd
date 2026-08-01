@@ -1,0 +1,9 @@
+﻿%% origin: original to system-design-mastery
+flowchart LR
+  Client --> Edge["Edge cache (code->body)"]
+  Edge -.miss.-> GW["Gateway"]
+  GW --> Create["Create svc"]
+  GW --> Read["Read svc"]
+  Create --> DB[("KV store")]
+  Read --> Cache[("Distributed cache")] --> DB
+  Sweeper["Expiry sweeper (cron)"] --> DB

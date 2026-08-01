@@ -1,0 +1,6 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  P[Producers] --> Part[Partitioned logs (RF=3)]
+  Part --> CG1[Consumer group A]
+  Part --> CG2[Consumer group B]
+  Part -.retention/tier.-> Cold[Object storage]

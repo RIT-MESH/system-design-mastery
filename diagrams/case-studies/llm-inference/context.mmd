@@ -1,0 +1,12 @@
+﻿%% origin: original to system-design-mastery
+%% llm-inference high-level context
+flowchart LR
+  Client --> GW["API gateway<br/>auth + quota + rate-limit"]
+  GW --> Router["Inference router<br/>(batch + cache-aware)"]
+  Router --> Cache["Prompt/KV cache"]
+  Router --> Rep1["GPU replica 1"]
+  Router --> Rep2["GPU replica 2"]
+  Router --> RepN["GPU replica N"]
+  Sched["Autoscaler (queue depth)"] --> Reps["GPU fleet"]
+  Reg["Model registry"] --> Reps
+  Reps --> Telemetry["Telemetry / usage / cost"]

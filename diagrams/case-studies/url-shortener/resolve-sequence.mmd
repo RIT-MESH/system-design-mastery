@@ -1,0 +1,28 @@
+﻿%% origin: original to system-design-mastery
+%% url-shortener resolve sequence
+sequenceDiagram
+  participant C as Client
+  participant CDN as Edge cache
+  participant GW as Gateway
+  participant R as Resolve service
+  participant Cache as Distributed cache
+  participant DB as KV store
+  C->>CDN: GET /x7K2q9a
+  alt edge hit
+    CDN-->>C: 302 (cached)
+  else miss
+    CDN->>GW: forward
+    GW->>R: resolve x7K2q9a
+    R->>Cache: get x7K2q9a
+    alt cache hit
+      Cache-->>R: long_url
+    else miss
+      R->>DB: get x7K2q9a
+      DB-->>R: long_url
+      R->>Cache: set (TTL)
+    end
+    R-->>GW: 302 long_url
+    GW-->>CDN: 302 (cacheable)
+    CDN-->>C: 302
+  end
+  R->>AnalyticsQ: emit redirect event (async)

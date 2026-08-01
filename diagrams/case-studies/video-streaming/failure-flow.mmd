@@ -1,0 +1,8 @@
+﻿%% origin: original to system-design-mastery
+%% video-streaming failure flow
+flowchart LR
+  F{"Failure"}
+  F -->|"worker dies"| Req["requeue, idempotent re-transcode"]
+  F -->|"origin down"| Edge["edge serves cache; failover origin"]
+  F -->|"edge down"| Alt["alternate edge/origin"]
+  F -->|"upload part fails"| Res["multipart resume from part"]

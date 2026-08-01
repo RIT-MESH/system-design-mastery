@@ -1,0 +1,8 @@
+﻿%% origin: original to system-design-mastery
+%% distributed-cache scaling evolution
+flowchart LR
+  S1["Stage 1: single node<br/>(dev)"]
+  S1 -->|"load grows"| S2["Stage 2: sharded ring<br/>+ RF=3"]
+  S2 -->|"hot keys"| S3["Stage 3: hot-key extra replicas<br/>+ coalescing"]
+  S3 -->|"global"| S4["Stage 4: region-local caches<br/>+ cross-region fill-on-miss"]
+  S4 -->|"durability needs"| S5["Stage 5: optional async disk<br/>snapshot for warm restart"]

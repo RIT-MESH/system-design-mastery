@@ -1,0 +1,31 @@
+﻿name: Spell Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  spellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install codespell
+        run: pip install codespell
+      - name: Run codespell
+        run: |
+          codespell --skip='./.git,*.mmd,./examples,./work,./LICENSE' \
+            --ignore-words=.codespellignore \
+            --check-filenames --check-hidden || true
+      - name: Note
+        run: |
+          echo "Spell check is advisory (runs with || true). Review flagged words and add"
+          echo "them to .codespellignore as needed. Do not 'fix' domain terms."

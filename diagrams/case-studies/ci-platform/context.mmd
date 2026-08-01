@@ -1,0 +1,8 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Push --> Trigger[Trigger svc] --> Queue[Job queue]
+  Queue --> Runner[Isolated runner]
+  Runner --> Cache[Dep cache]
+  Runner --> Repo[Git checkout]
+  Runner --> Logs[Log stream]
+  Runner --> Art[Artifacts]

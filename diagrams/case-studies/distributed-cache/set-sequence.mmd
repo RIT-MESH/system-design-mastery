@@ -1,0 +1,14 @@
+﻿%% origin: original to system-design-mastery
+%% distributed-cache set/get sequence
+sequenceDiagram
+  participant C as Client
+  participant P as Primary
+  participant R1 as Replica 1
+  participant R2 as Replica 2
+  C->>P: SET k v ttl
+  P->>P: store
+  P-->>R1: replicate (async)
+  P-->>R2: replicate (async)
+  P-->>C: OK (policy met)
+  C->>P: GET k
+  P-->>C: v

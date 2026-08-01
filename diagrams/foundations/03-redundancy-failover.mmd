@@ -1,0 +1,9 @@
+﻿%% origin: original to system-design-mastery
+%% level-1 reliability: redundancy and failover
+flowchart LR
+  Client --> LB["Load balancer"]
+  LB --> R1["Replica 1"]
+  LB --> R2["Replica 2"]
+  LB --> R3["Replica 3"]
+  R1 -.failure.-> X["removed from pool"]
+  Client -.still served by R2/R3.-> LB

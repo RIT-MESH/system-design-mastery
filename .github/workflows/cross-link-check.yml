@@ -1,0 +1,51 @@
+﻿name: Cross-Link Integrity
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  internal-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Verify internal markdown links resolve
+        run: |
+          node <<'EOF'
+          const fs=require('fs'),path=require('path');
+          const root=process.cwd();
+          const md=[];
+          (function walk(d){for(const e of fs.readdirSync(d,{withFileTypes:true})){
+            const p=path.join(d,e.name);
+            if(e.isDirectory()){ if(e.name==='.git'||e.name==='node_modules') continue; walk(p);}
+            else if(e.name.endsWith('.md')) md.push(p);
+          }})(root);
+          const re=/\[([^\]]+)\]\(([^)]+)\)/g;
+          let bad=0;
+          for(const f of md){
+            const t=fs.readFileSync(f,'utf8');
+            let m;
+            while((m=re.exec(t))){
+              const link=m[2].split('#')[0].split(' ')[0];
+              if(!link) continue;
+              if(/^(https?:|mailto:)/.test(link)) continue;
+              const base=path.dirname(f);
+              let target=link;
+              if(target.startsWith('/')) target=path.join(root,target);
+              else target=path.resolve(base,target);
+              if(!fs.existsSync(target)){ console.log(`BROKEN: ${f} -> ${link}`); bad++; }
+            }
+          }
+          if(bad>0){ console.error(`${bad} broken internal link(s)`); process.exit(1);}
+          console.log('internal links OK');
+          EOF
+        shell: bash

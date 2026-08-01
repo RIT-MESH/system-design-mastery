@@ -1,0 +1,7 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  DB[Jobs store] --> Leader[Leader-elected scheduler]
+  Leader -->|acquire lease per (job,run)| Workers
+  Workers --> Exec[Execute job]
+  Exec --> DB
+  Workers -.fail.-> Requeue[reassign lease]

@@ -1,0 +1,8 @@
+﻿%% origin: original to system-design-mastery
+%% url-shortener scaling evolution
+flowchart LR
+  S1["Stage 1: single region<br/>1 KV shard + cache + CDN"]
+  S1 -->|"reads grow"| S2["Stage 2: add read replicas<br/>+ sharded KV by code"]
+  S2 -->|"global traffic"| S3["Stage 3: multi-region reads<br/>cross-region replication"]
+  S3 -->|"viral hot keys"| S4["Stage 4: edge coalescing<br/>+ stale-while-revalidate"]
+  S4 -->|"writes grow"| S5["Stage 5: multi-region writes<br/>(coordination for uniqueness)"]

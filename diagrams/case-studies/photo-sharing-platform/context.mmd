@@ -1,0 +1,10 @@
+﻿%% origin: original to system-design-mastery
+flowchart LR
+  Up["Uploader"] --> API["API: presigned URL"]
+  API --> Obj["Object storage (original)"]
+  Obj --"event"--> Q["Thumb queue"]
+  Q --> W["Image workers"]
+  W --> Obj2["Object storage (thumbs)"]
+  W --> Meta["Metadata DB"]
+  Viewer["Viewer"] --> CDN["CDN"] -.miss.-> Obj2
+  Viewer --> Feed["Feed API"] --> Meta

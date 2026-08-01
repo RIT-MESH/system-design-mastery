@@ -1,0 +1,22 @@
+﻿%% origin: original to system-design-mastery
+%% llm-inference completion sequence
+sequenceDiagram
+  participant C as Client
+  participant GW as Gateway
+  participant R as Router
+  participant GPU as GPU replica
+  C->>GW: POST /completions (stream)
+  GW->>GW: auth + quota check
+  GW->>R: route
+  R->>R: prefix cache lookup
+  alt prefix hit on GPU
+    R->>GPU: route (reuse KV)
+  else miss
+    R->>GPU: route (fresh)
+  end
+  GPU->>GPU: batch with in-flight reqs
+  loop
+    GPU-->>C: token (SSE)
+  end
+  GPU-->>R: done
+  R-->>Telemetry: usage (async)

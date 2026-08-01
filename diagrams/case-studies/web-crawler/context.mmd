@@ -1,0 +1,10 @@
+﻿%% origin: original to system-design-mastery
+flowchart LR
+  Seeds["Seed URLs"] --> Frontier["URL frontier<br/>(per-host queues)"]
+  Frontier --> W["Fetch workers"]
+  W --> Robots["robots.txt cache"]
+  W --> Fetch["HTTP fetch"]
+  Fetch --> Dedup["Content-hash dedup"]
+  Dedup --> Store["Page store"]
+  Fetch --> Extract["Link extractor"]
+  Extract --> Frontier

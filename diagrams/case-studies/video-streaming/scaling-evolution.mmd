@@ -1,0 +1,8 @@
+﻿%% origin: original to system-design-mastery
+%% video-streaming scaling evolution
+flowchart LR
+  S1["Stage 1: single region,<br/>transcode + object storage + simple CDN"]
+  S1 -->|"viewers grow"| S2["Stage 2: global CDN<br/>+ multi-region origin"]
+  S2 -->|"ingest grows"| S3["Stage 3: GPU transcode autoscaling<br/>+ multipart resumable uploads"]
+  S3 -->|"monetization"| S4["Stage 4: ad insertion + DRM"]
+  S4 -->|"live"| S5["Stage 5: live streaming<br/>(ingest + real-time transcode)"]

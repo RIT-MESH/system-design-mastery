@@ -1,0 +1,9 @@
+﻿%% origin: original to system-design-mastery
+%% url-shortener failure flow
+flowchart LR
+  F{"Failure"}
+  F -->|"KV leader down"| Promote["promote follower"]
+  F -->|"cache down"| Direct["resolve from KV"]
+  F -->|"edge down"| GW["fall through to origin"]
+  F -->|"analytics down"| Lag["counts lag, redirect ok"]
+  Promote --> OK["redirects via cache during switch"]

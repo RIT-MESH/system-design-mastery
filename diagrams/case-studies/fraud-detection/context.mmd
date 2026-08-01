@@ -1,0 +1,8 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Tx --> Score[Scorer]
+  Score --> Feat[Feature store (online)]
+  Score --> Model[Model serving]
+  Score --> Dec[Decision: block/hold/allow]
+  Outcomes[Confirmed outcomes] --> Train[Training] --> Model
+  Dec --> Action[Action + alert]

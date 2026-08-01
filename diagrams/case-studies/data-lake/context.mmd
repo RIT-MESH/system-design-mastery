@@ -1,0 +1,6 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Src[Sources] --> Ingest[Ingest (batch/stream)] --> Lake[(Object storage, partitioned)]
+  Lake --> Catalog[Catalog + lineage]
+  Query[Scan engine] --> Lake
+  Gov[Governance: access, PII, retention] --> Lake & Catalog

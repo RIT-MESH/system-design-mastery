@@ -1,0 +1,19 @@
+﻿%% origin: original to system-design-mastery
+%% level-0 networking: DNS resolution walk
+sequenceDiagram
+  participant App as Application
+  participant Stub as Stub resolver
+  participant Rec as Recursive resolver
+  participant Root as Root server
+  participant TLD as TLD server
+  participant Auth as Authoritative server
+  App->>Stub: resolve example.com
+  Stub->>Rec: query example.com
+  Rec->>Root: query example.com
+  Root-->>Rec: go to .com TLD
+  Rec->>TLD: query example.com
+  TLD-->>Rec: go to authoritative
+  Rec->>Auth: query example.com
+  Auth-->>Rec: 203.0.113.10 (TTL 300s)
+  Rec-->>Stub: 203.0.113.10
+  Rec-->>Rec: cache for TTL

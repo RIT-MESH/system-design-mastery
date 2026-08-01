@@ -1,0 +1,38 @@
+﻿name: Mermaid Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  mermaid:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install @mermaid-js/mermaid-cli
+        run: npm install -g @mermaid-js/mermaid-cli
+      - name: Validate all .mmd files
+        run: |
+          shopt -s nullglob
+          status=0
+          for f in $(find . -name '*.mmd'); do
+            echo "Validating $f"
+            if ! mmdc -i "$f" -o /tmp/out.svg; then
+              echo "FAILED: $f"
+              status=1
+            fi
+          done
+          exit $status
+        shell: bash
+      - name: Check embedded mermaid blocks render
+        run: |
+          npx --yes @mermaid-js/mermaid-cli --version

@@ -1,0 +1,8 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Merch --> API[Payment API]
+  API --> Idem[Idempotency check]
+  API --> Token[Tokenize / vault]
+  API --> Netw[Card network/bank]
+  API --> Ledger[(Payment ledger)]
+  API --> Settle[Settlement]

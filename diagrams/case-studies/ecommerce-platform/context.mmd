@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  User --> CDN[Catalog CDN] --> Catalog[Catalog/search]
+  User --> Cart[Cart svc]
+  Cart --> Checkout[Checkout]
+  Checkout --> Inv[Inventory reserve (atomic)]
+  Checkout --> Pay[Payment]
+  Checkout --> Order[Order svc]
+  Order --> Fulfill[Fulfillment]

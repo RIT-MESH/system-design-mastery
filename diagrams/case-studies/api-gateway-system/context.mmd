@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Client --> GW[Gateway]
+  GW --> Auth[AuthN/Z]
+  GW --> RL[Rate limiter]
+  GW --> Route[Router]
+  Route --> B1 & B2 & B3
+  GW --> Agg[Aggregator] --> B1 & B2
+  Config[Policy config] -.hot reload.-> GW

@@ -1,0 +1,7 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  U1 & U2 --> Relay[Op relay / gateway]
+  Relay --> Doc[Doc service (CRDT/OT)]
+  Doc --> Store[(Op log + snapshots)]
+  Doc -->|merge| U1 & U2
+  U3[Offline] -.reconnect.-> Relay

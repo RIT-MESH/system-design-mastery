@@ -1,0 +1,37 @@
+﻿system-design-mastery uses a dual license:
+
+----------------------------------------------------------------------------
+Code (Python simulations, worksheets, scripts, Mermaid sources, GitHub Actions)
+is licensed under the MIT License.
+----------------------------------------------------------------------------
+
+MIT License
+
+Copyright (c) 2026 system-design-mastery contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
+
+----------------------------------------------------------------------------
+Prose documentation, explanations, examples, and diagrams are licensed under
+the Creative Commons Attribution 4.0 International License (CC BY 4.0).
+----------------------------------------------------------------------------
+
+You are free to:
+  Share — copy and redistribute the material in any medium or format
+  Adapt — remix, transform, and build upon the material for any purpose
+
+Under the following terms:
+  Attribution — You must give appropriate credit, provide a link to the license,
+  and indicate if changes were made.
+
+View the full CC BY 4.0 license at https://creativecommons.org/licenses/by/4.0/legalcode

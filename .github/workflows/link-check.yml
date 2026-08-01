@@ -1,0 +1,33 @@
+﻿name: Link Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 6 * * 1'  # weekly to catch link rot
+
+permissions:
+  contents: read
+
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore lychee cache
+        uses: actions/cache@v4
+        with:
+          path: .lycheecache
+          key: lychee-cache-${{ hashFiles('**/*.md') }}
+      - name: Run lychee link check
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --cache
+            --max-cache-age 30d
+            --exclude 'localhost|127\.0\.0\.1|example\.com|203\.0\.113|198\.51\.100'
+            '**/*.md'
+          fail: true

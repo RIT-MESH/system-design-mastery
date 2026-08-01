@@ -1,0 +1,10 @@
+﻿%% origin: original to system-design-mastery
+%% distributed-cache high-level context
+flowchart LR
+  Client --> CL["Client library / router<br/>(ring-aware)"]
+  CL -->|"hash(key) -> ring"| N1["Node A (primary)"]
+  CL -->|"replicate"| N2["Node B (replica)"]
+  CL -->|"replicate"| N3["Node C (replica)"]
+  N1 & N2 & N3 --> Ring["Consistent hash ring (vnodes)"]
+  Gossip["Membership / gossip"] -.membership.-> N1 & N2 & N3
+  CL --> Gossip

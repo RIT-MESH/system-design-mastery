@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Ask --> EmbedQ[Embed query]
+  EmbedQ --> Retrieve[Vector retrieve top-k]
+  Retrieve --> Context[Context + citations]
+  Context --> LLM[LLM generate]
+  LLM --> Answer[Grounded answer]
+  Corpus --> Chunk[Chunk+embed] --> Index
+  Cache[Query cache] --> Ask

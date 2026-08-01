@@ -1,0 +1,9 @@
+﻿%% origin: original to system-design-mastery
+%% level-1 capacity: paste service estimate flow
+flowchart LR
+  U["10M users<br/>10% post 1/day"] --> W["1M writes/day<br/>~12/s avg"]
+  W --> S["5 GB/day<br/>~9 TB over 5y"]
+  U --> R["50M reads/day<br/>~580/s avg"]
+  R --> B["~2.9 MB/s avg<br/>~29 MB/s peak"]
+  S --> Grow["Storage-driven cost"]
+  B --> BW["Bandwidth-driven cost"]
