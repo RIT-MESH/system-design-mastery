@@ -6,7 +6,7 @@ System Design Mastery is a self-contained, vendor-neutral reference and learning
 
 The repository is deliberately a curriculum rather than a list of interview answers. Each chapter is independently navigable and follows a consistent structure — learning objectives, examples, trade-offs, a "common mistakes" section, failure modes, review questions, and further reading with citations — so a reader can open any chapter and learn the topic in context. The conceptual material is reinforced by practical components: capacity-estimation and availability worksheets, small Python simulations of real mechanisms (consistent hashing, token-bucket rate limiting, retry with jitter, and a circuit-breaker/failure-injection model), reusable templates (case study, architecture decision record, and design/security/reliability review checklists), and an interview framework with a timed mock-interview script. Forty-four case studies apply the method end to end, each written to a fixed thirty-section template.
 
-**Current status:** the repository is feature-complete against its original scope. All eleven curriculum levels (76 chapters), all 44 case studies, the practical components, the templates, the interview framework, per-level exercises, the references index, and a full CI validation suite are present. Original Mermaid diagrams are used throughout (61 standalone `.mmd` sources plus 174 inline diagram blocks). See the [Progress and Project Status](#progress-and-project-status) section for a detailed breakdown and the [Planned Work](#planned-work) section for clearly-labeled future enhancements that are **not** yet present.
+**Current status:** the repository is substantially complete but not fully complete against the original detailed spec. All eleven curriculum levels (76 chapters), all 44 case studies (each with the full 30-section content), the practical components, the templates, the interview framework, per-level exercises, the references index, and a full CI validation suite are present. A few items are not yet done or have known defects — per-case-study diagram coverage is partial, the per-level index pages have a rendering defect, and the design research report is not committed to the repo — and are listed honestly in [Known Limitations](#known-limitations). Original Mermaid diagrams are used throughout (61 standalone `.mmd` sources plus 174 inline diagram blocks). See [Progress and Project Status](#progress-and-project-status), [Known Limitations](#known-limitations), and [Planned Work](#planned-work).
 
 **Purpose:** to give a beginner, a working engineer, and a senior architect a single coherent path that builds genuine design judgment — the ability to gather requirements, estimate, choose components, reason about consistency and failure, and justify trade-offs — rather than memorized answers to a fixed set of interview questions.
 
@@ -27,12 +27,13 @@ The repository is deliberately a curriculum rather than a list of interview answ
 11. [Recurring Design Principles](#recurring-design-principles)
 12. [How to Use This Repository](#how-to-use-this-repository)
 13. [Progress and Project Status](#progress-and-project-status)
-14. [Planned Work](#planned-work)
-15. [Contribution Guidelines](#contribution-guidelines)
-16. [Documentation Standards](#documentation-standards)
-17. [References and Sources](#references-and-sources)
-18. [Author](#author)
-19. [License](#license)
+14. [Known Limitations](#known-limitations)
+15. [Planned Work](#planned-work)
+16. [Contribution Guidelines](#contribution-guidelines)
+17. [Documentation Standards](#documentation-standards)
+18. [References and Sources](#references-and-sources)
+19. [Author](#author)
+20. [License](#license)
 
 ## Project Overview
 
@@ -245,7 +246,7 @@ Patterns and constraints that only matter past millions of users, petabytes, or 
 - [Internet-Scale Identity, IoT/Digital Twins, P2P & Blockchain](docs/10-extreme-scale/11-identity-iot-p2p-blockchain.md)
 ## Case Studies
 
-Forty-four case studies apply the design method end to end. Each follows the [thirty-section template](templates/CASE-STUDY-TEMPLATE.md) and contains original traffic/storage/bandwidth estimates, an API design, a data model, architecture and request-flow Mermaid diagrams, a failure-flow, scaling stages, trade-offs, alternatives, interview discussion points, and exercises. Standalone diagram sources live under [`diagrams/case-studies/`](diagrams/case-studies/).
+Forty-four case studies apply the design method end to end. Each follows the [thirty-section template](templates/CASE-STUDY-TEMPLATE.md) and contains original traffic/storage/bandwidth estimates, an API design, a data model, a high-level architecture Mermaid diagram, a request-flow description, a failure-scenarios description, scaling stages, trade-offs, alternatives, interview discussion points, and exercises. Four anchor case studies — [URL Shortener](case-studies/beginner/url-shortener.md), [Distributed Cache](case-studies/intermediate/distributed-cache.md), [Video-Streaming](case-studies/advanced/video-streaming.md), and [LLM Inference](case-studies/extreme/llm-inference.md) — additionally include request-sequence, failure-flow, and scaling-evolution diagrams; the other forty currently include the architecture diagram only (see [Known Limitations](#known-limitations)). Standalone diagram sources live under [`diagrams/case-studies/`](diagrams/case-studies/).
 
 ### Beginner ([`case-studies/beginner/`](case-studies/beginner/))
 
@@ -312,7 +313,7 @@ Banking ledger, stock-trading, fraud detection, advertisement platform, data lak
 
 ## Diagrams and Documentation Format
 
-The documentation is **Markdown** and diagrams are **Mermaid**. There are no committed PNG or SVG image files; diagrams are authored as Mermaid source so they stay in version control, render natively on GitHub, and are easy to revise. Each diagram carries an `%% origin: original to system-design-mastery` comment asserting it was drawn for this repository. Sixty-one standalone `.mmd` sources live under [`diagrams/`](diagrams/) (`foundamentals/`, `patterns/`, `case-studies/`), and 174 additional diagrams are embedded inline in the chapters and case studies. Diagram types include context/component, request-sequence, failure-flow, scaling-evolution, state-machine, and replication diagrams.
+The documentation is **Markdown** and diagrams are **Mermaid**. There are no committed PNG or SVG image files; diagrams are authored as Mermaid source so they stay in version control, render natively on GitHub, and are easy to revise. Each diagram carries an `%% origin: original to system-design-mastery` comment asserting it was drawn for this repository. Sixty-one standalone `.mmd` sources live under [`diagrams/`](diagrams/) (`foundamentals/`, `patterns/`, `case-studies/`), and 174 additional diagrams are embedded inline in the chapters and case studies. Diagram types include context/component, request-sequence, failure-flow, scaling-evolution, state-machine, and replication diagrams. Across the repository these types appear in the chapters and in the four anchor case studies; the remaining forty case studies currently include a context/component diagram, with the additional types to be added (see [Known Limitations](#known-limitations)).
 
 Other formats present: Python code examples (the four simulations), Markdown calculation worksheets, and YAML GitHub Actions configuration.
 
@@ -380,6 +381,8 @@ Every status below is derived from the actual repository contents (files that ex
 | Level 10 — Extreme-Scale | Complete | 12 chapters | — |
 | Case studies | Complete | 44 studies, all 30 sections each | — |
 | Diagrams | Complete | 61 `.mmd` sources + 174 inline Mermaid blocks | — |
+| Case-study diagram coverage | Partial | 4 anchor studies have the full diagram set; 40 have a context/component diagram | Add request-sequence / failure-flow / scaling-evolution to the rest |
+| Per-level index pages | Partial | chapter tables have a `$ch.f` placeholder defect | Regenerate the 11 `docs/<level>/README.md` files |
 | Calculation worksheets | Complete | 5 worksheets | — |
 | Python simulations | Complete | 4 simulations (runnable, std-lib only) | — |
 | Templates | Complete | Case study, ADR, 3 review checklists | — |
@@ -390,6 +393,18 @@ Every status below is derived from the actual repository contents (files that ex
 | License | Complete | Dual: MIT (code) + CC BY 4.0 (content) | — |
 
 The targeted scope is complete. Remaining work is enhancement, listed below as planned.
+
+## Known Limitations
+
+The repository is substantially complete, but the following are not yet done or have known defects, and are listed honestly rather than claimed as complete:
+
+- **Per-case-study diagram coverage is partial.** The original spec calls for several diagram types per case study (context/component, request-sequence, data-flow, failure-flow, scaling-evolution, state-machine, replication). Four anchor case studies — [URL Shortener](case-studies/beginner/url-shortener.md), [Distributed Cache](case-studies/intermediate/distributed-cache.md), [Video-Streaming](case-studies/advanced/video-streaming.md), and [LLM Inference](case-studies/extreme/llm-inference.md) — include the full set. The other forty case studies currently include the architecture (context/component) diagram only; the remaining diagram types are planned.
+- **Per-level index pages have a defect.** The `docs/<level>/README.md` files have a generation bug: their chapter tables show a literal `$ch.f` placeholder instead of real filenames and stale "PLANNED" statuses. The chapter files themselves are correct, and this root README links them directly; regenerating those eleven index files is planned.
+- **The design research report is not in the repository.** The pre-implementation research report that informed the structure and policies lives in a sibling `work/` folder outside this repo and was not committed. The equivalent policies are captured in [`CONTRIBUTING.md`](CONTRIBUTING.md), [`SOURCES.md`](SOURCES.md), and [`ACKNOWLEDGEMENTS.md`](ACKNOWLEDGEMENTS.md).
+- **Exercises have prompts, not answer keys.** The eleven exercise sets contain problems only.
+- **`ROADMAP.md` milestone statuses are stale.** The roadmap marks later milestones as "Planned" even though their content is complete; [`BACKLOG.md`](BACKLOG.md) and [`CHANGELOG.md`](CHANGELOG.md) reflect actual completion.
+
+None of the above is described as complete elsewhere in this README.
 
 ## Planned Work
 
