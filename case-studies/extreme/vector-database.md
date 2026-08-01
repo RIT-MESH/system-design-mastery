@@ -2,21 +2,6 @@
 
 > **Tier:** extreme · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  Ingest --> Store[(Vector store)] --> Index[ANN index builder]
-  Query --> Search[ANN search] --> Index
-  Search --> Filter[Metadata filter]
-  Search --> TopK[top-k]
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/vector-database/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 Store billions of embeddings and answer approximate nearest-neighbor queries at low latency — the substrate for semantic search and RAG.
@@ -71,6 +56,18 @@ Search responses small (top-k ids); ingest steady.
 ## 10. Data model
 
 vectors(id, embedding, metadata); index (HNSW/IVF/PQ) per shard; metadata index for filters.
+
+
+## 11. High-level architecture
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  Ingest --> Store[(Vector store)] --> Index[ANN index builder]
+  Query --> Search[ANN search] --> Index
+  Search --> Filter[Metadata filter]
+  Search --> TopK[top-k]
+```
 
 
 ## 12. Request flow
@@ -178,6 +175,9 @@ Exact NN (intractable). A single unsharded index (can't scale). No metadata filt
 
 Clarify scale, recall, filters, latency. Surface ANN index, sharding + fan-out merge, recall/cost tuning.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/vector-database/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

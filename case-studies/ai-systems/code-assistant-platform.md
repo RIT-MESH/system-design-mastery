@@ -2,24 +2,6 @@
 
 > **Tier:** ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% origin: original to system-design-mastery
-flowchart LR
-  IDE --> GW[Code gateway]
-  GW --> Index[Codebase index]
-  Index --> Context[Relevant code]
-  Context --> LLM[Code model]
-  LLM --> Complete[Completion]
-  PR --> Review[Security review]
-  Review --> Findings
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/code-assistant-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 A platform providing code completion, explanation, refactoring, and security review using LLMs with codebase indexing and security controls.
@@ -75,6 +57,21 @@ POST /complete (repo, file, cursor) -> completion; POST /review (PR diff) -> rev
 ## 10. Data model
 
 repos(id, url, lang); functions(id, repo, signature, body, embedding); reviews(id, pr, findings).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  IDE --> GW[Code gateway]
+  GW --> Index[Codebase index]
+  Index --> Context[Relevant code]
+  Context --> LLM[Code model]
+  LLM --> Complete[Completion]
+  PR --> Review[Security review]
+  Review --> Findings
+```
 
 
 ## 12. Request flow
@@ -185,6 +182,9 @@ Blind LLM (hallucinated APIs). External-only (security risk). Keyword-only (no u
 
 Clarify repo count, confidentiality, languages, latency. Surface codebase indexing, context retrieval, local routing, security review.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/code-assistant-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

@@ -2,24 +2,6 @@
 
 > **Tier:** ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% origin: original to system-design-mastery
-flowchart LR
-  Goal --> Sup[Supervisor]
-  Sup --> A1 & A2 & A3[Specialist agents]
-  A1 & A2 & A3 --> Tools[Shared tool registry]
-  A1 & A2 & A3 --> Mem[Shared memory]
-  A1 & A2 & A3 --> Policy[Policy gateway]
-  Policy --> Exec[Execute or approve]
-  All --> Audit
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/enterprise-agent-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 A platform for building, deploying, and managing multiple specialized AI agents across an enterprise, with shared memory, tool registry, supervisor coordination, policy gateway, and full audit.
@@ -75,6 +57,21 @@ POST /agents (type, config) -> agent id; POST /agents/:id/run (goal) -> session;
 ## 10. Data model
 
 agents(id, type, config, tools[]); sessions(id, agent, goal, state, steps[]); memory(id, namespace, key, value, embedding); audit(actor, action, ts, result).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  Goal --> Sup[Supervisor]
+  Sup --> A1 & A2 & A3[Specialist agents]
+  A1 & A2 & A3 --> Tools[Shared tool registry]
+  A1 & A2 & A3 --> Mem[Shared memory]
+  A1 & A2 & A3 --> Policy[Policy gateway]
+  Policy --> Exec[Execute or approve]
+  All --> Audit
+```
 
 
 ## 12. Request flow
@@ -188,6 +185,9 @@ Single agent (no specialization). No policy (unsafe). No memory (repeated work).
 
 Clarify agent count, tool risk tiers, approval workflow, memory sharing. Surface supervisor, tool registry, shared memory, policy gateway, audit.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/enterprise-agent-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

@@ -2,28 +2,6 @@
 
 > **Tier:** ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  Client --> Auth[Auth + token budget]
-  Auth --> Cache[Semantic cache]
-  Cache -.hit.-> Resp[Response]
-  Cache -.miss.-> Route[Router: complexity or cost or latency or capability]
-  Route --> P1[Provider 1]
-  Route --> P2[Provider 2]
-  Route --> Self[Self-hosted]
-  P1 -.fail.-> Fail[Fallback]
-  P1 & P2 & Self & Fail --> Filter[Content filter + PII redaction]
-  Filter --> Log[Log + audit + cost]
-  Log --> Resp
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/llm-api-gateway/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 An enterprise LLM API gateway that provides a unified model API across providers (external and self-hosted), with complexity/cost/latency routing, per-tenant token budgets, failover, semantic caching, content filtering, PII redaction, and full audit.
@@ -82,6 +60,25 @@ POST /v1/completions (unified) -> streamed response; GET /v1/usage/:tenant.
 ## 10. Data model
 
 usage(tenant, req_id, model, input_tokens, output_tokens, cost, ts); cache(query_hash, tenant, answer, ttl); providers(name, endpoint, key_ref, models, cost_per_1M).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  Client --> Auth[Auth + token budget]
+  Auth --> Cache[Semantic cache]
+  Cache -.hit.-> Resp[Response]
+  Cache -.miss.-> Route[Router: complexity or cost or latency or capability]
+  Route --> P1[Provider 1]
+  Route --> P2[Provider 2]
+  Route --> Self[Self-hosted]
+  P1 -.fail.-> Fail[Fallback]
+  P1 & P2 & Self & Fail --> Filter[Content filter + PII redaction]
+  Filter --> Log[Log + audit + cost]
+  Log --> Resp
+```
 
 
 ## 12. Request flow
@@ -196,6 +193,9 @@ Direct provider calls (no control, no budget, no audit). RPS limits (wrong unit)
 
 Clarify provider count, token distribution, budget enforcement, cache safety. Surface routing, token-based budgets, failover, PII redaction, audit.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/llm-api-gateway/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

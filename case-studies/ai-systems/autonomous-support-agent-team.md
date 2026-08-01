@@ -2,28 +2,6 @@
 
 > **Tier:** ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  Ticket --> Triage[Triage agent]
-  Triage --> Sup[Supervisor]
-  Sup --> Research[Research agent: RAG]
-  Research --> Resolution[Resolution agent]
-  Resolution --> Review[Review agent]
-  Review --> Sup
-  Sup -->|low risk| Close[Close ticket]
-  Sup -->|high risk| Human[Human approval]
-  Human --> Close
-  All --> Audit[Audit log]
-  Policy[Policy gateway] -.guards.-> Resolution
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/autonomous-support-agent-team/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 A team of specialized AI agents (triage, research, resolution, review) that handle support tickets end to end, with a supervisor coordinating, a policy gateway approving high-risk actions, and full audit.
@@ -80,6 +58,25 @@ POST /tickets (intake) -> agent team processes; GET /tickets/:id/trace; POST /ti
 ## 10. Data model
 
 tickets(id, status, priority, assignee); agent_traces(ticket, agent, steps, tools, results); rag_corpus(chunks, embeddings, ACLs); audit(actor, action, ts, result).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  Ticket --> Triage[Triage agent]
+  Triage --> Sup[Supervisor]
+  Sup --> Research[Research agent: RAG]
+  Research --> Resolution[Resolution agent]
+  Resolution --> Review[Review agent]
+  Review --> Sup
+  Sup -->|low risk| Close[Close ticket]
+  Sup -->|high risk| Human[Human approval]
+  Human --> Close
+  All --> Audit[Audit log]
+  Policy[Policy gateway] -.guards.-> Resolution
+```
 
 
 ## 12. Request flow
@@ -194,6 +191,9 @@ Single agent (no specialization). Full autonomy (unsafe). Human-only (slow).
 
 Clarify risk tiers, approval workflow, agent count. Surface multi-agent coordination, policy gateway, audit, and the human-approval principle.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/autonomous-support-agent-team/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

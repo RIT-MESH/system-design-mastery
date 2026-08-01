@@ -2,26 +2,6 @@
 
 > **Tier:** ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% origin: original to system-design-mastery
-flowchart LR
-  Doc --> Embed[Local embedding model]
-  Embed --> VDB[(Local vector DB)]
-  Q --> LE[Local embed query]
-  LE --> VDB
-  VDB --> Context[Local context]
-  Context --> LLM[Local LLM on GPU]
-  LLM --> Answer[Answer + citations]
-  All --> Audit[Local audit log]
-  NoNet[No internet] -.air-gap.-> All
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/offline-airgapped-rag-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 A RAG platform that runs entirely offline (no internet, no external APIs) for classified, regulated, or disconnected environments, with local embeddings, local LLM, local vector DB, and local audit.
@@ -78,6 +58,23 @@ POST /ask (question) -> answer + citations; POST /ingest (docs) -> index; all lo
 ## 10. Data model
 
 chunks(id, text, embedding, metadata) in local vector DB; models (local embedding + local LLM); audit (local append-only).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  Doc --> Embed[Local embedding model]
+  Embed --> VDB[(Local vector DB)]
+  Q --> LE[Local embed query]
+  LE --> VDB
+  VDB --> Context[Local context]
+  Context --> LLM[Local LLM on GPU]
+  LLM --> Answer[Answer + citations]
+  All --> Audit[Local audit log]
+  NoNet[No internet] -.air-gap.-> All
+```
 
 
 ## 12. Request flow
@@ -185,6 +182,9 @@ External API (violates air-gap). No RAG (manual search). Cloud RAG (data leaves)
 
 Clarify air-gap requirements, local GPU budget, document volume, model quality needs. Surface local embeddings, local vector DB, local LLM, local audit, no-internet constraint.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/offline-airgapped-rag-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

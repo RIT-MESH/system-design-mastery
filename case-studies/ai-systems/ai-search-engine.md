@@ -2,23 +2,6 @@
 
 > **Tier:** ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% origin: original to system-design-mastery
-flowchart LR
-  Q --> KW[BM25] & VS[Vector search]
-  KW & VS --> Fuse[RRF fusion]
-  Fuse --> Rerank[Cross-encoder]
-  Rerank --> Topk[Top-k]
-  Topk --> LLM[LLM answer synthesis]
-  LLM --> Answer[Answer + citations]
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/ai-search-engine/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 A search engine combining keyword search, vector search, and LLM generation to answer questions with grounded, cited results — not just links, but synthesized answers.
@@ -74,6 +57,20 @@ GET /search (q) -> results + optional answer; GET /suggest (prefix) -> top-k.
 ## 10. Data model
 
 pages(id, url, text, embedding, meta); inverted_index(term -> pages); answers(q_hash, answer, citations, ttl).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  Q --> KW[BM25] & VS[Vector search]
+  KW & VS --> Fuse[RRF fusion]
+  Fuse --> Rerank[Cross-encoder]
+  Rerank --> Topk[Top-k]
+  Topk --> LLM[LLM answer synthesis]
+  LLM --> Answer[Answer + citations]
+```
 
 
 ## 12. Request flow
@@ -187,6 +184,9 @@ Keyword only (misses semantic). Vector only (misses exact). No LLM (just links).
 
 Clarify scale, freshness, LLM answer rate, latency. Surface hybrid search, reranking, LLM synthesis, citations.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/ai-search-engine/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

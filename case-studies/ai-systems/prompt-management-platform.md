@@ -2,24 +2,6 @@
 
 > **Tier:** ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% origin: original to system-design-mastery
-flowchart LR
-  Author --> Version[Version and eval]
-  Version --> Review[Change review]
-  Review --> Deploy[Deploy or A/B test]
-  Deploy --> Monitor[Monitor performance]
-  Monitor -.regression.-> Rollback[Rollback]
-  A/B --> Results[Compare]
-  Results --> Deploy
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/prompt-management-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 A platform that versions, tests, deploys, and monitors prompt templates across AI features, with A/B testing, rollback, and change review.
@@ -75,6 +57,21 @@ POST /prompts (template) -> version; POST /prompts/:id/deploy -> deployed; POST 
 ## 10. Data model
 
 prompts(id, feature, versions[]); versions(id, template, status, eval_results, deploy_ts); ab_tests(id, prompt, version_a, version_b, traffic_split, results); performance(prompt, version, metrics, ts).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  Author --> Version[Version and eval]
+  Version --> Review[Change review]
+  Review --> Deploy[Deploy or A/B test]
+  Deploy --> Monitor[Monitor performance]
+  Monitor -.regression.-> Rollback[Rollback]
+  A/B --> Results[Compare]
+  Results --> Deploy
+```
 
 
 ## 12. Request flow
@@ -188,6 +185,9 @@ No versioning (no rollback). Hardcoded prompts (no A/B). No review (unsafe). No 
 
 Clarify change frequency, A/B policy, eval requirements. Surface versioning, eval, A/B, monitoring, rollback, change review.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/prompt-management-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

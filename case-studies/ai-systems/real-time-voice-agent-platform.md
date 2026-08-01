@@ -2,26 +2,6 @@
 
 > **Tier:** ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% origin: original to system-design-mastery
-flowchart LR
-  User --> STT[Speech to text]
-  STT --> LLM[LLM + RAG]
-  LLM --> Policy[Policy gateway]
-  Policy --> Tools[Read tools]
-  Policy --> Draft[Draft high-risk]
-  Draft --> Approve[Human approval]
-  LLM --> TTS[Text to speech]
-  TTS --> User
-  All --> Audit[Audit log]
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/real-time-voice-agent-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 A voice-operated assistant that transcribes speech, reasons with an LLM, and responds with synthesized speech in real time, with high-risk action guardrails.
@@ -78,6 +58,23 @@ WS /voice (bidirectional audio) -> text + audio responses.
 ## 10. Data model
 
 sessions(id, user, state, turns[]); transcripts(session, turn, text); audit(actor, action, ts).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  User --> STT[Speech to text]
+  STT --> LLM[LLM + RAG]
+  LLM --> Policy[Policy gateway]
+  Policy --> Tools[Read tools]
+  Policy --> Draft[Draft high-risk]
+  Draft --> Approve[Human approval]
+  LLM --> TTS[Text to speech]
+  TTS --> User
+  All --> Audit[Audit log]
+```
 
 
 ## 12. Request flow
@@ -191,6 +188,9 @@ Text-only (no hands-free). Full autonomy (unsafe). No policy (no guardrails). Ba
 
 Clarify latency, concurrency, risk tiers, approval. Surface STT-LLM-TTS pipeline, policy gateway, RAG, audit.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/real-time-voice-agent-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

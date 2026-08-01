@@ -2,27 +2,6 @@
 
 > **Tier:** network-ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% origin: original to system-design-mastery
-flowchart LR
-  Eng --> Agent[Agent planner-executor]
-  Agent --> Policy[AI safety policy gateway]
-  Policy --> Tools[Read and diagnostic tools]
-  Policy --> Draft[Draft change]
-  Policy --> Approve[Approval workflow]
-  Approve --> Exec[Change management]
-  Agent --> LLM[LLM local for configs]
-  Tools --> Audit[Audit log]
-  Draft --> Audit
-  Exec --> Audit
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/secure-network-agent/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 An enterprise agent that performs allowed network operations (read status, run diagnostics, draft changes, generate reports) under strict policies, approvals, RBAC, and an AI safety gateway, never executing high-risk or destructive actions autonomously.
@@ -79,6 +58,24 @@ POST /agent/sessions; POST /agent/sessions/:id/messages; POST /approvals; GET /a
 ## 10. Data model
 
 sessions(id, user, goal, state, steps); tools(name, spec, risk_level); approvals(id, action, status, approver); audit(actor, action, ts, result).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  Eng --> Agent[Agent planner-executor]
+  Agent --> Policy[AI safety policy gateway]
+  Policy --> Tools[Read and diagnostic tools]
+  Policy --> Draft[Draft change]
+  Policy --> Approve[Approval workflow]
+  Approve --> Exec[Change management]
+  Agent --> LLM[LLM local for configs]
+  Tools --> Audit[Audit log]
+  Draft --> Audit
+  Exec --> Audit
+```
 
 
 ## 12. Request flow
@@ -193,6 +190,9 @@ Full autonomy (unsafe). No policy gateway (no guardrails). No audit (no accounta
 
 Clarify allowed tools, risk tiers, approval workflow, air-gap need. Surface planner-executor, policy gateway, approval, audit, and the no-autonomous-high-risk principle.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/secure-network-agent/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

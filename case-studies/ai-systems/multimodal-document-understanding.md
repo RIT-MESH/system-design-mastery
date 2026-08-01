@@ -2,23 +2,6 @@
 
 > **Tier:** ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% origin: original to system-design-mastery
-flowchart LR
-  Doc --> Extract[Extract: text, images, tables]
-  Extract --> Index[Cross-modal index]
-  Q --> Retrieve[Multimodal retrieval]
-  Retrieve --> Context[Text + image regions]
-  Context --> MM[Multimodal LLM]
-  MM --> Answer[Answer + region citations]
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/multimodal-document-understanding/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 A system that ingests documents with text, images, tables, and charts, understands them across modalities, and answers questions about content including visual elements.
@@ -73,6 +56,20 @@ POST /ingest (doc) -> doc id; POST /ask (doc_id, question) -> answer + region ci
 ## 10. Data model
 
 documents(id, pages[]); pages(id, text, images[], tables[], embeddings[]); regions(page, bbox, type, content, embedding).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  Doc --> Extract[Extract: text, images, tables]
+  Extract --> Index[Cross-modal index]
+  Q --> Retrieve[Multimodal retrieval]
+  Retrieve --> Context[Text + image regions]
+  Context --> MM[Multimodal LLM]
+  MM --> Answer[Answer + region citations]
+```
 
 
 ## 12. Request flow
@@ -183,6 +180,9 @@ Text-only (misses visual). Human review (slow). OCR-only (misses layout and char
 
 Clarify document types, visual content, latency, citation requirements. Surface cross-modal indexing, multimodal retrieval, region-level grounding.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/multimodal-document-understanding/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

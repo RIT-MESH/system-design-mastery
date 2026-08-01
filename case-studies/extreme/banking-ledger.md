@@ -2,22 +2,6 @@
 
 > **Tier:** extreme · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  Tx[Transfer tx] --> Valid[Validate + double-entry]
-  Valid --> Ledger[(Append-only ledger, sync RF=3)]
-  Ledger --> Bal[Balance (derived)]
-  Ledger --> Recon[Reconcile vs banks]
-  Ledger --> Audit[Audit store]
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/banking-ledger/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 The core ledger of a bank: immutable, double-entry, strongly-durable, auditable, reconcilable — money never lost or duplicated.
@@ -73,6 +57,19 @@ Small payloads; correctness/durability dominate, not bandwidth.
 ## 10. Data model
 
 accounts(id); entries(id, account, delta, tx_id, ts) append-only; tx(id, debits[], credits[], status). Balance = fold of entries.
+
+
+## 11. High-level architecture
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  Tx[Transfer tx] --> Valid[Validate + double-entry]
+  Valid --> Ledger[(Append-only ledger, sync RF=3)]
+  Ledger --> Bal[Balance (derived)]
+  Ledger --> Recon[Reconcile vs banks]
+  Ledger --> Audit[Audit store]
+```
 
 
 ## 12. Request flow
@@ -180,6 +177,9 @@ Mutable balances (no audit). Async replication (loss risk). Eventual consistency
 
 Clarify loss tolerance (zero), audit, retention, regulation. Surface double-entry, append-only, sync replication, reconciliation.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/banking-ledger/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

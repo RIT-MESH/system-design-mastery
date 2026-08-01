@@ -2,23 +2,6 @@
 
 > **Tier:** extreme · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  Trader --> OE[Order entry] --> Match[Matching engine]
-  Match --> Book[(Order book, in-memory)]
-  Match --> Trade[Trades]
-  Trade --> Clear[Clearing + positions]
-  Match --> MD[Market data fan-out]
-  MD --> Traders
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/stock-trading/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 Match buy/sell orders in real time with an order book, execute, and clear — ultra-low-latency matching with strict price-time ordering and no double-execution.
@@ -74,6 +57,20 @@ Order stream small; market-data fan-out to clients is the bandwidth.
 ## 10. Data model
 
 order_book(symbol, bids, asks by price-time); orders(id, sym, side, price, qty, status); trades(id, buy, sell, price, qty, ts).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  Trader --> OE[Order entry] --> Match[Matching engine]
+  Match --> Book[(Order book, in-memory)]
+  Match --> Trade[Trades]
+  Trade --> Clear[Clearing + positions]
+  Match --> MD[Market data fan-out]
+  MD --> Traders
+```
 
 
 ## 12. Request flow
@@ -181,6 +178,9 @@ DB-backed book (too slow). Single global engine (latency, SPOF). No failover (lo
 
 Clarify latency SLA, ordering fairness, hot symbols. Surface in-memory book + log + failover + price-time priority.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/stock-trading/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

@@ -2,21 +2,6 @@
 
 > **Tier:** advanced · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  P1 & P2 & P3 --> SFU[Selective forwarding unit]
-  SFU -->|forward per layer| P1 & P2 & P3
-  P1 & P2 & P3 --> Sig[Signaling] --> Room[Room svc]
-  Room --> Pres[Presence]
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/video-conferencing/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 Real-time multiparty audio/video calls: low-latency media transport, selective forwarding, and presence — a stateful, real-time media system.
@@ -69,6 +54,18 @@ signaling over WS; media over UDP/SRTP; REST for room/presence.
 ## 10. Data model
 
 rooms(id, participants, sfu); presence(user, room); signaling state per room. Media is live streams, not persisted.
+
+
+## 11. High-level architecture
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  P1 & P2 & P3 --> SFU[Selective forwarding unit]
+  SFU -->|forward per layer| P1 & P2 & P3
+  P1 & P2 & P3 --> Sig[Signaling] --> Room[Room svc]
+  Room --> Pres[Presence]
+```
 
 
 ## 12. Request flow
@@ -176,6 +173,9 @@ Mesh (N^2 bandwidth, doesn't scale). TCP media (latency). Record everything (cos
 
 Clarify participants, latency, E2E, recording. Surface SFU, UDP/SRTP, signaling vs media split, degradation.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/video-conferencing/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

@@ -2,28 +2,6 @@
 
 > **Tier:** network-ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% origin: original to system-design-mastery
-flowchart LR
-  Dev[Network devices] --> Coll[Redundant collectors UDP/TCP/TLS]
-  Coll --> Norm[Normalize + enrich]
-  Norm --> Rules[Rule classifier]
-  Norm --> AI[AI classifier + summarizer]
-  Rules & AI --> Corr[Correlate + dedup]
-  Corr --> Store[(Event store + tiers)]
-  Corr -->|critical| Rep[/report critical/]
-  Rep --> Notif[Notify admins]
-  RAG[Runbook RAG] -.remediation.-> Rep
-  Notif --> Ops[Ack/escalate/resolve]
-  Ops --> Rep
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/intelligent-syslog-monitoring/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 Collect syslog from heterogeneous enterprise network devices (FortiGate, Cisco, Aruba, Yamaha, Linux/Windows servers, VPN, load balancers, APs, DNS/DHCP, proxy, NAS, cloud network services), normalize and enrich it, classify severity with rules plus AI, correlate duplicates, write critical incidents to a structured /report tree, notify administrators with recommended troubleshooting, and record resolution.
@@ -84,6 +62,25 @@ UDP/TCP/TLS syslog ingestion; REST: GET /incidents, POST /incidents/:id/ack, /es
 ## 10. Data model
 
 Raw events(timestamp, device, ip, type, vendor, site, facility, msg); parsed events + error_category + severity; incidents(id, severity, fields[]). /report tree: critical/, high/, medium/, resolved/, daily-summary/. Critical report fields: timestamp, device name, device IP, device type, vendor, site, severity, facility, syslog message, parsed error category, possible root cause, related events, impacted services, recommended checks, suggested remediation, confidence, escalation status, admin response, resolution notes.
+
+
+## 11. High-level architecture
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  Dev[Network devices] --> Coll[Redundant collectors UDP/TCP/TLS]
+  Coll --> Norm[Normalize + enrich]
+  Norm --> Rules[Rule classifier]
+  Norm --> AI[AI classifier + summarizer]
+  Rules & AI --> Corr[Correlate + dedup]
+  Corr --> Store[(Event store + tiers)]
+  Corr -->|critical| Rep[/report critical/]
+  Rep --> Notif[Notify admins]
+  RAG[Runbook RAG] -.remediation.-> Rep
+  Notif --> Ops[Ack/escalate/resolve]
+  Ops --> Rep
+```
 
 
 ## 12. Request flow
@@ -194,6 +191,9 @@ Pure SIEM without AI (less adaptive). Full auto-remediation (unsafe, rejected). 
 
 Clarify vendors, volume, latency, offline sites, auto-remediation tolerance (should be none). Surface collector redundancy, rule+AI hybrid, /report structure, and the human-approval principle.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/intelligent-syslog-monitoring/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

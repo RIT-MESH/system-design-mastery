@@ -2,23 +2,6 @@
 
 > **Tier:** ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% origin: original to system-design-mastery
-flowchart LR
-  Train[Training] & Batch[Batch] --> Q[Priority queue]
-  Serve[Serving reservations] --> Alloc[GPU allocation]
-  Q --> Sched[Scheduler: gang, backfill, preempt]
-  Sched --> Alloc
-  Alloc --> GPUs[GPU cluster]
-  GPUs -.utilization.-> Sched
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/gpu-workload-scheduler/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 A scheduler managing a GPU cluster for mixed workloads (serving, training, batch) with gang scheduling, priorities, preemption, and utilization optimization.
@@ -74,6 +57,20 @@ POST /jobs (type, gpu_req, priority) -> job id; GET /jobs/:id/status; POST /jobs
 ## 10. Data model
 
 jobs(id, type, gpu_count, status, priority, checkpoint_ref); gpus(id, node, memory, status); allocations(job, gpus[]).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  Train[Training] & Batch[Batch] --> Q[Priority queue]
+  Serve[Serving reservations] --> Alloc[GPU allocation]
+  Q --> Sched[Scheduler: gang, backfill, preempt]
+  Sched --> Alloc
+  Alloc --> GPUs[GPU cluster]
+  GPUs -.utilization.-> Sched
+```
 
 
 ## 12. Request flow
@@ -184,6 +181,9 @@ No gang (deadlock). No preempt (low utilization). No backfill (idle). Static (in
 
 Clarify GPU count, workload mix, serving SLA, training duration. Surface gang, preemption, backfill, utilization.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/gpu-workload-scheduler/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

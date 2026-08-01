@@ -2,27 +2,6 @@
 
 > **Tier:** network-ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% origin: original to system-design-mastery
-flowchart LR
-  Alerts --> Summ[Summarizer]
-  Summ --> Dash[Active incidents]
-  Eng --> Ask[Q and A + runbook RAG]
-  Eng --> Voice[Voice agent]
-  Router --> Models[Small large vision embedding code local]
-  Ask --> Router
-  Voice --> Router
-  Router --> Act[Ticket escalate notes]
-  Act --> Approve[Approval gate]
-  Act --> Audit[Audit log]
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/ai-assisted-noc/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 A NOC copilot that reads critical alerts, summarizes active incidents, retrieves device status, creates incident tickets, guides engineers through runbooks, records spoken notes, and escalates, with multi-model routing and a real-time voice-agent, but never executes high-risk changes without approval.
@@ -81,6 +60,24 @@ GET /incidents/active; POST /tickets; POST /ask; WS /voice; POST /escalate.
 ## 10. Data model
 
 incidents(id, severity, status, summary); runbooks(chunks, embeddings); transcripts(session, turns); audit(actor, action, ts).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  Alerts --> Summ[Summarizer]
+  Summ --> Dash[Active incidents]
+  Eng --> Ask[Q and A + runbook RAG]
+  Eng --> Voice[Voice agent]
+  Router --> Models[Small large vision embedding code local]
+  Ask --> Router
+  Voice --> Router
+  Router --> Act[Ticket escalate notes]
+  Act --> Approve[Approval gate]
+  Act --> Audit[Audit log]
+```
 
 
 ## 12. Request flow
@@ -192,6 +189,9 @@ Single model (cost/quality). Autonomous execution (unsafe). Text-only (no hands-
 
 Clarify channels, model mix, voice latency, autonomy limits. Surface multi-model routing, RAG, approval gate, audit, and the no-autonomous-high-risk principle.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/ai-assisted-noc/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

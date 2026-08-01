@@ -2,25 +2,6 @@
 
 > **Tier:** network-ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% origin: original to system-design-mastery
-flowchart LR
-  Inv[Inventory + firmware tracking] --> Plan[Upgrade planner + risk analysis]
-  Plan --> Approve[Approval gate]
-  Approve --> Backup[Config backup + checksum]
-  Backup --> Exec[Execute upgrade]
-  Exec --> Watch[Monitor reboot + recovery]
-  Watch --> Validate[Post-upgrade validation]
-  Validate -.fail.-> Rollback[Rollback + report]
-  Validate -.pass.-> Report[Upgrade report]
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/device-upgrade-management/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 Centrally plan, test, schedule, deploy, and verify firmware/software upgrades across network devices (firewalls, routers, switches, WLCs, APs, VPN, LB, DNS/DHCP, proxy, NAS) safely, with backups, HA-pair/cluster awareness, rollback, and audit.
@@ -83,6 +64,22 @@ GET /inventory; POST /upgrade-plans; POST /upgrade-plans/:id/approve; POST /upgr
 ## 10. Data model
 
 devices(id, type, vendor, model, firmware, config_hash, ha_pair, site); firmware_catalog(vendor, model, target, advisories, release_notes, compatible); upgrade_plans(id, devices[], steps, window, status, approvals[]); backups(plan, device, config, checksum); reports(plan, results, rollback?).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  Inv[Inventory + firmware tracking] --> Plan[Upgrade planner + risk analysis]
+  Plan --> Approve[Approval gate]
+  Approve --> Backup[Config backup + checksum]
+  Backup --> Exec[Execute upgrade]
+  Exec --> Watch[Monitor reboot + recovery]
+  Watch --> Validate[Post-upgrade validation]
+  Validate -.fail.-> Rollback[Rollback + report]
+  Validate -.pass.-> Report[Upgrade report]
+```
 
 
 ## 12. Request flow
@@ -193,6 +190,9 @@ Manual per-device (no scale, no audit). Zero-touch autonomous (unsafe). No rollb
 
 Clarify device count, HA/cluster model, rollback requirement, approval. Surface the plan/approve/backup/execute/validate/rollback pipeline and AI-as-assist principle.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/device-upgrade-management/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

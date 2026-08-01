@@ -2,26 +2,6 @@
 
 > **Tier:** ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  Client --> GW[AI gateway: auth + budget]
-  GW --> Cache[Semantic cache]
-  Cache -.hit.-> Resp[Answer]
-  Cache -.miss.-> Ret[Permission-aware hybrid retrieve]
-  Ret --> Rerank[Reranker]
-  Rerank --> LLM[Generate + cite]
-  LLM --> Store[Cache answer]
-  LLM --> Resp
-  Ingest[Ingest] --> Chunk[Chunk + embed + ACL] --> VDB[(Vector DB)]
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/enterprise-rag-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 An enterprise RAG platform serving thousands of tenants, each with private corpora, permission-aware retrieval, per-tenant token budgets, semantic caching, multi-model routing, and AI governance.
@@ -79,6 +59,23 @@ POST /ask (tenant, question) -> streamed answer + citations; POST /ingest (tenan
 ## 10. Data model
 
 chunks(tenant, id, text, embedding, acl, metadata); cache(query_hash, tenant, answer, ttl); usage(tenant, tokens, cost, budget).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  Client --> GW[AI gateway: auth + budget]
+  GW --> Cache[Semantic cache]
+  Cache -.hit.-> Resp[Answer]
+  Cache -.miss.-> Ret[Permission-aware hybrid retrieve]
+  Ret --> Rerank[Reranker]
+  Rerank --> LLM[Generate + cite]
+  LLM --> Store[Cache answer]
+  LLM --> Resp
+  Ingest[Ingest] --> Chunk[Chunk + embed + ACL] --> VDB[(Vector DB)]
+```
 
 
 ## 12. Request flow
@@ -189,6 +186,9 @@ Single model (cost). Shared cache (leakage). No permission filter (unauthorized 
 
 Clarify tenant count, permission model, cache safety, budget enforcement. Surface permission-aware retrieval, semantic caching, multi-model routing, and governance.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/enterprise-rag-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

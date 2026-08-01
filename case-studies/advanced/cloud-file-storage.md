@@ -2,22 +2,6 @@
 
 > **Tier:** advanced · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  Dev1 & Dev2 --> API[File API]
-  API --> Meta[Metadata DB]
-  API --> Obj[(Object storage, versioned)]
-  Obj --> CDN[CDN download]
-  Changes --> Notif[Sync notifications] --> Dev1 & Dev2
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/cloud-file-storage/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 Store users' files durably, sync across devices, and serve at scale — object storage + metadata + sync, bandwidth-dominated (cf. photo/video cases).
@@ -73,6 +57,19 @@ Downloads + sync egress dominate; CDN for hot files.
 ## 10. Data model
 
 files(id, owner, versions[]); metadata(id, name, parent, acl, version_id); shares(id, acl).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  Dev1 & Dev2 --> API[File API]
+  API --> Meta[Metadata DB]
+  API --> Obj[(Object storage, versioned)]
+  Obj --> CDN[CDN download]
+  Changes --> Notif[Sync notifications] --> Dev1 & Dev2
+```
 
 
 ## 12. Request flow
@@ -184,6 +181,9 @@ File server (won't scale, no dedup). DB for blobs (cost). No CDN (egress/latency
 
 Clarify scale, sync model, sharing. Surface object storage + metadata + CDN + sync notifications.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/cloud-file-storage/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

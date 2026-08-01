@@ -2,21 +2,6 @@
 
 > **Tier:** extreme · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  Src[Sources] --> Ingest[Ingest (batch/stream)] --> Lake[(Object storage, partitioned)]
-  Lake --> Catalog[Catalog + lineage]
-  Query[Scan engine] --> Lake
-  Gov[Governance: access, PII, retention] --> Lake & Catalog
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/data-lake/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 Store petabytes of raw data in any format cheaply, with a catalog and governance so it is discoverable and queryable — a foundational analytics store.
@@ -70,6 +55,18 @@ batch/stream ingest; SQL/scan query engine over partitions.
 ## 10. Data model
 
 Objects partitioned by (source, date); catalog metadata (schema, lineage, owner, partitions).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  Src[Sources] --> Ingest[Ingest (batch/stream)] --> Lake[(Object storage, partitioned)]
+  Lake --> Catalog[Catalog + lineage]
+  Query[Scan engine] --> Lake
+  Gov[Governance: access, PII, retention] --> Lake & Catalog
+```
 
 
 ## 12. Request flow
@@ -177,6 +174,9 @@ Warehouse for raw (cost explosion). No catalog (a swamp). No partitioning (full 
 
 Clarify volume, formats, query patterns, governance. Surface partitioning, catalog, lifecycle, and the swamp risk.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/data-lake/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

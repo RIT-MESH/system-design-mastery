@@ -2,23 +2,6 @@
 
 > **Tier:** extreme · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  Tx --> Score[Scorer]
-  Score --> Feat[Feature store (online)]
-  Score --> Model[Model serving]
-  Score --> Dec[Decision: block/hold/allow]
-  Outcomes[Confirmed outcomes] --> Train[Training] --> Model
-  Dec --> Action[Action + alert]
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/fraud-detection/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 Score every transaction in real time for fraud, block/alert high-risk ones, and learn from outcomes — a low-latency stream + ML pipeline with strict false-positive cost.
@@ -72,6 +55,20 @@ Feature fetch per tx; small but latency-critical.
 ## 10. Data model
 
 entities(id, features, recent history); events(id, entity, ts, features, score, outcome); models(version).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  Tx --> Score[Scorer]
+  Score --> Feat[Feature store (online)]
+  Score --> Model[Model serving]
+  Score --> Dec[Decision: block/hold/allow]
+  Outcomes[Confirmed outcomes] --> Train[Training] --> Model
+  Dec --> Action[Action + alert]
+```
 
 
 ## 12. Request flow
@@ -179,6 +176,9 @@ Batch scoring (too late — fraud already settled). Always-allow (fraud loss). A
 
 Clarify latency vs settlement, false-positive cost. Surface real-time scoring, feature store, feedback loop, safe fallback.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/fraud-detection/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

@@ -2,22 +2,6 @@
 
 > **Tier:** ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% origin: original to system-design-mastery
-flowchart LR
-  Req --> Router[Router: complexity or cost or privacy]
-  Router --> Small & Medium & Large & Local
-  Small -.fail.-> Fallback
-  All --> Track[Cost + budget]
-  Track --> Audit
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/multi-model-routing-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 A platform that routes AI requests to the cheapest capable model based on task type, token count, latency, privacy, and cost budget, maximizing quality per dollar.
@@ -73,6 +57,19 @@ POST /v1/completions (unified) -> streamed response; GET /v1/usage/:tenant.
 ## 10. Data model
 
 models(id, provider, cost_per_1m, max_tokens, caps, latency); usage(tenant, model, tokens, cost, ts); budgets(tenant, limit).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  Req --> Router[Router: complexity or cost or privacy]
+  Router --> Small & Medium & Large & Local
+  Small -.fail.-> Fallback
+  All --> Track[Cost + budget]
+  Track --> Audit
+```
 
 
 ## 12. Request flow
@@ -183,6 +180,9 @@ Single model (expensive). No routing (no cost control). External-only (privacy r
 
 Clarify model count, task types, privacy levels, budget enforcement. Surface routing, failover, budgets, local model, cost tracking.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/multi-model-routing-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

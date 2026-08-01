@@ -2,24 +2,6 @@
 
 > **Tier:** ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% origin: original to system-design-mastery
-flowchart LR
-  Golden & Adv --> Run[Evaluation run]
-  Run --> Metrics[Metrics: retrieval, generation, cost, safety]
-  Metrics --> Gates{Release gates}
-  Gates -->|pass| Release[Release]
-  Gates -->|fail| Block[Block or rollback]
-  Sample -.continuous.-> Run
-  Results --> Dash[Dashboard]
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/ai-evaluation-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 A platform that continuously evaluates AI features (RAG, agents, LLM calls) against golden and adversarial test sets, with release gates, regression tracking, and rollback triggers.
@@ -75,6 +57,21 @@ POST /eval/run (feature, version) -> results; GET /eval/results -> metrics; POST
 ## 10. Data model
 
 test_sets(id, feature, type, cases[]); results(id, feature, version, metrics, ts); gates(feature, metrics, thresholds, status).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  Golden & Adv --> Run[Evaluation run]
+  Run --> Metrics[Metrics: retrieval, generation, cost, safety]
+  Metrics --> Gates{Release gates}
+  Gates -->|pass| Release[Release]
+  Gates -->|fail| Block[Block or rollback]
+  Sample -.continuous.-> Run
+  Results --> Dash[Dashboard]
+```
 
 
 ## 12. Request flow
@@ -185,6 +182,9 @@ No eval (ship blind). Vibe check (subjective). One metric (misses regressions). 
 
 Clarify features, golden set size, gate thresholds, rollback. Surface golden/adversarial, metrics, gates, regression tracking.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/ai-evaluation-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

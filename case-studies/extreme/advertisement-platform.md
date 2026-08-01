@@ -2,22 +2,6 @@
 
 > **Tier:** extreme · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  Page --> AdReq[Ad request] --> Match[Eligibility match]
-  Match --> Auction[Auction] --> Serve[Serve ad]
-  Serve --> Pace[Budget pacing]
-  Serve --> Log[Event log]
-  Log --> Attr[Attribution]
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/advertisement-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 Match advertisers' campaigns to eligible users and serve an ad in milliseconds, with budget pacing and attribution — a latency-critical auction + serving system.
@@ -72,6 +56,19 @@ Ad creatives served (images/video) — egress significant; CDN for creatives.
 ## 10. Data model
 
 campaigns(id, targeting, creative, budget, pace); users(id, attributes); events(id, type, campaign, user, ts).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  Page --> AdReq[Ad request] --> Match[Eligibility match]
+  Match --> Auction[Auction] --> Serve[Serve ad]
+  Serve --> Pace[Budget pacing]
+  Serve --> Log[Event log]
+  Log --> Attr[Attribution]
+```
 
 
 ## 12. Request flow
@@ -179,6 +176,9 @@ Scan all campaigns (too slow). Loose budget (overspend). Synchronous attribution
 
 Clarify latency, targeting, budget strictness. Surface eligibility index, auction, budget pacing, CDN creatives.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/advertisement-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

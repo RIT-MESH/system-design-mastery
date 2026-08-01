@@ -2,25 +2,6 @@
 
 > **Tier:** ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% origin: original to system-design-mastery
-flowchart LR
-  Action --> Gateway[Policy gateway]
-  Gateway --> Classify[Classify risk]
-  Classify -->|read-only| Allow[Allow]
-  Classify -->|low/medium| PolicyCheck[Policy-controlled]
-  Classify -->|high| Approve[Human approval]
-  Classify -->|prohibited| Block[Block always]
-  Gateway -.error.-> FailClosed[Fail-closed: deny]
-  All --> Audit[Audit log]
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/ai-safety-policy-gateway/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 A centralized policy gateway that intercepts every AI action, enforces safety policies (no auto-high-risk, no PII to unapproved models, no secrets), routes high-risk to human approval, and is fail-closed.
@@ -77,6 +58,22 @@ POST /evaluate (action, context, user) -> allow/pending/deny; POST /approve (act
 ## 10. Data model
 
 policies(id, rule, risk_level, action_patterns); actions(id, user, action, risk, status, ts); approvals(id, action, approver, decision, ts).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  Action --> Gateway[Policy gateway]
+  Gateway --> Classify[Classify risk]
+  Classify -->|read-only| Allow[Allow]
+  Classify -->|low/medium| PolicyCheck[Policy-controlled]
+  Classify -->|high| Approve[Human approval]
+  Classify -->|prohibited| Block[Block always]
+  Gateway -.error.-> FailClosed[Fail-closed: deny]
+  All --> Audit[Audit log]
+```
 
 
 ## 12. Request flow
@@ -187,6 +184,9 @@ No gateway (unguarded). Fail-open (unsafe on error). Per-agent policies (inconsi
 
 Clarify risk tiers, approval workflow, fail-closed behavior, audit. Surface classification, approval, fail-closed, audit, no-prohibited principle.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/ai-safety-policy-gateway/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

@@ -2,21 +2,6 @@
 
 > **Tier:** advanced · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  Crawl[Crawl] --> Index[Index builder] --> Shards[Sharded inverted index]
-  Query --> Qry[Query svc] --> Shards
-  Shards --> Topk[per-shard top-k] --> Gather[Gather + rank]
-  Gather --> Results
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/search-engine/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 Crawl, index, and rank web-scale documents and answer text queries in milliseconds — a sharded inverted-index + ranking system.
@@ -69,6 +54,18 @@ Result snippets small; index builds scan large data.
 ## 10. Data model
 
 inverted_index(term -> [doc, score]) sharded; docs(id, url, text, rank signals); query logs.
+
+
+## 11. High-level architecture
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  Crawl[Crawl] --> Index[Index builder] --> Shards[Sharded inverted index]
+  Query --> Qry[Query svc] --> Shards
+  Shards --> Topk[per-shard top-k] --> Gather[Gather + rank]
+  Gather --> Results
+```
 
 
 ## 12. Request flow
@@ -176,6 +173,9 @@ Scan all docs (intractable). Single index (can't scale). No freshness (stale res
 
 Clarify scale, latency, freshness. Surface sharded inverted index, per-shard top-k + gather, freshness.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/search-engine/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

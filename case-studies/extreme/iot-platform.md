@@ -2,22 +2,6 @@
 
 > **Tier:** extreme · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  Dev[Devices, intermittent] --> GW[IoT gateway/broker]
-  GW --> Twin[(Digital twins)]
-  Twin --> Apps[Apps/analytics]
-  Apps -.commands.-> GW -.delivered when online.-> Dev
-  GW --> Tier[Telemetry -> cold tier]
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/iot-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 Ingest telemetry from billions of intermittently-connected devices, maintain per-device digital twins, and support bidirectional commands at fleet scale.
@@ -71,6 +55,19 @@ device MQTT/HTTP for telemetry + commands; app API to query twins / send command
 ## 10. Data model
 
 devices(id, twin state, last_seen); telemetry(device, ts, metrics); commands(device, queued commands).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  Dev[Devices, intermittent] --> GW[IoT gateway/broker]
+  GW --> Twin[(Digital twins)]
+  Twin --> Apps[Apps/analytics]
+  Apps -.commands.-> GW -.delivered when online.-> Dev
+  GW --> Tier[Telemetry -> cold tier]
+```
 
 
 ## 12. Request flow
@@ -178,6 +175,9 @@ Assume always-on devices (wrong). Single broker (can't scale). Sync commands (fa
 
 Clarify device count, online percent, command latency, retention. Surface intermittent design, twins, reconnect storms.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/iot-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

@@ -2,24 +2,6 @@
 
 > **Tier:** network-ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% origin: original to system-design-mastery
-flowchart LR
-  Dev[Devices] --> Coll[Config collector]
-  Coll --> Diff[Diff vs baseline]
-  Diff --> Class[Rule + AI drift classifier]
-  Class --> Risk[Risk scorer]
-  Risk --> Ticket[Change ticket + context]
-  Risk --> Comp[Compliance report]
-  Baselines -.versioned.-> Diff
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/configuration-drift-detection/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 Continuously compare live device configurations against approved baselines/policies, detect drift, classify intent (authorized change vs unauthorized/error), and route to change-management with risk scoring.
@@ -77,6 +59,21 @@ GET /drift; POST /baselines; GET /compliance; POST /drift/:id/ack.
 ## 10. Data model
 
 baselines(device_class, version, config); configs(device, version, config, hash); diffs(device, baseline, changes, class, risk); tickets(id, drift, status).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  Dev[Devices] --> Coll[Config collector]
+  Coll --> Diff[Diff vs baseline]
+  Diff --> Class[Rule + AI drift classifier]
+  Class --> Risk[Risk scorer]
+  Risk --> Ticket[Change ticket + context]
+  Risk --> Comp[Compliance report]
+  Baselines -.versioned.-> Diff
+```
 
 
 ## 12. Request flow
@@ -184,6 +181,9 @@ Manual diff (no scale). Auto-remediation (unsafe). Snapshot only without classif
 
 Clarify cadence, vendor variety, auto-remediation tolerance. Surface diff/classify/risk/ticket pipeline and human-approval principle.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/configuration-drift-detection/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

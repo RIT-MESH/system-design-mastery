@@ -2,23 +2,6 @@
 
 > **Tier:** ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% origin: original to system-design-mastery
-flowchart LR
-  Docs --> Extract[Entity and relation extraction]
-  Extract --> Graph[(Knowledge graph)]
-  Query --> Plan[Multi-hop plan]
-  Plan --> Graph
-  Graph --> Context[Subgraph + text]
-  Context --> LLM[Generate with citations]
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/graphrag-research-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 A RAG platform that retrieves from a knowledge graph for multi-hop reasoning, enabling answers that require traversing relationships.
@@ -72,6 +55,20 @@ POST /ask -> answer + graph path citations; POST /ingest (docs) -> extract + ind
 ## 10. Data model
 
 entities(id, type, attrs); relationships(src, dst, type, weight); documents(id, text, entities[]).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  Docs --> Extract[Entity and relation extraction]
+  Extract --> Graph[(Knowledge graph)]
+  Query --> Plan[Multi-hop plan]
+  Plan --> Graph
+  Graph --> Context[Subgraph + text]
+  Context --> LLM[Generate with citations]
+```
 
 
 ## 12. Request flow
@@ -182,6 +179,9 @@ Vector-only (misses multi-hop). Manual graph (no scale). Full graph DB (wrong ac
 
 Clarify entity count, hop depth, freshness, latency. Surface extraction, graph, multi-hop retrieval, citations.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/graphrag-research-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

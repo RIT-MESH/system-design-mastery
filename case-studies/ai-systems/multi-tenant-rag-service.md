@@ -2,22 +2,6 @@
 
 > **Tier:** ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% origin: original to system-design-mastery
-flowchart LR
-  Client --> GW[AI gateway]
-  GW --> Cache[Semantic cache]
-  Cache -.miss.-> Ret[Permission-aware retrieve]
-  Ret --> LLM[Generate and cite]
-  LLM --> Resp
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/multi-tenant-rag-service/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 A platform where each tenant uploads private corpora and queries via RAG with per-tenant permission-aware retrieval, paying per token.
@@ -75,6 +59,19 @@ POST /ask (tenant, q) -> streamed answer + citations; POST /ingest (tenant, docs
 ## 10. Data model
 
 chunks(tenant, id, text, embedding, acl, meta); cache(q_hash, tenant, answer, ttl); usage(tenant, tokens, cost, budget).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  Client --> GW[AI gateway]
+  GW --> Cache[Semantic cache]
+  Cache -.miss.-> Ret[Permission-aware retrieve]
+  Ret --> LLM[Generate and cite]
+  LLM --> Resp
+```
 
 
 ## 12. Request flow
@@ -185,6 +182,9 @@ Single model (cost). Shared cache (leakage). No filter (unauthorized).
 
 Clarify tenant count, ACL model, cache safety, budget. Surface permission-aware retrieval, cache, routing.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/multi-tenant-rag-service/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

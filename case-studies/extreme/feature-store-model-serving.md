@@ -2,24 +2,6 @@
 
 > **Tier:** extreme · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  Sources[Data sources] --> FS[Feature store]
-  FS --> Online[Online store (hot)]
-  FS --> Offline[Offline store (history)]
-  Online --> Serve[Serving (model)]
-  Offline --> Train[Training]
-  Train --> Reg[Model registry] --> Serve
-  Serve --> Mon[Drift monitoring] -.retrain.-> Train
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/feature-store-model-serving/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 Provide consistent features for training and serving and serve models at low latency — the data backbone of an ML platform (expanded from the Level 10 chapter).
@@ -74,6 +56,21 @@ Feature fetch per inference; small but latency-critical.
 ## 10. Data model
 
 features(entity, feature, value, ts) — online (hot) + offline (history); models(version, artifact, metrics).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  Sources[Data sources] --> FS[Feature store]
+  FS --> Online[Online store (hot)]
+  FS --> Offline[Offline store (history)]
+  Online --> Serve[Serving (model)]
+  Offline --> Train[Training]
+  Train --> Reg[Model registry] --> Serve
+  Serve --> Mon[Drift monitoring] -.retrain.-> Train
+```
 
 
 ## 12. Request flow
@@ -181,6 +178,9 @@ Recompute features per query (slow, skew). No versioning (silent drift). Single 
 
 Clarify feature scale, latency, skew. Surface the dual store, consistency-by-definition, versioning, drift.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/feature-store-model-serving/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

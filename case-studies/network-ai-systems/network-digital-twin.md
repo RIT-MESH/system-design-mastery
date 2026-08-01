@@ -2,24 +2,6 @@
 
 > **Tier:** network-ai-systems · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% origin: original to system-design-mastery
-flowchart LR
-  Mon[Monitoring and config] --> Twin[Digital twin: topology and state and traffic]
-  Eng --> Sim[Change simulator]
-  Sim --> Twin
-  Sim --> Predict[Impact prediction]
-  Predict --> AI[AI what-if analysis]
-  AI --> Report[Pre-change validation report]
-  Report --> Deploy[Change management]
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/network-digital-twin/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 Maintain a live model of network topology, device state, and traffic so engineers can simulate changes (upgrades, routing, policy), predict impact, and validate before deploying, with AI-assisted what-if analysis.
@@ -75,6 +57,21 @@ GET /topology; POST /simulate; GET /what-if; GET /validation-report.
 ## 10. Data model
 
 topology(nodes, links, capacities); device_state(device, status, config_hash); traffic_matrix(src,dst,bytes); simulations(id, change, impact, result).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  Mon[Monitoring and config] --> Twin[Digital twin: topology and state and traffic]
+  Eng --> Sim[Change simulator]
+  Sim --> Twin
+  Sim --> Predict[Impact prediction]
+  Predict --> AI[AI what-if analysis]
+  AI --> Report[Pre-change validation report]
+  Report --> Deploy[Change management]
+```
 
 
 ## 12. Request flow
@@ -182,6 +179,9 @@ No twin (blind changes). Full auto-deploy from twin (unsafe). Config-only model 
 
 Clarify topology scale, freshness, simulation fidelity, auto-deploy tolerance (none). Surface twin, simulate, predict, what-if, approval.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/network-digital-twin/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

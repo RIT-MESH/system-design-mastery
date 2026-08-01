@@ -2,24 +2,6 @@
 
 > **Tier:** extreme · **Status:** complete · Original numbers and diagrams.
 
-## 11. High-level architecture
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  Ask --> EmbedQ[Embed query]
-  EmbedQ --> Retrieve[Vector retrieve top-k]
-  Retrieve --> Context[Context + citations]
-  Context --> LLM[LLM generate]
-  LLM --> Answer[Grounded answer]
-  Corpus --> Chunk[Chunk+embed] --> Index
-  Cache[Query cache] --> Ask
-```
-
-
-## 28. Original Mermaid diagrams
-Standalone sources under `diagrams/case-studies/rag-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
-
 ## 1. Problem statement
 
 Answer questions grounded in a private corpus by retrieving relevant context and generating with an LLM — orchestration of retrieval + generation with caching and grounding.
@@ -74,6 +56,21 @@ Retrieval small; generation streamed tokens to client.
 ## 10. Data model
 
 chunks(id, doc, text, embedding, metadata); vector index; queries(query_hash -> cached answer).
+
+
+## 11. High-level architecture
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  Ask --> EmbedQ[Embed query]
+  EmbedQ --> Retrieve[Vector retrieve top-k]
+  Retrieve --> Context[Context + citations]
+  Context --> LLM[LLM generate]
+  LLM --> Answer[Grounded answer]
+  Corpus --> Chunk[Chunk+embed] --> Index
+  Cache[Query cache] --> Ask
+```
 
 
 ## 12. Request flow
@@ -185,6 +182,9 @@ No retrieval (hallucination). Re-embed every query (cost). Ungrounded refusal (p
 
 Clarify corpus scale, latency, grounding. Surface retrieve+generate, citations, caching, graceful degradation.
 
+
+## 28. Original Mermaid diagrams
+Standalone sources under `diagrams/case-studies/rag-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 
