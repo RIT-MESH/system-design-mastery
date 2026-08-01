@@ -69,6 +69,20 @@ Ingest: services batch logs → ingest compresses → stream → hot index (rece
 (partitioned objects). Search: route by time window to hot index (recent) or cold (old,
 slower); merge results.
 
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Services
+  participant P1 as Ingest batched, LZ4
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
+
 
 ## 13. Component responsibilities
 Ingest: batch + compress. Stream: partition by service/ts. Hot index: searchable recent.
@@ -104,6 +118,18 @@ eventually consistent with ingest.
 ## 19. Failure scenarios
 Hot index shard down → recent search degrades or returns partial. Cold tier unavailable →
 old queries fail (not the hot path). Ingest backlog → logs lag, alert.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Hot index shard down"]
+  R2["recent search degrades or returns partia"]
+  C1 --> R2
+  C3["Cold tier unavailable"]
+  C4["Ingest backlog"]
+  R5["logs lag, alert"]
+  C4 --> R5
+```
 
 
 ## 20. Reliability strategy
@@ -149,34 +175,7 @@ partition-by-date for lifecycle — the cost levers.
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/logging-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Services
-  participant P1 as Ingest batched, LZ4
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Hot index shard down"]
-  R2["recent search degrades or returns partia"]
-  C1 --> R2
-  C3["Cold tier unavailable"]
-  C4["Ingest backlog"]
-  R5["logs lag, alert"]
-  C4 --> R5
-```
+Standalone sources under `diagrams/case-studies/logging-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 Search engines: Level 2; tiering/lifecycle: Level 3; streams: Level 10; logs/metrics/traces:

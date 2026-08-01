@@ -16,36 +16,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/advertisement-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Ad request
-  participant P1 as Eligibility match
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Auction slow"]
-  R2["serve a default house ad latency, not er"]
-  C1 --> R2
-  C3["Budget store down"]
-  R4["fail-safe stop serving, never overspend"]
-  C3 --> R4
-  C5["Event log lag"]
-  R6["attribution delayed"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/advertisement-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -104,8 +75,21 @@ campaigns(id, targeting, creative, budget, pace); users(id, attributes); events(
 
 
 ## 12. Request flow
-
 Ad request -> match eligible campaigns by targeting -> auction (bid x relevance) -> serve winner -> deduct/pace budget -> log impression; clicks/conversions attribute later.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Ad request
+  participant P1 as Eligibility match
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -139,8 +123,21 @@ Budget: strongly consistent spend (no overspend) via atomic deduction. Events ev
 
 
 ## 19. Failure scenarios
-
 Auction slow -> serve a default/house ad (latency, not error). Budget store down -> fail-safe (stop serving, never overspend). Event log lag -> attribution delayed.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Auction slow"]
+  R2["serve a default house ad latency, not er"]
+  C1 --> R2
+  C3["Budget store down"]
+  R4["fail-safe stop serving, never overspend"]
+  C3 --> R4
+  C5["Event log lag"]
+  R6["attribution delayed"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy

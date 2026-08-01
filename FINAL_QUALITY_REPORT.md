@@ -1,4 +1,4 @@
-﻿# Final Quality Report
+# Final Quality Report
 
 ## Summary
 
@@ -10,7 +10,7 @@ A quality, originality, and case-study improvement pass was performed on the `sy
 - `PROVENANCE.md` — review dates and boilerplate-removal note added
 - `QUALITY_AUDIT.md` — findings table with status for each issue
 - `CONTRIBUTING.md` — broken link to `../work/RESEARCH-REPORT.md` replaced with `PROVENANCE.md`
-- `SOURCES.md` — duplicate source IDs fixed (S-RFC9112, S-PG had duplicates)
+- `SOURCES.md` — duplicate source IDs fixed (S-RFC9112 and S-PG-INDEX had duplicate references)
 - `tools/repository_stats.py` — stats generator
 - `tools/check_repeated_prose.py` — boilerplate detector
 - `tools/check_case_studies.py` — structure validator (minimum content per critical section)

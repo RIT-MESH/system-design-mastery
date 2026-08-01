@@ -19,39 +19,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/device-upgrade-management/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Inventory firmware track
-  participant P1 as Upgrade planner risk ana
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Executor dies mid-upgrade"]
-  R2["device state machine resumes or rollback"]
-  C1 --> R2
-  C3["Validation fail"]
-  R4["rollback report"]
-  C3 --> R4
-  C5["Backup fail"]
-  R6["block upgrade"]
-  C5 --> R6
-  C7["Advisory unaddressed"]
-  R8["block plan"]
-  C7 --> R8
-```
+Standalone sources under `diagrams/case-studies/device-upgrade-management/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -118,8 +86,21 @@ devices(id, type, vendor, model, firmware, config_hash, ha_pair, site); firmware
 
 
 ## 12. Request flow
-
 Inventory + firmware tracking -> planner checks targets/advisories/compatibility/config-risk -> approval gate -> config backup+checksum -> execute (HA-pair/cluster aware, one at a time) -> monitor reboot/recovery -> post-validation -> on fail rollback, on pass report; all steps audited.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Inventory firmware track
+  participant P1 as Upgrade planner risk ana
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -153,8 +134,24 @@ Plan/approval strongly consistent (audit). Firmware version tracking per device 
 
 
 ## 19. Failure scenarios
-
 Executor dies mid-upgrade -> device state machine resumes (or rollback). Validation fail -> rollback + report. Backup fail -> block upgrade. Advisory unaddressed -> block plan.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Executor dies mid-upgrade"]
+  R2["device state machine resumes or rollback"]
+  C1 --> R2
+  C3["Validation fail"]
+  R4["rollback report"]
+  C3 --> R4
+  C5["Backup fail"]
+  R6["block upgrade"]
+  C5 --> R6
+  C7["Advisory unaddressed"]
+  R8["block plan"]
+  C7 --> R8
+```
 
 
 ## 20. Reliability strategy

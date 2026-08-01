@@ -21,43 +21,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/secure-network-agent/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as Secure Network Agent
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 ->> P1: data
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["LLM down"]
-  R2["degrade to deterministic tools or queue"]
-  C1 --> R2
-  C3["Policy gateway down"]
-  R4["fail-closed no actions"]
-  C3 --> R4
-  C5["Tool fails"]
-  R6["report and retry"]
-  C5 --> R6
-  C7["Approval timeout"]
-  R8["no action"]
-  C7 --> R8
-```
+Standalone sources under `diagrams/case-studies/secure-network-agent/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -118,8 +82,25 @@ sessions(id, user, goal, state, steps); tools(name, spec, risk_level); approvals
 
 
 ## 12. Request flow
-
 Engineer goals the agent -> planner-executor picks tools -> every action passes the policy gateway -> read and diagnostic allowed; write actions only draft; high-risk routed to approval workflow -> approved actions go to change management; confidential configs use local LLM; everything audited.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Secure Network Agent
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 ->> P1: data
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -153,8 +134,24 @@ Approvals strongly consistent (audit). Agent state per session. Tool results adv
 
 
 ## 19. Failure scenarios
-
 LLM down -> degrade to deterministic tools or queue. Policy gateway down -> fail-closed (no actions). Tool fails -> report and retry. Approval timeout -> no action.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["LLM down"]
+  R2["degrade to deterministic tools or queue"]
+  C1 --> R2
+  C3["Policy gateway down"]
+  R4["fail-closed no actions"]
+  C3 --> R4
+  C5["Tool fails"]
+  R6["report and retry"]
+  C5 --> R6
+  C7["Approval timeout"]
+  R8["no action"]
+  C7 --> R8
+```
 
 
 ## 20. Reliability strategy

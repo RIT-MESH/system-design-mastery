@@ -20,39 +20,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/enterprise-rag-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Ingest
-  participant P1 as Chunk embed ACL
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Cache miss"]
-  R2["full LLM call slower, no failure"]
-  C1 --> R2
-  C3["Provider down"]
-  R4["failover"]
-  C3 --> R4
-  C5["Budget exceeded"]
-  R6["429"]
-  C5 --> R6
-  C7["Vector DB shard down"]
-  R8["partial results"]
-  C7 --> R8
-```
+Standalone sources under `diagrams/case-studies/enterprise-rag-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -114,8 +82,21 @@ chunks(tenant, id, text, embedding, acl, metadata); cache(query_hash, tenant, an
 
 
 ## 12. Request flow
-
 Client asks -> gateway auth + budget check -> semantic cache lookup (safe + same tenant) -> hit returns; miss -> permission-aware hybrid retrieve + rerank -> generate with citations -> cache safe answer -> return; audit all.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Ingest
+  participant P1 as Chunk embed ACL
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -149,8 +130,24 @@ Retrieval eventually consistent with ingest; cache versioned to model/corpus; bu
 
 
 ## 19. Failure scenarios
-
 Cache miss -> full LLM call (slower, no failure). Provider down -> failover. Budget exceeded -> 429. Vector DB shard down -> partial results.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Cache miss"]
+  R2["full LLM call slower, no failure"]
+  C1 --> R2
+  C3["Provider down"]
+  R4["failover"]
+  C3 --> R4
+  C5["Budget exceeded"]
+  R6["429"]
+  C5 --> R6
+  C7["Vector DB shard down"]
+  R8["partial results"]
+  C7 --> R8
+```
 
 
 ## 20. Reliability strategy

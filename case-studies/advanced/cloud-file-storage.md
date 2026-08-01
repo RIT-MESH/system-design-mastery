@@ -16,40 +16,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/cloud-file-storage/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as Cloud File-Storage Platf
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 ->> P1: data
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Object store down"]
-  R2["uploads downloads for those files fail m"]
-  C1 --> R2
-  C3["Metadata leader down"]
-  R4["promote"]
-  C3 --> R4
-  C5["CDN down"]
-  R6["origin serves slower"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/cloud-file-storage/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -109,8 +76,25 @@ files(id, owner, versions[]); metadata(id, name, parent, acl, version_id); share
 
 
 ## 12. Request flow
-
 Upload (multipart) -> object storage (new version) -> metadata updated -> sync notifications to other devices -> download via CDN. Reads served from CDN/edge.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Cloud File-Storage Platf
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 ->> P1: data
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -144,8 +128,21 @@ Files immutable per version (strong). Metadata eventually consistent across repl
 
 
 ## 19. Failure scenarios
-
 Object store down -> uploads/downloads for those files fail (metadata still listable). Metadata leader down -> promote. CDN down -> origin serves (slower).
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Object store down"]
+  R2["uploads downloads for those files fail m"]
+  C1 --> R2
+  C3["Metadata leader down"]
+  R4["promote"]
+  C3 --> R4
+  C5["CDN down"]
+  R6["origin serves slower"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy

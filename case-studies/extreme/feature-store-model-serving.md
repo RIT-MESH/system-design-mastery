@@ -18,36 +18,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/feature-store-model-serving/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Data sources
-  participant P1 as Feature store
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Online store down"]
-  R2["serving degrades stale cached features o"]
-  C1 --> R2
-  C3["Model serving down"]
-  R4["fallback model"]
-  C3 --> R4
-  C5["Drift undetected"]
-  R6["monitor freshness"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/feature-store-model-serving/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -106,8 +77,21 @@ features(entity, feature, value, ts) — online (hot) + offline (history); model
 
 
 ## 12. Request flow
-
 Sources compute features into the store (online hot + offline history). Training reads offline; serving reads online (same definitions -> no skew). Models versioned, served; drift monitoring triggers retraining.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Data sources
+  participant P1 as Feature store
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -141,8 +125,21 @@ Online near-real-time; offline immutable history; train/serve use the same featu
 
 
 ## 19. Failure scenarios
-
 Online store down -> serving degrades (stale/cached features or refuse). Model serving down -> fallback model. Drift undetected -> monitor freshness.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Online store down"]
+  R2["serving degrades stale cached features o"]
+  C1 --> R2
+  C3["Model serving down"]
+  R4["fallback model"]
+  C3 --> R4
+  C5["Drift undetected"]
+  R6["monitor freshness"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy

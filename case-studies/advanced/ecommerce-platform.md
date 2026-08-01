@@ -76,8 +76,21 @@ flowchart LR
 
 
 ## 12. Request flow
-
 Browse via CDN/search. Checkout reserves inventory atomically, charges payment, creates order, emits to fulfillment. Failed payment releases the reservation.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Catalog CDN
+  participant P1 as Catalog search
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -111,8 +124,21 @@ Inventory: strong reservation (no oversell) via DB transaction. Catalog: eventua
 
 
 ## 19. Failure scenarios
-
 Payment fail -> release reservation. Inventory shard down -> checkout for those products fails (better than oversell). Catalog CDN down -> origin serves (slower).
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Payment fail"]
+  R2["release reservation"]
+  C1 --> R2
+  C3["Inventory shard down"]
+  R4["checkout for those products fails better"]
+  C3 --> R4
+  C5["Catalog CDN down"]
+  R6["origin serves slower"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy
@@ -156,36 +182,7 @@ Clarify flash sales, oversell tolerance, checkout latency. Surface inventory ato
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/ecommerce-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Catalog CDN
-  participant P1 as Catalog search
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Payment fail"]
-  R2["release reservation"]
-  C1 --> R2
-  C3["Inventory shard down"]
-  R4["checkout for those products fails better"]
-  C3 --> R4
-  C5["Catalog CDN down"]
-  R6["origin serves slower"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/ecommerce-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

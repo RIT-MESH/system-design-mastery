@@ -16,36 +16,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/banking-ledger/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Transfer tx
-  participant P1 as Validate double-entry
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Mid-transfer failure"]
-  R2["atomic rollback no partial"]
-  C1 --> R2
-  C3["Ledger shard down"]
-  R4["those transfers fail no loss duplicate"]
-  C3 --> R4
-  C5["Sync replica loss"]
-  R6["still quorum-safe"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/banking-ledger/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -105,8 +76,21 @@ accounts(id); entries(id, account, delta, tx_id, ts) append-only; tx(id, debits[
 
 
 ## 12. Request flow
-
 Transfer validates (no negative), writes a balanced debit+credit transaction atomically to the append-only ledger (synchronous RF=3), derives balance, emits for reconciliation and audit.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Transfer tx
+  participant P1 as Validate double-entry
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -140,8 +124,21 @@ Strong: a transfer commits atomically (both entries or neither). Linearizable pe
 
 
 ## 19. Failure scenarios
-
 Mid-transfer failure -> atomic rollback (no partial). Ledger shard down -> those transfers fail (no loss/duplicate). Sync replica loss -> still quorum-safe. Reconciliation finds drift.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Mid-transfer failure"]
+  R2["atomic rollback no partial"]
+  C1 --> R2
+  C3["Ledger shard down"]
+  R4["those transfers fail no loss duplicate"]
+  C3 --> R4
+  C5["Sync replica loss"]
+  R6["still quorum-safe"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy

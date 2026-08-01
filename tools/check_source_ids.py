@@ -15,7 +15,7 @@ def main():
         print("FAIL: SOURCES.md not found")
         sys.exit(1)
     st = open(sp, encoding="utf-8-sig").read()
-    defined = set(re.findall(r"\b(S-\w+)\b", st))
+    defined = set(re.findall(r"\b(S-[A-Z][A-Z0-9-]*)\b", st))
     if not defined:
         print("WARN: no S- IDs found in SOURCES.md")
     # Check references in all .md files
@@ -26,14 +26,14 @@ def main():
             if not f.endswith(".md"): continue
             p = os.path.join(dp, f)
             t = open(p, encoding="utf-8-sig").read()
-            refs = set(re.findall(r"\b(S-\w+)\b", t))
+            refs = set(re.findall(r"\b(S-[A-Z][A-Z0-9-]*)\b", t))
             undefined = refs - defined
             if undefined and os.path.basename(p) != "SOURCES.md":
                 rel = os.path.relpath(p, ROOT)
                 print(f"FAIL {rel}: references undefined IDs: {undefined}")
                 issues += 1
     # Check for duplicate IDs in SOURCES.md
-    all_ids = re.findall(r"\b(S-\w+)\b", st)
+    all_ids = re.findall(r"^\|\s*(S-[A-Z][A-Z0-9-]*)\s*\|", st, re.M)
     dupes = [x for x in all_ids if all_ids.count(x) > 1]
     if dupes:
         print(f"FAIL SOURCES.md: duplicate IDs: {set(dupes)}")

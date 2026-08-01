@@ -72,8 +72,21 @@ flowchart LR
 
 
 ## 12. Request flow
-
 Order -> restaurant accepts -> dispatch finds a nearby available courier -> courier accepts -> live tracking -> on delivery, payment split to restaurant+courier.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Order svc
+  participant P1 as Restaurant accept
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -107,8 +120,21 @@ Order status strongly tracked per order. Geo/dispatch eventually consistent acro
 
 
 ## 19. Failure scenarios
-
 No courier nearby -> expand radius + queue + notify customer of delay. Tracking gateway down -> reconnect. Payment fail -> retry; order still tracked.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["No courier nearby"]
+  R2["expand radius queue notify customer of d"]
+  C1 --> R2
+  C3["Tracking gateway down"]
+  R4["reconnect"]
+  C3 --> R4
+  C5["Payment fail"]
+  R6["retry"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy
@@ -152,36 +178,7 @@ Clarify three-sided timing, dispatch radius, ETA. Surface geo dispatch, real-tim
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/food-delivery/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Order svc
-  participant P1 as Restaurant accept
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["No courier nearby"]
-  R2["expand radius queue notify customer of d"]
-  C1 --> R2
-  C3["Tracking gateway down"]
-  R4["reconnect"]
-  C3 --> R4
-  C5["Payment fail"]
-  R6["retry"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/food-delivery/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

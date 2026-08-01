@@ -17,39 +17,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/graphrag-research-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as GraphRAG Research Platfo
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Graph down"]
-  R2["degrade to vector-only RAG"]
-  C1 --> R2
-  C3["NLP lag"]
-  R4["graph stale"]
-  C3 --> R4
-  C5["Query timeout"]
-  R6["partial"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/graphrag-research-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -107,8 +75,24 @@ entities(id, type, attrs); relationships(src, dst, type, weight); documents(id, 
 
 
 ## 12. Request flow
-
 Documents -> NLP extracts entities and relationships -> knowledge graph built -> query plans multi-hop -> retrieves subgraph + text -> LLM generates with graph-path citations.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as GraphRAG Research Platfo
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -142,8 +126,21 @@ Graph eventual with ingestion; queries deterministic on snapshot.
 
 
 ## 19. Failure scenarios
-
 Graph down -> degrade to vector-only RAG. NLP lag -> graph stale. Query timeout -> partial.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Graph down"]
+  R2["degrade to vector-only RAG"]
+  C1 --> R2
+  C3["NLP lag"]
+  R4["graph stale"]
+  C3 --> R4
+  C5["Query timeout"]
+  R6["partial"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy

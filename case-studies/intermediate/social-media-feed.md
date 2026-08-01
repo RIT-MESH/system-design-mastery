@@ -72,6 +72,20 @@ Post: store → fanout to followers' prebuilt feeds (skip celebrities — too ma
 fetch the user's prebuilt feed, merge in recent posts from followed celebrities (pull-on
 -read), rank, return.
 
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Author posts
+  participant P1 as Post service
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
+
 
 ## 13. Component responsibilities
 Post service: store. Fan-out: write to per-user feeds. Feed cache: prebuilt feeds.
@@ -107,6 +121,20 @@ Read-your-writes: your own post appears immediately via a merge.
 ## 19. Failure scenarios
 Fan-out lag → feeds slightly stale (acceptable, bounded). Feed cache shard loss → rebuild
 from post store. Celebrity spike → pull-on-read absorbs (no fan-out storm).
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Fan-out lag"]
+  R2["feeds slightly stale acceptable, bounded"]
+  C1 --> R2
+  C3["Feed cache shard loss"]
+  R4["rebuild"]
+  C3 --> R4
+  C5["Celebrity spike"]
+  R6["pull-on-read absorbs no fan-out storm"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy
@@ -151,36 +179,7 @@ hybrid celebrity handling — the core of this problem.
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/social-media-feed/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Author posts
-  participant P1 as Post service
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Fan-out lag"]
-  R2["feeds slightly stale acceptable, bounded"]
-  C1 --> R2
-  C3["Feed cache shard loss"]
-  R4["rebuild"]
-  C3 --> R4
-  C5["Celebrity spike"]
-  R6["pull-on-read absorbs no fan-out storm"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/social-media-feed/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 Caching: Level 2; fan-out/queues: Level 2; ranking/ML: Level 10.

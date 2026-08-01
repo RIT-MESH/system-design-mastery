@@ -22,43 +22,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/autonomous-support-agent-team/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as Autonomous Support-Agent
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 ->> P1: data
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Agent fails"]
-  R2["supervisor retries or escalates"]
-  C1 --> R2
-  C3["RAG down"]
-  R4["answer without grounding disclaimer"]
-  C3 --> R4
-  C5["LLM down"]
-  R6["queue ticket"]
-  C5 --> R6
-  C7["Policy gateway down"]
-  R8["fail-closed no actions"]
-  C7 --> R8
-```
+Standalone sources under `diagrams/case-studies/autonomous-support-agent-team/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -119,8 +83,25 @@ tickets(id, status, priority, assignee); agent_traces(ticket, agent, steps, tool
 
 
 ## 12. Request flow
-
 Ticket arrives -> triage classifies -> supervisor routes to research (RAG) -> resolution drafts response or action -> review checks quality/safety -> supervisor: low-risk auto-close, high-risk human approval -> audit all steps.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Autonomous Support-Agent
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 ->> P1: data
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -154,8 +135,24 @@ Ticket status strongly tracked; agent traces append-only; RAG eventual; audit ta
 
 
 ## 19. Failure scenarios
-
 Agent fails -> supervisor retries or escalates. RAG down -> answer without grounding (disclaimer). LLM down -> queue ticket. Policy gateway down -> fail-closed (no actions).
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Agent fails"]
+  R2["supervisor retries or escalates"]
+  C1 --> R2
+  C3["RAG down"]
+  R4["answer without grounding disclaimer"]
+  C3 --> R4
+  C5["LLM down"]
+  R6["queue ticket"]
+  C5 --> R6
+  C7["Policy gateway down"]
+  R8["fail-closed no actions"]
+  C7 --> R8
+```
 
 
 ## 20. Reliability strategy

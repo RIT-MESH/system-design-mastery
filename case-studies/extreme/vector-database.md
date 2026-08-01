@@ -15,36 +15,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/vector-database/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Vector store
-  participant P1 as ANN index builder
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Shard down"]
-  R2["partial results search surviving shards"]
-  C1 --> R2
-  C3["Index rebuild slow"]
-  R4["serve from old index meanwhile"]
-  C3 --> R4
-  C5["Insert backlog"]
-  R6["search stale"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/vector-database/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -103,8 +74,21 @@ vectors(id, embedding, metadata); index (HNSW/IVF/PQ) per shard; metadata index 
 
 
 ## 12. Request flow
-
 Insert stores vector + metadata; index builder updates the ANN index. Search: ANN retrieves candidates, metadata filter prunes, return top-k.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Vector store
+  participant P1 as ANN index builder
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -138,8 +122,21 @@ Search may not see very recent inserts (index lag) — eventually consistent. Ve
 
 
 ## 19. Failure scenarios
-
 Shard down -> partial results (search surviving shards + alert). Index rebuild slow -> serve from old index meanwhile. Insert backlog -> search stale.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Shard down"]
+  R2["partial results search surviving shards"]
+  C1 --> R2
+  C3["Index rebuild slow"]
+  R4["serve from old index meanwhile"]
+  C3 --> R4
+  C5["Insert backlog"]
+  R6["search stale"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy

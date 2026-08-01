@@ -44,7 +44,7 @@ def main():
 
             # Check minimum content per critical section (6, 7, 8 = traffic/storage/bandwidth)
             for sec_num in [6, 7, 8, 19, 25]:
-                m = re.search(rf"## {sec_num}\..*\n(.*?)(?=\n## |\Z)", t, re.S)
+                m = re.search(rf"## {sec_num}\. [^\n]+\n(.*?)(?=^## |\Z)", t, re.S | re.M)
                 if m:
                     body = m.group(1).strip()
                     wc = len(body.split())

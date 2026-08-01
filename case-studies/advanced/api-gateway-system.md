@@ -74,8 +74,25 @@ flowchart LR
 
 
 ## 12. Request flow
-
 Request -> auth -> rate-limit -> route (or aggregate fan-out) -> backend(s) -> transform response -> client. Config hot-reloads without dropping requests.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as API Gateway
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 ->> P1: data
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -109,8 +126,21 @@ Config eventually consistent across instances (a route change propagates in seco
 
 
 ## 19. Failure scenarios
-
 Counter store down -> fail-open rate-limit (over-allow) to keep traffic flowing. Config service down -> keep last config. A backend down -> circuit-break/503.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Counter store down"]
+  R2["fail-open rate-limit over-allow to keep"]
+  C1 --> R2
+  C3["Config service down"]
+  R4["keep last config"]
+  C3 --> R4
+  C5["A backend down"]
+  R6["circuit-break 503"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy
@@ -154,40 +184,7 @@ Clarify QPS, policies, aggregation. Surface stateless edge, hot-reload config, f
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/api-gateway-system/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as API Gateway
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 ->> P1: data
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Counter store down"]
-  R2["fail-open rate-limit over-allow to keep"]
-  C1 --> R2
-  C3["Config service down"]
-  R4["keep last config"]
-  C3 --> R4
-  C5["A backend down"]
-  R6["circuit-break 503"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/api-gateway-system/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

@@ -71,6 +71,20 @@ Upload: presigned multipart → object storage → event → thumb worker genera
 metadata → feed. View: CDN serves cached image or fetches from origin; feed API returns
 metadata + image URLs.
 
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Uploader
+  participant P1 as API presigned URL
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
+
 
 ## 13. Component responsibilities
 API: presign + metadata. Object storage: durable media. Thumb workers: derive sizes. CDN:
@@ -104,6 +118,20 @@ Feed eventually consistent; read-your-writes for the uploader.
 ## 19. Failure scenarios
 Thumb worker dies → requeue (idempotent overwrite). Origin down → CDN serves cached.
 Metadata leader down → promote follower.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Thumb worker dies"]
+  R2["requeue idempotent overwrite"]
+  C1 --> R2
+  C3["Origin down"]
+  R4["CDN serves cached"]
+  C3 --> R4
+  C5["Metadata leader down"]
+  R6["promote follower"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy
@@ -148,36 +176,7 @@ dominance. Compare to the video-streaming case.
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/photo-sharing-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Uploader
-  participant P1 as API presigned URL
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Thumb worker dies"]
-  R2["requeue idempotent overwrite"]
-  C1 --> R2
-  C3["Origin down"]
-  R4["CDN serves cached"]
-  C3 --> R4
-  C5["Metadata leader down"]
-  R6["promote follower"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/photo-sharing-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 Object storage/CDN: Level 2; image pipeline like video-streaming case study; tiering: L3.

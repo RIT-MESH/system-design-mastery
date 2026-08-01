@@ -324,43 +324,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/url-shortener/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as URL Shortener
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 ->> P1: data
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Edge cache unavailable Traffic falls thr"]
-  R2["cache→KV"]
-  C1 --> R2
-  C3["F -"]
-  R4["KV leader down Promote promote follower"]
-  C3 --> R4
-  C5["F -"]
-  R6["cache down Direct resolve from KV"]
-  C5 --> R6
-  C7["F -"]
-  R8["edge down GW fall through to origin"]
-  C7 --> R8
-```
+Standalone sources under `diagrams/case-studies/url-shortener/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 - Consistent hashing: S-CHASH · ID generation/Snowflake: S-SNOWFLAKE · UUID: S-UUID

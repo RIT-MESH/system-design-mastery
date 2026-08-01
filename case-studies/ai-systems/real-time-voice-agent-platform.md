@@ -20,42 +20,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/real-time-voice-agent-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as Real-Time Voice-Agent Pl
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["STT error"]
-  R2["ask to repeat"]
-  C1 --> R2
-  C3["LLM down"]
-  R4["canned responses"]
-  C3 --> R4
-  C5["TTS down"]
-  R6["text-only"]
-  C5 --> R6
-  C7["Policy down"]
-  R8["fail-closed"]
-  C7 --> R8
-```
+Standalone sources under `diagrams/case-studies/real-time-voice-agent-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -116,8 +81,24 @@ sessions(id, user, state, turns[]); transcripts(session, turn, text); audit(acto
 
 
 ## 12. Request flow
-
 User speaks -> STT transcribes -> LLM reasons with RAG -> policy: read-only tools allowed, high-risk drafted for approval -> LLM generates response -> TTS synthesizes -> user hears; all audited.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Real-Time Voice-Agent Pl
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -151,8 +132,24 @@ Session strongly tracked; RAG eventual; audit append-only; policy fail-closed.
 
 
 ## 19. Failure scenarios
-
 STT error -> ask to repeat. LLM down -> canned responses. TTS down -> text-only. Policy down -> fail-closed.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["STT error"]
+  R2["ask to repeat"]
+  C1 --> R2
+  C3["LLM down"]
+  R4["canned responses"]
+  C3 --> R4
+  C5["TTS down"]
+  R6["text-only"]
+  C5 --> R6
+  C7["Policy down"]
+  R8["fail-closed"]
+  C7 --> R8
+```
 
 
 ## 20. Reliability strategy

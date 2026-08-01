@@ -69,6 +69,24 @@ flowchart LR
 Client sends prefix → edge cache hit returns → else suggest service looks up the prefix
 top-k list → merges per-user recent terms → returns top-k → caches at edge.
 
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Search Autocomplete
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 ->> P1: data
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
+
 
 ## 13. Component responsibilities
 Edge cache: per-prefix caching. Suggest service: prefix lookup + merge. Index: in-memory
@@ -103,6 +121,20 @@ results may be slightly stale; correctness not critical.
 ## 19. Failure scenarios
 Suggest service down → degrade to no-suggestions (or static top terms), not an error. Index
 replica stale → slightly old results. Hot prefix overwhelms a shard → replicate it.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Suggest service down"]
+  R2["degrade to no-suggestions or static top"]
+  C1 --> R2
+  C3["replica stale"]
+  R4["slightly old results"]
+  C3 --> R4
+  C5["Hot prefix overwhelms a shard"]
+  R6["replicate it"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy
@@ -145,40 +177,7 @@ in-memory index, and graceful degradation.
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/search-autocomplete/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as Search Autocomplete
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 ->> P1: data
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Suggest service down"]
-  R2["degrade to no-suggestions or static top"]
-  C1 --> R2
-  C3["replica stale"]
-  R4["slightly old results"]
-  C3 --> R4
-  C5["Hot prefix overwhelms a shard"]
-  R6["replicate it"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/search-autocomplete/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 Search/inverted index: Level 2/3; caching: Level 2; skew/hot keys: Level 3.

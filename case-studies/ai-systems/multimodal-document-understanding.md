@@ -17,39 +17,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/multimodal-document-understanding/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as Multimodal Document Unde
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Multimodal LLM down"]
-  R2["text-only answer disclaimer"]
-  C1 --> R2
-  C3["Image extraction fail"]
-  R4["text-only"]
-  C3 --> R4
-  C5["Index lag"]
-  R6["stale"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/multimodal-document-understanding/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -108,8 +76,24 @@ documents(id, pages[]); pages(id, text, images[], tables[], embeddings[]); regio
 
 
 ## 12. Request flow
-
 Document -> extract text/images/tables -> cross-modal index -> query -> multimodal retrieval (text + image regions) -> multimodal LLM -> answer with region citations.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Multimodal Document Unde
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -143,8 +127,21 @@ Index eventual with ingest; answers deterministic on snapshot; citations referen
 
 
 ## 19. Failure scenarios
-
 Multimodal LLM down -> text-only answer (disclaimer). Image extraction fail -> text-only. Index lag -> stale.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Multimodal LLM down"]
+  R2["text-only answer disclaimer"]
+  C1 --> R2
+  C3["Image extraction fail"]
+  R4["text-only"]
+  C3 --> R4
+  C5["Index lag"]
+  R6["stale"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy

@@ -68,6 +68,24 @@ flowchart LR
 Create: gateway → create svc generates code → write KV + cache → return URL. Read: edge
 hit → return; else read svc → cache → KV → populate; 404 if unknown/expired.
 
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Paste Service
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 ->> P1: data
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
+
 
 ## 13. Component responsibilities
 Edge: serve hot reads. Create/Read: stateless services. KV: source of truth. Cache: second
@@ -101,6 +119,20 @@ leader/leader-region. Body immutable after create.
 ## 19. Failure scenarios
 KV leader down → promote follower; reads continue from edge/cache. Cache down → read KV
 ( slower). Sweeper lag → expired pastes served briefly (bounded by TTL).
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["KV leader down"]
+  R2["promote follower"]
+  C1 --> R2
+  C3["Cache down"]
+  R4["read KV"]
+  C3 --> R4
+  C5["Sweeper lag"]
+  R6["expired pastes served briefly bounded by"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy
@@ -144,40 +176,7 @@ read-heavy, cache-dominated shape first.
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/paste-service/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as Paste Service
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 ->> P1: data
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["KV leader down"]
-  R2["promote follower"]
-  C1 --> R2
-  C3["Cache down"]
-  R4["read KV"]
-  C3 --> R4
-  C5["Sweeper lag"]
-  R6["expired pastes served briefly bounded by"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/paste-service/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 KV/sharding: Level 3; caching: Level 2; capacity worksheet in `calculations/`.

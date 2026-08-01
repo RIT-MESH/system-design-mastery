@@ -18,39 +18,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/code-assistant-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as Code-Assistant Platform
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Index stale"]
-  R2["old code completions"]
-  C1 --> R2
-  C3["LLM down"]
-  R4["keyword fallback"]
-  C3 --> R4
-  C5["Confidential repo"]
-  R6["local model"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/code-assistant-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -110,8 +78,24 @@ repos(id, url, lang); functions(id, repo, signature, body, embedding); reviews(i
 
 
 ## 12. Request flow
-
 IDE requests completion -> gateway auth -> retrieve relevant code from index -> send to code model -> stream completion; PR review: diff -> security model -> findings.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Code-Assistant Platform
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -145,8 +129,21 @@ Index eventual with commits; completions deterministic on snapshot; reviews advi
 
 
 ## 19. Failure scenarios
-
 Index stale -> old code completions. LLM down -> keyword fallback. Confidential repo -> local model.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Index stale"]
+  R2["old code completions"]
+  C1 --> R2
+  C3["LLM down"]
+  R4["keyword fallback"]
+  C3 --> R4
+  C5["Confidential repo"]
+  R6["local model"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy

@@ -72,8 +72,21 @@ flowchart LR
 
 
 ## 12. Request flow
-
 Push triggers jobs enqueued -> autoscaled runner pulls a job -> checks out code (cache deps) -> runs -> streams logs -> uploads artifacts -> posts result.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Trigger svc
+  participant P1 as Job queue
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -107,8 +120,21 @@ Job results eventually consistent with the commit; a retried job may run twice (
 
 
 ## 19. Failure scenarios
-
 Runner dies mid-job -> requeue (idempotent). Cache miss -> slower build, no failure. Artifact store down -> uploads retry.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Runner dies mid-job"]
+  R2["requeue idempotent"]
+  C1 --> R2
+  C3["Cache miss"]
+  R4["slower build, no failure"]
+  C3 --> R4
+  C5["Artifact store down"]
+  R6["uploads retry"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy
@@ -152,36 +178,7 @@ Clarify burstiness, isolation, caching. Surface queue + ephemeral runners + dep 
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/ci-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Trigger svc
-  participant P1 as Job queue
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Runner dies mid-job"]
-  R2["requeue idempotent"]
-  C1 --> R2
-  C3["Cache miss"]
-  R4["slower build, no failure"]
-  C3 --> R4
-  C5["Artifact store down"]
-  R6["uploads retry"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/ci-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

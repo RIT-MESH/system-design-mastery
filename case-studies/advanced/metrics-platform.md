@@ -72,8 +72,21 @@ flowchart LR
 
 
 ## 12. Request flow
-
 Ingest: agents batch -> ingest -> stream -> raw store (hot) + rollup workers (downsample to cold). Query: route by window to raw or rollups, fan out by label, aggregate.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Agents
+  participant P1 as Ingest batched
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -107,8 +120,21 @@ Recent data near-real-time (seconds lag). Downsampled values eventually consiste
 
 
 ## 19. Failure scenarios
-
 Ingest backlog -> metrics lag (alert on lag). Raw shard down -> partial recent query; cold unaffected. Cardinality explosion -> cap + alert.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Ingest backlog"]
+  R2["metrics lag alert on lag"]
+  C1 --> R2
+  C3["Raw shard down"]
+  R4["partial recent query"]
+  C3 --> R4
+  C5["Cardinality explosion"]
+  R6["cap alert"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy
@@ -152,36 +178,7 @@ Clarify ingest rate, retention, cardinality, query patterns. Surface time-series
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/metrics-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Agents
-  participant P1 as Ingest batched
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Ingest backlog"]
-  R2["metrics lag alert on lag"]
-  C1 --> R2
-  C3["Raw shard down"]
-  R4["partial recent query"]
-  C3 --> R4
-  C5["Cardinality explosion"]
-  R6["cap alert"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/metrics-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

@@ -71,8 +71,21 @@ flowchart LR
 
 
 ## 12. Request flow
-
 Request -> retrieval (ANN + business filters) -> ranker scores candidates with user+item features -> top-k served -> interaction logged -> hourly retraining updates the model.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Interactions
+  participant P1 as Training
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -106,8 +119,21 @@ Recommendations eventually consistent with behavior (a click reflects within the
 
 
 ## 19. Failure scenarios
-
 ANN shard down -> partial candidates (serve best-available). Model serving down -> fallback to cached/popular recs. Training lag -> older model serves (graceful).
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["ANN shard down"]
+  R2["partial candidates serve best-available"]
+  C1 --> R2
+  C3["Model serving down"]
+  R4["fallback to cached popular recs"]
+  C3 --> R4
+  C5["Training lag"]
+  R6["older model serves graceful"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy
@@ -151,36 +177,7 @@ Clarify latency, item scale, freshness. Surface the retrieval+ranking funnel, fe
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/recommendation-engine/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Interactions
-  participant P1 as Training
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["ANN shard down"]
-  R2["partial candidates serve best-available"]
-  C1 --> R2
-  C3["Model serving down"]
-  R4["fallback to cached popular recs"]
-  C3 --> R4
-  C5["Training lag"]
-  R6["older model serves graceful"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/recommendation-engine/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

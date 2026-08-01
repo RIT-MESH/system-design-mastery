@@ -22,43 +22,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/llm-api-gateway/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as LLM API Gateway
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 ->> P1: data
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Provider down"]
-  R2["failover"]
-  C1 --> R2
-  C3["Budget store down"]
-  R4["fail-open with cap reconcile or fail-clo"]
-  C3 --> R4
-  C5["Cache stale"]
-  R6["TTL"]
-  C5 --> R6
-  C7["Router down"]
-  R8["default model"]
-  C7 --> R8
-```
+Standalone sources under `diagrams/case-studies/llm-api-gateway/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -121,8 +85,25 @@ usage(tenant, req_id, model, input_tokens, output_tokens, cost, ts); cache(query
 
 
 ## 12. Request flow
-
 Client calls unified API -> auth + token budget check -> semantic cache (safe + same tenant) -> hit returns; miss -> router picks best model (complexity/cost/latency/capability) -> provider call -> on fail, failover -> content filter + PII redaction -> log + audit + cost -> return.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as LLM API Gateway
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 ->> P1: data
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -156,8 +137,24 @@ Usage/cost strongly tracked; cache versioned; budget strongly enforced.
 
 
 ## 19. Failure scenarios
-
 Provider down -> failover. Budget store down -> fail-open with cap + reconcile (or fail-closed). Cache stale -> TTL. Router down -> default model.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Provider down"]
+  R2["failover"]
+  C1 --> R2
+  C3["Budget store down"]
+  R4["fail-open with cap reconcile or fail-clo"]
+  C3 --> R4
+  C5["Cache stale"]
+  R6["TTL"]
+  C5 --> R6
+  C7["Router down"]
+  R8["default model"]
+  C7 --> R8
+```
 
 
 ## 20. Reliability strategy

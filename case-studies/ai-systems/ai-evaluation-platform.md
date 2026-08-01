@@ -18,39 +18,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/ai-evaluation-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as AI Evaluation Platform
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Eval runner down"]
-  R2["block release"]
-  C1 --> R2
-  C3["Metric error"]
-  R4["false green alert on anomalies"]
-  C3 --> R4
-  C5["Test set stale"]
-  R6["overfitting rotate"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/ai-evaluation-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -110,8 +78,24 @@ test_sets(id, feature, type, cases[]); results(id, feature, version, metrics, ts
 
 
 ## 12. Request flow
-
 Golden + adversarial sets run before release -> measure metrics -> check gates (groundedness >= threshold, hallucination <= threshold, latency <= SLO, cost <= budget) -> pass: release; fail: block/rollback -> continuous sample -> dashboard tracks regressions.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as AI Evaluation Platform
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -145,8 +129,21 @@ Results immutable per version; gates strongly consistent; regression tracking ch
 
 
 ## 19. Failure scenarios
-
 Eval runner down -> block release. Metric error -> false green (alert on anomalies). Test set stale -> overfitting (rotate).
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Eval runner down"]
+  R2["block release"]
+  C1 --> R2
+  C3["Metric error"]
+  R4["false green alert on anomalies"]
+  C3 --> R4
+  C5["Test set stale"]
+  R6["overfitting rotate"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy

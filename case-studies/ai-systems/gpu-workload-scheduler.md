@@ -17,39 +17,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/gpu-workload-scheduler/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Batch
-  participant P1 as Priority queue
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Scheduler down"]
-  R2["jobs continue allocations persist"]
-  C1 --> R2
-  C3["Gang deadlock"]
-  R4["timeout release"]
-  C3 --> R4
-  C5["GPU failure"]
-  R6["reallocate"]
-  C5 --> R6
-  C7["Checkpoint corrupt"]
-  R8["restart"]
-  C7 --> R8
-```
+Standalone sources under `diagrams/case-studies/gpu-workload-scheduler/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -109,8 +77,21 @@ jobs(id, type, gpu_count, status, priority, checkpoint_ref); gpus(id, node, memo
 
 
 ## 12. Request flow
-
 Training and batch queued -> scheduler gang-schedules (all GPUs or none) -> serving reserved -> batch backfills spare -> long jobs preempted for priority -> checkpoints saved -> utilization reported.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Batch
+  participant P1 as Priority queue
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -144,8 +125,24 @@ Job state strongly consistent; GPU allocation atomic; checkpoints versioned.
 
 
 ## 19. Failure scenarios
-
 Scheduler down -> jobs continue (allocations persist). Gang deadlock -> timeout + release. GPU failure -> reallocate. Checkpoint corrupt -> restart.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Scheduler down"]
+  R2["jobs continue allocations persist"]
+  C1 --> R2
+  C3["Gang deadlock"]
+  R4["timeout release"]
+  C3 --> R4
+  C5["GPU failure"]
+  R6["reallocate"]
+  C5 --> R6
+  C7["Checkpoint corrupt"]
+  R8["restart"]
+  C7 --> R8
+```
 
 
 ## 20. Reliability strategy

@@ -17,36 +17,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/fraud-detection/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Confirmed outcomes
-  participant P1 as Training
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Model serving down"]
-  R2["fail-closed hold for review or rule-base"]
-  C1 --> R2
-  C3["Feature store lag"]
-  R4["stale features bounded"]
-  C3 --> R4
-  C5["Scoring backlog"]
-  R6["degrade to rules"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/fraud-detection/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -104,8 +75,21 @@ entities(id, features, recent history); events(id, entity, ts, features, score, 
 
 
 ## 12. Request flow
-
 Event -> scorer fetches entity features -> model scores -> decision (block/hold/allow) -> action; confirmed outcomes flow back to retrain.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Confirmed outcomes
+  participant P1 as Training
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -139,8 +123,21 @@ Features near-real-time; a decision uses the latest available features. Outcomes
 
 
 ## 19. Failure scenarios
-
 Model serving down -> fail-closed (hold for review) or rule-based fallback (never silently allow). Feature store lag -> stale features (bounded). Scoring backlog -> degrade to rules.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Model serving down"]
+  R2["fail-closed hold for review or rule-base"]
+  C1 --> R2
+  C3["Feature store lag"]
+  R4["stale features bounded"]
+  C3 --> R4
+  C5["Scoring backlog"]
+  R6["degrade to rules"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy

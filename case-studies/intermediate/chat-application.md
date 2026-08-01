@@ -73,6 +73,24 @@ Send: client → gateway → message service → persist → fanout routes to ea
 gateway → pushed over their socket. Receipts flow back the same path. History loaded via
 REST on scroll.
 
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Chat Application
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 ->> P1: data
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
+
 
 ## 13. Component responsibilities
 Connection gateway: hold connections (stateful, async). Message service: persist + fanout.
@@ -110,6 +128,17 @@ consistent.
 Gateway node loss: clients reconnect to another; in-flight messages redelivered (at-least
 -once + client dedup by id). Message store shard down → promote follower. Presence
 conflict → last-seen wins.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Message store shard down"]
+  R2["promote follower"]
+  C1 --> R2
+  C3["conflict"]
+  R4["last-seen wins"]
+  C3 --> R4
+```
 
 
 ## 20. Reliability strategy
@@ -155,37 +184,7 @@ fan-out, ordering, and at-least-once.
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/chat-application/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as Chat Application
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 ->> P1: data
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Message store shard down"]
-  R2["promote follower"]
-  C1 --> R2
-  C3["conflict"]
-  R4["last-seen wins"]
-  C3 --> R4
-```
+Standalone sources under `diagrams/case-studies/chat-application/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 Async I/O: Level 0; queues/fanout: Level 2; ordering/dedup: Level 4.

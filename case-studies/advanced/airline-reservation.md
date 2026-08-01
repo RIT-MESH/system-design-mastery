@@ -73,8 +73,25 @@ flowchart LR
 
 
 ## 12. Request flow
-
 Search across segments -> hold a seat (TTL) -> book confirms, pays, tickets; expiry releases holds. Multi-segment bookings reserve all segments atomically.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Airline-Reservation Plat
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 ->> P1: data
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -108,8 +125,18 @@ Strong per seat: no double-book. Multi-segment booking atomic (all-or-none).
 
 
 ## 19. Failure scenarios
-
 Hold expiry releases seats. A segment unavailable mid-booking -> release all held segments. Payment fail -> release.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["A segment unavailable mid-booking"]
+  R2["release all held segments"]
+  C1 --> R2
+  C3["Payment fail"]
+  R4["release"]
+  C3 --> R4
+```
 
 
 ## 20. Reliability strategy
@@ -153,37 +180,7 @@ Clarify multi-segment, seat inventory, overbooking. Surface atomic multi-segment
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/airline-reservation/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as Airline-Reservation Plat
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 ->> P1: data
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["A segment unavailable mid-booking"]
-  R2["release all held segments"]
-  C1 --> R2
-  C3["Payment fail"]
-  R4["release"]
-  C3 --> R4
-```
+Standalone sources under `diagrams/case-studies/airline-reservation/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

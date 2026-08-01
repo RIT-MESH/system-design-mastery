@@ -72,6 +72,20 @@ flowchart LR
 Frontier dequeues a URL from a host queue (respecting per-host rate) → fetcher checks
 robots → fetches → dedup by hash → stores page → extracts links → adds new URLs to frontier.
 
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Seed URLs
+  participant P1 as URL frontier<br > per-ho
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
+
 
 ## 13. Component responsibilities
 Frontier: per-host queues + politeness scheduling. Fetchers: HTTP + robots. Dedup:
@@ -106,6 +120,20 @@ Frontier: per-host ordering for politeness.
 ## 19. Failure scenarios
 Worker dies mid-fetch → URL requeued (idempotent fetch). Frontier shard down → its hosts
 pause (others continue). Store down → workers backpressure, pause.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Worker dies mid-fetch"]
+  R2["URL requeued idempotent fetch"]
+  C1 --> R2
+  C3["Frontier shard down"]
+  R4["its hosts"]
+  C3 --> R4
+  C5["Store down"]
+  R6["workers backpressure, pause"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy
@@ -150,36 +178,7 @@ politeness-vs-throughput trade.
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/web-crawler/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Seed URLs
-  participant P1 as URL frontier<br > per-ho
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Worker dies mid-fetch"]
-  R2["URL requeued idempotent fetch"]
-  C1 --> R2
-  C3["Frontier shard down"]
-  R4["its hosts"]
-  C3 --> R4
-  C5["Store down"]
-  R6["workers backpressure, pause"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/web-crawler/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 Queues: Level 2; dedup/hashing: Level 4; object storage: Level 2.

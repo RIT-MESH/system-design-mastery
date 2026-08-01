@@ -15,36 +15,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/data-lake/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Sources
-  participant P1 as Ingest batch stream
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Catalog down"]
-  R2["can't find data queries fail"]
-  C1 --> R2
-  C3["Scan engine failure"]
-  R4["query retries"]
-  C3 --> R4
-  C5["Ingest backlog"]
-  R6["data lags"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/data-lake/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -102,8 +73,21 @@ Objects partitioned by (source, date); catalog metadata (schema, lineage, owner,
 
 
 ## 12. Request flow
-
 Ingest writes partitioned objects; catalog records schema/lineage; queries scan partitions via the engine; governance enforces access/retention; lifecycle tiers/deletes.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Sources
+  participant P1 as Ingest batch stream
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -137,8 +121,21 @@ Objects immutable once written; catalog eventually consistent with ingest; parti
 
 
 ## 19. Failure scenarios
-
 Catalog down -> can't find data (queries fail); keep HA. Scan engine failure -> query retries. Ingest backlog -> data lags.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Catalog down"]
+  R2["can't find data queries fail"]
+  C1 --> R2
+  C3["Scan engine failure"]
+  R4["query retries"]
+  C3 --> R4
+  C5["Ingest backlog"]
+  R6["data lags"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy

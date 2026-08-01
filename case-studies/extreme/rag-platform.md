@@ -18,40 +18,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/rag-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as Retrieval-Augmented Gene
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 ->> P1: data
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Vector DB down"]
-  R2["degraded no grounding, refuse or ungroun"]
-  C1 --> R2
-  C3["LLM down"]
-  R4["retry queue"]
-  C3 --> R4
-  C5["Cache stale"]
-  R6["recompute on model corpus change"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/rag-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -110,8 +77,25 @@ chunks(id, doc, text, embedding, metadata); vector index; queries(query_hash -> 
 
 
 ## 12. Request flow
-
 Query embeds -> vector retrieve top-k chunks -> assemble context -> LLM generates with citations -> stream answer. Repeated queries served from cache. Ingest chunks+embeds+indexes.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Retrieval-Augmented Gene
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 ->> P1: data
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -145,8 +129,21 @@ Retrieval eventually consistent with ingest (a new doc appears after indexing). 
 
 
 ## 19. Failure scenarios
-
 Vector DB down -> degraded (no grounding, refuse or ungrounded with disclaimer). LLM down -> retry/queue. Cache stale -> recompute on model/corpus change.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Vector DB down"]
+  R2["degraded no grounding, refuse or ungroun"]
+  C1 --> R2
+  C3["LLM down"]
+  R4["retry queue"]
+  C3 --> R4
+  C5["Cache stale"]
+  R6["recompute on model corpus change"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy

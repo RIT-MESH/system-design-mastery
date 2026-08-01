@@ -72,8 +72,21 @@ flowchart LR
 
 
 ## 12. Request flow
-
 Search queries date-range inventory -> hold temporarily reserves rooms (TTL) -> book confirms + pays, converting hold to booking; expiry releases holds.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Search svc
+  participant P1 as Inventory date-range
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -107,8 +120,18 @@ Strong per (hotel,room,date): no double-book via atomic reserve. Search availabi
 
 
 ## 19. Failure scenarios
-
 Hold expiry releases rooms on timeout. Inventory shard down -> bookings for those hotels fail (no double-book). Payment fail -> release hold.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Inventory shard down"]
+  R2["bookings for those hotels fail no double"]
+  C1 --> R2
+  C3["Payment fail"]
+  R4["release hold"]
+  C3 --> R4
+```
 
 
 ## 20. Reliability strategy
@@ -152,33 +175,7 @@ Clarify date-range inventory, hold/expiry, overbooking. Surface atomic reservati
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/hotel-booking/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Search svc
-  participant P1 as Inventory date-range
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Inventory shard down"]
-  R2["bookings for those hotels fail no double"]
-  C1 --> R2
-  C3["Payment fail"]
-  R4["release hold"]
-  C3 --> R4
-```
+Standalone sources under `diagrams/case-studies/hotel-booking/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

@@ -1,7 +1,7 @@
 # Sources
 
 This file is the single source of truth for citations used across the repository. Each source
-has a **stable ID** referenced by chapters (e.g., `S-RFC9112`). Prefer primary sources:
+has a **stable ID** referenced by chapters (e.g., `S-RFC8446`). Prefer primary sources:
 RFCs, academic papers, official vendor/cloud/CNCF/database documentation. Secondary
 engineering blogs are included with attribution where useful.
 

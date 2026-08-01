@@ -16,39 +16,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/multi-model-routing-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as Multi-Model Routing Plat
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Model down"]
-  R2["failover"]
-  C1 --> R2
-  C3["Budget store down"]
-  R4["fail-open with cap reconcile"]
-  C3 --> R4
-  C5["Router down"]
-  R6["default model"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/multi-model-routing-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -108,8 +76,24 @@ models(id, provider, cost_per_1m, max_tokens, caps, latency); usage(tenant, mode
 
 
 ## 12. Request flow
-
 Request -> router evaluates task, tokens, privacy -> cheapest capable model -> on fail, failover -> track cost per tenant -> audit. Confidential -> local only.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Multi-Model Routing Plat
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -143,8 +127,21 @@ Budgets strongly consistent; usage eventually consistent; registry hot-reloaded.
 
 
 ## 19. Failure scenarios
-
 Model down -> failover. Budget store down -> fail-open with cap + reconcile. Router down -> default model.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Model down"]
+  R2["failover"]
+  C1 --> R2
+  C3["Budget store down"]
+  R4["fail-open with cap reconcile"]
+  C3 --> R4
+  C5["Router down"]
+  R6["default model"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy

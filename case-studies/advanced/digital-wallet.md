@@ -74,8 +74,25 @@ flowchart LR
 
 
 ## 12. Request flow
-
 Transfer: a transaction debits sender, credits receiver atomically (reject if insufficient), appends two ledger entries. Top-up/withdraw via bank rails, reconciled.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Digital Wallet
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 ->> P1: data
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -109,8 +126,21 @@ Strong per account: atomic debit/credit; no negative balance. Cross-partition tr
 
 
 ## 19. Failure scenarios
-
 Transfer mid-way fail -> atomic rollback (no partial). Rail timeout -> pending + reconcile. Ledger shard down -> transfers for those accounts fail (no double-spend).
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Transfer mid-way fail"]
+  R2["atomic rollback no partial"]
+  C1 --> R2
+  C3["Rail timeout"]
+  R4["pending reconcile"]
+  C3 --> R4
+  C5["Ledger shard down"]
+  R6["transfers for those accounts fail no dou"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy
@@ -154,40 +184,7 @@ Clarify double-spend, latency, rails. Surface atomic debit/credit, the append-on
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/digital-wallet/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as Digital Wallet
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 ->> P1: data
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Transfer mid-way fail"]
-  R2["atomic rollback no partial"]
-  C1 --> R2
-  C3["Rail timeout"]
-  R4["pending reconcile"]
-  C3 --> R4
-  C5["Ledger shard down"]
-  R6["transfers for those accounts fail no dou"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/digital-wallet/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

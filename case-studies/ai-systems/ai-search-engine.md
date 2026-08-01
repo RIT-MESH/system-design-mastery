@@ -17,42 +17,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/ai-search-engine/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as AI Search Engine
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Vector shard down"]
-  R2["partial"]
-  C1 --> R2
-  C3["BM25 down"]
-  R4["partial"]
-  C3 --> R4
-  C5["LLM down"]
-  R6["links only"]
-  C5 --> R6
-  C7["Cache stale"]
-  R8["TTL"]
-  C7 --> R8
-```
+Standalone sources under `diagrams/case-studies/ai-search-engine/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -112,8 +77,24 @@ pages(id, url, text, embedding, meta); inverted_index(term -> pages); answers(q_
 
 
 ## 12. Request flow
-
 Query -> parallel BM25 + vector -> RRF fusion -> cross-encoder rerank -> top-k -> LLM synthesizes answer with citations -> return.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as AI Search Engine
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -147,8 +128,24 @@ Index eventual with web (freshness < 1 day); answers cached with TTL.
 
 
 ## 19. Failure scenarios
-
 Vector shard down -> partial. BM25 down -> partial. LLM down -> links only. Cache stale -> TTL.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Vector shard down"]
+  R2["partial"]
+  C1 --> R2
+  C3["BM25 down"]
+  R4["partial"]
+  C3 --> R4
+  C5["LLM down"]
+  R6["links only"]
+  C5 --> R6
+  C7["Cache stale"]
+  R8["TTL"]
+  C7 --> R8
+```
 
 
 ## 20. Reliability strategy

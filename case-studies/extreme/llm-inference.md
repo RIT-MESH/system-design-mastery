@@ -269,39 +269,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/llm-inference/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Autoscaler queue depth
-  participant P1 as GPU fleet
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["F -"]
-  R2["GPU crash Reroute re-route in-flight"]
-  C1 --> R2
-  C3["F -"]
-  R4["scarcity Four 429 graceful , bounded que"]
-  C3 --> R4
-  C5["F -"]
-  R6["cold start Floor warm-floor replicas"]
-  C5 --> R6
-  C7["F -"]
-  R8["quota store down Open fail-open with cap"]
-  C7 --> R8
-```
+Standalone sources under `diagrams/case-studies/llm-inference/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 GPU clusters/batch: this level · vector search/RAG: this level · rate limiting: Level 2/5

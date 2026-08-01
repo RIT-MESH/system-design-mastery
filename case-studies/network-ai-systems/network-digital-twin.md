@@ -18,36 +18,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/network-digital-twin/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Monitoring and config
-  participant P1 as Digital twin topology an
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["State ingest lag"]
-  R2["twin stale alert, bound staleness"]
-  C1 --> R2
-  C3["Simulator fail"]
-  R4["retry or queue"]
-  C3 --> R4
-  C5["Graph store down"]
-  R6["degrade to last snapshot"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/network-digital-twin/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -107,8 +78,21 @@ topology(nodes, links, capacities); device_state(device, status, config_hash); t
 
 
 ## 12. Request flow
-
 Monitoring and config feed the twin -> engineer proposes a change -> simulator applies it to the twin -> impact prediction (reachability, capacity, failure) -> AI what-if analysis and report -> approval gate before real deployment; twin never auto-deploys.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Monitoring and config
+  participant P1 as Digital twin topology an
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -142,8 +126,21 @@ Twin eventually consistent with network (minutes); simulation is deterministic o
 
 
 ## 19. Failure scenarios
-
 State ingest lag -> twin stale (alert, bound staleness). Simulator fail -> retry or queue. Graph store down -> degrade to last snapshot.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["State ingest lag"]
+  R2["twin stale alert, bound staleness"]
+  C1 --> R2
+  C3["Simulator fail"]
+  R4["retry or queue"]
+  C3 --> R4
+  C5["Graph store down"]
+  R6["degrade to last snapshot"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy

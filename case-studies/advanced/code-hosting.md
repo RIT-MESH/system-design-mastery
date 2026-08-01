@@ -72,8 +72,21 @@ flowchart LR
 
 
 ## 12. Request flow
-
 Push/fetch via git transport -> objects stored content-addressed -> refs updated. PR/review via API -> metadata DB -> events emit webhooks. Clones served from cached objects.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as PR events
+  participant P1 as Webhooks
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -107,8 +120,21 @@ Git's own model: refs are the mutable pointers; objects immutable. Strong per-re
 
 
 ## 19. Failure scenarios
-
 Object store down -> clone fails for those repos (cache may serve). Metadata DB down -> PRs unavailable but clones work. Webhook backlog -> events lag.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Object store down"]
+  R2["clone fails for those repos cache may se"]
+  C1 --> R2
+  C3["Metadata DB down"]
+  R4["PRs unavailable but clones work"]
+  C3 --> R4
+  C5["Webhook backlog"]
+  R6["events lag"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy
@@ -152,36 +178,7 @@ Clarify scale, large repos, clone volume. Surface content-addressed objects, met
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/code-hosting/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as PR events
-  participant P1 as Webhooks
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Object store down"]
-  R2["clone fails for those repos cache may se"]
-  C1 --> R2
-  C3["Metadata DB down"]
-  R4["PRs unavailable but clones work"]
-  C3 --> R4
-  C5["Webhook backlog"]
-  R6["events lag"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/code-hosting/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

@@ -20,36 +20,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/offline-airgapped-rag-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as Offline Air-Gapped RAG P
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Local GPU fails"]
-  R2["failover to backup local GPU or degrade"]
-  C1 --> R2
-  C3["Vector DB corruption"]
-  R4["restore from local backup"]
-  C3 --> R4
-```
+Standalone sources under `diagrams/case-studies/offline-airgapped-rag-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -110,8 +81,24 @@ chunks(id, text, embedding, metadata) in local vector DB; models (local embeddin
 
 
 ## 12. Request flow
-
 Documents ingested locally -> local embedding model creates vectors -> local vector DB -> query embedded locally -> local vector search -> context to local LLM on GPU -> answer with citations -> all audited locally; no internet, no external API, no data leaves the air-gap.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Offline Air-Gapped RAG P
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -145,8 +132,18 @@ Local vector DB consistent (single node or local RF); audit append-only; no even
 
 
 ## 19. Failure scenarios
-
 Local GPU fails -> failover to backup local GPU or degrade to smaller model. Vector DB corruption -> restore from local backup. No external failover possible.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Local GPU fails"]
+  R2["failover to backup local GPU or degrade"]
+  C1 --> R2
+  C3["Vector DB corruption"]
+  R4["restore from local backup"]
+  C3 --> R4
+```
 
 
 ## 20. Reliability strategy

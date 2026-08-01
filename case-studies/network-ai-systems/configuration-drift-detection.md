@@ -18,36 +18,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/configuration-drift-detection/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Devices
-  participant P1 as Config collector
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Collector can't reach device"]
-  R2["retry backoff, alert"]
-  C1 --> R2
-  C3["Classifier down"]
-  R4["fall back to rules"]
-  C3 --> R4
-  C5["Baseline missing"]
-  R6["block classification, alert"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/configuration-drift-detection/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -109,8 +80,21 @@ baselines(device_class, version, config); configs(device, version, config, hash)
 
 
 ## 12. Request flow
-
 Collector pulls configs (scheduled + on-change) -> diff vs versioned baseline -> rule+AI classifies drift (authorized/unauthorized/error/violation) -> risk score -> open change ticket with context + suggested review -> compliance report; human approves remediation.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Devices
+  participant P1 as Config collector
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -144,8 +128,21 @@ Baselines strongly versioned; drift classification advisory; remediation require
 
 
 ## 19. Failure scenarios
-
 Collector can't reach device -> retry/backoff, alert. Classifier down -> fall back to rules. Baseline missing -> block classification, alert.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Collector can't reach device"]
+  R2["retry backoff, alert"]
+  C1 --> R2
+  C3["Classifier down"]
+  R4["fall back to rules"]
+  C3 --> R4
+  C5["Baseline missing"]
+  R6["block classification, alert"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy

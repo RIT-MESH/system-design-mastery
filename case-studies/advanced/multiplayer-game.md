@@ -70,8 +70,25 @@ flowchart LR
 
 
 ## 12. Request flow
-
 Matchmaker forms a match -> allocates a game server -> players send inputs (UDP) -> authoritative server advances state 60 tps -> replicates deltas to all -> on end, persist results.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Online Multiplayer Game
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 ->> P1: data
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -105,8 +122,21 @@ Authoritative: the server is the single source of truth; clients see lagging pro
 
 
 ## 19. Failure scenarios
-
 Game server crash -> match ends (or handoff to a standby for high-tier). Player disconnect -> timeout -> forfeit/stand-in. Matchmaker down -> no new matches.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Game server crash"]
+  R2["match ends or handoff to a standby for h"]
+  C1 --> R2
+  C3["Player disconnect"]
+  R4["timeout -> forfeit stand-in"]
+  C3 --> R4
+  C5["Matchmaker down"]
+  R6["no new matches"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy
@@ -150,40 +180,7 @@ Clarify tick rate, latency, anti-cheat, region. Surface authoritative server, UD
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/multiplayer-game/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as Online Multiplayer Game
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 ->> P1: data
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Game server crash"]
-  R2["match ends or handoff to a standby for h"]
-  C1 --> R2
-  C3["Player disconnect"]
-  R4["timeout -> forfeit stand-in"]
-  C3 --> R4
-  C5["Matchmaker down"]
-  R6["no new matches"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/multiplayer-game/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

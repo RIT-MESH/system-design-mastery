@@ -18,42 +18,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/enterprise-agent-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as Enterprise Agent Platfor
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Agent fails"]
-  R2["supervisor retries or escalates"]
-  C1 --> R2
-  C3["Memory down"]
-  R4["session-only context"]
-  C3 --> R4
-  C5["Policy down"]
-  R6["fail-closed"]
-  C5 --> R6
-  C7["LLM down"]
-  R8["queue"]
-  C7 --> R8
-```
+Standalone sources under `diagrams/case-studies/enterprise-agent-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -113,8 +78,24 @@ agents(id, type, config, tools[]); sessions(id, agent, goal, state, steps[]); me
 
 
 ## 12. Request flow
-
 Goal -> supervisor decomposes -> routes to specialists -> each calls tools from shared registry -> policy gateway: read-only allowed, high-risk to approval -> shared memory provides cross-agent context -> audit all.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Enterprise Agent Platfor
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -148,8 +129,24 @@ Session state per session; memory eventually consistent; approvals strongly cons
 
 
 ## 19. Failure scenarios
-
 Agent fails -> supervisor retries or escalates. Memory down -> session-only context. Policy down -> fail-closed. LLM down -> queue.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Agent fails"]
+  R2["supervisor retries or escalates"]
+  C1 --> R2
+  C3["Memory down"]
+  R4["session-only context"]
+  C3 --> R4
+  C5["Policy down"]
+  R6["fail-closed"]
+  C5 --> R6
+  C7["LLM down"]
+  R8["queue"]
+  C7 --> R8
+```
 
 
 ## 20. Reliability strategy

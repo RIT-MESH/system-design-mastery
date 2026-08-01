@@ -17,36 +17,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/stock-trading/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Order entry
-  participant P1 as Matching engine
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Matching engine down"]
-  R2["failover to standby replaying the order"]
-  C1 --> R2
-  C3["Hot symbol skew"]
-  R4["dedicated engine"]
-  C3 --> R4
-  C5["Order spike"]
-  R6["backpressure throttle"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/stock-trading/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -106,8 +77,21 @@ order_book(symbol, bids, asks by price-time); orders(id, sym, side, price, qty, 
 
 
 ## 12. Request flow
-
 Order -> matching engine matches against the book in price-time priority -> trade executed -> positions/balances updated -> market data fanned out.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Order entry
+  participant P1 as Matching engine
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -141,8 +125,21 @@ Strict price-time priority per symbol (matching determinism). Trades idempotent 
 
 
 ## 19. Failure scenarios
-
 Matching engine down -> failover to standby replaying the order log; brief pause, no loss. Hot symbol skew -> dedicated engine. Order spike -> backpressure (throttle).
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Matching engine down"]
+  R2["failover to standby replaying the order"]
+  C1 --> R2
+  C3["Hot symbol skew"]
+  R4["dedicated engine"]
+  C3 --> R4
+  C5["Order spike"]
+  R6["backpressure throttle"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy

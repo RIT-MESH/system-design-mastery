@@ -15,36 +15,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/search-engine/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Crawl
-  participant P1 as Index builder
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Shard down"]
-  R2["partial results warn or fail"]
-  C1 --> R2
-  C3["Index rebuild slow"]
-  R4["serve old version"]
-  C3 --> R4
-  C5["Gather node down"]
-  R6["retry"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/search-engine/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -101,8 +72,21 @@ inverted_index(term -> [doc, score]) sharded; docs(id, url, text, rank signals);
 
 
 ## 12. Request flow
-
 Crawl feeds the index builder -> sharded inverted index. Query fans out to shards -> each returns per-shard top-k -> gather merges and re-ranks -> results. Index updated by streaming + daily rebuild.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Crawl
+  participant P1 as Index builder
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -136,8 +120,21 @@ Index eventually consistent with the web (freshness days). Query results consist
 
 
 ## 19. Failure scenarios
-
 Shard down -> partial results (warn) or fail. Index rebuild slow -> serve old version. Gather node down -> retry.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Shard down"]
+  R2["partial results warn or fail"]
+  C1 --> R2
+  C3["Index rebuild slow"]
+  R4["serve old version"]
+  C3 --> R4
+  C5["Gather node down"]
+  R6["retry"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy

@@ -18,42 +18,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/prompt-management-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as Prompt-Management Platfo
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Eval fail"]
-  R2["block deploy"]
-  C1 --> R2
-  C3["A B inconclusive"]
-  R4["extend or default to control"]
-  C3 --> R4
-  C5["Performance regression"]
-  R6["rollback"]
-  C5 --> R6
-  C7["Cache stale"]
-  R8["TTL manual refresh"]
-  C7 --> R8
-```
+Standalone sources under `diagrams/case-studies/prompt-management-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -113,8 +78,24 @@ prompts(id, feature, versions[]); versions(id, template, status, eval_results, d
 
 
 ## 12. Request flow
-
 Author writes prompt -> version + eval -> change review (cost, safety, quality) -> deploy or A/B (10 percent for 24h) -> monitor -> if regression: rollback -> all versioned and audited.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Prompt-Management Platfo
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -148,8 +129,24 @@ Prompt versions immutable once deployed; A/B assignment sticky per user; perform
 
 
 ## 19. Failure scenarios
-
 Eval fail -> block deploy. A/B inconclusive -> extend or default to control. Performance regression -> rollback. Cache stale -> TTL + manual refresh.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Eval fail"]
+  R2["block deploy"]
+  C1 --> R2
+  C3["A B inconclusive"]
+  R4["extend or default to control"]
+  C3 --> R4
+  C5["Performance regression"]
+  R6["rollback"]
+  C5 --> R6
+  C7["Cache stale"]
+  R8["TTL manual refresh"]
+  C7 --> R8
+```
 
 
 ## 20. Reliability strategy

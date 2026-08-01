@@ -270,39 +270,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/video-streaming/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Uploader
-  participant P1 as API gateway
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["F -"]
-  R2["worker dies Req requeue, idempotent re-t"]
-  C1 --> R2
-  C3["F -"]
-  R4["origin down Edge edge serves cache"]
-  C3 --> R4
-  C5["F -"]
-  R6["edge down Alt alternate edge origin"]
-  C5 --> R6
-  C7["F -"]
-  R8["upload part fails Res multipart resume f"]
-  C7 --> R8
-```
+Standalone sources under `diagrams/case-studies/video-streaming/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 CDN/caching: Level 2 · object storage: Level 2 · queues: Level 2 · multi-region/edge: L10.

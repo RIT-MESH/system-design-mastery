@@ -72,8 +72,21 @@ flowchart LR
 
 
 ## 12. Request flow
-
 At a job's time, the scheduler (leader) acquires a lease for (job, run), assigns a worker, executes, records status; on worker loss the lease expires and another worker runs it.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Jobs store
+  participant P1 as Leader-elected scheduler
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -107,8 +120,21 @@ Single-execution via lease + leader (strong for 'who runs this'). Run status eve
 
 
 ## 19. Failure scenarios
-
 Leader down -> elect new; leases via TTL expire -> reassign. Worker down -> lease expires -> rerun (idempotent jobs). Double-run prevented by lease.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Leader down"]
+  R2["elect new"]
+  C1 --> R2
+  C3["leases via TTL expire"]
+  R4["reassign"]
+  C3 --> R4
+  C5["Worker down"]
+  R6["lease expires -> rerun idempotent jobs"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy
@@ -152,36 +178,7 @@ Clarify single-execution, retry, spikes. Surface leader election + leases + idem
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/distributed-scheduler/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Jobs store
-  participant P1 as Leader-elected scheduler
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Leader down"]
-  R2["elect new"]
-  C1 --> R2
-  C3["leases via TTL expire"]
-  R4["reassign"]
-  C3 --> R4
-  C5["Worker down"]
-  R6["lease expires -> rerun idempotent jobs"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/distributed-scheduler/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

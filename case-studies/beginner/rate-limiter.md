@@ -67,6 +67,24 @@ flowchart LR
 Gateway extracts (client, endpoint) → limiter checks/refills the bucket → if tokens ≥ 1,
 consume and allow; else return 429 with Retry-After.
 
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Rate Limiter
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 ->> P1: data
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
+
 
 ## 13. Component responsibilities
 Gateway: enforce the limit decision. Limiter: bucket logic. Store: shared counters across
@@ -101,6 +119,17 @@ in-process caching. Exactness traded for latency and availability; documented.
 ## 19. Failure scenarios
 Limiter store down → fail-open (allow) to avoid blocking all traffic; degrade protection,
 not availability. In-process cache skew → slight over-allow on some gateways.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Limiter store down"]
+  R2["fail-open allow to avoid blocking all tr"]
+  C1 --> R2
+  C3["In-process cache skew"]
+  R4["slight over-allow on some gateways"]
+  C3 --> R4
+```
 
 
 ## 20. Reliability strategy
@@ -146,37 +175,7 @@ latency/availability-vs-exactness trade.
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/rate-limiter/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as Rate Limiter
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 ->> P1: data
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Limiter store down"]
-  R2["fail-open allow to avoid blocking all tr"]
-  C1 --> R2
-  C3["In-process cache skew"]
-  R4["slight over-allow on some gateways"]
-  C3 --> R4
-```
+Standalone sources under `diagrams/case-studies/rate-limiter/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 Resilience patterns: Level 5; load shedding: Level 6; rate_limiter.py.

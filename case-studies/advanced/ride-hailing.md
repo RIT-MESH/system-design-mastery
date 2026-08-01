@@ -73,8 +73,21 @@ flowchart LR
 
 
 ## 12. Request flow
-
 Rider requests -> matching queries the geo index for nearby available drivers -> offers to nearest -> driver accepts -> trip created -> live tracking via WS -> on completion fare + payment.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Location svc
+  participant P1 as Geo index available driv
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -108,8 +121,21 @@ Matching eventually consistent across regions (a driver's status may lag). Trip 
 
 
 ## 19. Failure scenarios
-
 Matching slow -> degrade (expand radius, queue). Location gateway down -> drivers reconnect to another. Payment fail -> trip still completes, fare retried.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Matching slow"]
+  R2["degrade expand radius, queue"]
+  C1 --> R2
+  C3["Location gateway down"]
+  R4["drivers reconnect to another"]
+  C3 --> R4
+  C5["Payment fail"]
+  R6["trip still completes, fare retried"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy
@@ -153,36 +179,7 @@ Clarify match radius, latency, pooling, surge. Surface the geo index, real-time 
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/ride-hailing/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Location svc
-  participant P1 as Geo index available driv
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Matching slow"]
-  R2["degrade expand radius, queue"]
-  C1 --> R2
-  C3["Location gateway down"]
-  R4["drivers reconnect to another"]
-  C3 --> R4
-  C5["Payment fail"]
-  R6["trip still completes, fare retried"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/ride-hailing/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

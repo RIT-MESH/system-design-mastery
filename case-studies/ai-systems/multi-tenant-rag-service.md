@@ -16,39 +16,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/multi-tenant-rag-service/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as Multi-Tenant RAG-as-a-Se
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Cache miss"]
-  R2["full LLM"]
-  C1 --> R2
-  C3["Provider down"]
-  R4["failover"]
-  C3 --> R4
-  C5["Budget exceeded"]
-  R6["429"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/multi-tenant-rag-service/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -110,8 +78,24 @@ chunks(tenant, id, text, embedding, acl, meta); cache(q_hash, tenant, answer, tt
 
 
 ## 12. Request flow
-
 Client asks -> gateway auth + budget -> semantic cache -> hit returns; miss -> permission-aware retrieve -> generate with citations -> cache -> return; audit.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Multi-Tenant RAG-as-a-Se
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -145,8 +129,21 @@ Retrieval eventual; cache versioned; budget strongly tracked.
 
 
 ## 19. Failure scenarios
-
 Cache miss -> full LLM. Provider down -> failover. Budget exceeded -> 429.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Cache miss"]
+  R2["full LLM"]
+  C1 --> R2
+  C3["Provider down"]
+  R4["failover"]
+  C3 --> R4
+  C5["Budget exceeded"]
+  R6["429"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy

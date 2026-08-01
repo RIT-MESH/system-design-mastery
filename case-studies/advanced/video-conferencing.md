@@ -15,36 +15,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/video-conferencing/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Signaling
-  participant P1 as Room svc
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["SFU down"]
-  R2["call drops or migrates to another SFU be"]
-  C1 --> R2
-  C3["Participant network loss"]
-  R4["jitter buffer"]
-  C3 --> R4
-  C5["Signaling down"]
-  R6["can't start calls"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/video-conferencing/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -101,8 +72,21 @@ rooms(id, participants, sfu); presence(user, room); signaling state per room. Me
 
 
 ## 12. Request flow
-
 Participants signal to a room -> media sent to an SFU (not a mesh) -> SFU selectively forwards each participant media to others (per-layer/bandwidth) -> presence updates. On leave, teardown.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Signaling
+  participant P1 as Room svc
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -136,8 +120,21 @@ Call state strongly tracked per room (who's in). Media is real-time (no consiste
 
 
 ## 19. Failure scenarios
-
 SFU down -> call drops or migrates to another SFU (best-effort). Participant network loss -> jitter buffer; degrade quality. Signaling down -> can't start calls.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["SFU down"]
+  R2["call drops or migrates to another SFU be"]
+  C1 --> R2
+  C3["Participant network loss"]
+  R4["jitter buffer"]
+  C3 --> R4
+  C5["Signaling down"]
+  R6["can't start calls"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy

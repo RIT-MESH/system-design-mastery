@@ -73,8 +73,21 @@ flowchart LR
 
 
 ## 12. Request flow
-
 Ingest -> stream -> processors compute windowed aggregates -> aggregates store (+ raw retained for replay) -> dashboard API reads aggregates (cached) -> alerts on thresholds.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Sources
+  participant P1 as Stream
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -108,8 +121,21 @@ Aggregates near-real-time (window lag seconds). Exactly-once via checkpoints + i
 
 
 ## 19. Failure scenarios
-
 Processor failure -> restore from checkpoint, replay (idempotent). Aggregate store down -> dashboard degrades to cached/last. Raw retention gap -> historical loss (alert).
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Processor failure"]
+  R2["restore from checkpoint, replay idempote"]
+  C1 --> R2
+  C3["Aggregate store down"]
+  R4["dashboard degrades to cached last"]
+  C3 --> R4
+  C5["Raw retention gap"]
+  R6["historical loss alert"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy
@@ -153,36 +179,7 @@ Clarify event rate, dashboard latency, retention. Surface stream + aggregates + 
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/real-time-analytics/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Sources
-  participant P1 as Stream
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Processor failure"]
-  R2["restore from checkpoint, replay idempote"]
-  C1 --> R2
-  C3["Aggregate store down"]
-  R4["dashboard degrades to cached last"]
-  C3 --> R4
-  C5["Raw retention gap"]
-  R6["historical loss alert"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/real-time-analytics/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

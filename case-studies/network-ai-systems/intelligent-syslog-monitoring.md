@@ -22,39 +22,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/intelligent-syslog-monitoring/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Network devices
-  participant P1 as Redundant collectors UDP
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Collector down"]
-  R2["peer buffer absorbs offline buffer repla"]
-  C1 --> R2
-  C3["AI classifier down"]
-  R4["fall back to rules never block reporting"]
-  C3 --> R4
-  C5["RAG down"]
-  R6["reports omit remediation hints"]
-  C5 --> R6
-  C7["Store down"]
-  R8["buffer alert"]
-  C7 --> R8
-```
+Standalone sources under `diagrams/case-studies/intelligent-syslog-monitoring/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -119,8 +87,21 @@ Raw events(timestamp, device, ip, type, vendor, site, facility, msg); parsed eve
 
 
 ## 12. Request flow
-
 Devices send syslog -> redundant collectors (UDP/TCP/TLS) buffer on loss -> normalize/enrich (CEF/structured, vendor parsers) -> rule + AI severity classification -> correlate/dedup/suppress (maintenance windows) -> critical incidents written to /report/critical with all fields -> runbook RAG attaches recommended checks/remediation -> notify admins -> admin ack/escalate/resolve recorded back into the report.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Network devices
+  participant P1 as Redundant collectors UDP
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -154,8 +135,24 @@ Reports eventually consistent with ingest (seconds); resolution status strongly 
 
 
 ## 19. Failure scenarios
-
 Collector down -> peer/buffer absorbs (offline buffer replays). AI classifier down -> fall back to rules (never block reporting). RAG down -> reports omit remediation hints. Store down -> buffer + alert.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Collector down"]
+  R2["peer buffer absorbs offline buffer repla"]
+  C1 --> R2
+  C3["AI classifier down"]
+  R4["fall back to rules never block reporting"]
+  C3 --> R4
+  C5["RAG down"]
+  R6["reports omit remediation hints"]
+  C5 --> R6
+  C7["Store down"]
+  R8["buffer alert"]
+  C7 --> R8
+```
 
 
 ## 20. Reliability strategy

@@ -70,6 +70,24 @@ API receives request → dedup by event_id → enqueue per-channel → worker pi
 provider → on success mark delivered; on transient failure retry with backoff; after
 max attempts, DLQ.
 
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Notification Platform
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 ->> P1: data
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
+
 
 ## 13. Component responsibilities
 API: ingest + dedup. Queue: level load across channels. Workers: send + retry. Providers:
@@ -105,6 +123,18 @@ application effect. Status eventually consistent.
 ## 19. Failure scenarios
 Provider down → backoff + queue backlog grows (acceptable, drains later). Worker loss →
 re-deliver (idempotent). Queue full → backpressure to API (429).
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Provider down"]
+  R2["backoff queue backlog grows acceptable,"]
+  C1 --> R2
+  C3["Worker loss"]
+  C4["Queue full"]
+  R5["backpressure to API 429"]
+  C4 --> R5
+```
 
 
 ## 20. Reliability strategy
@@ -151,38 +181,7 @@ at-least-once + idempotency, and provider rate limits.
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/notification-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as Notification Platform
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 ->> P1: data
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Provider down"]
-  R2["backoff queue backlog grows acceptable,"]
-  C1 --> R2
-  C3["Worker loss"]
-  C4["Queue full"]
-  R5["backpressure to API 429"]
-  C4 --> R5
-```
+Standalone sources under `diagrams/case-studies/notification-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 Queues/retries/DLQ: Level 2 & 4; queue_retry.py; backpressure: Level 6.

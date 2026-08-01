@@ -72,8 +72,21 @@ flowchart LR
 
 
 ## 12. Request flow
-
 Produce: route by key to a partition leader, append, replicate to followers, ack on RF. Consume: a group splits partitions; each consumer reads its partitions by offset, commits offsets.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Producers
+  participant P1 as Partitioned logs RF 3
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -107,8 +120,21 @@ Per-partition total order. Within a partition, ordering is strict; across partit
 
 
 ## 19. Failure scenarios
-
 Leader down -> elect an ISR follower; minor data loss only if an un-replicated leader is lost (ack=all prevents). Consumer down -> rebalance partitions; offsets resume. Partition skew -> add partitions/consumers.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Leader down"]
+  R2["elect an ISR follower"]
+  C1 --> R2
+  C3["Consumer down"]
+  R4["rebalance partitions"]
+  C3 --> R4
+  C5["Partition skew"]
+  R6["add partitions consumers"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy
@@ -152,36 +178,7 @@ Clarify ordering scope (partition vs global), retention, delivery semantics, rep
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/message-broker/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Producers
-  participant P1 as Partitioned logs RF 3
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Leader down"]
-  R2["elect an ISR follower"]
-  C1 --> R2
-  C3["Consumer down"]
-  R4["rebalance partitions"]
-  C3 --> R4
-  C5["Partition skew"]
-  R6["add partitions consumers"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/message-broker/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 

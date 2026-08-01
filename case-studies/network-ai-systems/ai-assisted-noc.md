@@ -21,40 +21,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/ai-assisted-noc/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as AI-Assisted NOC Platform
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 ->> P1: data
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Provider model down"]
-  R2["failover fallback model"]
-  C1 --> R2
-  C3["RAG down"]
-  R4["answer without runbook disclaimer"]
-  C3 --> R4
-  C5["Voice gateway down"]
-  R6["reconnect"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/ai-assisted-noc/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -117,8 +84,25 @@ incidents(id, severity, status, summary); runbooks(chunks, embeddings); transcri
 
 
 ## 12. Request flow
-
 Alerts summarized -> active incidents dashboard; engineer asks (text/voice) -> multi-model router picks model (small for classify, large for analysis, embedding for runbook RAG, vision for diagrams) -> actions (ticket/escalate/notes) -> high-risk actions require approval -> all audited; voice never executes changes.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as AI-Assisted NOC Platform
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 ->> P1: data
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -152,8 +136,21 @@ Incident status strongly tracked; RAG eventual with ingest; AI outputs advisory.
 
 
 ## 19. Failure scenarios
-
 Provider/model down -> failover/fallback model. RAG down -> answer without runbook (disclaimer). Voice gateway down -> reconnect. High-risk action blocked without approval.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Provider model down"]
+  R2["failover fallback model"]
+  C1 --> R2
+  C3["RAG down"]
+  R4["answer without runbook disclaimer"]
+  C3 --> R4
+  C5["Voice gateway down"]
+  R6["reconnect"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy

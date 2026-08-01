@@ -16,36 +16,7 @@ flowchart LR
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/iot-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Devices, intermittent
-  participant P1 as IoT gateway broker
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Broker down"]
-  R2["devices reconnect to another stagger to"]
-  C1 --> R2
-  C3["Twin shard down"]
-  R4["those twins unavailable read last-known"]
-  C3 --> R4
-  C5["Command queue down"]
-  R6["commands re-queued"]
-  C5 --> R6
-```
+Standalone sources under `diagrams/case-studies/iot-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 1. Problem statement
 
@@ -103,8 +74,21 @@ devices(id, twin state, last_seen); telemetry(device, ts, metrics); commands(dev
 
 
 ## 12. Request flow
-
 Devices connect (when online), push telemetry -> gateway updates the twin + stores telemetry -> apps query twins / send commands -> commands queued and delivered on reconnect; telemetry tiered cold.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Devices, intermittent
+  participant P1 as IoT gateway broker
+  P0 ->> P1: query
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -138,8 +122,21 @@ Twin eventually consistent with telemetry (lag seconds). Commands delivered at-l
 
 
 ## 19. Failure scenarios
-
 Broker down -> devices reconnect to another (stagger to avoid storm). Twin shard down -> those twins unavailable (read last-known). Command queue down -> commands re-queued.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Broker down"]
+  R2["devices reconnect to another stagger to"]
+  C1 --> R2
+  C3["Twin shard down"]
+  R4["those twins unavailable read last-known"]
+  C3 --> R4
+  C5["Command queue down"]
+  R6["commands re-queued"]
+  C5 --> R6
+```
 
 
 ## 20. Reliability strategy

@@ -73,8 +73,25 @@ flowchart LR
 
 
 ## 12. Request flow
-
 Reserve: atomic decrement of available + increment reserved; reject if insufficient. Release reverses. Transfer moves stock between warehouses atomically. Reconcile adjusts to physical counts with audit.
+
+```mermaid
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Inventory-Management Pla
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 ->> P1: data
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end
+```
 
 
 ## 13. Component responsibilities
@@ -108,8 +125,15 @@ Strong per (warehouse, SKU): atomic reserve; no oversell even under failover. Cr
 
 
 ## 19. Failure scenarios
-
 Stock shard down -> reserves for those SKUs fail (no oversell); reads return last-known or unavailable. Reconcile corrects drift.
+
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Stock shard down"]
+  R2["reserves for those SKUs fail no oversell"]
+  C1 --> R2
+```
 
 
 ## 20. Reliability strategy
@@ -153,34 +177,7 @@ Clarify oversell tolerance, warehouse model, transfers. Surface atomic reservati
 
 
 ## 28. Original Mermaid diagrams
-
-Standalone sources under `diagrams/case-studies/inventory-management/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Request sequence and failure flow:
-
-```mermaid
-%% created-for: system-design-mastery
-sequenceDiagram
-  participant P0 as Client
-  participant P1 as Inventory-Management Pla
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 ->> P1: data
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
-  end
-```
-
-```mermaid
-%% created-for: system-design-mastery
-flowchart LR
-  C1["Stock shard down"]
-  R2["reserves for those SKUs fail no oversell"]
-  C1 --> R2
-```
+Standalone sources under `diagrams/case-studies/inventory-management/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 
