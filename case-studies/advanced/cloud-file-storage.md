@@ -63,12 +63,17 @@ In (v1): upload, store, list, share, sync across devices. Out: real-time co-edit
 
 ## 3. Functional requirements
 
-- Upload and store files durably. - List and download. - Share via links/ACLs. - Sync changes across devices.
+- Upload and store files durably.
+- List and download.
+- Share via links/ACLs.
+- Sync changes across devices.
 
 
 ## 4. Non-functional requirements
 
-- Upload durable (11 nines). - Download p99 < 200 ms (CDN). - Eventual sync consistency across devices.
+- Upload durable (11 nines).
+- Download p99 < 200 ms (CDN).
+- Eventual sync consistency across devices.
 
 
 ## 5. Explicit assumptions
@@ -93,7 +98,9 @@ Downloads + sync egress dominate; CDN for hot files.
 
 ## 9. API design
 
-| POST /files (multipart) | | file id | | GET /files/:id | | content (CDN) | | GET /list | | tree |
+| POST /files (multipart) |
+| file id |
+| GET |/files/:id | | content (CDN) | | GET /list | | tree |
 
 
 ## 10. Data model

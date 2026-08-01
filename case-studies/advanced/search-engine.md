@@ -58,12 +58,16 @@ In (v1): crawl-derived index, query, ranking, results page. Out: personalization
 
 ## 3. Functional requirements
 
-- Index web documents (inverted index). - Answer text queries with ranked results. - Update the index as content changes.
+- Index web documents (inverted index).
+- Answer text queries with ranked results.
+- Update the index as content changes.
 
 
 ## 4. Non-functional requirements
 
-- Query p99 < 500 ms. - Index billions of docs. - Freshness within days (web scale).
+- Query p99 < 500 ms.
+- Index billions of docs.
+- Freshness within days (web scale).
 
 
 ## 5. Explicit assumptions

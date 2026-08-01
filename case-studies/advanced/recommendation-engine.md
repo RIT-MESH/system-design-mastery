@@ -14,12 +14,17 @@ In (v1): candidate retrieval, ranking, serving, feedback loop. Out: cold-start, 
 
 ## 3. Functional requirements
 
-- Retrieve candidate items for a user. - Rank by predicted relevance. - Serve top-k in <100 ms. - Learn from feedback (clicks).
+- Retrieve candidate items for a user.
+- Rank by predicted relevance.
+- Serve top-k in <100 ms.
+- Learn from feedback (clicks).
 
 
 ## 4. Non-functional requirements
 
-- Serve p99 < 100 ms. - Availability 99.9%. - Freshness: incorporate recent behavior.
+- Serve p99 < 100 ms.
+- Availability 99.9%.
+- Freshness: incorporate recent behavior.
 
 
 ## 5. Explicit assumptions

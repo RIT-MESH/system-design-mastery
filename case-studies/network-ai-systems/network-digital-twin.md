@@ -61,12 +61,19 @@ In (v1): topology + state ingestion, change simulation, impact prediction (reach
 
 ## 3. Functional requirements
 
-- Ingest topology, device state, and traffic metrics. - Simulate a proposed change. - Predict impact (reachability, capacity, failures). - Q and A what-if with AI. - Generate a pre-change validation report. - Never auto-deploy.
+- Ingest topology, device state, and traffic metrics.
+- Simulate a proposed change.
+- Predict impact (reachability, capacity, failures).
+- Q and A what-if with AI.
+- Generate a pre-change validation report.
+- Never auto-deploy.
 
 
 ## 4. Non-functional requirements
 
-- Twin freshness < 5 min. - Simulation latency < 30 s for a change. - Availability 99.9 percent.
+- Twin freshness < 5 min.
+- Simulation latency < 30 s for a change.
+- Availability 99.9 percent.
 
 
 ## 5. Explicit assumptions

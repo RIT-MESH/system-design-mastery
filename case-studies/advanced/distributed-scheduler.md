@@ -14,12 +14,17 @@ In (v1): schedule jobs at a time/interval, single-execution, retries, status, co
 
 ## 3. Functional requirements
 
-- Schedule a job at a time or interval. - Run exactly once even with many nodes. - Retry on failure; record status. - Enforce concurrency limits.
+- Schedule a job at a time or interval.
+- Run exactly once even with many nodes.
+- Retry on failure; record status.
+- Enforce concurrency limits.
 
 
 ## 4. Non-functional requirements
 
-- At-most-one execution per scheduled run. - Availability 99.9% (jobs run, possibly late). - Survive node loss without skipping.
+- At-most-one execution per scheduled run.
+- Availability 99.9% (jobs run, possibly late).
+- Survive node loss without skipping.
 
 
 ## 5. Explicit assumptions
@@ -44,7 +49,8 @@ Job payloads small; worker-to-service control is light.
 
 ## 9. API design
 
-| POST /jobs | schedule, action | id | | GET /jobs/:id/runs | | history |
+| POST /jobs | schedule, action | id |
+| GET |/jobs/:id/runs | | history |
 
 
 ## 10. Data model

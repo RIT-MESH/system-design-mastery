@@ -72,12 +72,22 @@ In (v1): unified API, provider abstraction, multi-model routing (complexity, cos
 
 ## 3. Functional requirements
 
-- Accept a unified API call. - Authenticate and check token budget. - Route to the best model for the task. - Fail over on provider failure. - Cache semantically equivalent safe queries. - Filter content and redact PII. - Log and audit all calls. - Enforce per-tenant token budgets.
+- Accept a unified API call.
+- Authenticate and check token budget.
+- Route to the best model for the task.
+- Fail over on provider failure.
+- Cache semantically equivalent safe queries.
+- Filter content and redact PII.
+- Log and audit all calls.
+- Enforce per-tenant token budgets.
 
 
 ## 4. Non-functional requirements
 
-- Gateway overhead p99 < 20 ms. - Availability 99.95 percent. - No PII in logs. - No cost overrun (budgets enforced).
+- Gateway overhead p99 < 20 ms.
+- Availability 99.95 percent.
+- No PII in logs.
+- No cost overrun (budgets enforced).
 
 
 ## 5. Explicit assumptions

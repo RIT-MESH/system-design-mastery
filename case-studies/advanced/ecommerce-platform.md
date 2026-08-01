@@ -14,12 +14,18 @@ In (v1): catalog browse, cart, checkout, payment, order, inventory. Out: recomme
 
 ## 3. Functional requirements
 
-- Browse/search catalog. - Manage cart. - Checkout + pay. - Place order + reserve inventory. - Fulfill.
+- Browse/search catalog.
+- Manage cart.
+- Checkout + pay.
+- Place order + reserve inventory.
+- Fulfill.
 
 
 ## 4. Non-functional requirements
 
-- Browse p99 < 200 ms (CDN/search). - Checkout consistency: don't oversell inventory. - Availability 99.95% (checkout = revenue).
+- Browse p99 < 200 ms (CDN/search).
+- Checkout consistency: don't oversell inventory.
+- Availability 99.95% (checkout = revenue).
 
 
 ## 5. Explicit assumptions
@@ -44,7 +50,9 @@ Catalog media via CDN (egress heavy); checkout small.
 
 ## 9. API design
 
-| GET /products?... | | catalog | | POST /cart | | | | POST /checkout | cart, payment | order id |
+| GET /products?... |
+| catalog |
+| POST |/cart | | | | POST /checkout | cart, payment | order id |
 
 
 ## 10. Data model

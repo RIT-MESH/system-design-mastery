@@ -65,12 +65,26 @@ In (v1): inventory + firmware tracking, target-version checks, release-note/advi
 
 ## 3. Functional requirements
 
-- Discover inventory and current firmware/config. - Check approved targets + advisories + compatibility. - Analyze config risk. - Generate an upgrade plan. - Back up config + checksum. - Schedule maintenance window + get approval. - Pre-upgrade health checks. - Execute upgrade. - Monitor reboot/service recovery. - Post-upgrade validation. - Roll back on failure. - Generate upgrade report.
+- Discover inventory and current firmware/config.
+- Check approved targets + advisories + compatibility.
+- Analyze config risk.
+- Generate an upgrade plan.
+- Back up config + checksum.
+- Schedule maintenance window + get approval.
+- Pre-upgrade health checks.
+- Execute upgrade.
+- Monitor reboot/service recovery.
+- Post-upgrade validation.
+- Roll back on failure.
+- Generate upgrade report.
 
 
 ## 4. Non-functional requirements
 
-- No device left bricked; rollback always possible. - HA-pair/cluster-aware (upgrade one at a time, maintain service). - Full audit + approval chain. - Scheduled, rate-limited rollout.
+- No device left bricked; rollback always possible.
+- HA-pair/cluster-aware (upgrade one at a time, maintain service).
+- Full audit + approval chain.
+- Scheduled, rate-limited rollout.
 
 
 ## 5. Explicit assumptions

@@ -67,12 +67,19 @@ In: agent builder, tool registry with risk tiers, shared memory, supervisor coor
 
 ## 3. Functional requirements
 
-- Build and deploy specialized agents (monitoring, config, incident, compliance). - Share a tool registry with risk tiers. - Coordinate agents via a supervisor. - Enforce policy gateway on every action. - Per-tenant isolation. - Full audit.
+- Build and deploy specialized agents (monitoring, config, incident, compliance).
+- Share a tool registry with risk tiers.
+- Coordinate agents via a supervisor.
+- Enforce policy gateway on every action.
+- Per-tenant isolation.
+- Full audit.
 
 
 ## 4. Non-functional requirements
 
-- Agent step latency < 2 s. - No unauthorized high-risk action. - Availability 99.9 percent.
+- Agent step latency < 2 s.
+- No unauthorized high-risk action.
+- Availability 99.9 percent.
 
 
 ## 5. Explicit assumptions

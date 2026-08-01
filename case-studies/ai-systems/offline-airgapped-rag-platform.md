@@ -63,12 +63,20 @@ In: local document ingestion, local embeddings, local vector DB, local LLM, loca
 
 ## 3. Functional requirements
 
-- Ingest documents locally (no external API). - Embed with a local embedding model. - Store in a local vector DB. - Generate answers with a local LLM. - Cite sources. - Full local audit. - No internet dependency.
+- Ingest documents locally (no external API).
+- Embed with a local embedding model.
+- Store in a local vector DB.
+- Generate answers with a local LLM.
+- Cite sources.
+- Full local audit.
+- No internet dependency.
 
 
 ## 4. Non-functional requirements
 
-- 100 percent offline. - Answer p99 < 10 s (limited by local GPU). - Availability 99.9 percent (local HA).
+- 100 percent offline.
+- Answer p99 < 10 s (limited by local GPU).
+- Availability 99.9 percent (local HA).
 
 
 ## 5. Explicit assumptions

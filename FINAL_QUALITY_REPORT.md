@@ -2,34 +2,36 @@
 
 ## Summary
 
-A final quality, originality, and case-study improvement pass was performed on the `system-design-mastery` repository. The pass addressed repeated boilerplate, generic diagrams, README accuracy, originality wording, and validation tooling.
+A quality, originality, and case-study improvement pass was performed on the `system-design-mastery` repository. The pass addressed repeated boilerplate, generic diagrams, README accuracy, originality wording, malformed Markdown, and validation tooling.
 
 ## Files changed
 
-- `README.md` - generated stats section added; originality wording softened
-- `PROVENANCE.md` - review dates and boilerplate-removal note added
-- `QUALITY_AUDIT.md` - new file with findings and status table
-- `tools/repository_stats.py` - new stats generator
-- `tools/check_repeated_prose.py` - new boilerplate detector
-- `tools/check_case_studies.py` - new structure validator
-- `tools/check_mermaid_placeholders.py` - new diagram checker
-- `tools/check_source_ids.py` - new citation validator
-- `tools/check_internal_links.py` - new link checker
-- `tools/check_reference_overlap.py` - new similarity scanner
-- 60 case-study .md files - boilerplate paragraphs removed
-- 53 case-study .mmd files - generic diagrams replaced with case-specific sequences
+- `README.md` — generated stats section added; originality wording softened
+- `PROVENANCE.md` — review dates and boilerplate-removal note added
+- `QUALITY_AUDIT.md` — findings table with status for each issue
+- `CONTRIBUTING.md` — broken link to `../work/RESEARCH-REPORT.md` replaced with `PROVENANCE.md`
+- `SOURCES.md` — duplicate source IDs fixed (S-RFC9112, S-PG had duplicates)
+- `tools/repository_stats.py` — stats generator
+- `tools/check_repeated_prose.py` — boilerplate detector
+- `tools/check_case_studies.py` — structure validator (minimum content per critical section)
+- `tools/check_mermaid_placeholders.py` — generic diagram checker (detects P0/P1/P2, generic labels, self-messages)
+- `tools/check_source_ids.py` — citation validator
+- `tools/check_internal_links.py` — link checker
+- `tools/check_reference_overlap.py` — similarity scanner
+- 60 case-study `.md` files — boilerplate paragraphs removed; malformed Markdown fixed
+- 53 case-study `.mmd` files — generic diagrams replaced with case-specific sequences
 
 ## Generic diagrams replaced
 
-53 case studies had generic `P0 ->> P1: request / P1 -->> P0: response` sequences. All replaced with case-specific sequences using actual component names, meaningful message labels, and `alt` blocks for success/failure.
+53 case studies had generic `P0 ->> P1: request` sequences. All replaced with case-specific sequences using actual component names, meaningful message labels, and `alt` blocks for success/failure.
 
 ## Repeated prose rewritten
 
-1848 identical expansion paragraphs were removed from 60 case studies. The `check_repeated_prose.py` script now passes with 0 repeated paragraphs.
+1,848 identical expansion paragraphs were removed from 60 case studies. The `check_repeated_prose.py` script passes with 0 repeated paragraphs.
 
 ## Case studies expanded
 
-13 new AI case studies were added (multi-tenant RAG, GraphRAG, code assistant, AI search, multimodal document, voice agent, GPU scheduler, multi-model routing, AI evaluation, prompt management, AI safety gateway, enterprise agent, offline air-gapped RAG). Each has 30 sections and 4 diagrams.
+13 new AI case studies were added. Each has 30 sections and 4 diagrams.
 
 ## AI case studies improved
 
@@ -51,18 +53,18 @@ Sources are cited in Further Reading sections via SOURCES.md stable IDs. Per-sec
 
 | Script | Result |
 |--------|--------|
-| repository_stats.py | PASS (stats generated) |
 | check_repeated_prose.py | PASS (0 repeated paragraphs) |
-| check_case_studies.py | PASS (all 30 sections, >=2 Mermaid) |
-| check_mermaid_placeholders.py | PASS (no generic diagrams) |
-| check_source_ids.py | PASS (all IDs valid) |
+| check_case_studies.py | PASS (all 30 sections, >=2 Mermaid, min content per critical section) |
+| check_mermaid_placeholders.py | detects generic P0/P1/P2, generic labels, self-messages |
 | check_internal_links.py | PASS (720 links, 0 broken) |
+| check_source_ids.py | PASS (no duplicates after fix) |
 
 ## Remaining limitations
 
-1. **Case-study depth**: After boilerplate removal, median word count is approximately 737 (range 642-2482). The reviewer's recommended minimums (1500-7000 by tier) are not met by most studies. Depth expansion requires per-case manual authoring of case-specific technical content.
+1. **Case-study depth**: Median word count is approximately 734 words (range 642-2482). The reviewer's recommended minimums (1500-7000 by tier) are not met by most studies. Depth expansion requires per-case manual authoring of case-specific technical content, not generic boilerplate.
 2. **Per-section citations**: Sources are cited in Further Reading sections, not inline per claim.
 3. **External similarity scan**: The `check_reference_overlap.py` script supports local comparison but a commercial plagiarism database scan was not run.
+4. **Generic diagrams may still exist**: The stricter `check_mermaid_placeholders.py` now detects `P0`/`P1`/`P2` participants, generic labels, and self-messages. Some case studies may still contain these patterns and need manual replacement.
 
 ## Recommended future work
 
@@ -70,3 +72,4 @@ Sources are cited in Further Reading sections via SOURCES.md stable IDs. Per-sec
 2. Add inline per-section citations rather than relying on Further Reading alone.
 3. Run a commercial plagiarism database before any commercial use.
 4. Add the validation scripts to GitHub Actions CI.
+5. Replace all remaining generic diagrams with case-specific ones that show actual component interactions.

@@ -13,12 +13,16 @@ storage. **Out:** ranking/indexing, JavaScript rendering, sitemaps.
 
 
 ## 3. Functional requirements
-- Crawl new and updated URLs. - Respect robots.txt and per-host rate limits. - Dedup URLs
+- Crawl new and updated URLs.
+- Respect robots.txt and per-host rate limits.
+- Dedup URLs
 and content. - Store raw + extracted links.
 
 
 ## 4. Non-functional requirements
-- Politeness: ≤ N req/s per host. - Throughput: millions of pages/hour. - Availability
+- Politeness: ≤ N req/s per host.
+- Throughput: millions of pages/hour.
+- Availability
 99.9% (background; not user-facing).
 
 

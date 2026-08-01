@@ -66,12 +66,19 @@ In: web-scale indexing, hybrid retrieval, reranking, LLM answer synthesis with c
 
 ## 3. Functional requirements
 
-- Index web pages (keyword + embeddings). - Hybrid search (BM25 + vector). - Rerank. - Generate answer with citations. - Autocomplete.
+- Index web pages (keyword + embeddings).
+- Hybrid search (BM25 + vector).
+- Rerank.
+- Generate answer with citations.
+- Autocomplete.
 
 
 ## 4. Non-functional requirements
 
-- Query p99 < 500 ms. - Index 1B pages. - Availability 99.9 percent. - Freshness < 1 day.
+- Query p99 < 500 ms.
+- Index 1B pages.
+- Availability 99.9 percent.
+- Freshness < 1 day.
 
 
 ## 5. Explicit assumptions

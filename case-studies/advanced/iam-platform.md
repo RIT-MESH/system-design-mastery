@@ -14,12 +14,18 @@ In (v1): authN (password/MFA), sessions, token issuance/validation, RBAC, SCIM p
 
 ## 3. Functional requirements
 
-- Authenticate users (password/MFA). - Issue/validate tokens/sessions. - Enforce authorization (RBAC). - Provision/deprovision users (SCIM). - Audit access.
+- Authenticate users (password/MFA).
+- Issue/validate tokens/sessions.
+- Enforce authorization (RBAC).
+- Provision/deprovision users (SCIM).
+- Audit access.
 
 
 ## 4. Non-functional requirements
 
-- Availability 99.99% (every app depends on it). - Token validation p99 < 20 ms. - Strong security; revocation works.
+- Availability 99.99% (every app depends on it).
+- Token validation p99 < 20 ms.
+- Strong security; revocation works.
 
 
 ## 5. Explicit assumptions
@@ -44,7 +50,8 @@ Small payloads; bandwidth trivial. Latency + availability + security dominate.
 
 ## 9. API design
 
-| POST /login | creds | token | | POST /validate | token | valid/claims | | GET /users/:id/roles | | roles |
+| POST /login | creds | token |
+| POST |/validate | token | valid/claims | | GET /users/:id/roles | | roles |
 
 
 ## 10. Data model

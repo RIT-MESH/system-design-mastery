@@ -61,12 +61,16 @@ In (v1): offline + online feature store, model registry, low-latency serving, mo
 
 ## 3. Functional requirements
 
-- Serve consistent features for training and online inference. - Version models; serve at low latency. - Monitor drift; trigger retrain.
+- Serve consistent features for training and online inference.
+- Version models; serve at low latency.
+- Monitor drift; trigger retrain.
 
 
 ## 4. Non-functional requirements
 
-- Online feature read p99 < 50 ms. - Train/serve consistency (no skew). - Availability 99.9%.
+- Online feature read p99 < 50 ms.
+- Train/serve consistency (no skew).
+- Availability 99.9%.
 
 
 ## 5. Explicit assumptions
@@ -91,7 +95,9 @@ Feature fetch per inference; small but latency-critical.
 
 ## 9. API design
 
-| GET /features/:entity | | features | | POST /predict | features/model | prediction |
+| GET /features/:entity |
+| features |
+| POST |/predict | features/model | prediction |
 
 
 ## 10. Data model

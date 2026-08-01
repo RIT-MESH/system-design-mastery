@@ -63,12 +63,19 @@ In: GPU pool, workload queues, gang scheduling, priorities, preemption, utilizat
 
 ## 3. Functional requirements
 
-- Queue workloads by type. - Allocate GPUs with gang scheduling for distributed training. - Prioritize serving over batch. - Preempt and checkpoint long jobs. - Report utilization. - Backfill spare capacity.
+- Queue workloads by type.
+- Allocate GPUs with gang scheduling for distributed training.
+- Prioritize serving over batch.
+- Preempt and checkpoint long jobs.
+- Report utilization.
+- Backfill spare capacity.
 
 
 ## 4. Non-functional requirements
 
-- GPU utilization > 70 percent. - Serving not impacted by batch. - No deadlock from partial gang.
+- GPU utilization > 70 percent.
+- Serving not impacted by batch.
+- No deadlock from partial gang.
 
 
 ## 5. Explicit assumptions

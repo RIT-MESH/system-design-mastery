@@ -68,12 +68,22 @@ In (v1): alert ingestion + summarization, incident list, device-status Q&A, tick
 
 ## 3. Functional requirements
 
-- Read and summarize active incidents. - Retrieve device status on request. - Create incident tickets. - Guide engineers through runbooks. - Record spoken incident notes. - Escalate. - Route tasks to the right model. - Never execute high-risk changes via voice/autonomous.
+- Read and summarize active incidents.
+- Retrieve device status on request.
+- Create incident tickets.
+- Guide engineers through runbooks.
+- Record spoken incident notes.
+- Escalate.
+- Route tasks to the right model.
+- Never execute high-risk changes via voice/autonomous.
 
 
 ## 4. Non-functional requirements
 
-- Alert-to-summary < 10 s. - Voice interaction < 1.5 s turn latency. - Availability 99.9 percent. - No silent high-risk execution.
+- Alert-to-summary < 10 s.
+- Voice interaction < 1.5 s turn latency.
+- Availability 99.9 percent.
+- No silent high-risk execution.
 
 
 ## 5. Explicit assumptions

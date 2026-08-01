@@ -1,4 +1,4 @@
-﻿# Sources
+# Sources
 
 This file is the single source of truth for citations used across the repository. Each source
 has a **stable ID** referenced by chapters (e.g., `S-RFC9112`). Prefer primary sources:

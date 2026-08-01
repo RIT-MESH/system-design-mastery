@@ -67,12 +67,19 @@ In: prompt template registry, versioning, A/B testing, deployment, change review
 
 ## 3. Functional requirements
 
-- Store and version prompt templates. - Test prompts against eval sets before deploy. - A/B test prompt versions. - Deploy with rollback. - Review prompt changes (cost, safety, quality). - Monitor performance.
+- Store and version prompt templates.
+- Test prompts against eval sets before deploy.
+- A/B test prompt versions.
+- Deploy with rollback.
+- Review prompt changes (cost, safety, quality).
+- Monitor performance.
 
 
 ## 4. Non-functional requirements
 
-- Prompt deploy < 1 min. - No production change without review. - Availability 99.9 percent.
+- Prompt deploy < 1 min.
+- No production change without review.
+- Availability 99.9 percent.
 
 
 ## 5. Explicit assumptions

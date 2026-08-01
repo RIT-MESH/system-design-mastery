@@ -14,12 +14,18 @@ In (v1): auth, rate limit, route, transform, aggregate, observability. Out: full
 
 ## 3. Functional requirements
 
-- Authenticate/authorize requests. - Rate-limit per client/tenant. - Route to backends. - Transform request/response. - Aggregate multiple backends.
+- Authenticate/authorize requests.
+- Rate-limit per client/tenant.
+- Route to backends.
+- Transform request/response.
+- Aggregate multiple backends.
 
 
 ## 4. Non-functional requirements
 
-- p99 < 50 ms overhead. - Availability 99.95% (it's the front door). - High QPS; horizontally scalable.
+- p99 < 50 ms overhead.
+- Availability 99.95% (it's the front door).
+- High QPS; horizontally scalable.
 
 
 ## 5. Explicit assumptions

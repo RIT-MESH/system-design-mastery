@@ -14,12 +14,18 @@ In (v1): ingest counters/gauges/histograms, store time-series, query by label+wi
 
 ## 3. Functional requirements
 
-- Ingest metric points with labels. - Query by label selectors over a time window. - Downsample/rollup old data. - Alert on thresholds.
+- Ingest metric points with labels.
+- Query by label selectors over a time window.
+- Downsample/rollup old data.
+- Alert on thresholds.
 
 
 ## 4. Non-functional requirements
 
-- Ingest millions of points/s. - Query p99 < 2 s. - Hot data recent (hours/days); cold downsampled. - Cardinality must be bounded.
+- Ingest millions of points/s.
+- Query p99 < 2 s.
+- Hot data recent (hours/days); cold downsampled.
+- Cardinality must be bounded.
 
 
 ## 5. Explicit assumptions
@@ -44,7 +50,8 @@ Ingress ~200 MB/s; dashboards pull aggregations, not raw points — bandwidth mo
 
 ## 9. API design
 
-| POST /ingest (batch) | points | ack | | GET /query | selectors, window, step | series |
+| POST /ingest (batch) | points | ack |
+| GET |/query | selectors, window, step | series |
 
 
 ## 10. Data model

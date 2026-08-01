@@ -13,7 +13,9 @@ metrics/traces (separate; observability chapter), alerting UI.
 
 
 ## 3. Functional requirements
-- Ingest structured logs from services (batched). - Store with retention. - Search recent
+- Ingest structured logs from services (batched).
+- Store with retention.
+- Search recent
 logs by service/severity/text/time. - Tier old logs to cold storage.
 
 

@@ -65,12 +65,17 @@ In (v1): ingest/chunk/embed a corpus, query retrieve+generate, citations, cachin
 
 ## 3. Functional requirements
 
-- Ingest a corpus (chunk + embed + index). - On query, retrieve top-k relevant chunks. - Generate a grounded answer with citations. - Cache repeated queries.
+- Ingest a corpus (chunk + embed + index).
+- On query, retrieve top-k relevant chunks.
+- Generate a grounded answer with citations.
+- Cache repeated queries.
 
 
 ## 4. Non-functional requirements
 
-- Answer p99 < 3 s. - Grounding (cite sources; minimize hallucination). - Availability 99.9%.
+- Answer p99 < 3 s.
+- Grounding (cite sources; minimize hallucination).
+- Availability 99.9%.
 
 
 ## 5. Explicit assumptions
@@ -95,7 +100,8 @@ Retrieval small; generation streamed tokens to client.
 
 ## 9. API design
 
-| POST /ask | question | streamed answer + citations | | POST /ingest | docs | ack
+| POST /ask | question | streamed answer + citations |
+| POST |/ingest | docs | ack
 
 
 ## 10. Data model

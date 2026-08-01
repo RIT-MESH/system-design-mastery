@@ -69,12 +69,20 @@ In: speech-to-text, LLM reasoning with RAG, text-to-speech, tool calling, policy
 
 ## 3. Functional requirements
 
-- Transcribe user speech in real time. - Reason with LLM + RAG. - Respond with synthesized speech. - Call read-only tools. - Draft (not execute) high-risk actions. - Enforce policy gateway. - Full audit.
+- Transcribe user speech in real time.
+- Reason with LLM + RAG.
+- Respond with synthesized speech.
+- Call read-only tools.
+- Draft (not execute) high-risk actions.
+- Enforce policy gateway.
+- Full audit.
 
 
 ## 4. Non-functional requirements
 
-- Turn latency < 1.5 s. - Availability 99.9 percent. - No autonomous high-risk execution.
+- Turn latency < 1.5 s.
+- Availability 99.9 percent.
+- No autonomous high-risk execution.
 
 
 ## 5. Explicit assumptions

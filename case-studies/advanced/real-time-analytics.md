@@ -14,12 +14,17 @@ In (v1): ingest events, real-time aggregations, dashboards, alerts. Out: ad-hoc 
 
 ## 3. Functional requirements
 
-- Ingest events continuously. - Compute real-time aggregations (windows). - Serve dashboards sub-second. - Alert on aggregates.
+- Ingest events continuously.
+- Compute real-time aggregations (windows).
+- Serve dashboards sub-second.
+- Alert on aggregates.
 
 
 ## 4. Non-functional requirements
 
-- Dashboard refresh < 1 s. - Ingest millions of events/s. - Recent data low-latency; historical queryable.
+- Dashboard refresh < 1 s.
+- Ingest millions of events/s.
+- Recent data low-latency; historical queryable.
 
 
 ## 5. Explicit assumptions
@@ -44,7 +49,8 @@ Ingress ~200 MB/s; dashboards pull aggregates (small).
 
 ## 9. API design
 
-| POST /ingest (batch) | events | ack | | GET /dashboard | query | series |
+| POST /ingest (batch) | events | ack |
+| GET |/dashboard | query | series |
 
 
 ## 10. Data model

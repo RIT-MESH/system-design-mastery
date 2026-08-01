@@ -18,7 +18,9 @@ recency/basic signals. - Update counts (likes/reposts).
 
 
 ## 4. Non-functional requirements
-- Feed load p99 < 300 ms. - Availability 99.9%. - Celebrities with millions of followers
+- Feed load p99 < 300 ms.
+- Availability 99.9%.
+- Celebrities with millions of followers
 (the fan-out problem).
 
 

@@ -59,7 +59,7 @@ bandwidth estimates. Do not reuse another system's numbers verbatim.
 - Author diagrams in Mermaid only. Store sources under `diagrams/<area>/` and embed in the
   chapter.
 - Never include raster images traced from references.
-- See the [diagram originality policy](../work/RESEARCH-REPORT.md#11-diagram-originality-policy).
+- See the [diagram originality policy](PROVENANCE.md).
 
 ## 6. Style and terminology
 

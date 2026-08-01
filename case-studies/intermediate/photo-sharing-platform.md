@@ -18,7 +18,9 @@ scale. - Show a feed of a user's/followed photos.
 
 
 ## 4. Non-functional requirements
-- Upload durable (11 nines). - Thumbnail/serve p99 < 200 ms (CDN). - Bandwidth-dominated:
+- Upload durable (11 nines).
+- Thumbnail/serve p99 < 200 ms (CDN).
+- Bandwidth-dominated:
 egress is the binding cost.
 
 

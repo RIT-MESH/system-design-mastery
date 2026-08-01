@@ -63,12 +63,18 @@ In: document ingestion (PDF, images, text), multimodal extraction, cross-modal r
 
 ## 3. Functional requirements
 
-- Ingest documents with text, images, tables, charts. - Extract and index across modalities. - Answer questions about visual content. - Ground answers in document regions. - Cite page and region.
+- Ingest documents with text, images, tables, charts.
+- Extract and index across modalities.
+- Answer questions about visual content.
+- Ground answers in document regions.
+- Cite page and region.
 
 
 ## 4. Non-functional requirements
 
-- Answer p99 < 5 s. - Ingest 1k docs/hour. - Availability 99.9 percent.
+- Answer p99 < 5 s.
+- Ingest 1k docs/hour.
+- Availability 99.9 percent.
 
 
 ## 5. Explicit assumptions

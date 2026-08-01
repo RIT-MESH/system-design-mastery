@@ -59,12 +59,17 @@ In (v1): campaign targeting, real-time auction/serving, budget pacing, click att
 
 ## 3. Functional requirements
 
-- Match a request to eligible campaigns. - Run an auction; serve the winning ad. - Pace budgets. - Attribute clicks/conversions.
+- Match a request to eligible campaigns.
+- Run an auction; serve the winning ad.
+- Pace budgets.
+- Attribute clicks/conversions.
 
 
 ## 4. Non-functional requirements
 
-- Serve p99 < 100 ms (in the page-load path). - Budget never overspent. - Availability 99.9%.
+- Serve p99 < 100 ms (in the page-load path).
+- Budget never overspent.
+- Availability 99.9%.
 
 
 ## 5. Explicit assumptions
@@ -89,7 +94,8 @@ Ad creatives served (images/video) — egress significant; CDN for creatives.
 
 ## 9. API design
 
-| GET /ad | user, context | ad creative | | POST /event | impression/click | ack
+| GET /ad | user, context | ad creative |
+| POST |/event | impression/click | ack
 
 
 ## 10. Data model

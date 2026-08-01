@@ -71,12 +71,20 @@ In (v1): tool-calling agent for network ops, policy gateway, approval workflow, 
 
 ## 3. Functional requirements
 
-- Run allowed read and diagnostic tools. - Draft (not execute) changes. - Generate reports. - Request approval for write actions. - Enforce policies (no password or key exposure, no unapproved changes, no firewall or routing or VPN changes without approval). - Full audit.
+- Run allowed read and diagnostic tools.
+- Draft (not execute) changes.
+- Generate reports.
+- Request approval for write actions.
+- Enforce policies (no password or key exposure, no unapproved changes, no firewall or routing or VPN changes without approval).
+- Full audit.
 
 
 ## 4. Non-functional requirements
 
-- Never execute high-risk action without approval. - Tool latency bounded. - Availability 99.9 percent. - Confidential configs stay local or air-gapped.
+- Never execute high-risk action without approval.
+- Tool latency bounded.
+- Availability 99.9 percent.
+- Confidential configs stay local or air-gapped.
 
 
 ## 5. Explicit assumptions

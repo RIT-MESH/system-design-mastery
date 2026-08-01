@@ -13,7 +13,9 @@ highlighting, accounts, versioning, comments.
 
 
 ## 3. Functional requirements
-- Create a paste from text, return a short URL. - Read a paste by code. - Expire pastes on
+- Create a paste from text, return a short URL.
+- Read a paste by code.
+- Expire pastes on
 an optional TTL. - Return 404 for unknown/expired.
 
 

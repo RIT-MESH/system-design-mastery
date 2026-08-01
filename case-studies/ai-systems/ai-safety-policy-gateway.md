@@ -65,12 +65,20 @@ In: policy registry, action interceptor, risk-tier classification, approval work
 
 ## 3. Functional requirements
 
-- Intercept every AI action before execution. - Classify risk (read-only, low, medium, high, prohibited). - Allow read-only automatically. - Route high-risk to human approval. - Block prohibited actions. - Audit everything. - Fail-closed on any error.
+- Intercept every AI action before execution.
+- Classify risk (read-only, low, medium, high, prohibited).
+- Allow read-only automatically.
+- Route high-risk to human approval.
+- Block prohibited actions.
+- Audit everything.
+- Fail-closed on any error.
 
 
 ## 4. Non-functional requirements
 
-- Policy decision < 10 ms. - Never allow prohibited. - Availability 99.95 percent (fail-closed if down).
+- Policy decision < 10 ms.
+- Never allow prohibited.
+- Availability 99.95 percent (fail-closed if down).
 
 
 ## 5. Explicit assumptions

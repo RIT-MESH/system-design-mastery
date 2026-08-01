@@ -72,12 +72,20 @@ In (v1): multi-agent ticket handling, RAG for knowledge, tool calling for ticket
 
 ## 3. Functional requirements
 
-- Triage agent classifies and routes tickets. - Research agent retrieves relevant docs via RAG. - Resolution agent drafts a response or action. - Review agent checks quality and safety. - Supervisor coordinates and approves. - High-risk actions require human approval. - Full audit.
+- Triage agent classifies and routes tickets.
+- Research agent retrieves relevant docs via RAG.
+- Resolution agent drafts a response or action.
+- Review agent checks quality and safety.
+- Supervisor coordinates and approves.
+- High-risk actions require human approval.
+- Full audit.
 
 
 ## 4. Non-functional requirements
 
-- Ticket-to-first-response < 30 s. - No unauthorized high-risk action. - Availability 99.9 percent.
+- Ticket-to-first-response < 30 s.
+- No unauthorized high-risk action.
+- Availability 99.9 percent.
 
 
 ## 5. Explicit assumptions

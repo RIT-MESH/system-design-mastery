@@ -13,7 +13,9 @@ optional. **Out:** semantic suggestions, spell correction.
 
 
 ## 3. Functional requirements
-- Return top-k completions for a prefix. - Rank by popularity (and recency). - Update
+- Return top-k completions for a prefix.
+- Rank by popularity (and recency).
+- Update
 popular terms as trends change. - Per-user recent-history suggestions.
 
 

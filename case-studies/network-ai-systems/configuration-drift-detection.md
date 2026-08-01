@@ -61,12 +61,21 @@ In (v1): baseline + policy definitions, periodic + on-change config collection, 
 
 ## 3. Functional requirements
 
-- Define baselines/policies per device class. - Collect current configs. - Diff vs baseline. - Classify drift (authorized/unauthorized/error/policy violation). - Score risk. - Open change ticket with context. - Report compliance.
+- Define baselines/policies per device class.
+- Collect current configs.
+- Diff vs baseline.
+- Classify drift (authorized/unauthorized/error/policy violation).
+- Score risk.
+- Open change ticket with context.
+- Report compliance.
 
 
 ## 4. Non-functional requirements
 
-- Detect drift within 15 min of change. - No false auto-remediation. - Full audit. - Multi-vendor config parsing.
+- Detect drift within 15 min of change.
+- No false auto-remediation.
+- Full audit.
+- Multi-vendor config parsing.
 
 
 ## 5. Explicit assumptions

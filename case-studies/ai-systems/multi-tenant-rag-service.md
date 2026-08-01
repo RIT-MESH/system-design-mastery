@@ -62,12 +62,21 @@ In: per-tenant ingestion, hybrid retrieval with ACLs, grounded generation, token
 
 ## 3. Functional requirements
 
-- Ingest per-tenant docs with ACLs. - Permission-aware hybrid retrieval. - Generate grounded answers with citations. - Per-tenant token budgets. - Semantic cache (safe only). - Multi-model routing. - Full audit.
+- Ingest per-tenant docs with ACLs.
+- Permission-aware hybrid retrieval.
+- Generate grounded answers with citations.
+- Per-tenant token budgets.
+- Semantic cache (safe only).
+- Multi-model routing.
+- Full audit.
 
 
 ## 4. Non-functional requirements
 
-- Answer p99 < 3 s. - No cross-tenant leakage. - Availability 99.9 percent. - Cost capped per tenant.
+- Answer p99 < 3 s.
+- No cross-tenant leakage.
+- Availability 99.9 percent.
+- Cost capped per tenant.
 
 
 ## 5. Explicit assumptions

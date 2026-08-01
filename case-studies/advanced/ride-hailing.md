@@ -14,12 +14,17 @@ In (v1): request ride, match nearby driver, track trip, fare. Out: pooled rides,
 
 ## 3. Functional requirements
 
-- Rider requests a ride. - Match to a nearby available driver. - Track trip live. - Compute and charge fare.
+- Rider requests a ride.
+- Match to a nearby available driver.
+- Track trip live.
+- Compute and charge fare.
 
 
 ## 4. Non-functional requirements
 
-- Match latency < 5 s. - Live tracking p99 < 1 s updates. - Availability 99.9% (matching is revenue).
+- Match latency < 5 s.
+- Live tracking p99 < 1 s updates.
+- Availability 99.9% (matching is revenue).
 
 
 ## 5. Explicit assumptions
@@ -44,7 +49,8 @@ Location updates from every active driver/ride at ~1/s — connection + small me
 
 ## 9. API design
 
-| POST /rides | pickup, dropoff | ride id | | WS /rides/:id/stream | | live trip | | POST /drivers/location | lat,lng | ack
+| POST /rides | pickup, dropoff | ride id |
+| WS |/rides/:id/stream | | live trip | | POST /drivers/location | lat,lng | ack
 
 
 ## 10. Data model

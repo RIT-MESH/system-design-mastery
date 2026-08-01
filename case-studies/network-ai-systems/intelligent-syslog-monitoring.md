@@ -68,12 +68,24 @@ In (v1): multi-vendor syslog ingest (UDP/TCP/TLS), normalization, rule+AI severi
 
 ## 3. Functional requirements
 
-- Ingest syslog from listed device types. - Normalize and enrich messages (CEF/structured). - Classify severity via rules + AI. - Correlate duplicates and suppress. - Write critical incidents to /report/critical with full fields. - Notify admins (email/Slack/Teams/ticket). - Attach recommended checks and remediation. - Acknowledge or escalate. - Record final resolution.
+- Ingest syslog from listed device types.
+- Normalize and enrich messages (CEF/structured).
+- Classify severity via rules + AI.
+- Correlate duplicates and suppress.
+- Write critical incidents to /report/critical with full fields.
+- Notify admins (email/Slack/Teams/ticket).
+- Attach recommended checks and remediation.
+- Acknowledge or escalate.
+- Record final resolution.
 
 
 ## 4. Non-functional requirements
 
-- Ingest 50k msgs/s peak with buffering. - Critical-to-report latency < 30 s. - No silent drop (buffer on collector loss). - Log integrity + access control. - AI never auto-executes high-risk remediation.
+- Ingest 50k msgs/s peak with buffering.
+- Critical-to-report latency < 30 s.
+- No silent drop (buffer on collector loss).
+- Log integrity + access control.
+- AI never auto-executes high-risk remediation.
 
 
 ## 5. Explicit assumptions

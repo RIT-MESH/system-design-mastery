@@ -13,12 +13,16 @@ voice/video, end-to-end encryption, large-channel fanout (noted as stage).
 
 
 ## 3. Functional requirements
-- Send/receive messages in real time. - Show presence (online/offline). - Persist history
+- Send/receive messages in real time.
+- Show presence (online/offline).
+- Persist history
 and load on demand. - Delivery/read receipts.
 
 
 ## 4. Non-functional requirements
-- Message delivery latency < 200 ms p99. - Availability 99.9%. - Connection-scale: hold
+- Message delivery latency < 200 ms p99.
+- Availability 99.9%.
+- Connection-scale: hold
 millions of concurrent connections.
 
 

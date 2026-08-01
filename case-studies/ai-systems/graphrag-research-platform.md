@@ -63,12 +63,17 @@ In: graph ingestion, entity extraction, relationship indexing, multi-hop retriev
 
 ## 3. Functional requirements
 
-- Ingest documents and extract entities and relationships. - Build a knowledge graph. - Multi-hop retrieval. - Generate answers with graph context and citations.
+- Ingest documents and extract entities and relationships.
+- Build a knowledge graph.
+- Multi-hop retrieval.
+- Generate answers with graph context and citations.
 
 
 ## 4. Non-functional requirements
 
-- Multi-hop query p99 < 5 s. - Graph freshness < 1 hour. - Availability 99.9 percent.
+- Multi-hop query p99 < 5 s.
+- Graph freshness < 1 hour.
+- Availability 99.9 percent.
 
 
 ## 5. Explicit assumptions

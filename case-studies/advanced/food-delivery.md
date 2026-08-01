@@ -14,12 +14,17 @@ In (v1): browse/order, restaurant accept, courier dispatch, live tracking, payme
 
 ## 3. Functional requirements
 
-- Customer orders from a restaurant. - Restaurant accepts/prepares. - Dispatch a courier; track delivery. - Pay all parties.
+- Customer orders from a restaurant.
+- Restaurant accepts/prepares.
+- Dispatch a courier; track delivery.
+- Pay all parties.
 
 
 ## 4. Non-functional requirements
 
-- Dispatch latency < 30 s. - Tracking freshness < 5 s. - Availability 99.9%.
+- Dispatch latency < 30 s.
+- Tracking freshness < 5 s.
+- Availability 99.9%.
 
 
 ## 5. Explicit assumptions
@@ -44,7 +49,8 @@ Live location updates from active couriers + order status pushes; small messages
 
 ## 9. API design
 
-| POST /orders | items, restaurant | order id | | WS /orders/:id | | live status | | POST /couriers/location | loc | ack
+| POST /orders | items, restaurant | order id |
+| WS |/orders/:id | | live status | | POST /couriers/location | loc | ack
 
 
 ## 10. Data model

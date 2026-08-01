@@ -58,12 +58,17 @@ In (v1): ingest raw, catalog, partition by date, query via scan engine, lifecycl
 
 ## 3. Functional requirements
 
-- Ingest raw data in any format. - Catalog with schema/lineage/ownership. - Partition for scan efficiency. - Lifecycle (tier/delete).
+- Ingest raw data in any format.
+- Catalog with schema/lineage/ownership.
+- Partition for scan efficiency.
+- Lifecycle (tier/delete).
 
 
 ## 4. Non-functional requirements
 
-- Cheap durable storage (11 nines). - Query via scan over partitions. - Governed (access, PII, retention).
+- Cheap durable storage (11 nines).
+- Query via scan over partitions.
+- Governed (access, PII, retention).
 
 
 ## 5. Explicit assumptions

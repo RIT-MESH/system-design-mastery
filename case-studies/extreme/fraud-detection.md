@@ -60,12 +60,17 @@ In (v1): real-time scoring, block/hold/review decisions, feedback loop, model re
 
 ## 3. Functional requirements
 
-- Score each event in real time. - Decide block/hold/allow. - Learn from confirmed outcomes. - Retrain models.
+- Score each event in real time.
+- Decide block/hold/allow.
+- Learn from confirmed outcomes.
+- Retrain models.
 
 
 ## 4. Non-functional requirements
 
-- Decision latency < 200 ms (must precede settlement). - Low false-positive rate (blocking good tx is costly). - Availability 99.95%.
+- Decision latency < 200 ms (must precede settlement).
+- Low false-positive rate (blocking good tx is costly).
+- Availability 99.95%.
 
 
 ## 5. Explicit assumptions

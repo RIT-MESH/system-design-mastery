@@ -14,12 +14,19 @@ In (v1): produce/consume topics, partitioned logs, consumer groups, retention, a
 
 ## 3. Functional requirements
 
-- Publish events to a partitioned topic. - Multiple consumer groups read independently. - Retain events by time/size for replay. - Per-partition ordering. - At-least-once; idempotent consumers.
+- Publish events to a partitioned topic.
+- Multiple consumer groups read independently.
+- Retain events by time/size for replay.
+- Per-partition ordering.
+- At-least-once; idempotent consumers.
 
 
 ## 4. Non-functional requirements
 
-- Ingest millions of events/s. - Consumer lag bounded. - Durability 11 nines (replicated log). - Availability 99.9%.
+- Ingest millions of events/s.
+- Consumer lag bounded.
+- Durability 11 nines (replicated log).
+- Availability 99.9%.
 
 
 ## 5. Explicit assumptions

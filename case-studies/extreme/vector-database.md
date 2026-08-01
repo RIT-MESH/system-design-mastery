@@ -58,12 +58,17 @@ In (v1): insert vectors, ANN search with metadata filters, index build/update, v
 
 ## 3. Functional requirements
 
-- Insert vectors with metadata. - ANN search top-k by similarity. - Filter by metadata. - Rebuild/update the index.
+- Insert vectors with metadata.
+- ANN search top-k by similarity.
+- Filter by metadata.
+- Rebuild/update the index.
 
 
 ## 4. Non-functional requirements
 
-- Search p99 < 100 ms at billion scale. - Recall tuned per workload. - Index update without full rebuild (where possible).
+- Search p99 < 100 ms at billion scale.
+- Recall tuned per workload.
+- Index update without full rebuild (where possible).
 
 
 ## 5. Explicit assumptions
@@ -88,7 +93,8 @@ Search responses small (top-k ids); ingest steady.
 
 ## 9. API design
 
-| POST /vectors | vec, meta | id | | GET /search | vec, filters, k | top-k ids |
+| POST /vectors | vec, meta | id |
+| GET |/search | vec, filters, k | top-k ids |
 
 
 ## 10. Data model

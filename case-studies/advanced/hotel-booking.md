@@ -14,12 +14,17 @@ In (v1): search by date/location, availability, reserve, book, pay. Out: dynamic
 
 ## 3. Functional requirements
 
-- Search available hotels by date/location. - Hold a room temporarily. - Confirm booking + pay. - Cancel/release.
+- Search available hotels by date/location.
+- Hold a room temporarily.
+- Confirm booking + pay.
+- Cancel/release.
 
 
 ## 4. Non-functional requirements
 
-- No double-book a room. - Search p99 < 1 s. - Availability freshness near-real-time.
+- No double-book a room.
+- Search p99 < 1 s.
+- Availability freshness near-real-time.
 
 
 ## 5. Explicit assumptions
@@ -44,7 +49,8 @@ Search responses medium; booking small.
 
 ## 9. API design
 
-| GET /search | city, date range | hotels | | POST /hold | room, dates | hold id | | POST /book | hold id, pay | booking id |
+| GET /search | city, date range | hotels |
+| POST |/hold | room, dates | hold id | | POST /book | hold id, pay | booking id |
 
 
 ## 10. Data model

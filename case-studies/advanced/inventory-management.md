@@ -14,12 +14,17 @@ In (v1): per-warehouse stock, reservations, transfers, reconciliation. Out: dema
 
 ## 3. Functional requirements
 
-- Track stock per warehouse/SKU. - Atomically reserve/release on order. - Transfer between warehouses. - Reconcile to physical counts.
+- Track stock per warehouse/SKU.
+- Atomically reserve/release on order.
+- Transfer between warehouses.
+- Reconcile to physical counts.
 
 
 ## 4. Non-functional requirements
 
-- No oversell. - Reserve latency < 50 ms. - Availability 99.9%.
+- No oversell.
+- Reserve latency < 50 ms.
+- Availability 99.9%.
 
 
 ## 5. Explicit assumptions
@@ -44,7 +49,8 @@ Small messages; bandwidth trivial; correctness is the concern.
 
 ## 9. API design
 
-| POST /reserve | wh, sku, qty | reserved/rejected | | POST /release | reserve id | ack | | POST /transfer | from,to,sku,qty | ack
+| POST /reserve | wh, sku, qty | reserved/rejected |
+| POST |/release | reserve id | ack | | POST /transfer | from,to,sku,qty | ack
 
 
 ## 10. Data model

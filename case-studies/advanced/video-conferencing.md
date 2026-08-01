@@ -58,12 +58,16 @@ In (v1): 1:1 and small-group calls, audio/video, screen share, presence. Out: la
 
 ## 3. Functional requirements
 
-- Start/join a call. - Send/receive audio/video with low latency. - Selectively forward each participant media. - Show presence; mute/leave.
+- Start/join a call.
+- Send/receive audio/video with low latency.
+- Selectively forward each participant media.
+- Show presence; mute/leave.
 
 
 ## 4. Non-functional requirements
 
-- One-way media latency < 200 ms. - 30 fps video; audio priority. - Availability 99.9 percent (calls are real-time, no retries).
+- One-way media latency < 200 ms. - 30 fps video; audio priority.
+- Availability 99.9 percent (calls are real-time, no retries).
 
 
 ## 5. Explicit assumptions

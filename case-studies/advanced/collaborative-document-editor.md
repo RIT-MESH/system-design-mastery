@@ -14,12 +14,17 @@ In (v1): real-time co-edit, presence, offline + merge, history. Out: comments, v
 
 ## 3. Functional requirements
 
-- Multiple users edit concurrently. - Merge edits without conflict. - Show presence/cursors. - Work offline and merge on reconnect.
+- Multiple users edit concurrently.
+- Merge edits without conflict.
+- Show presence/cursors.
+- Work offline and merge on reconnect.
 
 
 ## 4. Non-functional requirements
 
-- Keystroke-to-render < 50 ms local. - Merge correctness (no lost edits). - Availability 100% for editing (offline ok).
+- Keystroke-to-render < 50 ms local.
+- Merge correctness (no lost edits).
+- Availability 100% for editing (offline ok).
 
 
 ## 5. Explicit assumptions

@@ -59,12 +59,18 @@ In (v1): accounts, transfers, double-entry, balances, reconciliation, immutable 
 
 ## 3. Functional requirements
 
-- Move money double-entry (balanced debit/credit). - Never lose/duplicate a committed entry. - Derive balances from entries. - Reconcile vs banks. - Full audit trail.
+- Move money double-entry (balanced debit/credit).
+- Never lose/duplicate a committed entry.
+- Derive balances from entries.
+- Reconcile vs banks.
+- Full audit trail.
 
 
 ## 4. Non-functional requirements
 
-- Zero data loss; committed entries survive any failure. - Strong consistency (no double-spend). - Auditability for years.
+- Zero data loss; committed entries survive any failure.
+- Strong consistency (no double-spend).
+- Auditability for years.
 
 
 ## 5. Explicit assumptions
@@ -89,7 +95,8 @@ Small payloads; correctness/durability dominate, not bandwidth.
 
 ## 9. API design
 
-| POST /transfer | from,to,amount | tx id | | GET /accounts/:id/balance | | amount |
+| POST /transfer | from,to,amount | tx id |
+| GET |/accounts/:id/balance | | amount |
 
 
 ## 10. Data model

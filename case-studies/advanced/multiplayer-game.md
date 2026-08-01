@@ -14,12 +14,16 @@ In (v1): real-time match, authoritative server, state sync, matchmaking. Out: pe
 
 ## 3. Functional requirements
 
-- Match players. - Run authoritative game state on a server. - Replicate state to players at ~tick rate. - Persist match results.
+- Match players.
+- Run authoritative game state on a server.
+- Replicate state to players at ~tick rate.
+- Persist match results.
 
 
 ## 4. Non-functional requirements
 
-- Tick-to-player latency < 100 ms. - 60 ticks/s authoritative loop. - Availability 99.9% per match.
+- Tick-to-player latency < 100 ms. - 60 ticks/s authoritative loop.
+- Availability 99.9% per match.
 
 
 ## 5. Explicit assumptions

@@ -64,12 +64,19 @@ In: golden + adversarial test sets, continuous evaluation, release gates, regres
 
 ## 3. Functional requirements
 
-- Maintain golden and adversarial test sets. - Run evaluation before every release and continuously. - Measure retrieval, generation, agent, cost, safety metrics. - Set release gates with rollback triggers. - Track regressions. - Dashboard results.
+- Maintain golden and adversarial test sets.
+- Run evaluation before every release and continuously.
+- Measure retrieval, generation, agent, cost, safety metrics.
+- Set release gates with rollback triggers.
+- Track regressions.
+- Dashboard results.
 
 
 ## 4. Non-functional requirements
 
-- Evaluation run < 10 min. - No false-green gates. - Availability 99.9 percent.
+- Evaluation run < 10 min.
+- No false-green gates.
+- Availability 99.9 percent.
 
 
 ## 5. Explicit assumptions

@@ -60,12 +60,18 @@ In (v1): order entry, order book matching, trades, clearing. Out: derivatives, d
 
 ## 3. Functional requirements
 
-- Accept buy/sell orders. - Match in price-time priority (order book). - Execute trades; update positions/balances. - Cancel/modify orders.
+- Accept buy/sell orders.
+- Match in price-time priority (order book).
+- Execute trades; update positions/balances.
+- Cancel/modify orders.
 
 
 ## 4. Non-functional requirements
 
-- Matching p99 < 1 ms. - Strict price-time ordering (fairness). - No double-execution. - Availability 99.99% (market hours).
+- Matching p99 < 1 ms.
+- Strict price-time ordering (fairness).
+- No double-execution.
+- Availability 99.99% (market hours).
 
 
 ## 5. Explicit assumptions
@@ -90,7 +96,8 @@ Order stream small; market-data fan-out to clients is the bandwidth.
 
 ## 9. API design
 
-| POST /orders | side, price, qty | order id | | WS /market/:sym | | quotes/trades |
+| POST /orders | side, price, qty | order id |
+| WS |/market/:sym | | quotes/trades |
 
 
 ## 10. Data model

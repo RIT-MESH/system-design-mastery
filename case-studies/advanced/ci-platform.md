@@ -14,12 +14,17 @@ In (v1): trigger on push, run jobs in isolated runners, cache deps, report resul
 
 ## 3. Functional requirements
 
-- Trigger jobs on push/PR. - Run jobs in isolated, ephemeral runners. - Cache dependencies. - Report pass/fail + logs.
+- Trigger jobs on push/PR.
+- Run jobs in isolated, ephemeral runners.
+- Cache dependencies.
+- Report pass/fail + logs.
 
 
 ## 4. Non-functional requirements
 
-- Job start latency < 30 s. - Isolation between jobs. - Availability 99.9% (CI lags releases, doesn't lose code).
+- Job start latency < 30 s.
+- Isolation between jobs.
+- Availability 99.9% (CI lags releases, doesn't lose code).
 
 
 ## 5. Explicit assumptions

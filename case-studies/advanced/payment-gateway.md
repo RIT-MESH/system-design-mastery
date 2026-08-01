@@ -14,12 +14,19 @@ In (v1): authorize + capture + refund, idempotent, PCI tokenization. Out: 3DS, r
 
 ## 3. Functional requirements
 
-- Authorize a payment (hold). - Capture (settle the hold). - Refund. - Idempotent by request key. - Tokenize card data (PCI).
+- Authorize a payment (hold).
+- Capture (settle the hold).
+- Refund.
+- Idempotent by request key.
+- Tokenize card data (PCI).
 
 
 ## 4. Non-functional requirements
 
-- No double-charge. - Durability 11 nines of payment records. - Availability 99.95% (money path). - PCI-DSS compliant.
+- No double-charge.
+- Durability 11 nines of payment records.
+- Availability 99.95% (money path).
+- PCI-DSS compliant.
 
 
 ## 5. Explicit assumptions
@@ -44,7 +51,8 @@ Small payloads; latency dominated by bank/network round trips, not bandwidth.
 
 ## 9. API design
 
-| POST /payments/authorize | amount, token, key | auth id | | POST /payments/:id/capture | | | | POST /payments/:id/refund | | |
+| POST /payments/authorize | amount, token, key | auth id |
+| POST |/payments/:id/capture | | | | POST /payments/:id/refund | | |
 
 
 ## 10. Data model

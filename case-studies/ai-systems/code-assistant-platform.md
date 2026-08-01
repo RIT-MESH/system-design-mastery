@@ -64,12 +64,19 @@ In: codebase indexing, code completion, explanation, refactoring suggestions, se
 
 ## 3. Functional requirements
 
-- Index codebase (functions, classes, imports). - Suggest completions in context. - Explain code. - Suggest refactors. - Flag security issues. - Never execute code.
+- Index codebase (functions, classes, imports).
+- Suggest completions in context.
+- Explain code.
+- Suggest refactors.
+- Flag security issues.
+- Never execute code.
 
 
 ## 4. Non-functional requirements
 
-- Completion latency < 500 ms. - Context uses relevant code. - Availability 99.9 percent.
+- Completion latency < 500 ms.
+- Context uses relevant code.
+- Availability 99.9 percent.
 
 
 ## 5. Explicit assumptions

@@ -59,12 +59,17 @@ In (v1): device ingest (intermittent), digital-twin state, command delivery, fan
 
 ## 3. Functional requirements
 
-- Ingest telemetry from devices (intermittent). - Maintain a digital twin per device. - Deliver commands with acknowledged delivery. - Fan-out analytics.
+- Ingest telemetry from devices (intermittent).
+- Maintain a digital twin per device.
+- Deliver commands with acknowledged delivery.
+- Fan-out analytics.
 
 
 ## 4. Non-functional requirements
 
-- Handle billions of devices, intermittent connectivity. - Twin update near-real-time. - Command delivery when device reconnects.
+- Handle billions of devices, intermittent connectivity.
+- Twin update near-real-time.
+- Command delivery when device reconnects.
 
 
 ## 5. Explicit assumptions

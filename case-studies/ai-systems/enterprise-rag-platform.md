@@ -66,12 +66,21 @@ In (v1): multi-tenant ingestion, permission-aware hybrid retrieval, reranking, g
 
 ## 3. Functional requirements
 
-- Ingest per-tenant corpora with ACLs. - Retrieve with permission filtering. - Generate grounded answers with citations. - Cache semantically equivalent queries (safe ones only). - Route by task complexity to the cheapest capable model. - Enforce per-tenant token budgets. - Full audit.
+- Ingest per-tenant corpora with ACLs.
+- Retrieve with permission filtering.
+- Generate grounded answers with citations.
+- Cache semantically equivalent queries (safe ones only).
+- Route by task complexity to the cheapest capable model.
+- Enforce per-tenant token budgets.
+- Full audit.
 
 
 ## 4. Non-functional requirements
 
-- Answer p99 < 3 s. - No cross-tenant retrieval leakage. - Availability 99.9 percent. - Cost capped per tenant.
+- Answer p99 < 3 s.
+- No cross-tenant retrieval leakage.
+- Availability 99.9 percent.
+- Cost capped per tenant.
 
 
 ## 5. Explicit assumptions

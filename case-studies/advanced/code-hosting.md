@@ -14,12 +14,17 @@ In (v1): repos, push/pull/clone, PRs, reviews, webhooks. Out: CI (separate case)
 
 ## 3. Functional requirements
 
-- Host git repos (push/pull/clone). - Branches, merges, PRs. - Reviews + comments. - Webhooks/notifications.
+- Host git repos (push/pull/clone).
+- Branches, merges, PRs.
+- Reviews + comments.
+- Webhooks/notifications.
 
 
 ## 4. Non-functional requirements
 
-- Clone latency reasonable for large repos. - Availability 99.9%. - Read-heavy (clones/fetches >> pushes).
+- Clone latency reasonable for large repos.
+- Availability 99.9%.
+- Read-heavy (clones/fetches >> pushes).
 
 
 ## 5. Explicit assumptions

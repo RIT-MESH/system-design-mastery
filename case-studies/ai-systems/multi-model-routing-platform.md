@@ -62,12 +62,19 @@ In: model registry, routing rules (complexity, cost, latency, capability, privac
 
 ## 3. Functional requirements
 
-- Register models with capabilities, costs, latency, max tokens. - Route each request to cheapest capable model. - Fail over on model failure. - Track cost per request and tenant. - Enforce per-tenant budgets. - Route confidential to local models.
+- Register models with capabilities, costs, latency, max tokens.
+- Route each request to cheapest capable model.
+- Fail over on model failure.
+- Track cost per request and tenant.
+- Enforce per-tenant budgets.
+- Route confidential to local models.
 
 
 ## 4. Non-functional requirements
 
-- Routing decision < 5 ms. - Availability 99.95 percent. - No cost overrun.
+- Routing decision < 5 ms.
+- Availability 99.95 percent.
+- No cost overrun.
 
 
 ## 5. Explicit assumptions

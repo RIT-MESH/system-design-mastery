@@ -14,12 +14,17 @@ In (v1): flight search, seat hold, book, ticket, pay. Out: multi-city/fare class
 
 ## 3. Functional requirements
 
-- Search flights by route/date. - Hold a seat temporarily. - Book + ticket + pay. - Cancel/refund.
+- Search flights by route/date.
+- Hold a seat temporarily.
+- Book + ticket + pay.
+- Cancel/refund.
 
 
 ## 4. Non-functional requirements
 
-- No double-book a seat. - Search p99 < 2 s. - Availability near-real-time across segments.
+- No double-book a seat.
+- Search p99 < 2 s.
+- Availability near-real-time across segments.
 
 
 ## 5. Explicit assumptions
@@ -44,7 +49,8 @@ Search medium; booking small.
 
 ## 9. API design
 
-| GET /search | route, date | flights | | POST /hold | flight, seat | hold id | | POST /book | hold, pay | ticket |
+| GET /search | route, date | flights |
+| POST |/hold | flight, seat | hold id | | POST /book | hold, pay | ticket |
 
 
 ## 10. Data model

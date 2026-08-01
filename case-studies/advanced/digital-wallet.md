@@ -14,12 +14,17 @@ In (v1): balance, top-up/withdraw, P2P transfer, ledger. Out: cards, interest, m
 
 ## 3. Functional requirements
 
-- Hold a balance per user. - Transfer between users instantly. - Top-up from / withdraw to bank. - Ledger every move.
+- Hold a balance per user.
+- Transfer between users instantly.
+- Top-up from / withdraw to bank.
+- Ledger every move.
 
 
 ## 4. Non-functional requirements
 
-- No double-spend; balances never negative. - Transfer p99 < 1 s. - Availability 99.95%.
+- No double-spend; balances never negative.
+- Transfer p99 < 1 s.
+- Availability 99.95%.
 
 
 ## 5. Explicit assumptions
@@ -44,7 +49,9 @@ Tiny payloads; correctness/consistency is the concern.
 
 ## 9. API design
 
-| GET /balance | | amount | | POST /transfer | to, amount | transfer id | | POST /topup | amount | |
+| GET /balance |
+| amount |
+| POST |/transfer | to, amount | transfer id | | POST /topup | amount | |
 
 
 ## 10. Data model
