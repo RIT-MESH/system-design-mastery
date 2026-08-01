@@ -51,3 +51,11 @@ A fourth repository, `ByteByteGoHq/system-design-101`, was also studied during p
 ## Limitations
 
 This is a technical similarity and attribution review, not a legal opinion. It included repository-wide local scans, targeted exact-phrase comparison, internal duplicate detection, and license-file checks. It did not include a commercial plagiarism database, full semantic comparison of every paragraph against the entire public web, or pixel-level comparison against every external diagram.
+
+## Boilerplate removal (2026-08-01)
+
+An automated expansion pass had added identical paragraphs to sections 1-30 across all case studies. These were detected by `tools/check_repeated_prose.py` (58 repeated paragraphs in >3 files). All 1848 boilerplate paragraphs were removed. Case studies now contain only their original unique per-study content.
+
+## Automated checks disclaimer
+
+Automated checks reduce the risk of accidental overlap but do not constitute a legal determination. The repository maintains source attribution and accepts corrections when overlap is identified.

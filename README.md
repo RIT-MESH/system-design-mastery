@@ -2,7 +2,7 @@
 
 **A graded, original curriculum for learning system design — from absolute prerequisites to extreme-scale architecture.**
 
-System Design Mastery is a self-contained, vendor-neutral reference and learning path that teaches how to design distributed systems in depth. It is organized as eleven progressive levels (Level 0 through Level 10), from the computing and networking fundamentals a beginner needs before "system design" means anything concrete, through distributed-systems theory, reliability, security, and observability, up to the patterns and constraints that only appear at billion-user, petabyte, and globally-distributed scale. Content was drafted independently and reviewed using exact-match and similarity checks against the listed reference repositories. The curriculum, explanations, capacity estimates, failure scenarios, and Mermaid diagrams in this repository are original works. See [ACKNOWLEDGEMENTS.md](ACKNOWLEDGEMENTS.md) for license status and [PROVENANCE.md](PROVENANCE.md) for the originality review process.
+System Design Mastery is a self-contained, vendor-neutral reference and learning path that teaches how to design distributed systems in depth. It is organized as eleven progressive levels (Level 0 through Level 10), from the computing and networking fundamentals a beginner needs before "system design" means anything concrete, through distributed-systems theory, reliability, security, and observability, up to the patterns and constraints that only appear at billion-user, petabyte, and globally-distributed scale. The repository was independently drafted and is reviewed using exact-match, similarity, attribution, and diagram-duplication checks. Confirmed overlap is rewritten or attributed. Standard algorithms, protocol names, architecture patterns, and common technical terminology are not claimed as proprietary. See [ACKNOWLEDGEMENTS.md](ACKNOWLEDGEMENTS.md) for license status and [PROVENANCE.md](PROVENANCE.md) for the review process.
 
 The repository is deliberately a curriculum rather than a list of interview answers. Each chapter is independently navigable and follows a consistent structure — learning objectives, examples, trade-offs, a "common mistakes" section, failure modes, review questions, and further reading with citations — so a reader can open any chapter and learn the topic in context. The conceptual material is reinforced by practical components: capacity-estimation and availability worksheets, small Python simulations of real mechanisms (consistent hashing, token-bucket rate limiting, retry with jitter, and a circuit-breaker/failure-injection model), reusable templates (case study, architecture decision record, and design/security/reliability review checklists), and an interview framework with a timed mock-interview script. Sixty-six case studies apply the method end to end, each written to a fixed thirty-section template.
 
@@ -538,3 +538,20 @@ Reuse therefore requires attribution under CC BY 4.0 for the content and the MIT
 ---
 
 *System Design Mastery — an original, graded curriculum from prerequisites to extreme scale. Authored by [RIT-MESH](https://github.com/RIT-MESH).*
+
+<!-- BEGIN GENERATED REPOSITORY STATS -->
+| Metric | Value |
+|--------|-------|
+| Total files | 509 |
+| Markdown files | 208 |
+| Python files | 15 |
+| Standalone .mmd files | 272 |
+| Inline Mermaid blocks | 328 |
+| Case-study directories | 6 |
+| Case-study Markdown files | 60 |
+| Median case-study word count | 734 |
+| Min case-study word count | 642 |
+| Max case-study word count | 2482 |
+| Complete case studies | 60 |
+| Draft case studies | 0 |
+<!-- END GENERATED REPOSITORY STATS -->
