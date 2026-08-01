@@ -1,41 +1,32 @@
-﻿# Acknowledgements
+# Acknowledgements
 
-This repository was created after studying the following public system-design repositories.
-They were valuable for understanding topic coverage and common gaps. **No wording,
-structure, examples, interview answers, or diagrams were copied or adapted from them.**
-The curriculum, explanations, capacity estimates, failure scenarios, and Mermaid diagrams
-in this repository are original works.
+This project was informed by several public system-design repositories as topic-discovery references. Their text, diagrams, examples, and solution structures were not intentionally reproduced. Technical chapters rely primarily on RFCs, standards, academic papers, and official documentation. License status is recorded only where confirmed from the source repository; repositories without a confirmed license are treated as reference-only.
 
 ## Studied repositories
 
-- **donnemartin/system-design-primer** — MIT (code) / CC-BY-SA 4.0 (content noted). Useful for
-  understanding the breadth of interview-style questions and the value of back-of-envelope
-  estimation. Referenced as a topic-coverage guide only.
-- **DovAmir/awesome-design-patterns** — CC0 1.0 (public domain). A broad taxonomy of design
-  patterns used to seed our terminology and ensure we did not miss a pattern family.
-- **Sairyss/system-design-patterns** — MIT. Useful for surveying advanced distributed-systems
-  and architecture patterns; informed which advanced topics belong in Levels 4–5.
-- **ByteByteGoHq/system-design-101** — MIT. Useful for appreciating how beginner-accessible
-  visual explanations are structured; informed our commitment to original Mermaid diagrams
-  for the same accessibility without reusing their images.
+- **donnemartin/system-design-primer** — Creative Commons Attribution 4.0 International (CC BY 4.0). Used as a topic-coverage guide to understand the breadth of interview-style questions and the value of back-of-envelope estimation. Referenced for topic discovery only; no text, examples, or diagrams were adapted.
+- **DovAmir/awesome-design-patterns** — No license file was confirmed during review. Treated as **reference-only; all rights reserved by default**. Used as a taxonomy reference to ensure pattern-family coverage; no content was adapted.
+- **Sairyss/system-design-patterns** — No license file was confirmed during review. Treated as **reference-only; all rights reserved by default**. Used to survey advanced distributed-systems and architecture patterns; no content was adapted.
+- **ByteByteGoHq/system-design-101** — No license file was confirmed during review. Treated as **reference-only; all rights reserved by default**. Used to appreciate how beginner-accessible visual explanations are structured; no images or text were adapted.
 
-## How we used them
+## How they were used
 
-- We read them to map the topic space and identify gaps (see
-  [`work/RESEARCH-REPORT.md`](../work/RESEARCH-REPORT.md)).
-- We did not reproduce their text, tables, or figures.
-- Where a concept they cover is universal (e.g., the CAP theorem), we explain it independently
-  and cite primary sources (the original paper and RFCs) in [SOURCES.md](SOURCES.md).
+These repositories were read to map the topic space and identify gaps. Content was drafted independently and reviewed using exact-match and similarity checks against the listed reference repositories. Any identified overlap will be corrected and attributed.
 
-## Primary sources we rely on instead
+## Primary sources
 
-We deliberately lean on primary, authoritative sources for factual claims rather than on the
-repositories above. These include RFCs, academic papers, official cloud/database/CNCF
-documentation, and reputable engineering blogs — all cited with stable IDs in
-[SOURCES.md](SOURCES.md).
+Technical chapters cite primary, authoritative sources for factual claims rather than the repositories above. These include RFCs, academic papers, official cloud/database/CNCF documentation, and reputable engineering blogs — all cited with stable IDs in [SOURCES.md](SOURCES.md).
+
+## Originality review process
+
+The repository underwent a plagiarism and attribution review that included:
+- Repository-wide targeted exact-phrase scans against distinctive canonical phrases from the reference repositories (no matches found).
+- Internal duplicate detection for Mermaid diagram blocks (no exact duplicates found).
+- License-file verification for each reference repository.
+- A documented recommendation to run a broader external similarity service before commercial publication.
+
+See [PROVENANCE.md](PROVENANCE.md) for the full review process and recommendations.
 
 ## Thanks
 
-Thanks to the maintainers of the repositories above for making system-design education more
-accessible, and to the authors of the primary sources (RFC editors, paper authors, and
-engineering blog authors) whose work underpins the technical accuracy of this curriculum.
+Thanks to the maintainers of the repositories above for making system-design education more accessible, and to the authors of the primary sources (RFC editors, paper authors, and engineering blog authors) whose work underpins the technical accuracy of this curriculum.

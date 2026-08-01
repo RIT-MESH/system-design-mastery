@@ -1,4 +1,4 @@
-﻿# Contributing to system-design-mastery
+# Contributing to system-design-mastery
 
 Thank you for considering a contribution. This repository teaches system design, so the
 quality, accuracy, and **originality** of every explanation matter more than volume. Please
@@ -105,3 +105,15 @@ By contributing you agree your content is licensed under CC BY 4.0 (prose/diagra
 
 All interactions are governed by the [Code of Conduct](CODE_OF_CONDUCT.md). Be respectful,
 constructive, and assume good intent.
+
+## Overlap-review checklist (for every content PR)
+
+Before merging a content change, verify:
+
+- [ ] No distinctive phrases from the reference repositories (see [PROVENANCE.md](PROVENANCE.md) for the phrase list).
+- [ ] Diagrams are drawn from the chapter's own requirements, not from a reference figure.
+- [ ] Examples and capacity estimates are original to this repository.
+- [ ] Primary sources (RFCs, papers, official docs) are cited via SOURCES.md IDs.
+- [ ] The change does not reproduce the structure, ordering, or pros/cons layout of a reference repository.
+- [ ] If any overlap is identified, it is corrected and attributed before merge.
+
