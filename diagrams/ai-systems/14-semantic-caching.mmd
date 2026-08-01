@@ -1,0 +1,10 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Req[Request] --> Norm[Prompt normalization]
+  Norm --> Embed[Embed query]
+  Embed --> Search[Semantic cache lookup]
+  Search -->|hit + safe| Return[Cached response]
+  Search -->|miss or unsafe| LLM[Call LLM]
+  LLM --> Store[Store in cache]
+  Store --> Return2[Response]
+  Safety[Safety checks: same user, same tenant, not time-sensitive] --> Search

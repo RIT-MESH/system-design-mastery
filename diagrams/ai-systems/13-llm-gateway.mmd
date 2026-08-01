@@ -1,0 +1,13 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Client --> Auth[Auth + API key]
+  Auth --> Budget[Token budget + rate limit]
+  Budget --> Route[Router: complexity or cost or latency or capability]
+  Route --> P1[Provider 1]
+  Route --> P2[Provider 2]
+  Route --> Self[Self-hosted]
+  P1 -.fail.-> Failover[Fallback model]
+  Failover --> P2
+  P1 & P2 & Self --> Filter[Content filter + PII redaction]
+  Filter --> Log[Request and response log + audit]
+  Log --> Client

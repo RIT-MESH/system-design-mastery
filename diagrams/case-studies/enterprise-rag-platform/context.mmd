@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Client --> GW[AI gateway: auth + budget]
+  GW --> Cache[Semantic cache]
+  Cache -.hit.-> Resp[Answer]
+  Cache -.miss.-> Ret[Permission-aware hybrid retrieve]
+  Ret --> Rerank[Reranker]
+  Rerank --> LLM[Generate + cite]
+  LLM --> Store[Cache answer]
+  LLM --> Resp
+  Ingest[Ingest] --> Chunk[Chunk + embed + ACL] --> VDB[(Vector DB)]

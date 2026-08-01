@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Golden[Golden set] & Adv[Adversarial set] --> Eval[Evaluation run]
+  Eval --> Ret[Retrieval metrics]
+  Eval --> Gen[Generation metrics]
+  Eval --> Ops[Ops metrics]
+  Eval --> Safe[Safety metrics]
+  Ret & Gen & Ops & Safe --> Gates{Release gates}
+  Gates -->|pass| Release[Release]
+  Gates -->|fail| Block[Block or rollback]
+  Sample[Live sample] -.continuous.-> Eval

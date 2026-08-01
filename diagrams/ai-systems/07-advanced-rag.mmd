@@ -1,0 +1,13 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Q[User query] --> T[Query transform: hyde or sub-questions]
+  T --> Route[Adaptive router]
+  Route --> V[Vector]
+  Route --> K[Keyword]
+  Route --> G[GraphRAG]
+  Route --> F[Federated]
+  V & K & G & F --> Perm[Permission filter]
+  Perm --> Ctx[Context]
+  Ctx --> LLM[Generate]
+  LLM --> Ground[Grounding check]
+  Ground --> Ans[Answer + citations]

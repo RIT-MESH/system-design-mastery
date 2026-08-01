@@ -214,11 +214,11 @@ sections and original Mermaid diagrams.
 | ✅ | AI Milestone 2 chapters: 03-vector-databases, 04-chunking-ingestion, 05-hybrid-search-reranking, 06-basic-rag |
 | ✅ | `templates/ai/`: rag-adr, ai-threat-model, evaluation-plan, prompt-change-review, ai-production-readiness (5 templates) |
 | ✅ | `examples/ai/`: token_cost.py, vram.py (2 runnable tools) |
-| 🔲 | AI Milestone 3 — Advanced RAG: query transformation, adaptive retrieval, GraphRAG, federated retrieval, permission-aware retrieval, grounding and verification |
-| 🔲 | AI Milestone 4 — Agentic systems: tool calling, workflow state, agent memory, ReAct, planner-executor, multi-agent, human approvals |
-| 🔲 | AI Milestone 5 — Security and evaluation: prompt injection, data poisoning, RBAC-aware RAG, PII, LLM tracing, RAG/agent evaluation, cost observability |
-| 🔲 | AI Milestone 6 — Model serving: inference engines, continuous batching, KV caching, quantization, distributed/multi-GPU inference, autoscaling |
-| 🔲 | AI Milestone 7 — Extreme scale: multi-region serving, billion-chunk retrieval, multi-LoRA, GPU scheduling, enterprise AI gateways, large-scale evaluation, AI governance |
+| ✅ | AI Milestone 3 — Advanced RAG: query transformation, adaptive retrieval, GraphRAG, federated retrieval, permission-aware retrieval, grounding and verification |
+| ✅ | AI Milestone 4 — Agentic systems: tool calling, workflow state, agent memory, ReAct, planner-executor, multi-agent, human approvals |
+| ✅ | AI Milestone 5 — Security and evaluation: prompt injection, data poisoning, RBAC-aware RAG, PII, LLM tracing, RAG/agent evaluation, cost observability |
+| ✅ | AI Milestone 6 — Model serving: inference engines, continuous batching, KV caching, quantization, distributed/multi-GPU inference, autoscaling |
+| ✅ | AI Milestone 7 — Extreme scale: multi-region serving, billion-chunk retrieval, multi-LoRA, GPU scheduling, enterprise AI gateways, large-scale evaluation, AI governance |
 | 🔲 | AI Milestone 8 — Case studies and tools: enterprise RAG platform, autonomous support-agent team, LLM API gateway, chunking simulator, model-routing simulator, security and readiness templates |
 | 🔲 | `simulations/ai/` and `simulations/network/` interactive simulation sets |
 

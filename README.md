@@ -397,44 +397,51 @@ AI should assist network engineers, not bypass operational controls. Use AI for 
 
 ## AI Systems Track
 
-> **Track:** AI Systems (Milestones 1–2 complete; Milestones 3–8 planned). First-class coverage of modern AI system architecture: LLM applications, RAG, agentic workflows, model serving, evaluation, security, and cost control. Vendor-neutral; vendor products appear only as implementation examples.
+> **Track:** AI Systems (complete). Fifteen chapters covering modern AI system architecture from fundamentals to extreme scale: LLM applications, RAG, agentic workflows, model serving, evaluation, security, and cost control. Vendor-neutral; vendor products appear only as implementation examples.
 
 ### Chapters ([`docs/ai-systems/`](docs/ai-systems/))
 
-Seven chapters covering AI Milestones 1–2, each with learning objectives, overview, architecture diagram, capacity/latency/cost considerations, security risks, evaluation methodology, scaling, trade-offs, and a practical exercise:
+| # | Chapter | Topic | Status |
+|:-:|---------|-------|:------:|
+| 00 | [AI and ML Fundamentals](docs/ai-systems/00-ai-ml-fundamentals.md) | AI/ML/DL/generative, foundation models, LLMs, tokens, embeddings, context windows, inference vs training, sampling, structured output, tool calling, latency metrics | Complete |
+| 01 | [AI Hardware](docs/ai-systems/01-ai-hardware.md) | CPU/GPU/TPU, tensor cores, VRAM, PCIe/NVLink, memory- vs compute-bound, quantization (FP16/BF16/INT8/INT4) | Complete |
+| 02 | [AI Capacity Planning](docs/ai-systems/02-ai-capacity-planning.md) | Token-based vs request-based planning, GPU capacity, KV cache, TTFT/TPOT, cost | Complete |
+| 03 | [Vector Databases](docs/ai-systems/03-vector-databases.md) | Dense/sparse, ANN (HNSW/IVF/PQ), similarity, sharding, re-indexing, multi-tenancy, hybrid | Complete |
+| 04 | [Chunking and Ingestion](docs/ai-systems/04-chunking-ingestion.md) | Chunking strategies, embeddings, ingestion pipeline, metadata | Complete |
+| 05 | [Hybrid Search and Reranking](docs/ai-systems/05-hybrid-search-reranking.md) | Hybrid (keyword+vector), reranking, metadata filtering | Complete |
+| 06 | [Basic RAG](docs/ai-systems/06-basic-rag.md) | Retrieve-then-generate, grounding, citations, evaluation | Complete |
+| 07 | [Advanced RAG](docs/ai-systems/07-advanced-rag.md) | Query transformation, adaptive retrieval, GraphRAG, federated, permission-aware, grounding verification | Complete |
+| 08 | [Agentic Systems](docs/ai-systems/08-agentic-systems.md) | Tool calling, ReAct, planner-executor, multi-agent, memory, human approvals, policy gateway | Complete |
+| 09 | [AI Security](docs/ai-systems/09-ai-security.md) | Prompt injection, data poisoning, RBAC-aware RAG, PII protection, AI safety gateway | Complete |
+| 10 | [AI Evaluation](docs/ai-systems/10-ai-evaluation.md) | Retrieval/generation/agent/cost/safety metrics, release gates, rollback triggers, adversarial sets | Complete |
+| 11 | [Model Serving](docs/ai-systems/11-model-serving.md) | Continuous batching, KV caching, quantization, distributed/multi-GPU inference, autoscaling | Complete |
+| 12 | [AI at Extreme Scale](docs/ai-systems/12-ai-extreme-scale.md) | Multi-region serving, billion-chunk retrieval, multi-LoRA, GPU scheduling, enterprise AI gateways, AI governance | Complete |
+| 13 | [LLM Gateways](docs/ai-systems/13-llm-gateway.md) | Unified model API, complexity/cost/latency/capability routing, token-based quotas, failover, content filtering, audit | Complete |
+| 14 | [Semantic Caching](docs/ai-systems/14-semantic-caching.md) | Embedding-based cache lookup, similarity thresholds, safety risks (financial, medical, user-specific, time-sensitive) | Complete |
 
-| Chapter | Milestone | Status |
-|---------|:---------:|:------:|
-| [AI and ML Fundamentals](docs/ai-systems/00-ai-ml-fundamentals.md) | M1 Foundations | Complete |
-| [AI Hardware](docs/ai-systems/01-ai-hardware.md) | M1 Foundations | Complete |
-| [AI Capacity Planning](docs/ai-systems/02-ai-capacity-planning.md) | M1 Foundations | Complete |
-| [Vector Databases](docs/ai-systems/03-vector-databases.md) | M2 Retrieval | Complete |
-| [Chunking and Ingestion](docs/ai-systems/04-chunking-ingestion.md) | M2 Retrieval | Complete |
-| [Hybrid Search and Reranking](docs/ai-systems/05-hybrid-search-reranking.md) | M2 Retrieval | Complete |
-| [Basic RAG](docs/ai-systems/06-basic-rag.md) | M2 Retrieval | Complete |
+### AI Case Studies ([`case-studies/ai-systems/`](case-studies/ai-systems/))
+
+| Case study | Problem | Status |
+|------------|---------|:------:|
+| [Enterprise RAG Platform](case-studies/ai-systems/enterprise-rag-platform.md) | Multi-tenant RAG, permission-aware retrieval, per-tenant token budgets, semantic caching, multi-model routing, AI governance | Complete |
+| [Autonomous Support-Agent Team](case-studies/ai-systems/autonomous-support-agent-team.md) | Multi-agent ticket handling (triage, research, resolution, review), supervisor coordination, policy gateway, human approval | Complete |
+| [LLM API Gateway](case-studies/ai-systems/llm-api-gateway.md) | Unified model API across providers, complexity/cost/latency routing, token budgets, failover, PII redaction, audit | Complete |
 
 ### Templates ([`templates/ai/`](templates/ai/))
 
-- [RAG ADR](templates/ai/rag-adr.md) — RAG architecture decision record
-- [AI Threat Model](templates/ai/ai-threat-model.md) — STRIDE-for-AI threat model
-- [Evaluation Plan](templates/ai/evaluation-plan.md) — AI evaluation gates and metrics
-- [Prompt Change Review](templates/ai/prompt-change-review.md) — prompt/version change review
-- [AI Production Readiness](templates/ai/ai-production-readiness.md) — pre-production checklist
+- [RAG ADR](templates/ai/rag-adr.md) - RAG architecture decision record
+- [AI Threat Model](templates/ai/ai-threat-model.md) - STRIDE-for-AI threat model
+- [Evaluation Plan](templates/ai/evaluation-plan.md) - AI evaluation gates and metrics
+- [Prompt Change Review](templates/ai/prompt-change-review.md) - prompt/version change review
+- [AI Production Readiness](templates/ai/ai-production-readiness.md) - pre-production checklist
 
 ### Tools ([`examples/ai/`](examples/ai/))
 
-Two runnable Python tools: `token_cost.py` (token-cost calculator showing why long-context tails dominate cost) and `vram.py` (VRAM calculator for model + KV-cache fit across precision).
+Four runnable Python tools: `token_cost.py` (token-cost calculator), `vram.py` (VRAM calculator), `chunking_simulator.py` (chunk-size/overlap trade-off simulator), `model_routing_simulator.py` (multi-model routing by task type and cost).
 
-### Planned AI milestones
+### Design principle
 
-- **AI Milestone 3** — Advanced RAG: query transformation, adaptive retrieval, GraphRAG, federated retrieval, permission-aware retrieval, grounding and verification
-- **AI Milestone 4** — Agentic systems: tool calling, workflow state, agent memory, ReAct, planner-executor, multi-agent, human approvals
-- **AI Milestone 5** — Security and evaluation: prompt injection, data poisoning, RBAC-aware RAG, PII, LLM tracing, RAG/agent evaluation, cost observability
-- **AI Milestone 6** — Model serving: inference engines, continuous batching, KV caching, quantization, distributed/multi-GPU inference, autoscaling
-- **AI Milestone 7** — Extreme scale: multi-region serving, billion-chunk retrieval, multi-LoRA, GPU scheduling, enterprise AI gateways, large-scale evaluation, AI governance
-- **AI Milestone 8** — Case studies and tools: enterprise RAG platform, autonomous support-agent team, LLM API gateway, chunking simulator, model-routing simulator, security and readiness templates
-
-See [BACKLOG.md](BACKLOG.md) for per-item status.
+AI should assist, not bypass operational controls. Use AI for summarization, classification, retrieval, correlation, explanation, recommendation, and report generation. Use deterministic systems and human approval for firmware upgrades, routing changes, firewall changes, VPN changes, device reboots, configuration deployment, security-policy modification, and destructive or irreversible operations.
 
 ## Progress and Project Status
 

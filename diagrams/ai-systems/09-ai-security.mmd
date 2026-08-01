@@ -1,0 +1,12 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Input --> Inject[Prompt injection check]
+  RAG[Retrieval] --> ACL[ACL filter]
+  ACL --> LLM[Generate]
+  LLM --> PII[PII redaction]
+  PII --> Out[Output]
+  Out --> Policy[Policy gateway]
+  Policy -->|low risk| Exec[Execute]
+  Policy -->|high risk| Approve[Approval]
+  Poison[Data poisoning] -.integrity check.-> RAG
+  All --> Audit[Audit log]

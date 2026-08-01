@@ -1,0 +1,13 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Ticket --> Triage[Triage agent]
+  Triage --> Sup[Supervisor]
+  Sup --> Research[Research agent: RAG]
+  Research --> Resolution[Resolution agent]
+  Resolution --> Review[Review agent]
+  Review --> Sup
+  Sup -->|low risk| Close[Close ticket]
+  Sup -->|high risk| Human[Human approval]
+  Human --> Close
+  All --> Audit[Audit log]
+  Policy[Policy gateway] -.guards.-> Resolution

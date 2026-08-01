@@ -1,0 +1,12 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  User --> GW[Enterprise AI gateway]
+  GW --> Route[Router: cost or latency or capability]
+  Route --> R1[Region 1]
+  Route --> R2[Region 2]
+  R1 & R2 --> Model[Multi-LoRA serving]
+  R1 & R2 --> VDB[Billion-chunk sharded VDB]
+  Sched[GPU scheduler] --> Train[Gang: training]
+  Sched --> Serve[Reserved: serving]
+  Sched --> Batch[Backfill: batch]
+  GW --> Gov[AI governance: policy and audit]

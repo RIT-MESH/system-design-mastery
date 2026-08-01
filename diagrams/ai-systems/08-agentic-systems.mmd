@@ -1,0 +1,14 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Goal --> Agent[Agent: ReAct loop]
+  Agent --> Think[Reason]
+  Think --> Act[Choose tool]
+  Act --> Tools[Tool registry]
+  Tools --> Obs[Observe result]
+  Obs --> Think
+  Agent --> Mem[Memory: short and long]
+  Agent --> Policy[Policy gateway]
+  Policy -->|low risk| Exec[Execute]
+  Policy -->|high risk| Approve[Approval workflow]
+  Supervisor --> Agent2[Specialist agent]
+  Agent2 --> Supervisor
