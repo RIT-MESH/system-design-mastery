@@ -21,8 +21,8 @@
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  D["Deliver"] --> A1["at-most-once<br/>(may drop)"]
-  D --> A2["at-least-once<br/>(may duplicate)"]
+  D["Deliver"] --> A1["at-most-once<br/> - may drop"]
+  D --> A2["at-least-once<br/> - may duplicate"]
   A2 --> I["idempotent consumer<br/>+ transactional output"]
   I --> E["effectively-once"]
 ```

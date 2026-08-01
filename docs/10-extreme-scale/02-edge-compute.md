@@ -17,8 +17,8 @@ and lets the origin stay out of the hot path. Edge functions are short-lived, st
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  User --> Edge["Edge compute<br/>(personalize, auth, transform)"]
-  Edge -->|"cache + compute"| Resp["response to user (fast)"]
+  User --> Edge["Edge compute<br/> - personalize, auth, transform"]
+  Edge -->|"cache + compute"| Resp["response to user - fast"]
   Edge -.rare miss.-> Origin["Origin / regional"]
   Edge -.regional state.-> State["regional KV / small store"]
 ```

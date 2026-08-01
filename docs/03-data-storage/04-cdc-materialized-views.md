@@ -17,7 +17,7 @@ not-atomic: one write can fail, leaving the stores diverged silently.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  App["Application"] --> DB[("Primary DB<br/>(source of truth)")]
+  App["Application"] --> DB["Primary DB<br/> - source of truth"]
   DB -->|"CDC: tail the log"| Stream["Change stream / outbox"]
   Stream --> Search["Search index"]
   Stream --> Cache["Cache invalidate / populate"]
@@ -47,8 +47,8 @@ as access decays:
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Hot["Hot<br/>(SSD/in-mem, days)"] -->|"age"| Warm["Warm<br/>(standard, weeks-months)"]
-  Warm -->|"age"| Cold["Cold<br/>(object/archive, years)"]
+  Hot["Hot<br/> - SSD/in-mem, days"] -->|"age"| Warm["Warm<br/> - standard, weeks-months"]
+  Warm -->|"age"| Cold["Cold<br/> - object/archive, years"]
   Cold -->|"rare recall"| Warm
   Policy["Lifecycle rules<br/>+ retention + deletion"] -.drives.-> Hot
   Policy -.drives.-> Warm

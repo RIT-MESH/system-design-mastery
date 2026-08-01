@@ -16,7 +16,7 @@ with data — the antidote to the ""network costs years"" lesson from Level 0.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Input["Input partitions<br/>(data-local)"] --> Map["Map tasks"]
+  Input["Input partitions<br/> - data-local"] --> Map["Map tasks"]
   Map --> Shuffle["Shuffle by key"]
   Shuffle --> Reduce["Reduce tasks"]
   Reduce --> Output["Output"]

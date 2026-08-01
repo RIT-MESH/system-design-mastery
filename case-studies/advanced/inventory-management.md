@@ -54,7 +54,7 @@ stock(warehouse, sku, available, reserved); reservations(id, wh, sku, qty, statu
 %% created-for: system-design-mastery
 flowchart LR
   Order --> Reserve[Reserve svc]
-  Reserve --> Stock[(Stock store, atomic)]
+  Reserve --> Stock[Stock store, atomic]
   Reserve -->|rejected| Order
   Transfer[Transfer svc] --> Stock
   Stock --> Reconcile[Reconcile vs physical]

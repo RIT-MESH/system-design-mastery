@@ -4,5 +4,5 @@ flowchart LR
   S1["Stage 1: single GPU replica,<br/>no batching"]
   S1 -->|"throughput"| S2["Stage 2: batching + autoscaling<br/>+ quota"]
   S2 -->|"cost"| S3["Stage 3: prefix KV caching<br/>+ response caching"]
-  S3 -->|"many models"| S4["Stage 4: quality/cost routing<br/>(small vs flagship)"]
-  S4 -->|"RAG"| S5["Stage 5: retrieval-augmented<br/>(vector search + context)"]
+  S3 -->|"many models"| S4["Stage 4: quality/cost routing<br/> - small vs flagship"]
+  S4 -->|"RAG"| S5["Stage 5: retrieval-augmented<br/> - vector search + context"]

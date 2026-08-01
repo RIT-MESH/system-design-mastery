@@ -17,8 +17,8 @@ avoids the cross-region write-latency of multi-region-all data, at the cost of
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  EUUser["EU user"] --> EURegion["EU region (home for EU data)"]
-  USUser["US user"] --> USRegion["US region (home for US data)"]
+  EUUser["EU user"] --> EURegion["EU region - home for EU data"]
+  USUser["US user"] --> USRegion["US region - home for US data"]
   EUUser -.travels to US.-> USRegion
   USRegion -.cross-region read.-> EURegion
 ```

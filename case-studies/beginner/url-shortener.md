@@ -102,14 +102,14 @@ scales further. We pick a sharded key-value store with the short code as the par
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Client --> CDN["Edge cache / CDN<br/>(short_code -> long_url cached)"]
+  Client --> CDN["Edge cache / CDN<br/> - short_code -> long_url cached"]
   CDN -.miss.-> GW["API gateway<br/>rate-limit + auth"]
-  GW --> Shorten["Shorten service<br/>(stateless)"]
-  GW --> Resolve["Resolve service<br/>(stateless)"]
+  GW --> Shorten["Shorten service<br/> - stateless"]
+  GW --> Resolve["Resolve service<br/> - stateless"]
   Shorten --> IDS["ID / code generator"]
-  Shorten --> DB[("KV store<br/>sharded by short_code")]
+  Shorten --> DB["KV store<br/>sharded by short_code"]
   Resolve --> DB
-  Resolve --> Cache[("Distributed cache")]
+  Resolve --> Cache["Distributed cache"]
   Cache --> DB
   Shorten --> Cache
   AnalyticsQ["Analytics queue"] <-. redirect event .-> Resolve
@@ -284,7 +284,7 @@ flowchart LR
   S1 -->|"reads grow"| S2["Stage 2: add read replicas<br/>+ sharded KV by code"]
   S2 -->|"global traffic"| S3["Stage 3: multi-region reads<br/>cross-region replication"]
   S3 -->|"viral hot keys"| S4["Stage 4: edge coalescing<br/>+ stale-while-revalidate"]
-  S4 -->|"writes grow"| S5["Stage 5: multi-region writes<br/>(coordination for uniqueness)"]
+  S4 -->|"writes grow"| S5["Stage 5: multi-region writes<br/> - coordination for uniqueness"]
 ```
 
 - Stage 1: single region, 1 KV shard, cache, CDN. Handles v1 easily.

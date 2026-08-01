@@ -17,7 +17,7 @@ global system, a CDN is often the highest-leverage single decision.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  U1["User, far"] --> Edge1["Edge POP (near user)"]
+  U1["User, far"] --> Edge1["Edge POP - near user"]
   U2["User, near origin"] --> Edge2["Edge POP"]
   Edge1 -.miss.-> Origin["Origin"]
   Edge2 -.hit.-> H["served from edge"]

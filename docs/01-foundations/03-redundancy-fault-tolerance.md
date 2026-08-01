@@ -22,8 +22,8 @@ have a SPOF to address.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Client --> LB["LB (SPOF)"]
-  LB --> DB["DB primary (SPOF)"]
+  Client --> LB["LB - SPOF"]
+  LB --> DB["DB primary - SPOF"]
   DB -.one failure kills all.-> Down["Outage"]
 ```
 

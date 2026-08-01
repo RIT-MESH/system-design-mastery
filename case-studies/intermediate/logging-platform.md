@@ -48,10 +48,10 @@ cold, and in a hot search index for recent. Fields: service, severity, ts, messa
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Src["Services"] --> Ingest["Ingest (batched, LZ4)"]
+  Src["Services"] --> Ingest["Ingest - batched, LZ4"]
   Ingest --> Stream["Partitioned stream"]
-  Stream --> Hot["Hot search index (recent)"]
-  Stream --> Tier["Cold tier (object storage, partitioned)"]
+  Stream --> Hot["Hot search index - recent"]
+  Stream --> Tier["Cold tier - object storage, partitioned"]
   Search["Search API"] --> Hot
   Search --> Tier
 ```

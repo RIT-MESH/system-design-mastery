@@ -65,8 +65,8 @@ For bursty writes, put a queue between producers and workers so a burst is absor
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  P["Producers (burst)"] --> Q["Queue<br/>(absorbs burst)"]
-  Q --> W["Workers<br/>(steady rate)"]
+  P["Producers - burst"] --> Q["Queue<br/> - absorbs burst"]
+  Q --> W["Workers<br/> - steady rate"]
   Q -.backpressure.-> P
 ```
 

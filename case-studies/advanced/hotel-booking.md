@@ -52,7 +52,7 @@ inventory(hotel, room, date, status); holds(id, hotel, room, dates, exp); bookin
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  User --> Search[Search svc] --> Inv[Inventory (date-range)]
+  User --> Search[Search svc] --> Inv[Inventory - date-range]
   Search --> Results
   User --> Hold[Hold svc] --> Inv
   Hold --> Expire[Hold expiry]

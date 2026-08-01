@@ -28,7 +28,7 @@ degradation** so no single component sees the whole.
 %% created-for: system-design-mastery
 flowchart TB
   Billion["Billion users / PB-EB"]
-  Billion --> Shards["massive sharding<br/>(no whole-system view)"]
+  Billion --> Shards["massive sharding<br/> - no whole-system view"]
   Billion --> Tier["tiered + lifecycle storage"]
   Billion --> Multi["multi-region + edge"]
   Billion --> Bulk["bulkhead every layer"]

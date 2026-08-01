@@ -51,8 +51,8 @@ repos(id, objects, refs); metadata: users, PRs, issues, comments, webhooks. Git 
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Dev --> Trans[Git transport (ssh/http)]
-  Trans --> Repo[Repo storage (objects, refs)]
+  Dev --> Trans[Git transport - ssh/http]
+  Trans --> Repo[Repo storage - objects, refs]
   Dev --> API[API: PRs/issues]
   API --> Meta[Metadata DB]
   Repo --> CDN/Cache

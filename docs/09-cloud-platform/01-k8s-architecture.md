@@ -19,7 +19,7 @@
 %% created-for: system-design-mastery
 flowchart LR
   subgraph CP["Control plane"]
-    API["API server"] --> Etcd[("etcd (Raft)")]
+    API["API server"] --> Etcd["etcd - Raft"]
     API --> Sched["Scheduler"]
     API --> Ctrl["Controllers"]
   end

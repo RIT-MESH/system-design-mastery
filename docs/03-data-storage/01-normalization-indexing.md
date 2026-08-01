@@ -22,9 +22,9 @@ path. It optimizes for read latency and scale. The cost: writes must update mult
 %% created-for: system-design-mastery
 flowchart LR
   Write["Write"] --> Norm["Normalized: update one fact"]
-  Norm --> JoinRead["Read needs joins (slow at scale)"]
+  Norm --> JoinRead["Read needs joins - slow at scale"]
   Write2["Write"] --> Denorm["Denormalized: update N copies"]
-  Denorm --> FastRead["Read: no join (fast)"]
+  Denorm --> FastRead["Read: no join - fast"]
   Denorm -.inconsistency risk.-> Sync["sync copies"]
 ```
 
@@ -49,7 +49,7 @@ speeds reads but slows writes and uses storage.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Q["WHERE a=? AND b=? ORDER BY c"] --> Idx["Composite (a,b,c)"]
+  Q["WHERE a=? AND b=? ORDER BY c"] --> Idx["Composite - a,b,c"]
   Idx --> Probe["probe a, then b, scan c sorted"]
   Idx --> Cover["if all selected cols included -> covering index"]
 ```

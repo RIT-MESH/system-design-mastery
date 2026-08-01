@@ -55,9 +55,9 @@ accounts(user, balance); transfers(id, from, to, amount, status); ledger(id, acc
 flowchart LR
   User --> API[Wallet API]
   API --> Tx[Transfer tx: debit + credit]
-  Tx --> Ledger[(Append-only ledger)]
-  Tx --> Bal[Balance check (no negative)]
-  API --> Rails[Bank rails (topup/withdraw)]
+  Tx --> Ledger[Append-only ledger]
+  Tx --> Bal[Balance check - no negative]
+  API --> Rails[Bank rails - topup/withdraw]
   Ledger --> Reconcile[Reconcile vs bank]
 ```
 

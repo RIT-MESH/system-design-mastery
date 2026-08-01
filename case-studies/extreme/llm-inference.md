@@ -74,12 +74,12 @@ State is minimal and external; the GPU replicas are stateless compute.
 %% created-for: system-design-mastery
 flowchart LR
   Client --> GW["API gateway<br/>auth + quota + rate-limit"]
-  GW --> Router["Inference router<br/>(batch + cache-aware)"]
+  GW --> Router["Inference router<br/> - batch + cache-aware"]
   Router --> Cache["Prompt/KV cache"]
   Router --> Rep1["GPU replica 1"]
   Router --> Rep2["GPU replica 2"]
   Router --> RepN["GPU replica N"]
-  Sched["Autoscaler (queue depth)"] --> Reps["GPU fleet"]
+  Sched["Autoscaler - queue depth"] --> Reps["GPU fleet"]
   Reg["Model registry"] --> Reps
   Reps --> Telemetry["Telemetry / usage / cost"]
 ```
@@ -169,7 +169,7 @@ failover = re-route to another replica (and, if needed, scale up).
 flowchart LR
   F{"Failure"}
   F -->|"GPU crash"| Reroute["re-route in-flight; replace replica"]
-  F -->|"scarcity"| Four["429 (graceful), bounded queue"]
+  F -->|"scarcity"| Four["429 - graceful, bounded queue"]
   F -->|"cold start"| Floor["warm-floor replicas; scale up early"]
   F -->|"quota store down"| Open["fail-open with cap + reconcile"]
 ```
@@ -211,8 +211,8 @@ flowchart LR
   S1["Stage 1: single GPU replica,<br/>no batching"]
   S1 -->|"throughput"| S2["Stage 2: batching + autoscaling<br/>+ quota"]
   S2 -->|"cost"| S3["Stage 3: prefix KV caching<br/>+ response caching"]
-  S3 -->|"many models"| S4["Stage 4: quality/cost routing<br/>(small vs flagship)"]
-  S4 -->|"RAG"| S5["Stage 5: retrieval-augmented<br/>(vector search + context)"]
+  S3 -->|"many models"| S4["Stage 4: quality/cost routing<br/> - small vs flagship"]
+  S4 -->|"RAG"| S5["Stage 5: retrieval-augmented<br/> - vector search + context"]
 ```
 
 ## 25. Trade-offs

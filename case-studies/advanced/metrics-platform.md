@@ -52,7 +52,7 @@ Series keyed by (metric, label set); points are (ts, value). Stored columnar/gor
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Src[Agents] --> Ingest[Ingest (batched)] --> Stream[Stream] --> Raw[Raw store (recent)]
+  Src[Agents] --> Ingest[Ingest - batched] --> Stream[Stream] --> Raw[Raw store - recent]
   Stream --> Roll[Rollup workers] --> Cold[Downsampled store]
   Query[Query API] --> Raw & Cold
   Alert[Alert engine] --> Query

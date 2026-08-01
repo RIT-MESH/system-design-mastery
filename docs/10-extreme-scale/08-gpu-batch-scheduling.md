@@ -24,8 +24,8 @@ preemption/resume for long training jobs.
 %% created-for: system-design-mastery
 flowchart LR
   Train["Training jobs"] --> Q["Priority queue"]
-  Serv["Serving (latency)"] --> Alloc["GPU allocation"]
-  Batch["Batch (throughput)"] --> Q
+  Serv["Serving - latency"] --> Alloc["GPU allocation"]
+  Batch["Batch - throughput"] --> Q
   Q --> Sched["Scheduler: gang + backfill + preempt"]
   Sched --> Cluster["GPU cluster"]
   Cluster -.underutilized? backfill batch.-> Sched

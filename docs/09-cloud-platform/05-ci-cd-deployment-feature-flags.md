@@ -27,7 +27,7 @@ flowchart LR
   New["New version"]
   New --> Canary["Canary: 1% -> 5% -> 50% -> 100%"]
   Canary -->|"metrics ok"| Promote["promote"]
-  Canary -->|"metrics bad"| Rollback["rollback (shrink to 0%)"]
+  Canary -->|"metrics bad"| Rollback["rollback - shrink to 0%"]
   New2["Alt: blue-green"] --> Switch["switch traffic; keep old warm for rollback"]
 ```
 

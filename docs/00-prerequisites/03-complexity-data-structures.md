@@ -30,10 +30,10 @@ gains on small inputs.
 %% created-for: system-design-mastery
 flowchart LR
   subgraph Growth["Cost growth as n rises"]
-    O1["O(1) flat"] --> Olog["O(log n)"]
-    Olog --> On["O(n)"]
-    On --> Onlogn["O(n log n)"]
-    Onlogn --> On2["O(n^2)"]
+    O1["O - 1 flat"] --> Olog["O - log n"]
+    Olog --> On["O - n"]
+    On --> Onlogn["O - n log n"]
+    Onlogn --> On2["O - n^2"]
   end
 ```
 
@@ -63,10 +63,10 @@ distributed systems: design for the tail, not the mean.
 %% created-for: system-design-mastery
 flowchart TB
   Need{"What do you need?"}
-  Need -->|"key→value, unordered"| HM["Hash map (cache)"]
-  Need -->|"ordered / range scan"| Tree["B-tree (DB index)"]
-  Need -->|"priority ordering"| Heap["Heap (scheduler / top-k)"]
-  Need -->|"cheap absence check"| BF["Bloom filter (pre-filter disk reads)"]
+  Need -->|"key→value, unordered"| HM["Hash map - cache"]
+  Need -->|"ordered / range scan"| Tree["B-tree - DB index"]
+  Need -->|"priority ordering"| Heap["Heap - scheduler / top-k"]
+  Need -->|"cheap absence check"| BF["Bloom filter - pre-filter disk reads"]
 ```
 
 ## Why this matters for system design

@@ -52,7 +52,7 @@ vectors(id, embedding, metadata); index (HNSW/IVF/PQ) per shard; metadata index 
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Ingest --> Store[(Vector store)] --> Index[ANN index builder]
+  Ingest --> Store[Vector store] --> Index[ANN index builder]
   Query --> Search[ANN search] --> Index
   Search --> Filter[Metadata filter]
   Search --> TopK[top-k]

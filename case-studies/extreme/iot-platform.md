@@ -52,7 +52,7 @@ devices(id, twin state, last_seen); telemetry(device, ts, metrics); commands(dev
 %% created-for: system-design-mastery
 flowchart LR
   Dev[Devices, intermittent] --> GW[IoT gateway/broker]
-  GW --> Twin[(Digital twins)]
+  GW --> Twin[Digital twins]
   Twin --> Apps[Apps/analytics]
   Apps -.commands.-> GW -.delivered when online.-> Dev
   GW --> Tier[Telemetry -> cold tier]

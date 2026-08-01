@@ -56,7 +56,7 @@ files(id, owner, versions[]); metadata(id, name, parent, acl, version_id); share
 flowchart LR
   Dev1 & Dev2 --> API[File API]
   API --> Meta[Metadata DB]
-  API --> Obj[(Object storage, versioned)]
+  API --> Obj[Object storage, versioned]
   Obj --> CDN[CDN download]
   Changes --> Notif[Sync notifications] --> Dev1 & Dev2
 ```

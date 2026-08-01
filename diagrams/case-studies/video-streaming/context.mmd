@@ -2,12 +2,12 @@
 %% video-streaming high-level context
 flowchart LR
   Up["Uploader"] --> API["API gateway"]
-  API --> Obj["Object storage (raw)"]
+  API --> Obj["Object storage - raw"]
   Obj --"upload event"--> Q["Transcode queue"]
-  Q --> W["Transcode workers (GPU)"]
-  W --> Obj2["Object storage (renditions)"]
+  Q --> W["Transcode workers - GPU"]
+  W --> Obj2["Object storage - renditions"]
   W --> Meta["Metadata DB"]
   Player["Player"] --> Edge["CDN / edge"]
-  Edge -.miss.-> Origin["Origin (object storage)"]
+  Edge -.miss.-> Origin["Origin - object storage"]
   Player --> API2["API: get manifest"]
-  Player --> Ana["Analytics (watch events)"]
+  Player --> Ana["Analytics - watch events"]

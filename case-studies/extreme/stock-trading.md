@@ -55,7 +55,7 @@ order_book(symbol, bids, asks by price-time); orders(id, sym, side, price, qty, 
 %% created-for: system-design-mastery
 flowchart LR
   Trader --> OE[Order entry] --> Match[Matching engine]
-  Match --> Book[(Order book, in-memory)]
+  Match --> Book[Order book, in-memory]
   Match --> Trade[Trades]
   Trade --> Clear[Clearing + positions]
   Match --> MD[Market data fan-out]

@@ -52,8 +52,8 @@ users(features); items(features, embeddings); interactions(user, item, action, t
 %% created-for: system-design-mastery
 flowchart LR
   User --> RecSvc[Rec service]
-  RecSvc --> Retrieval[Retrieval (ann + filters)] --> Candidates
-  Candidates --> Rank[Ranker (model)] --> TopK
+  RecSvc --> Retrieval[Retrieval - ann + filters] --> Candidates
+  Candidates --> Rank[Ranker - model] --> TopK
   RecSvc --> Feat[Feature store]
   Interact[Interactions] --> Train[Training] --> Model[Model registry] --> Rank
 ```

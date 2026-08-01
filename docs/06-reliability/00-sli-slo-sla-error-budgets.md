@@ -19,8 +19,8 @@
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  SLI["SLI (measure)"] --> SLO["SLO (internal target)"]
-  SLO --> SLA["SLA (external contract,<br/>looser than SLO)"]
+  SLI["SLI - measure"] --> SLO["SLO - internal target"]
+  SLO --> SLA["SLA - external contract,<br/>looser than SLO"]
   SLO --> EB["Error budget = 1 - SLO"]
 ```
 
@@ -42,8 +42,8 @@ catches chronic erosion. This avoids both paging on noise and missing slow degra
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Burn["Error burn rate"] --> Short["short window<br/>(acute, page)"]
-  Burn --> Long["long window<br/>(chronic, ticket)"]
+  Burn["Error burn rate"] --> Short["short window<br/> - acute, page"]
+  Burn --> Long["long window<br/> - chronic, ticket"]
   Short -.high burn.-> Page["on-call page"]
   Long -.slow burn.-> Ticket["investigate"]
 ```

@@ -25,8 +25,8 @@ default.
 flowchart LR
   Dev["Product team"] --> IDP["Internal Developer Platform"]
   IDP --> GP["Golden paths: deploy / db / queue / secrets / observe"]
-  GP --> Infra["Underlying infra<br/>(K8s, cloud, mesh, observability)"]
-  Guard["Guardrails (policy, quotas, security)"] -.embedded.-> GP
+  GP --> Infra["Underlying infra<br/> - K8s, cloud, mesh, observability"]
+  Guard["Guardrails - policy, quotas, security"] -.embedded.-> GP
 ```
 
 ## Self-service vs guardrails

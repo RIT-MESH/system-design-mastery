@@ -59,7 +59,7 @@ flowchart LR
   API --> Idem[Idempotency check]
   API --> Token[Tokenize / vault]
   API --> Netw[Card network/bank]
-  API --> Ledger[(Payment ledger)]
+  API --> Ledger[Payment ledger]
   API --> Settle[Settlement]
 ```
 

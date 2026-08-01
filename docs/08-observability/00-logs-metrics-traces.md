@@ -20,7 +20,7 @@
 %% created-for: system-design-mastery
 flowchart LR
   Req["Request"] --> Span["Trace: spans across services"]
-  Span --> Metrics["Metrics: aggregated (rate, error, latency)"]
+  Span --> Metrics["Metrics: aggregated - rate, error, latency"]
   Span --> Logs["Logs: per-event, linked by trace/correlation id"]
 ```
 

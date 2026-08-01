@@ -37,8 +37,8 @@ flowchart LR
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Z["Multi-zone<br/>(zone failover)"] --> AP["Active-passive<br/>(region standby)"]
-  AP --> AA["Active-active<br/>(multi-region serve)"]
+  Z["Multi-zone<br/> - zone failover"] --> AP["Active-passive<br/> - region standby"]
+  AP --> AA["Active-active<br/> - multi-region serve"]
   AA -.needs cross-region consistency.-> Cons["eventual / consensus"]
 ```
 

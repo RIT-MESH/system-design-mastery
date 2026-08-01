@@ -19,8 +19,8 @@
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  W["Write"] -.through.-> Both["cache + store (sync)"]
-  W -.behind.-> Async["cache now, store later (async)"]
+  W["Write"] -.through.-> Both["cache + store - sync"]
+  W -.behind.-> Async["cache now, store later - async"]
   R["Read"] -.aside.-> App["app: cache? store? fill"]
   R -.through.-> Cache["cache fetches on miss"]
 ```
@@ -58,10 +58,10 @@ propagation between stages.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  subgraph Lambda["Lambda (batch + speed)"]
+  subgraph Lambda["Lambda - batch + speed"]
     B["Batch layer"] & S["Speed layer"] --> Serv["Serving layer"]
   end
-  subgraph Kappa["Kappa (stream only)"]
+  subgraph Kappa["Kappa - stream only"]
     St["Stream"] --> Proc["one processor"]
     St -.replay for history.-> Proc
   end

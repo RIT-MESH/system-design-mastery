@@ -47,11 +47,11 @@ the central read/write trade-off of storage.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Q["WHERE author_id = 7"] --> NoIdx["No index: scan all rows O(n)"]
-  Q --> Idx["Index: B-tree probe O(log n)"]
+  Q["WHERE author_id = 7"] --> NoIdx["No index: scan all rows O - n"]
+  Q --> Idx["Index: B-tree probe O - log n"]
   Idx --> Fast["fast read"]
   NoIdx --> Slow["slow read"]
-  Write["INSERT"] --> IdxUp["update index(s)"]
+  Write["INSERT"] --> IdxUp["update index - s"]
   IdxUp --> WriteCost["extra write cost"]
 ```
 

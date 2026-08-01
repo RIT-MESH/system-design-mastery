@@ -26,7 +26,7 @@ co-locating compute with data).
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Probe["Synthetic probe<br/>(scheduled, multi-region)"] --> Flow["Critical flow check"]
+  Probe["Synthetic probe<br/> - scheduled, multi-region"] --> Flow["Critical flow check"]
   Users["Real users"] --> RUM["RUM: per-session perf"]
   Flow & RUM --> Alerts["Outage/regression alerts"]
 ```

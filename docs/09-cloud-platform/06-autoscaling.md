@@ -24,7 +24,7 @@ flowchart LR
   HPA -->|"no room"| Pending["pods pending"]
   Pending --> CA["Cluster autoscaler: add nodes"]
   Stateful["Can't scale out"] --> VPA["VPA: bigger pod"]
-  Load -.drops.-> Down["scale in (with cooldown)"]
+  Load -.drops.-> Down["scale in - with cooldown"]
 ```
 
 ## Triggers, cooldown, oscillation

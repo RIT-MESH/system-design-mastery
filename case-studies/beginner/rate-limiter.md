@@ -48,8 +48,8 @@ Token bucket per key: `(tokens, last_refill_ts)`. In-memory store (Redis-like) k
 %% created-for: system-design-mastery
 flowchart LR
   Client --> GW["Gateway"]
-  GW --> RL["Rate limiter (in-process + shared store)"]
-  RL --> Store[("Counter/bucket store")]
+  GW --> RL["Rate limiter - in-process + shared store"]
+  RL --> Store["Counter/bucket store"]
   RL -->|"allow"| Svc["Backend"]
   RL -->|"deny (429)"| Client
 ```

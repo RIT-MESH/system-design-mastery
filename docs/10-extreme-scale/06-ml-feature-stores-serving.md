@@ -18,9 +18,9 @@ for both training and serving) to avoid train/serve skew.
 %% created-for: system-design-mastery
 flowchart LR
   Data["Data"] --> FS["Feature store"]
-  FS --> Train["Distributed training (GPU cluster)"]
+  FS --> Train["Distributed training - GPU cluster"]
   Train --> Reg["Model registry"]
-  Reg --> Serve["Serving (replicas, batched)"]
+  Reg --> Serve["Serving - replicas, batched"]
   Serve --> Mon["Monitoring / drift"]
   Mon -.retrain.-> Train
   FS -.same features.-> Serve

@@ -52,7 +52,7 @@ entities(id, features, recent history); events(id, entity, ts, features, score, 
 %% created-for: system-design-mastery
 flowchart LR
   Tx --> Score[Scorer]
-  Score --> Feat[Feature store (online)]
+  Score --> Feat[Feature store - online]
   Score --> Model[Model serving]
   Score --> Dec[Decision: block/hold/allow]
   Outcomes[Confirmed outcomes] --> Train[Training] --> Model

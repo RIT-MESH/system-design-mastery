@@ -25,8 +25,8 @@ constrained protocols. Patterns:
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Dev["Millions of devices<br/>(intermittent)"] --> GW["IoT gateway / broker"]
-  GW --> Twin["Digital twins (per-device state)"]
+  Dev["Millions of devices<br/> - intermittent"] --> GW["IoT gateway / broker"]
+  GW --> Twin["Digital twins - per-device state"]
   Twin --> Apps["Apps / analytics"]
   Apps -.commands.-> GW -.delivered when online.-> Dev
 ```

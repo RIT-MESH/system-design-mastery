@@ -22,7 +22,7 @@ A **shard key** decides which node owns a row. A good key:
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  R["Row with key k"] --> H["hash(k) % N"]
+  R["Row with key k"] --> H["hash - k % N"]
   H --> S1["Shard 1"]
   H --> S2["Shard 2"]
   H --> S3["Shard 3"]

@@ -43,7 +43,7 @@ current set of healthy instances.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Client --> Reg["Service registry<br/>(consul/etcd/k8s DNS)"]
+  Client --> Reg["Service registry<br/> - consul/etcd/k8s DNS"]
   Reg -- "list of healthy instances" --> Client
   Client --> Pick["choose instance"]
   Pick --> Inst["Instance"]

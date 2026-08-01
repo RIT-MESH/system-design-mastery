@@ -21,7 +21,7 @@ table or blocks writes during the deploy. The discipline is **expand/contract**:
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  E["Expand:<br/>add new (no removal)"] --> B["Backfill:<br/>online, batched"]
+  E["Expand:<br/>add new - no removal"] --> B["Backfill:<br/>online, batched"]
   B --> S["Switch:<br/>code uses new"]
   S --> C["Contract:<br/>remove old"]
 ```
@@ -40,7 +40,7 @@ maximum data loss you can tolerate.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Full["Full backup (daily)"] --> Logs["Continuous WAL/log archive"]
+  Full["Full backup - daily"] --> Logs["Continuous WAL/log archive"]
   Logs --> R["Restore to any t in [full, now]"]
   R --> Validate["Restore test"]
 ```

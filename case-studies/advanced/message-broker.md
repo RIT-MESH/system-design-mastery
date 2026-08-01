@@ -52,7 +52,7 @@ Topics partitioned by key into append-only logs; each partition is an ordered, r
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  P[Producers] --> Part[Partitioned logs (RF=3)]
+  P[Producers] --> Part[Partitioned logs - RF=3]
   Part --> CG1[Consumer group A]
   Part --> CG2[Consumer group B]
   Part -.retention/tier.-> Cold[Object storage]

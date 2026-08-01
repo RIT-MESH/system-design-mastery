@@ -47,13 +47,13 @@ an optional TTL. - Return 404 for unknown/expired.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Client --> Edge["Edge cache (code->body)"]
+  Client --> Edge["Edge cache - code->body"]
   Edge -.miss.-> GW["Gateway"]
   GW --> Create["Create svc"]
   GW --> Read["Read svc"]
-  Create --> DB[("KV store")]
-  Read --> Cache[("Distributed cache")] --> DB
-  Sweeper["Expiry sweeper (cron)"] --> DB
+  Create --> DB["KV store"]
+  Read --> Cache["Distributed cache"] --> DB
+  Sweeper["Expiry sweeper - cron"] --> DB
 ```
 
 ## 12. Request flow

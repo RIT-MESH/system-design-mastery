@@ -37,7 +37,7 @@ flowchart LR
   Alert["Alert"] --> RB["Runbook"]
   RB --> Mit["Mitigate"]
   Mit --> PM["Blameless postmortem"]
-  PM --> AIs["Action items (owned, dated)"]
+  PM --> AIs["Action items - owned, dated"]
   AIs -.prevent recurrence.-> System["Systemic fixes"]
   Cap["Capacity trends"] -.lead-time.-> Scale["Scale before saturation"]
 ```

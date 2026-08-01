@@ -46,8 +46,8 @@ architecture; if you decide them after building, you will rebuild.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  R["Requirements"] --> FR["Functional<br/>(what it does)"]
-  R --> NFR["Non-functional<br/>(how well)"]
+  R["Requirements"] --> FR["Functional<br/> - what it does"]
+  R --> NFR["Non-functional<br/> - how well"]
   NFR --> Av["Availability"]
   NFR --> Re["Reliability"]
   NFR --> Du["Durability"]

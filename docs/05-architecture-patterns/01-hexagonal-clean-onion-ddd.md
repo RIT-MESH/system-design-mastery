@@ -18,9 +18,9 @@ rules.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart TB
-  Infra["Infrastructure<br/>(DB, APIs, frameworks)"] --> App["Application<br/>(use cases)"]
-  App --> Domain["Domain<br/>(business rules)"]
-  Domain -.depends on abstractions only.-> Ports["Ports (interfaces)"]
+  Infra["Infrastructure<br/> - DB, APIs, frameworks"] --> App["Application<br/> - use cases"]
+  App --> Domain["Domain<br/> - business rules"]
+  Domain -.depends on abstractions only.-> Ports["Ports - interfaces"]
   Infra -.implements.-> Ports
 ```
 

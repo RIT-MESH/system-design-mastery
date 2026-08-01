@@ -53,8 +53,8 @@ accounts(id); entries(id, account, delta, tx_id, ts) append-only; tx(id, debits[
 %% created-for: system-design-mastery
 flowchart LR
   Tx[Transfer tx] --> Valid[Validate + double-entry]
-  Valid --> Ledger[(Append-only ledger, sync RF=3)]
-  Ledger --> Bal[Balance (derived)]
+  Valid --> Ledger[Append-only ledger, sync RF=3]
+  Ledger --> Bal[Balance - derived]
   Ledger --> Recon[Reconcile vs banks]
   Ledger --> Audit[Audit store]
 ```

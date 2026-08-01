@@ -26,7 +26,7 @@
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Browser -->|"cookie + session id"| Sess["Server session store<br/>(revocable)"]
+  Browser -->|"cookie + session id"| Sess["Server session store<br/> - revocable"]
   SPA["Client"] -->|"JWT (stateless)"| Svc["Service<br/>verifies signature"]
   Svc2["Service"] -->|"API key"| API["API gateway<br/>identifies caller"]
 ```

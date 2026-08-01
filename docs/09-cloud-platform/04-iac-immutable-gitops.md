@@ -29,9 +29,9 @@ push-based pipelines. It extends the Kubernetes reconcile model to delivery.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Dev["Engineer"] --> PR["PR to Git (desired state)"]
+  Dev["Engineer"] --> PR["PR to Git - desired state"]
   PR --> Review["Review + merge"]
-  Git[("Git (source of truth)")] --> Agent["Cluster agent (reconcile)"]
+  Git["Git - source of truth"] --> Agent["Cluster agent - reconcile"]
   Agent --> Cluster["Actual state -> matches Git"]
   Agent -.drift detected.-> Git
 ```

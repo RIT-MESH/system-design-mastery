@@ -20,8 +20,8 @@
 ```mermaid
 %% created-for: system-design-mastery
 flowchart TB
-  Metal["Physical fleet"] --> VMs["VMs (strong isolation,<br/>heavy)"]
-  Metal --> Containers["Containers (light,<br/>shared kernel)"]
+  Metal["Physical fleet"] --> VMs["VMs - strong isolation,<br/>heavy"]
+  Metal --> Containers["Containers - light,<br/>shared kernel"]
   Containers --> Orch["Orchestrator: schedule + self-heal + scale"]
 ```
 

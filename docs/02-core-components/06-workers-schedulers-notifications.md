@@ -17,8 +17,8 @@ spikes open thousands of connections and exhaust the database.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Apps["Many app instances"] --> Pool["Connection pool (bounded)"]
-  Pool --> DB["Database (N connections)"]
+  Apps["Many app instances"] --> Pool["Connection pool - bounded"]
+  Pool --> DB["Database - N connections"]
   Apps -.without a pool.-> Flood["connection flood -> DB refused"]
 ```
 
@@ -42,7 +42,7 @@ Workers should be idempotent (redelivery is normal) and bounded (concurrency cap
 %% created-for: system-design-mastery
 flowchart LR
   Leader["Leader-elected scheduler"] -->|"owns the job lease"| Job["Run job once"]
-  N1["Node 1"] -.lost lease.-> Skip["skip (no double-run)"]
+  N1["Node 1"] -.lost lease.-> Skip["skip - no double-run"]
   N2["Node 2"] -.no lease.-> Skip2["skip"]
 ```
 
@@ -58,7 +58,7 @@ flowchart LR
   Q --> W["Worker pool"]
   W --> Email["Email provider"]
   W --> SMS["SMS provider"]
-  W --> Push["Push (per-device tokens)"]
+  W --> Push["Push - per-device tokens"]
   W -.failures.-> DLQ["Retry/backoff -> DLQ"]
 ```
 

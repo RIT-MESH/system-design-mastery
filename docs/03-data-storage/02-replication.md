@@ -52,7 +52,7 @@ complexity of quorum arithmetic and conflict resolution.
 flowchart LR
   W["Write"] --> N1 & N2 & N3
   R["Read"] --> N1 & N2 & N3
-  N1 & N2 & N3 --> Q["quorum reconcile (R + W > N)"]
+  N1 & N2 & N3 --> Q["quorum reconcile - R + W > N"]
   Q --> RR["read-repair / anti-entropy"]
 ```
 

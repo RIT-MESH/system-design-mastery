@@ -20,7 +20,7 @@
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Lake["Data lake (cheap object storage)"] --> Catalog["Catalog + metadata + ACID layer"]
+  Lake["Data lake - cheap object storage"] --> Catalog["Catalog + metadata + ACID layer"]
   Catalog --> Lakehouse["Lakehouse: warehouse quality on lake storage"]
   Sources["Raw/structured sources"] --> Lake
   Lakehouse --> BI["BI / ML / analytics"]

@@ -17,7 +17,7 @@ polyglot fleet via a uniform data plane.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Client --> Ingress["Ingress (north-south)"]
+  Client --> Ingress["Ingress - north-south"]
   Ingress --> A["Svc A + sidecar"]
   A --"mTLS + retry + telemetry (mesh/east-west)"--> B["Svc B + sidecar"]
   B --> C["Svc C + sidecar"]

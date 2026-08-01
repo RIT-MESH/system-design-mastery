@@ -16,7 +16,7 @@ The key knob is the **TTL**: it bounds how long clients/resolvers cache a record
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  U["User in EU"] --> DNS["Geo DNS<br/>(short TTL)"]
+  U["User in EU"] --> DNS["Geo DNS<br/> - short TTL"]
   DNS --> EU["EU region"]
   U2["User in US"] --> DNS
   DNS --> US["US region"]

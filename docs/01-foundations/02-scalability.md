@@ -26,7 +26,7 @@ flowchart TB
   Load --> H["Horizontal: more nodes"]
   V --> VC["Ceiling + SPOF<br/>simple ops"]
   H --> HC["State distribution<br/>coordination + failure"]
-  H --> HC2["(the rest of this curriculum)"]
+  H --> HC2[" - the rest of this curriculum"]
 ```
 
 A common evolution: start vertical to ship fast, then extract the stateless parts and scale
@@ -42,11 +42,11 @@ externally (a cache or database) and referenced by a token.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  C["Client (token)"] --> LB["Load balancer"]
+  C["Client - token"] --> LB["Load balancer"]
   LB --> A["Instance A"]
   LB --> B["Instance B"]
   LB --> D["Instance D"]
-  A & B & D --> S["Shared state store<br/>(cache / DB)"]
+  A & B & D --> S["Shared state store<br/> - cache / DB"]
 ```
 
 This is why the industry default for service tiers (APIs, gateways, renderers) is

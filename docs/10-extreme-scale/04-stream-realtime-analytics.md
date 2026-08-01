@@ -23,8 +23,8 @@ when consumers can't keep up.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Src["Sources (millions/s)"] --> Stream["Partitioned stream"]
-  Stream --> Proc["Stream processors (windowed, stateful)"]
+  Src["Sources - millions/s"] --> Stream["Partitioned stream"]
+  Stream --> Proc["Stream processors - windowed, stateful"]
   Proc --> State["RocksDB/managed state + checkpointing"]
   Proc --> Sink["Serving store / DW"]
   Query["Dashboards"] --> Sink

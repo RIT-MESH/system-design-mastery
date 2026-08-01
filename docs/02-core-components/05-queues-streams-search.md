@@ -38,7 +38,7 @@ need the same events.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  P["Producers"] --> Log["Partitioned log<br/>(retained, replayable)"]
+  P["Producers"] --> Log["Partitioned log<br/> - retained, replayable"]
   Log --> A["Consumer group A"]
   Log --> B["Consumer group B"]
   Log --> C["Consumer group C"]

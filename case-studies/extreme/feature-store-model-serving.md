@@ -54,9 +54,9 @@ features(entity, feature, value, ts) — online (hot) + offline (history); model
 %% created-for: system-design-mastery
 flowchart LR
   Sources[Data sources] --> FS[Feature store]
-  FS --> Online[Online store (hot)]
-  FS --> Offline[Offline store (history)]
-  Online --> Serve[Serving (model)]
+  FS --> Online[Online store - hot]
+  FS --> Offline[Offline store - history]
+  Online --> Serve[Serving - model]
   Offline --> Train[Training]
   Train --> Reg[Model registry] --> Serve
   Serve --> Mon[Drift monitoring] -.retrain.-> Train

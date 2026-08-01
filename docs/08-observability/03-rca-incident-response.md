@@ -19,9 +19,9 @@
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Detect["Detect"] --> Mit["Mitigate (stop bleeding)"]
-  Mit --> Resolve["Resolve (real fix)"]
-  Resolve --> Post["Postmortem (learn)"]
+  Detect["Detect"] --> Mit["Mitigate - stop bleeding"]
+  Mit --> Resolve["Resolve - real fix"]
+  Resolve --> Post["Postmortem - learn"]
   Post -.systemic fix.-> Detect
 ```
 

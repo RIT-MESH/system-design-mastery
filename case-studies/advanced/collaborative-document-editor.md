@@ -51,8 +51,8 @@ doc(id, crdt state, op log, snapshots); presence(user, doc, cursor). Op log is t
 %% created-for: system-design-mastery
 flowchart LR
   U1 & U2 --> Relay[Op relay / gateway]
-  Relay --> Doc[Doc service (CRDT/OT)]
-  Doc --> Store[(Op log + snapshots)]
+  Relay --> Doc[Doc service - CRDT/OT]
+  Doc --> Store[Op log + snapshots]
   Doc -->|merge| U1 & U2
   U3[Offline] -.reconnect.-> Relay
 ```

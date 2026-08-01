@@ -49,11 +49,11 @@ per-prefix precomputed top-k to make lookup O(1)-ish. Per-user recent terms list
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Client --> CDN["Edge cache (prefix->top-k)"]
+  Client --> CDN["Edge cache - prefix->top-k"]
   CDN -.miss.-> Svc["Suggest service"]
-  Svc --> Index["Prefix index (in-memory)"]
+  Svc --> Index["Prefix index - in-memory"]
   Svc --> User["Per-user recent terms"]
-  Builder["Index builder (stream of searches)"] --> Index
+  Builder["Index builder - stream of searches"] --> Index
 ```
 
 ## 12. Request flow

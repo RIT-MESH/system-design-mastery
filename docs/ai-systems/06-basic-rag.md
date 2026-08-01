@@ -24,7 +24,7 @@ flowchart LR
   Ret --> Ctx[Context + citations]
   Ctx --> LLM[LLM generate]
   LLM --> Ans[Grounded answer]
-  Corpus --> Ingest[Ingest chunk + embed] --> VDB[(Vector DB)]
+  Corpus --> Ingest[Ingest chunk + embed] --> VDB[Vector DB]
   Cache[Query cache] --> Q
 ```
 

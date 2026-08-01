@@ -51,7 +51,7 @@ Objects partitioned by (source, date); catalog metadata (schema, lineage, owner,
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Src[Sources] --> Ingest[Ingest (batch/stream)] --> Lake[(Object storage, partitioned)]
+  Src[Sources] --> Ingest[Ingest - batch/stream] --> Lake[Object storage, partitioned]
   Lake --> Catalog[Catalog + lineage]
   Query[Scan engine] --> Lake
   Gov[Governance: access, PII, retention] --> Lake & Catalog

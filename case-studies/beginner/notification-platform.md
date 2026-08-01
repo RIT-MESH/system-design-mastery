@@ -46,8 +46,8 @@ unique index for dedup.
 %% created-for: system-design-mastery
 flowchart LR
   App --> API["Notify API"]
-  API --> Dedup["Dedup (event_id)"]
-  Dedup --> Q["Notification queue (per-channel)"]
+  API --> Dedup["Dedup - event_id"]
+  Dedup --> Q["Notification queue - per-channel"]
   Q --> W["Workers"]
   W --> Email["Email provider"]
   W --> SMS["SMS provider"]

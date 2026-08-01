@@ -28,9 +28,9 @@ write latency. The cost: **cross-region consistency**. Options:
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  GeoDNS["Geo-DNS / Anycast"] --> R1["Region A (write)"]
-  GeoDNS --> R2["Region B (write)"]
-  GeoDNS --> R3["Region C (write)"]
+  GeoDNS["Geo-DNS / Anycast"] --> R1["Region A - write"]
+  GeoDNS --> R2["Region B - write"]
+  GeoDNS --> R3["Region C - write"]
   R1 <-.async replicate.-> R2 & R3
   Policy{"Strong core?"} -->|"yes"| Global["global-consensus DB"]
   Policy -->|"no"| Crdt["CRDT / conflict-resolve"]

@@ -20,7 +20,7 @@ making things worse. Readiness off → LB stops sending; liveness off → orches
 flowchart LR
   P["Probe"]
   P --> Live["Liveness: alive?<br/>fail -> restart"]
-  P --> Ready["Readiness: can serve?<br/>fail -> remove from LB (no restart)"]
+  P --> Ready["Readiness: can serve?<br/>fail -> remove from LB - no restart"]
   Warm["warming cache"] -.ready fails, liveness ok.-> LB["kept alive, not routed"]
 ```
 

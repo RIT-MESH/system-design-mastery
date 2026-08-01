@@ -34,7 +34,7 @@ flowchart LR
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  App["Application"] <--> Side["Sidecar<br/>(mTLS, metrics, retries)"]
+  App["Application"] <--> Side["Sidecar<br/> - mTLS, metrics, retries"]
   Side <--> Net["Network / peers"]
   App2["Service"] --> Amb["Ambassador"] --> Ext["External API"]
   Amb -.retry + circuit-break + observe.-> Ext
@@ -58,7 +58,7 @@ flowchart LR
   Web["Web client"] --> BFFw["Web BFF"]
   Mob["Mobile client"] --> BFFm["Mobile BFF"]
   BFFw & BFFm --> S1["Service 1"] & S2["Service 2"] & S3["Service 3"]
-  Any["Client (federation)"] --> Fed["Federation layer"]
+  Any["Client - federation"] --> Fed["Federation layer"]
   Fed --> S1 & S2 & S3
 ```
 

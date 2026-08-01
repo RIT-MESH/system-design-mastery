@@ -62,8 +62,8 @@ systems, crash-fault tolerance (Raft/Paxos) suffices.
 %% created-for: system-design-mastery
 flowchart TB
   F["Fault model"]
-  F --> CFT["Crash-fault (nodes stop)<br/>2f+1 to tolerate f"]
-  F --> BFT["Byzantine (nodes lie)<br/>3f+1 to tolerate f"]
+  F --> CFT["Crash-fault - nodes stop<br/>2f+1 to tolerate f"]
+  F --> BFT["Byzantine - nodes lie<br/>3f+1 to tolerate f"]
   CFT --> Algos["Raft / Paxos"]
   BFT --> AlgosB["PBFT / BFT consensus"]
 ```

@@ -18,8 +18,8 @@ eventually-consistent projection.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Cmd["Command<br/>(validate + apply)"] --> Write["Write model<br/>(source of truth)"]
-  Write --"events / CDC"--> Proj["Read projections<br/>(denormalized)"]
+  Cmd["Command<br/> - validate + apply"] --> Write["Write model<br/> - source of truth"]
+  Write --"events / CDC"--> Proj["Read projections<br/> - denormalized"]
   Query["Query"] --> Proj
   Proj --"eventually consistent"--> Read["fast reads"]
 ```

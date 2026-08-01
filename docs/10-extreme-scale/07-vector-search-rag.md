@@ -23,7 +23,7 @@ private/up-to-date knowledge, and is the standard pattern for grounded LLM appli
 %% created-for: system-design-mastery
 flowchart LR
   Q["User query"] --> EmbQ["Embed query"]
-  EmbQ --> VS["Vector search<br/>(top-k relevant chunks)"]
+  EmbQ --> VS["Vector search<br/> - top-k relevant chunks"]
   VS --> Ctx["Context chunks + metadata"]
   Ctx --> LLM["LLM generation"]
   LLM --> Ans["Grounded answer"]

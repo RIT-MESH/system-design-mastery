@@ -49,7 +49,7 @@ match_state(match, authoritative); player profile; match results. State in-memor
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  P1 & P2 & P3 --> GS[Game server (authoritative, 60 tps)]
+  P1 & P2 & P3 --> GS[Game server - authoritative, 60 tps]
   GS -->|state delta (UDP)| P1 & P2 & P3
   MM[Matchmaker] --> GS
   GS --> Persist[Persist results]

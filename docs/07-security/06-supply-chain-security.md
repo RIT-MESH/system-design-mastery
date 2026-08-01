@@ -29,7 +29,7 @@ compromises, not direct intrusions.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Src["Source (signed commits)"] --> Build["Hermetic build"]
+  Src["Source - signed commits"] --> Build["Hermetic build"]
   Build --> Art["Signed artifact + provenance + SBOM"]
   Art --> Verify["Verify before deploy"]
   Verify --> Deploy["Least-privilege deploy"]

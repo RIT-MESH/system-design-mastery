@@ -53,7 +53,7 @@ driver(id, loc, status); trip(id, rider, driver, status, route, fare); location 
 %% created-for: system-design-mastery
 flowchart LR
   Rider --> API --> Match[Matching svc]
-  Driver --> LocSvc[Location svc] --> Geo[Geo index (available drivers)]
+  Driver --> LocSvc[Location svc] --> Geo[Geo index - available drivers]
   Match --> Geo
   Match --> Trip[Trip svc]
   Trip --> Stream[Live tracking WS]

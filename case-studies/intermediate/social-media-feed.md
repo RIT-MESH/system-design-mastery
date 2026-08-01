@@ -51,9 +51,9 @@ ids])` (prebuilt for fan-out-on-write).
 %% created-for: system-design-mastery
 flowchart LR
   Author["Author posts"] --> PostSvc["Post service"]
-  PostSvc --> Store[("Post store")]
-  PostSvc --> Fanout["Fan-out worker<br/>(hybrid)"]
-  Fanout -->|"normal: write to followers' feeds"| FeedCache[("Per-user feed cache")]
+  PostSvc --> Store["Post store"]
+  PostSvc --> Fanout["Fan-out worker<br/> - hybrid"]
+  Fanout -->|"normal: write to followers' feeds"| FeedCache["Per-user feed cache"]
   Fanout -.celebrity: skip, pull-on-read.-> Pull["Read-time merge"]
   Reader["Reader loads feed"] --> FeedCache
   Reader --> Pull --> Store

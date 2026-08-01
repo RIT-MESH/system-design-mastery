@@ -21,7 +21,7 @@ for availability: any replica accepts writes, and merges converge.
 flowchart LR
   A["Replica A: add x"] --> M["merge"]
   B["Replica B: remove x"] --> M
-  M --> C["deterministic result<br/>(e.g., OR-set rules)"]
+  M --> C["deterministic result<br/> - e.g., OR-set rules"]
   A & B --> D["converge without a coordinator"]
 ```
 

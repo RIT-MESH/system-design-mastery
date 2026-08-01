@@ -78,11 +78,11 @@ owns a contiguous range of a **consistent hash ring** (with vnodes for balance).
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Client --> CL["Client library / router<br/>(ring-aware)"]
-  CL -->|"hash(key) -> ring"| N1["Node A (primary)"]
-  CL -->|"replicate"| N2["Node B (replica)"]
-  CL -->|"replicate"| N3["Node C (replica)"]
-  N1 & N2 & N3 --> Ring["Consistent hash ring (vnodes)"]
+  Client --> CL["Client library / router<br/> - ring-aware"]
+  CL -->|"hash(key) -> ring"| N1["Node A - primary"]
+  CL -->|"replicate"| N2["Node B - replica"]
+  CL -->|"replicate"| N3["Node C - replica"]
+  N1 & N2 & N3 --> Ring["Consistent hash ring - vnodes"]
   Gossip["Membership / gossip"] -.membership.-> N1 & N2 & N3
   CL --> Gossip
 ```
@@ -228,7 +228,7 @@ flowchart LR
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  S1["Stage 1: single node<br/>(dev)"]
+  S1["Stage 1: single node<br/> - dev"]
   S1 -->|"load grows"| S2["Stage 2: sharded ring<br/>+ RF=3"]
   S2 -->|"hot keys"| S3["Stage 3: hot-key extra replicas<br/>+ coalescing"]
   S3 -->|"global"| S4["Stage 4: region-local caches<br/>+ cross-region fill-on-miss"]

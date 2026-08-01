@@ -89,15 +89,15 @@ store for discovery (out of v1 scope).
 %% created-for: system-design-mastery
 flowchart LR
   Up["Uploader"] --> API["API gateway"]
-  API --> Obj["Object storage (raw)"]
+  API --> Obj["Object storage - raw"]
   Obj --"upload event"--> Q["Transcode queue"]
-  Q --> W["Transcode workers (GPU)"]
-  W --> Obj2["Object storage (renditions)"]
+  Q --> W["Transcode workers - GPU"]
+  W --> Obj2["Object storage - renditions"]
   W --> Meta["Metadata DB"]
   Player["Player"] --> Edge["CDN / edge"]
-  Edge -.miss.-> Origin["Origin (object storage)"]
+  Edge -.miss.-> Origin["Origin - object storage"]
   Player --> API2["API: get manifest"]
-  Player --> Ana["Analytics (watch events)"]
+  Player --> Ana["Analytics - watch events"]
 ```
 
 
@@ -237,7 +237,7 @@ flowchart LR
   S1 -->|"viewers grow"| S2["Stage 2: global CDN<br/>+ multi-region origin"]
   S2 -->|"ingest grows"| S3["Stage 3: GPU transcode autoscaling<br/>+ multipart resumable uploads"]
   S3 -->|"monetization"| S4["Stage 4: ad insertion + DRM"]
-  S4 -->|"live"| S5["Stage 5: live streaming<br/>(ingest + real-time transcode)"]
+  S4 -->|"live"| S5["Stage 5: live streaming<br/> - ingest + real-time transcode"]
 ```
 
 

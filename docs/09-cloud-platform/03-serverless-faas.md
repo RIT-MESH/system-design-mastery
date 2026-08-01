@@ -17,7 +17,7 @@ short-lived, stateless work.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  E["Event (HTTP/queue/cron)"] --> Fx["FaaS: invokes handler"]
+  E["Event - HTTP/queue/cron"] --> Fx["FaaS: invokes handler"]
   Fx -->|"scale 0 -> N"| Instances["concurrent instances"]
   Instances --> Result["result + scale to 0 when idle"]
   Fx -.stateless.-> Store["external state store"]

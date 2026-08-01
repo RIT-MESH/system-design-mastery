@@ -53,7 +53,7 @@ chunks(id, text, embedding, metadata) in local vector DB; models (local embeddin
 %% origin: original to system-design-mastery
 flowchart LR
   Doc --> Embed[Local embedding model]
-  Embed --> VDB[(Local vector DB)]
+  Embed --> VDB[Local vector DB]
   Q --> LE[Local embed query]
   LE --> VDB
   VDB --> Context[Local context]

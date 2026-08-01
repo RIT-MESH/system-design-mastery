@@ -26,8 +26,8 @@ a set of registers, an execution context, and at least one thread of control.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  A["Source code<br/>(file on disk)"] --> B["Compiler / interpreter"]
-  B --> C["Executable / bytecode<br/>(file on disk)"]
+  A["Source code<br/> - file on disk"] --> B["Compiler / interpreter"]
+  B --> C["Executable / bytecode<br/> - file on disk"]
   C --> D["OS creates a process"]
   D --> E["Address space + main thread"]
   E --> F["Running instructions on CPU"]
@@ -51,7 +51,7 @@ requires synchronization to avoid data races.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart TB
-  subgraph P["Process (one address space)"]
+  subgraph P["Process - one address space"]
     direction TB
     T1["Thread 1"]
     T2["Thread 2"]

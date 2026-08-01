@@ -34,9 +34,9 @@ millisecond. The default choice for large-scale systems needing sortable, sharde
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  T["Timestamp (~41 bits, ms)"] --> ID
-  W["Worker id (~10 bits)"] --> ID["64-bit Snowflake ID"]
-  S["Sequence (~12 bits, per ms)"] --> ID
+  T["Timestamp - ~41 bits, ms"] --> ID
+  W["Worker id - ~10 bits"] --> ID["64-bit Snowflake ID"]
+  S["Sequence - ~12 bits, per ms"] --> ID
   ID --> Sort["time-ordered + unique"]
 ```
 

@@ -27,9 +27,9 @@
 %% created-for: system-design-mastery
 flowchart TB
   Style{"Style"}
-  Style --> Mono["Modular monolith<br/>(one deployable, strict modules)"]
-  Style --> Micro["Microservices<br/>(independent deploys + data)"]
-  Style --> EDA["Event-driven<br/>(async events)"]
+  Style --> Mono["Modular monolith<br/> - one deployable, strict modules"]
+  Style --> Micro["Microservices<br/> - independent deploys + data"]
+  Style --> EDA["Event-driven<br/> - async events"]
   Mono -.lowest ops cost.-> A
   Micro -.scales teams + deploys.-> B
   EDA -.decoupled, hard to trace.-> C

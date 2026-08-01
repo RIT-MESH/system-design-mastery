@@ -47,7 +47,7 @@ Internal: enqueue URL; fetch worker pulls host-queue; store page; emit extracted
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Seeds["Seed URLs"] --> Frontier["URL frontier<br/>(per-host queues)"]
+  Seeds["Seed URLs"] --> Frontier["URL frontier<br/> - per-host queues"]
   Frontier --> W["Fetch workers"]
   W --> Robots["robots.txt cache"]
   W --> Fetch["HTTP fetch"]

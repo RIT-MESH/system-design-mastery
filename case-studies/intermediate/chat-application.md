@@ -48,10 +48,10 @@ send. Presence via the connection layer.
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Client --> Gateway["Connection gateway<br/>(stateful, async I/O)"]
+  Client --> Gateway["Connection gateway<br/> - stateful, async I/O"]
   Gateway --> Presence["Presence store"]
   Gateway --> MsgSvc["Message service"]
-  MsgSvc --> Store[("Message store")]
+  MsgSvc --> Store["Message store"]
   MsgSvc --> Fanout["Fanout / channel router"]
   Fanout --> Gateway
   Client --> Hist["History API"] --> Store

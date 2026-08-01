@@ -18,7 +18,7 @@ A financial **ledger** is an append-only record of immutable entries; balances a
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  Pay["Payment request<br/>(idempotency key)"] --> Tx["Ledger transaction<br/>(debit + credit)"]
+  Pay["Payment request<br/> - idempotency key"] --> Tx["Ledger transaction<br/> - debit + credit"]
   Tx --> Append["Append-only entries"]
   Append --> Fold["Balance = fold over entries"]
   Append --> Reconcile["Reconcile vs bank/partner"]

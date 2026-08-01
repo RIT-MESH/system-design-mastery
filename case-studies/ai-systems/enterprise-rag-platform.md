@@ -61,7 +61,7 @@ flowchart LR
   Rerank --> LLM[Generate + cite]
   LLM --> Store[Cache answer]
   LLM --> Resp
-  Ingest[Ingest] --> Chunk[Chunk + embed + ACL] --> VDB[(Vector DB)]
+  Ingest[Ingest] --> Chunk[Chunk + embed + ACL] --> VDB[Vector DB]
 ```
 
 ## 12. Request flow
