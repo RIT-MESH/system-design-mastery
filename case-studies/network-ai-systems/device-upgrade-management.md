@@ -6,11 +6,9 @@
 
 Centrally plan, test, schedule, deploy, and verify firmware/software upgrades across network devices (firewalls, routers, switches, WLCs, APs, VPN, LB, DNS/DHCP, proxy, NAS) safely, with backups, HA-pair/cluster awareness, rollback, and audit.
 
-
 ## 2. Scope
 
 In (v1): inventory + firmware tracking, target-version checks, release-note/advisory retrieval, compatibility + config-risk analysis, upgrade plan, config backup+checksum, maintenance window, approval, pre-checks, execute, monitor reboot, post-validation, rollback, report. Out: full zero-touch autonomous rollout (human approval required).
-
 
 ## 3. Functional requirements
 
@@ -27,7 +25,6 @@ In (v1): inventory + firmware tracking, target-version checks, release-note/advi
 - Roll back on failure.
 - Generate upgrade report.
 
-
 ## 4. Non-functional requirements
 
 - No device left bricked; rollback always possible.
@@ -35,36 +32,28 @@ In (v1): inventory + firmware tracking, target-version checks, release-note/advi
 - Full audit + approval chain.
 - Scheduled, rate-limited rollout.
 
-
 ## 5. Explicit assumptions
 
 1. 20k devices, ~1 upgrade/device/year avg, batches of 50. [assumption] 2. Each upgrade 5-30 min. [assumption] 3. Approvals required. [constraint]
-
 
 ## 6. Traffic estimation
 
 Low request rate; the load is scheduled batches at maintenance windows, not a hot path.
 
-
 ## 7. Storage estimation
 
 Inventory + firmware catalog + configs (versioned) + backups + reports; modest (GBs) but must be durable/auditable.
 
-
 ## 8. Bandwidth estimation
-
 Pushing firmware images to devices (MBs-GBs each) during windows; bandwidth moderate, scheduled.
-
 
 ## 9. API design
 
 GET /inventory; POST /upgrade-plans; POST /upgrade-plans/:id/approve; POST /upgrade-plans/:id/execute; POST /rollback; GET /reports/:id.
 
-
 ## 10. Data model
 
 devices(id, type, vendor, model, firmware, config_hash, ha_pair, site); firmware_catalog(vendor, model, target, advisories, release_notes, compatible); upgrade_plans(id, devices[], steps, window, status, approvals[]); backups(plan, device, config, checksum); reports(plan, results, rollback?).
-
 
 ## 11. High-level architecture
 
@@ -81,54 +70,56 @@ flowchart LR
   Validate -.pass.-> Report[Upgrade report]
 ```
 
-
 ## 12. Request flow
 Inventory + firmware tracking -> planner checks targets/advisories/compatibility/config-risk -> approval gate -> config backup+checksum -> execute (HA-pair/cluster aware, one at a time) -> monitor reboot/recovery -> post-validation -> on fail rollback, on pass report; all steps audited.
 
 ```mermaid
 %% created-for: system-design-mastery
 sequenceDiagram
-  participant P0 as Inventory firmware track
-  participant P1 as Upgrade planner risk ana
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
+  participant C0 as Inventory firmware track
+  participant C1 as Upgrade planner risk ana
+  participant C2 as Approval gate
+  participant C3 as Config backup checksum
+  participant C4 as Execute upgrade
+  C0 ->> C1: send request
+  C1 ->> C2: validate and process
+  C2 ->> C3: query or persist
+  C3 ->> C4: acknowledge
+  C4 -->> C3: result
+  C3 -->> C2: response
+  C2 -->> C1: response
+  C1 -->> C0: response
+  alt operation succeeds
+    C0 -->> C0: confirm
+  else operation fails
+    C4 -->> C4: log error
+    C0 -->> C0: retry with backoff
   end
 ```
-
 
 ## 13. Component responsibilities
 
 Inventory service, firmware/advisory catalog, planner/risk engine, approval workflow, backup service, executor, monitor/validator, rollback, report.
 
-
 ## 14. Database selection
 
 Inventory/catalog/plan relational (transactional, audited); config backups in object storage (versioned, checksummed); execution logs append-only. Rejected: in-place config without backup.
-
 
 ## 15. Caching strategy
 
 Firmware catalog + release notes cached; inventory cached.
 
-
 ## 16. Partitioning strategy
 
 Inventory by site; upgrades batched by site/HA-group; executor capacity per region.
-
 
 ## 17. Replication strategy
 
 Inventory/catalog RF=3; backups durable (object storage, cross-region); executor stateless, idempotent per device step.
 
-
 ## 18. Consistency model
 
 Plan/approval strongly consistent (audit). Firmware version tracking per device authoritative. Rollback decision per device.
-
 
 ## 19. Failure scenarios
 Executor dies mid-upgrade -> device state machine resumes (or rollback). Validation fail -> rollback + report. Backup fail -> block upgrade. Advisory unaddressed -> block plan.
@@ -150,59 +141,58 @@ flowchart LR
   C7 --> R8
 ```
 
-
 ## 20. Reliability strategy
 
 SLI rollback success, no-brick rate; SLO 99.9 percent. Backup + rollback always. Chaos: fail validation, assert rollback + report.
-
 
 ## 21. Security considerations
 
 Approval chain + RBAC; secrets in secret manager; config backups encrypted; no unapproved changes; AI safety gateway (no auto-upgrade outside windows).
 
-
 ## 22. Observability strategy
 
 Active upgrades, validation pass/fail, rollback rate, per-device stage, window adherence, advisory coverage.
-
 
 ## 23. Cost considerations
 
 Executor compute (scheduled, bursty at windows) + firmware storage + backup storage. Right-size executors; store firmware once per catalog.
 
-
 ## 24. Scaling stages
-
 Stage 1: inventory + manual plan. -> Stage 2: automated planning + approval + backup/rollback. -> Stage 3: HA/cluster-aware, dependency checks, AI risk scoring. -> Stage 4: fleet-wide scheduled rollout, air-gapped firmware repo.
 
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  S1["Stage 1: inventory manual plan."]
+  S2["Stage 2: automated planning approval backup rollb"]
+  S3["Stage 3: HA cluster-aware, dependency checks, AI"]
+  S4["Stage 4: fleet-wide scheduled rollout, air-gapped"]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 
 ## 25. Trade-offs
 
 Automation (speed) vs human approval (safety). Backup (safety) vs time. HA-aware (safety) vs parallel speed. AI risk scoring (assist) vs deterministic checks (trust).
 
-
 ## 26. Alternative designs
 
 Manual per-device (no scale, no audit). Zero-touch autonomous (unsafe). No rollback (bricked devices).
-
 
 ## 27. Interview discussion points
 
 Clarify device count, HA/cluster model, rollback requirement, approval. Surface the plan/approve/backup/execute/validate/rollback pipeline and AI-as-assist principle.
 
-
 ## 28. Original Mermaid diagrams
 Standalone sources under `diagrams/case-studies/device-upgrade-management/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
-
-Firmware lifecycle: docs/firmware-lifecycle; change management: Level 6; AI safety gateway.
-
+Firmware lifecycle: docs/firmware-lifecycle; change management: Level 6; AI safety gateway. Sources: `S-OTEL` `S-SLO`.
 
 ## 30. Practical exercises
 
 1. HA-pair upgrade ordering. 2. Rollback after partial batch. 3. AI config-risk scoring inputs. 4. Air-gapped firmware repository. 5. End-of-support tracking at fleet scale.
-
 
 ---
 Previous: Intelligent syslog monitoring · Next: Configuration drift detection

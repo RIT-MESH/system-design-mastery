@@ -6,11 +6,9 @@
 
 An enterprise LLM API gateway that provides a unified model API across providers (external and self-hosted), with complexity/cost/latency routing, per-tenant token budgets, failover, semantic caching, content filtering, PII redaction, and full audit.
 
-
 ## 2. Scope
 
 In (v1): unified API, provider abstraction, multi-model routing (complexity, cost, latency, capability), token-based rate limiting and budgets, provider failover, semantic caching, content filtering, PII redaction, logging, audit. Out: model hosting (uses providers).
-
 
 ## 3. Functional requirements
 
@@ -23,7 +21,6 @@ In (v1): unified API, provider abstraction, multi-model routing (complexity, cos
 - Log and audit all calls.
 - Enforce per-tenant token budgets.
 
-
 ## 4. Non-functional requirements
 
 - Gateway overhead p99 < 20 ms.
@@ -31,36 +28,27 @@ In (v1): unified API, provider abstraction, multi-model routing (complexity, cos
 - No PII in logs.
 - No cost overrun (budgets enforced).
 
-
 ## 5. Explicit assumptions
 
 1. 100 tenants, 10k requests/s peak. [assumption] 2. Token distribution: 80 percent short, 20 percent long-context. [assumption] 3. 3 providers + 1 self-hosted. [constraint]
 
-
 ## 6. Traffic estimation
-
 10k req/s peak; each request carries input tokens (budget by tokens, not RPS).
-
 
 ## 7. Storage estimation
 
 Usage logs + audit + cache; moderate, must be auditable.
 
-
 ## 8. Bandwidth estimation
-
 Pass-through (input + output tokens); gateway adds minimal.
-
 
 ## 9. API design
 
 POST /v1/completions (unified) -> streamed response; GET /v1/usage/:tenant.
 
-
 ## 10. Data model
 
 usage(tenant, req_id, model, input_tokens, output_tokens, cost, ts); cache(query_hash, tenant, answer, ttl); providers(name, endpoint, key_ref, models, cost_per_1M).
-
 
 ## 11. High-level architecture
 
@@ -80,58 +68,56 @@ flowchart LR
   Log --> Resp
 ```
 
-
 ## 12. Request flow
 Client calls unified API -> auth + token budget check -> semantic cache (safe + same tenant) -> hit returns; miss -> router picks best model (complexity/cost/latency/capability) -> provider call -> on fail, failover -> content filter + PII redaction -> log + audit + cost -> return.
 
 ```mermaid
 %% created-for: system-design-mastery
 sequenceDiagram
-  participant P0 as Client
-  participant P1 as LLM API Gateway
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 ->> P1: data
-  P2 -->> P1: response
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
+  participant C0 as Auth token budget
+  participant C1 as Semantic cache
+  participant C2 as Response
+  participant C3 as Router complexity or cos
+  participant C4 as Provider 1
+  C0 ->> C1: send request
+  C1 ->> C2: validate and process
+  C2 ->> C3: query or persist
+  C3 ->> C4: acknowledge
+  C4 -->> C3: result
+  C3 -->> C2: response
+  C2 -->> C1: response
+  C1 -->> C0: response
+  alt operation succeeds
+    C0 -->> C0: confirm
+  else operation fails
+    C4 -->> C4: log error
+    C0 -->> C0: retry with backoff
   end
 ```
-
 
 ## 13. Component responsibilities
 
 Auth, token budget store, semantic cache, router, provider connectors, failover, content filter, PII redaction, logger/auditor, cost tracker.
 
-
 ## 14. Database selection
 
 Usage/audit (relational, append-only); semantic cache (embedding index + KV); provider registry (secret manager). Rejected: RPS-based rate limiting (insufficient for LLMs).
-
 
 ## 15. Caching strategy
 
 Semantic cache namespaced by tenant + model + prompt version; unsafe for time-sensitive or user-specific; TTL.
 
-
 ## 16. Partitioning strategy
 
 Usage by tenant; cache by tenant; gateway stateless; router stateless.
-
 
 ## 17. Replication strategy
 
 Gateway stateless RF=many; usage store RF=3; cache replicated; provider credentials in secret manager.
 
-
 ## 18. Consistency model
 
 Usage/cost strongly tracked; cache versioned; budget strongly enforced.
-
 
 ## 19. Failure scenarios
 Provider down -> failover. Budget store down -> fail-open with cap + reconcile (or fail-closed). Cache stale -> TTL. Router down -> default model.
@@ -153,59 +139,58 @@ flowchart LR
   C7 --> R8
 ```
 
-
 ## 20. Reliability strategy
 
 SLI overhead latency, availability; SLO 99.95 percent. Failover + budget enforcement. Chaos: kill a provider, assert failover.
-
 
 ## 21. Security considerations
 
 API key management + rotation; PII redaction before logging; content filtering; no confidential data to unapproved external models; per-tenant isolation; full audit; mTLS to providers.
 
-
 ## 22. Observability strategy
 
 Requests/s, tokens/s, routing distribution, cache hit ratio, cost per tenant, failover rate, content-filter blocks, PII redaction count, p99 overhead.
-
 
 ## 23. Cost considerations
 
 Gateway compute (stateless, cheap) + cache (saves LLM cost). Routing to cheaper models cuts cost; budgets cap spend.
 
-
 ## 24. Scaling stages
-
 Stage 1: unified API + routing + budgets. -> Stage 2: semantic cache + failover + PII redaction. -> Stage 3: multi-region + governance + evaluation. -> Stage 4: enterprise AI gateway at scale.
 
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  S1["Stage 1: unified API routing budgets."]
+  S2["Stage 2: semantic cache failover PII redaction."]
+  S3["Stage 3: multi-region governance evaluation."]
+  S4["Stage 4: enterprise AI gateway at scale."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 
 ## 25. Trade-offs
 
 Centralized (policy consistency) vs SPOF. Routing (cost) vs latency overhead. Token budgets (fairness) vs flexibility. Cache (cost) vs freshness/safety.
 
-
 ## 26. Alternative designs
 
 Direct provider calls (no control, no budget, no audit). RPS limits (wrong unit). Single provider (SPOF). No cache (full cost).
-
 
 ## 27. Interview discussion points
 
 Clarify provider count, token distribution, budget enforcement, cache safety. Surface routing, token-based budgets, failover, PII redaction, audit.
 
-
 ## 28. Original Mermaid diagrams
 Standalone sources under `diagrams/case-studies/llm-api-gateway/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
-
-LLM gateways: docs/ai-systems/13-llm-gateway; semantic caching: 14-semantic-caching; AI security: 09-ai-security; API gateway: Level 2.
-
+LLM gateways: docs/ai-systems/13-llm-gateway; semantic caching: 14-semantic-caching; AI security: 09-ai-security; API gateway: Level 2. Sources: `S-VECTORDB` `S-RAG`.
 
 ## 30. Practical exercises
 
 1. Routing policy for 4 models. 2. Token budget enforcement with concurrency. 3. Safe vs unsafe cache categories. 4. Failover with 3 providers. 5. PII redaction pipeline.
-
 
 ---
 Previous: Autonomous support-agent team · Next: (end of AI case studies)

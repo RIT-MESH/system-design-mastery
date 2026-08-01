@@ -273,8 +273,7 @@ flowchart LR
 Standalone sources under `diagrams/case-studies/video-streaming/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
-CDN/caching: Level 2 · object storage: Level 2 · queues: Level 2 · multi-region/edge: L10.
-
+CDN/caching: Level 2 · object storage: Level 2 · queues: Level 2 · multi-region/edge: L10. Sources: `S-CHASH` `S-DYNAMO`.
 
 ## 30. Practical exercises
 1. Re-estimate at 10M videos/month and 1M concurrent viewers. What changes?

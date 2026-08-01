@@ -6,16 +6,13 @@
 Generate each user's personalized feed of posts from people/pages they follow, at scale and
 with low latency. The classic fan-out-on-write vs fan-out-on-read trade.
 
-
 ## 2. Scope
 **In (v1):** a home feed of followed authors' posts; likes/reposts counts. **Out:**
 ranking ML, ads, stories.
 
-
 ## 3. Functional requirements
 - Build a user's feed from followed authors' posts. - Show recent posts, ranked by
 recency/basic signals. - Update counts (likes/reposts).
-
 
 ## 4. Non-functional requirements
 - Feed load p99 < 300 ms.
@@ -23,35 +20,31 @@ recency/basic signals. - Update counts (likes/reposts).
 - Celebrities with millions of followers
 (the fan-out problem).
 
-
 ## 5. Explicit assumptions
 1. 100M users, avg 200 follows, 5 posts/author/day = 100B posts/day to distribute.
 [assumption] 2. 50 feed loads/user/day. [assumption] 3. Celebrities: top ~0.1% have >1M
 followers. [constraint]
 
-
 ## 6. Traffic estimation
 - Posts: 100M authors × 5/day? Re-estimate: 100M users post avg 0.5/day = 50M posts/day ≈
 580/s. Feed loads: 100M × 50/day ≈ 58k/s.
-
 
 ## 7. Storage estimation
 - Posts ~1 KB; 50M/day = 50 GB/day; retain 1 year ≈ 18 TB. Feed caches (per-user prebuilt)
 are larger and hotter.
 
-
 ## 8. Bandwidth estimation
 - Feed loads 58k/s × ~50 KB (a page) ≈ 2.9 GB/s egress — significant; cache.
 
-
 ## 9. API design
-| GET | /feed | cursor | posts page | POST | /posts | content | post id |
-
+| Method | Path | Request | Response |
+|--------|------|---------|----------|
+| GET | /feed | cursor | posts page |
+| POST | /posts | content | post id |
 
 ## 10. Data model
 `posts(id, author, body, ts, counts)`; `follows(follower, followee)`; `feed(user, [post
 ids])` (prebuilt for fan-out-on-write).
-
 
 ## 11. High-level architecture
 ```mermaid
@@ -66,7 +59,6 @@ flowchart LR
   Reader --> Pull --> Store
 ```
 
-
 ## 12. Request flow
 Post: store → fanout to followers' prebuilt feeds (skip celebrities — too many). Read:
 fetch the user's prebuilt feed, merge in recent posts from followed celebrities (pull-on
@@ -75,48 +67,51 @@ fetch the user's prebuilt feed, merge in recent posts from followed celebrities 
 ```mermaid
 %% created-for: system-design-mastery
 sequenceDiagram
-  participant P0 as Author posts
-  participant P1 as Post service
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
+  participant C0 as Author posts
+  participant C1 as Post service
+  participant C2 as Post store
+  participant C3 as Fan-out worker<br > hybr
+  participant C4 as Per-user feed cache
+  C0 ->> C1: send request
+  C1 ->> C2: validate and process
+  C2 ->> C3: query or persist
+  C3 ->> C4: acknowledge
+  C4 -->> C3: result
+  C3 -->> C2: response
+  C2 -->> C1: response
+  C1 -->> C0: response
+  alt operation succeeds
+    C0 -->> C0: confirm
+  else operation fails
+    C4 -->> C4: log error
+    C0 -->> C0: retry with backoff
   end
 ```
-
 
 ## 13. Component responsibilities
 Post service: store. Fan-out: write to per-user feeds. Feed cache: prebuilt feeds.
 Pull-on-read: celebrity handling. Ranking: basic recency/signals.
-
 
 ## 14. Database selection
 Post store: sharded KV by author/id. Feed cache: a fast KV (Redis) per user. Rejected:
 pull-on-read only (slow for normal users with many follows); fan-out-only (impossible for
 celebrities).
 
-
 ## 15. Caching strategy
 Per-user feed cache (the whole point of fan-out-on-write). Celebrity posts pulled and
 cached with a short TTL. Hot posts cached.
-
 
 ## 16. Partitioning strategy
 Feed cache partitioned by user (each user's feed on one shard). Post store by post id.
 Fan-out workers scaled by post rate.
 
-
 ## 17. Replication strategy
 Post store RF=3; feed cache replicated for availability (a cache loss rebuilds from post
 store). Fan-out is idempotent (a re-delivered post dedups by id).
 
-
 ## 18. Consistency model
 Feed eventually consistent (a post appears within seconds). Counts eventually consistent.
 Read-your-writes: your own post appears immediately via a merge.
-
 
 ## 19. Failure scenarios
 Fan-out lag → feeds slightly stale (acceptable, bounded). Feed cache shard loss → rebuild
@@ -136,54 +131,56 @@ flowchart LR
   C5 --> R6
 ```
 
-
 ## 20. Reliability strategy
 SLI feed load latency, freshness; SLO 99.9%. Hybrid fan-out bounds celebrity load. Chaos:
 kill fan-out workers, assert feeds (stale but serving).
-
 
 ## 21. Security considerations
 Per-user auth; hide private accounts' posts from non-followers; rate-limit posting;
 moderation hooks.
 
-
 ## 22. Observability strategy
 Feed load latency, fan-out lag, feed cache hit ratio, fan-out queue depth, per-author post
 rate (celebrity watch).
 
-
 ## 23. Cost considerations
 Fan-out storage (per-user feeds) is large; the hybrid model avoids celebrity explosion.
 Cache hit ratio drives egress cost.
-
 
 ## 24. Scaling stages
 Stage 1: pull-on-read (simple, slow). → Stage 2: fan-out-on-write for normal users. →
 Stage 3: hybrid (celebrities pull-on-read). → Stage 4: ML ranking + multi-region feed
 caches.
 
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  S1["Stage 1: pull-on-read simple, slow ."]
+  S2["Stage 2: fan-out-on-write for normal users."]
+  S3["Stage 3: hybrid celebrities pull-on-read ."]
+  S4["Stage 4: ML ranking multi-region feed"]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 
 ## 25. Trade-offs
 Fan-out-on-write (fast reads, expensive writes + celebrity problem) vs pull-on-read (cheap
 writes, slow reads). Hybrid: normal fan-out, celebrities pull. Feed cache size vs cost.
 
-
 ## 26. Alternative designs
 Pure fan-out-on-write (celebrity blow-up). Pure pull-on-read (slow at 200 follows each
 load). Chosen: hybrid.
-
 
 ## 27. Interview discussion points
 Clarify scale, celebrity ratio, latency, ranking. Surface the fan-out trade and the
 hybrid celebrity handling — the core of this problem.
 
-
 ## 28. Original Mermaid diagrams
 Standalone sources under `diagrams/case-studies/social-media-feed/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
-Caching: Level 2; fan-out/queues: Level 2; ranking/ML: Level 10.
-
+Caching: Level 2; fan-out/queues: Level 2; ranking/ML: Level 10. Sources: `S-CHASH` `S-DYNAMO`.
 
 ## 30. Practical exercises
 1. Add ML ranking — where does it run, at what latency? 2. Design celebrity pull-on-read

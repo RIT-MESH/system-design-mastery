@@ -6,11 +6,9 @@
 
 An enterprise RAG platform serving thousands of tenants, each with private corpora, permission-aware retrieval, per-tenant token budgets, semantic caching, multi-model routing, and AI governance.
 
-
 ## 2. Scope
 
 In (v1): multi-tenant ingestion, permission-aware hybrid retrieval, reranking, grounded generation with citations, semantic caching, multi-model routing, per-tenant quotas, audit. Out: autonomous action (excluded).
-
 
 ## 3. Functional requirements
 
@@ -22,7 +20,6 @@ In (v1): multi-tenant ingestion, permission-aware hybrid retrieval, reranking, g
 - Enforce per-tenant token budgets.
 - Full audit.
 
-
 ## 4. Non-functional requirements
 
 - Answer p99 < 3 s.
@@ -30,36 +27,26 @@ In (v1): multi-tenant ingestion, permission-aware hybrid retrieval, reranking, g
 - Availability 99.9 percent.
 - Cost capped per tenant.
 
-
 ## 5. Explicit assumptions
 
 1. 1k tenants, 10M chunks total, 100 queries/s peak. [assumption] 2. 20 percent cache hit rate. [assumption] 3. Permission filtering before generation. [constraint]
 
-
 ## 6. Traffic estimation
-
 100 queries/s peak; bursts during business hours; cache hits skip LLM.
 
-
 ## 7. Storage estimation
-
 10M chunks x embeddings x metadata = ~30 TB vectors + index; per-tenant namespace isolation.
 
-
 ## 8. Bandwidth estimation
-
 Queries small; retrieval results small; generation streamed.
-
 
 ## 9. API design
 
 POST /ask (tenant, question) -> streamed answer + citations; POST /ingest (tenant, docs).
 
-
 ## 10. Data model
 
 chunks(tenant, id, text, embedding, acl, metadata); cache(query_hash, tenant, answer, ttl); usage(tenant, tokens, cost, budget).
-
 
 ## 11. High-level architecture
 
@@ -77,54 +64,56 @@ flowchart LR
   Ingest[Ingest] --> Chunk[Chunk + embed + ACL] --> VDB[(Vector DB)]
 ```
 
-
 ## 12. Request flow
 Client asks -> gateway auth + budget check -> semantic cache lookup (safe + same tenant) -> hit returns; miss -> permission-aware hybrid retrieve + rerank -> generate with citations -> cache safe answer -> return; audit all.
 
 ```mermaid
 %% created-for: system-design-mastery
 sequenceDiagram
-  participant P0 as Ingest
-  participant P1 as Chunk embed ACL
-  P0 ->> P1: query
-  P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
+  participant C0 as AI gateway auth budget
+  participant C1 as Semantic cache
+  participant C2 as Answer
+  participant C3 as Permission-aware hybrid
+  participant C4 as Reranker
+  C0 ->> C1: send request
+  C1 ->> C2: validate and process
+  C2 ->> C3: query or persist
+  C3 ->> C4: acknowledge
+  C4 -->> C3: result
+  C3 -->> C2: response
+  C2 -->> C1: response
+  C1 -->> C0: response
+  alt operation succeeds
+    C0 -->> C0: confirm
+  else operation fails
+    C4 -->> C4: log error
+    C0 -->> C0: retry with backoff
   end
 ```
-
 
 ## 13. Component responsibilities
 
 AI gateway, semantic cache, permission-aware retrieval, reranker, LLM serving, ingestion pipeline, usage/budget tracker, audit.
 
-
 ## 14. Database selection
 
 Vector DB (per-tenant namespaces); semantic cache (embedding index + KV); usage store (relational); audit (append-only). Rejected: shared cache across tenants (leakage).
-
 
 ## 15. Caching strategy
 
 Semantic cache namespaced by tenant + model + prompt version; unsafe for time-sensitive or user-specific queries; TTL for freshness.
 
-
 ## 16. Partitioning strategy
 
 Vector index sharded by tenant; cache by tenant; gateway stateless; usage by tenant.
-
 
 ## 17. Replication strategy
 
 Vector DB RF=3; cache replicated; gateway stateless + provider failover.
 
-
 ## 18. Consistency model
 
 Retrieval eventually consistent with ingest; cache versioned to model/corpus; budget strongly tracked.
-
 
 ## 19. Failure scenarios
 Cache miss -> full LLM call (slower, no failure). Provider down -> failover. Budget exceeded -> 429. Vector DB shard down -> partial results.
@@ -146,59 +135,58 @@ flowchart LR
   C7 --> R8
 ```
 
-
 ## 20. Reliability strategy
 
 SLI answer latency, groundedness, zero-cross-tenant-leak; SLO 99.9 percent. Failover + budget enforcement. Chaos: kill a provider, assert failover.
-
 
 ## 21. Security considerations
 
 Permission-aware retrieval (filter before generation); per-tenant isolation; PII redaction; no confidential data to unapproved external models; full audit; AI safety gateway.
 
-
 ## 22. Observability strategy
 
 Answer p99, cache hit ratio, cost per tenant, cross-tenant leakage attempts (0), groundedness score, provider failover rate.
-
 
 ## 23. Cost considerations
 
 LLM calls dominate; cache + routing cut cost. Per-tenant budgets cap spend; small models for simple queries.
 
-
 ## 24. Scaling stages
-
 Stage 1: basic RAG + per-tenant isolation. -> Stage 2: semantic cache + multi-model routing. -> Stage 3: governance + evaluation + billion-chunk. -> Stage 4: multi-region + multi-LoRA.
 
+```mermaid
+%% created-for: system-design-mastery
+flowchart LR
+  S1["Stage 1: basic RAG per-tenant isolation."]
+  S2["Stage 2: semantic cache multi-model routing."]
+  S3["Stage 3: governance evaluation billion-chunk."]
+  S4["Stage 4: multi-region multi-LoRA."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 
 ## 25. Trade-offs
 
 Cache (cost) vs freshness/safety. Routing (cost) vs quality. Permission pre-filter (safe) vs post-filter (fast). Multi-tenant shared (efficient) vs isolated (safe).
 
-
 ## 26. Alternative designs
 
 Single model (cost). Shared cache (leakage). No permission filter (unauthorized access). Post-filter (leaks to model).
-
 
 ## 27. Interview discussion points
 
 Clarify tenant count, permission model, cache safety, budget enforcement. Surface permission-aware retrieval, semantic caching, multi-model routing, and governance.
 
-
 ## 28. Original Mermaid diagrams
 Standalone sources under `diagrams/case-studies/enterprise-rag-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
-
-RAG: docs/ai-systems/06-basic-rag and 07-advanced-rag; semantic caching: 14-semantic-caching; LLM gateway: 13-llm-gateway; security: 09-ai-security.
-
+RAG: docs/ai-systems/06-basic-rag and 07-advanced-rag; semantic caching: 14-semantic-caching; LLM gateway: 13-llm-gateway; security: 09-ai-security. Sources: `S-VECTORDB` `S-RAG`.
 
 ## 30. Practical exercises
 
 1. Design permission-aware retrieval with ACLs. 2. Safe vs unsafe cache categories. 3. Multi-model routing policy. 4. Per-tenant budget enforcement. 5. Cross-tenant leak test.
-
 
 ---
 Previous: (AI case studies start) · Next: Autonomous support-agent team

@@ -546,11 +546,11 @@ Reuse therefore requires attribution under CC BY 4.0 for the content and the MIT
 | Markdown files | 209 |
 | Python files | 15 |
 | Standalone .mmd files | 272 |
-| Inline Mermaid blocks | 320 |
+| Inline Mermaid blocks | 376 |
 | Case-study directories | 6 |
 | Case-study Markdown files | 60 |
-| Median case-study word count | 757 |
-| Min case-study word count | 665 |
+| Median case-study word count | 843 |
+| Min case-study word count | 725 |
 | Max case-study word count | 2397 |
 | Complete case studies | 60 |
 | Draft case studies | 0 |

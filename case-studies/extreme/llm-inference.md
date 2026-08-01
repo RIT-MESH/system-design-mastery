@@ -11,14 +11,12 @@ applications. Requests are bursty, latency-sensitive (token-streaming), and expe
 bound). We must maximize GPU utilization, keep per-token latency low, autoscale to demand,
 > and control cost — the central economic challenge of LLM serving.
 
-
 ## 2. Scope
 **In (v1):** a single flagship model served via a streaming completion API; batching;
 autoscaling; usage quotas; basic prompt caching.
 **Out (v1):** multi-model routing by quality/cost, fine-tuning hosting, RAG orchestration
 (these are referenced as scaling stages; RAG retrieval is in the vector-search case study's
 domain).
-
 
 ## 3. Functional requirements
 - The platform **shall** accept a prompt and stream generated tokens back.
@@ -28,14 +26,12 @@ domain).
 - The platform **shall** enforce per-tenant quotas and return 429 when exceeded.
 - The platform **shall** cache repeated prompts/contexts where safe.
 
-
 ## 4. Non-functional requirements
 - First-token latency < 1 s p95; inter-token latency < 50 ms p95.
 - Availability 99.9% for the API; best-effort during GPU scarcity (graceful 429, not 5xx).
 - Cost is the binding constraint: GPU-seconds dominate; utilization must stay high.
 - Throughput: tokens/sec/GPU maximized via batching; cluster serves millions of
   tokens/sec.
-
 
 ## 5. Explicit assumptions
 1. Flagship model ~ 70B params; one inference replica = one GPU serving it. [constraint]
@@ -44,12 +40,10 @@ domain).
 4. GPU can produce ~6,000 tokens/s aggregated (batched). [assumption]
 5. Cold start of a replica ~60–120 s (model load). [constraint]
 
-
 ## 6. Traffic estimation
 - 200 req/s avg × 800 tokens = 160k tokens/s; peak 1.6M tokens/s.
 - Per GPU ~6,000 tokens/s → ~27 GPUs avg, ~270 GPUs peak. (These are illustrative.)
 - Read-only inference; no writes except telemetry/quota. Request path is GPU-bound.
-
 
 ## 7. Storage estimation
 - Model weights: ~140 GB per replica (loaded into GPU memory). Stored once in object
@@ -57,11 +51,9 @@ domain).
 - Prompt cache: KV-cache reuse for shared prefixes; sized in GPU/cluster memory, GBs.
 - Telemetry/quota: small, in a fast store.
 
-
 ## 8. Bandwidth estimation
 - Input/output text is small (~KBs/request); bandwidth is trivial vs GPU compute. The
   binding resource is GPU compute, not network.
-
 
 ## 9. API design
 | Method | Path | Request | Response |
@@ -70,13 +62,11 @@ domain).
 | GET | /v1/usage/:tenant | — | tokens used / quota |
 Requests carry an idempotency key (for billing/dedup of retries) and a tenant token.
 
-
 ## 10. Data model
 - `usage(tenant, window, tokens, cost)` for quota/billing.
 - `prompt_cache(context_hash) -> prefix KV state` (in cluster memory / a cache tier).
 - `models(name, version, weights_uri, config)` registry.
 State is minimal and external; the GPU replicas are stateless compute.
-
 
 ## 11. High-level architecture
 
@@ -93,7 +83,6 @@ flowchart LR
   Reg["Model registry"] --> Reps
   Reps --> Telemetry["Telemetry / usage / cost"]
 ```
-
 
 ## 12. Request flow
 1. Client posts a completion request (SSE stream).
@@ -128,7 +117,6 @@ sequenceDiagram
   R-->>Telemetry: usage (async)
 ```
 
-
 ## 13. Component responsibilities
 - **API gateway**: auth, per-tenant quota, rate limiting (token-bucket, Level 2).
 - **Inference router**: batch-aware + cache-aware routing; the brain of utilization.
@@ -137,13 +125,11 @@ sequenceDiagram
 - **Prompt/KV cache**: reuse shared prefixes (system prompts) to skip recompute.
 - **Model registry**: versioned weights; canary new versions.
 
-
 ## 14. Database selection
 **Chosen: minimal external state.** Quota/usage in a fast KV/counter store; model weights in
 object storage; KV-cache in cluster memory. The "database" is the GPU memory; we keep
 durable state tiny. **Rejected: storing conversation history in the platform** — that's the
 client's job (statelessness keeps replicas fungible).
-
 
 ## 15. Caching strategy
 - **Prompt/KV prefix caching**: shared system prompts or long contexts produce KV state
@@ -152,18 +138,15 @@ client's job (statelessness keeps replicas fungible).
   enough, keyed by a hash; honor non-determinism settings.
 - **Tiering**: hot prefixes in GPU memory; warm ones in a host/cluster cache.
 
-
 ## 16. Partitioning strategy
 Inference is stateless; "partitioning" is **routing**: batch-aware (group requests that fit
 one GPU's batch) and cache-aware (send prefix-sharing requests to the same replica).
 There's no per-key data sharding; the GPU fleet is a pool sized by demand.
 
-
 ## 17. Replication strategy
 Replicas are **stateless** (KV-cache is a performance cache, not durability); any replica
 can serve any request. The fleet is "replicated" by autoscaling. No leader/follower;
 failover = re-route to another replica (and, if needed, scale up).
-
 
 ## 18. Consistency model
 - **Inference**: a single request is processed by one replica (no cross-replica state).
@@ -171,7 +154,6 @@ failover = re-route to another replica (and, if needed, scale up).
   over-shoot under burst is acceptable (bill the surplus, don't block).
 - **Cache**: prefix cache is best-effort; a miss recomputes — correctness never depends on
   the cache.
-
 
 ## 19. Failure scenarios
 | Failure | Response |
@@ -192,13 +174,11 @@ flowchart LR
   F -->|"quota store down"| Open["fail-open with cap + reconcile"]
 ```
 
-
 ## 20. Reliability strategy
 - SLI: first-token latency, inter-token latency, 429 vs 5xx rate; SLO 99.9% availability.
 - Stateless replicas + autoscaling; a floor of warm replicas bounds cold-start.
 - Overload protection: queue with bounded wait, then 429 (never let GPU latency collapse).
 - Chaos: kill a replica and assert re-routing; simulate GPU scarcity and assert graceful 429.
-
 
 ## 21. Security considerations
 - Per-tenant auth and quota (token + tenant_id derived from auth, Level 7).
@@ -206,7 +186,6 @@ flowchart LR
 - Model weights are IP — protect in storage and in memory; restrict replica access.
 - Rate limiting per tenant to prevent abuse/cost runaway.
 - Audit access for billing and abuse investigation.
-
 
 ## 22. Observability strategy
 - Golden signals on the API: request rate, latency (first/inter-token), errors (429/5xx),
@@ -216,7 +195,6 @@ flowchart LR
 - Per-replica batch fill and KV-cache hit ratio (the utilization levers).
 - Alerts: utilization drop (cost), latency rise, 429 spike, replica churn.
 
-
 ## 23. Cost considerations
 - GPU-seconds dominate cost; **utilization is the lever**: batching raises tokens/sec/GPU,
   prefix caching skips recompute, and right-sized batching balances latency vs throughput.
@@ -224,7 +202,6 @@ flowchart LR
   cold start is acceptable to the SLA.
 - Right-size the model for the workload (smaller/cheaper models where they suffice —
   routing by quality/cost, a scaling stage).
-
 
 ## 24. Scaling stages
 
@@ -238,7 +215,6 @@ flowchart LR
   S4 -->|"RAG"| S5["Stage 5: retrieval-augmented<br/>(vector search + context)"]
 ```
 
-
 ## 25. Trade-offs
 | Decision | Chosen | Rejected | Reason |
 |----------|--------|----------|--------|
@@ -248,7 +224,6 @@ flowchart LR
 | Caching | prefix KV cache | recompute each request | skip redundant compute (cost) |
 | Scarcity | graceful 429 | queue forever | protect latency and cost |
 
-
 ## 26. Alternative designs
 - **Sticky routing**: always route a user to the same replica (max cache reuse) but loses
   fungibility and load-balancing; rejected for bursty, fungible workloads.
@@ -256,7 +231,6 @@ flowchart LR
   for regulated tenants (a scaling stage).
 - **Scale to zero off-peak**: max cost savings but cold-start violates the latency SLO on
   wake; only if cold start is acceptable.
-
 
 ## 27. Interview discussion points
 - Clarify: latency SLA, burstiness, cost constraints, multi-model? These reshape the design.
@@ -267,14 +241,12 @@ flowchart LR
 - Watch for: serving one request at a time (kills throughput/utilization), or scaling to
   zero with a latency SLO.
 
-
 ## 28. Original Mermaid diagrams
 Standalone sources under `diagrams/case-studies/llm-inference/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.
 
 ## 29. Further reading
 GPU clusters/batch: this level · vector search/RAG: this level · rate limiting: Level 2/5
-(rate_limiter.py) · cost observability: Level 8.
-
+(rate_limiter.py) · cost observability: Level 8. Sources: `S-VECTORDB` `S-RAG`.
 
 ## 30. Practical exercises
 1. Re-estimate at 20k req/s peak. How many GPUs, and what changes about batching?
