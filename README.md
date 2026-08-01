@@ -245,7 +245,7 @@ Patterns and constraints that only matter past millions of users, petabytes, or 
 - [Internet-Scale Identity, IoT/Digital Twins, P2P & Blockchain](docs/10-extreme-scale/11-identity-iot-p2p-blockchain.md)
 ## Case Studies
 
-Fifty-three case studies apply the design method end to end. Each follows the [thirty-section template](templates/CASE-STUDY-TEMPLATE.md) and contains original traffic/storage/bandwidth estimates, an API design, a data model, and four original Mermaid diagrams — a high-level architecture (context/component) diagram, a request-sequence diagram, a failure-flow diagram, and a scaling-evolution diagram — plus a request-flow description, failure-scenarios description, scaling stages, trade-offs, alternatives, interview discussion points, and exercises. Standalone diagram sources live under [`diagrams/case-studies/`](diagrams/case-studies/).
+Fifty-three case studies apply the design method end to end. Each follows the [case study template](templates/CASE-STUDY-TEMPLATE.md) and contains original traffic/storage/bandwidth estimates, an API design, a data model, and four original Mermaid diagrams — a high-level architecture (context/component) diagram, a request-sequence diagram, a failure-flow diagram, and a scaling-evolution diagram — plus a request-flow description, failure-scenarios description, scaling stages, trade-offs, alternatives, interview discussion points, and exercises. Standalone diagram sources live under [`diagrams/case-studies/`](diagrams/case-studies/).
 
 ### Beginner ([`case-studies/beginner/`](case-studies/beginner/))
 
