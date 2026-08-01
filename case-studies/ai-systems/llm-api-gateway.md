@@ -22,8 +22,48 @@ flowchart LR
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/llm-api-gateway/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/llm-api-gateway/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as LLM API Gateway
+  participant P2 as Store
+  P0 ->> P1: request
+  P1 ->> P2: process
+  P2 -->> P1: response
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Provider down"]
+  R2["failover"]
+  C1 --> R2
+  C3["Budget store down"]
+  R4["fail-open with cap reconcile or fail-clo"]
+  C3 --> R4
+  C5["Cache stale"]
+  R6["TTL"]
+  C5 --> R6
+  C7["Router down"]
+  R8["default model."]
+  C7 --> R8
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 unified API routing budgets."]
+  S2["Stage 2 semantic cache failover PII redaction."]
+  S3["Stage 3 multi-region governance evaluation."]
+  S4["Stage 4 enterprise AI gateway at scale."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 1. Problem statement
 
 An enterprise LLM API gateway that provides a unified model API across providers (external and self-hosted), with complexity/cost/latency routing, per-tenant token budgets, failover, semantic caching, content filtering, PII redaction, and full audit.

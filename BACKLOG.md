@@ -219,7 +219,7 @@ sections and original Mermaid diagrams.
 | ✅ | AI Milestone 5 — Security and evaluation: prompt injection, data poisoning, RBAC-aware RAG, PII, LLM tracing, RAG/agent evaluation, cost observability |
 | ✅ | AI Milestone 6 — Model serving: inference engines, continuous batching, KV caching, quantization, distributed/multi-GPU inference, autoscaling |
 | ✅ | AI Milestone 7 — Extreme scale: multi-region serving, billion-chunk retrieval, multi-LoRA, GPU scheduling, enterprise AI gateways, large-scale evaluation, AI governance |
-| 🔲 | AI Milestone 8 — Case studies and tools: enterprise RAG platform, autonomous support-agent team, LLM API gateway, chunking simulator, model-routing simulator, security and readiness templates |
+| ✅ | AI Milestone 8 — Case studies and tools: enterprise RAG platform, autonomous support-agent team, LLM API gateway, chunking simulator, model-routing simulator, security and readiness templates |
 | 🔲 | `simulations/ai/` and `simulations/network/` interactive simulation sets |
 
 ## Practical components (M3–M8)

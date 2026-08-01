@@ -1,0 +1,14 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Provider down"]
+  R2["failover"]
+  C1 --> R2
+  C3["Budget store down"]
+  R4["fail-open with cap reconcile or fail-clo"]
+  C3 --> R4
+  C5["Cache stale"]
+  R6["TTL"]
+  C5 --> R6
+  C7["Router down"]
+  R8["default model."]
+  C7 --> R8

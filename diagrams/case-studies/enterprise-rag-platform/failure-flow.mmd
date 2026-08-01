@@ -1,0 +1,14 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Cache miss"]
+  R2["full LLM call slower, no failure"]
+  C1 --> R2
+  C3["Provider down"]
+  R4["failover"]
+  C3 --> R4
+  C5["Budget exceeded"]
+  R6["429"]
+  C5 --> R6
+  C7["Vector DB shard down"]
+  R8["partial results."]
+  C7 --> R8

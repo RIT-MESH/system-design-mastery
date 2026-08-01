@@ -1,0 +1,14 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Agent fails"]
+  R2["supervisor retries or escalates"]
+  C1 --> R2
+  C3["RAG down"]
+  R4["answer without grounding disclaimer"]
+  C3 --> R4
+  C5["LLM down"]
+  R6["queue ticket"]
+  C5 --> R6
+  C7["Policy gateway down"]
+  R8["fail-closed no actions ."]
+  C7 --> R8

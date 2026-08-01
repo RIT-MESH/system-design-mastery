@@ -22,8 +22,48 @@ flowchart LR
 
 ## 28. Original Mermaid diagrams
 
-`diagrams/case-studies/autonomous-support-agent-team/context.mmd`; key diagram inline above.
+Standalone sources under `diagrams/case-studies/autonomous-support-agent-team/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams:
 
+```mermaid
+%% origin: original to system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Autonomous Support-Agent Tea
+  participant P2 as Store
+  P0 ->> P1: request
+  P1 ->> P2: process
+  P2 -->> P1: response
+  P1 -->> P0: response
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Agent fails"]
+  R2["supervisor retries or escalates"]
+  C1 --> R2
+  C3["RAG down"]
+  R4["answer without grounding disclaimer"]
+  C3 --> R4
+  C5["LLM down"]
+  R6["queue ticket"]
+  C5 --> R6
+  C7["Policy gateway down"]
+  R8["fail-closed no actions ."]
+  C7 --> R8
+```
+
+```mermaid
+%% origin: original to system-design-mastery
+flowchart LR
+  S1["Stage 1 single agent RAG."]
+  S2["Stage 2 multi-agent supervisor policy."]
+  S3["Stage 3 review agent evaluation governance."]
+  S4["Stage 4 enterprise agent platform, multi-region."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+```
 ## 1. Problem statement
 
 A team of specialized AI agents (triage, research, resolution, review) that handle support tickets end to end, with a supervisor coordinating, a policy gateway approving high-risk actions, and full audit.
