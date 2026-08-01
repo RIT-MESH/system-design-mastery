@@ -1,6 +1,6 @@
 # Case Study: Logging Platform
 
-> **Tier:** intermediate · **Status:** draft · Original numbers and diagrams.
+> **Tier:** intermediate · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 Ingest, store, and query logs from many services at high event rates, with retention and
@@ -41,7 +41,7 @@ cold, and in a hot search index for recent. Fields: service, severity, ts, messa
 
 ## 11. High-level architecture
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Src["Services"] --> Ingest["Ingest (batched, LZ4)"]
   Ingest --> Stream["Partitioned stream"]
@@ -124,7 +124,7 @@ partition-by-date for lifecycle — the cost levers.
 Standalone sources under `diagrams/case-studies/logging-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Services
   participant P1 as Ingest batched, LZ4
@@ -133,7 +133,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Hot index shard down"]
   R2["recent search degrades or returns partia"]
@@ -145,7 +145,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 ingest + hot index."]
   S2["Stage 2 partitioned cold tier + date lifecycle."]

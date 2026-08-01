@@ -17,7 +17,7 @@ Prompt injection: an attacker embeds instructions in retrieved content or user i
 ## Architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Input --> Inject[Prompt injection check]
   RAG[Retrieval] --> ACL[ACL filter]

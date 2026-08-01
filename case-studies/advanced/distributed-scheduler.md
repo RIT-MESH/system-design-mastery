@@ -1,6 +1,6 @@
 # Case Study: Distributed Scheduler
 
-> **Tier:** advanced · **Status:** draft · Original numbers and diagrams.
+> **Tier:** advanced · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 
@@ -45,7 +45,7 @@ jobs(id, schedule, action, concurrency); runs(job_id, run_id, status, attempts, 
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   DB[Jobs store] --> Leader[Leader-elected scheduler]
   Leader -->|acquire lease per (job,run)| Workers
@@ -123,7 +123,7 @@ Clarify single-execution, retry, spikes. Surface leader election + leases + idem
 Standalone sources under `diagrams/case-studies/distributed-scheduler/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Jobs store
   participant P1 as Leader-elected scheduler
@@ -132,7 +132,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Leader down"]
   R2["elect new"]
@@ -146,7 +146,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 leader + workers."]
   S2["Stage 2 leases + idempotency."]

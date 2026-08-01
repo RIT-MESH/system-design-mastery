@@ -1,6 +1,6 @@
-﻿# Case Study: Large-Language-Model Inference Platform
+# Case Study: Large-Language-Model Inference Platform
 
-> **Tier:** extreme · **Status:** draft
+> **Tier:** extreme · **Status:** beta
 > A complete extreme case study demonstrating the 30-section template for a GPU-bound,
 > latency- and cost-sensitive serving system at extreme scale. All numbers and diagrams are
 > original.
@@ -71,7 +71,7 @@ State is minimal and external; the GPU replicas are stateless compute.
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Client --> GW["API gateway<br/>auth + quota + rate-limit"]
   GW --> Router["Inference router<br/>(batch + cache-aware)"]
@@ -94,7 +94,7 @@ flowchart LR
 5. Usage is recorded asynchronously for quota/billing.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant C as Client
   participant GW as Gateway
@@ -165,7 +165,7 @@ failover = re-route to another replica (and, if needed, scale up).
 | Quota store down | Fail-open with a cap, reconcile on recovery |
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   F{"Failure"}
   F -->|"GPU crash"| Reroute["re-route in-flight; replace replica"]
@@ -206,7 +206,7 @@ flowchart LR
 ## 24. Scaling stages
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1: single GPU replica,<br/>no batching"]
   S1 -->|"throughput"| S2["Stage 2: batching + autoscaling<br/>+ quota"]

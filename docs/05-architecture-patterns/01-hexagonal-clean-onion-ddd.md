@@ -1,4 +1,4 @@
-﻿# Hexagonal, Clean, Onion Architecture & DDD
+# Hexagonal, Clean, Onion Architecture & DDD
 
 > **Level:** 5 (Architecture Patterns) · **Prerequisites:** [Monolith→Microservices](00-monolith-modular-microservices.md)
 > **Navigation:** [← Previous: Monolith→Microservices](00-monolith-modular-microservices.md) · [Next → CQRS, Event Sourcing, Outbox, Inbox](02-cqrs-es-outbox.md)
@@ -16,7 +16,7 @@ testable and swappable and lets you change the DB or the API without touching th
 rules.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart TB
   Infra["Infrastructure<br/>(DB, APIs, frameworks)"] --> App["Application<br/>(use cases)"]
   App --> Domain["Domain<br/>(business rules)"]
@@ -45,7 +45,7 @@ DDD gives you the *vocabulary* and *boundaries* for the inside:
 - **Context mapping**: how contexts relate (upstream/downstream, anti-corruption layers).
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   subgraph BC1["Orders context"]
     OA["Order aggregate"]

@@ -1,6 +1,6 @@
 # Case Study: Ride-Hailing Platform
 
-> **Tier:** advanced · **Status:** draft · Original numbers and diagrams.
+> **Tier:** advanced · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 
@@ -45,7 +45,7 @@ driver(id, loc, status); trip(id, rider, driver, status, route, fare); location 
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Rider --> API --> Match[Matching svc]
   Driver --> LocSvc[Location svc] --> Geo[Geo index (available drivers)]
@@ -124,7 +124,7 @@ Clarify match radius, latency, pooling, surge. Surface the geo index, real-time 
 Standalone sources under `diagrams/case-studies/ride-hailing/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Location svc
   participant P1 as Geo index available drivers
@@ -133,7 +133,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Matching slow"]
   R2["degrade expand radius, queue"]
@@ -147,7 +147,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 matching + geo index."]
   S2["Stage 2 region-partitioned geo + live tracking."]

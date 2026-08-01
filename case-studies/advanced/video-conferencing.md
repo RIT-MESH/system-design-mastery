@@ -1,11 +1,11 @@
 # Case Study: Video-Conferencing System
 
-> **Tier:** advanced · **Status:** draft · Original numbers and diagrams.
+> **Tier:** advanced · **Status:** beta · Original numbers and diagrams.
 
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   P1 & P2 & P3 --> SFU[Selective forwarding unit]
   SFU -->|forward per layer| P1 & P2 & P3
@@ -18,7 +18,7 @@ flowchart LR
 Standalone sources under `diagrams/case-studies/video-conferencing/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Signaling
   participant P1 as Room svc
@@ -27,7 +27,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["SFU down"]
   R2["call drops or migrates to another SFU be"]
@@ -41,7 +41,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 signaling + SFU."]
   S2["Stage 2 per-call SFU + presence."]

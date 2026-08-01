@@ -1,4 +1,4 @@
-﻿# Cost Observability, Synthetic/RUM, Profiling, Continuous Verification
+# Cost Observability, Synthetic/RUM, Profiling, Continuous Verification
 
 > **Level:** 8 (Observability) · **Prerequisites:** [On-Call/Runbooks/Postmortems](04-on-call-runbooks-postmortems.md)
 > **Navigation:** [← Previous: On-Call/Runbooks/Postmortems](04-on-call-runbooks-postmortems.md) · [Next → Level 9: Cloud-Native](../09-cloud-platform/README.md)
@@ -24,7 +24,7 @@ co-locating compute with data).
   synthetic misses.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Probe["Synthetic probe<br/>(scheduled, multi-region)"] --> Flow["Critical flow check"]
   Users["Real users"] --> RUM["RUM: per-session perf"]

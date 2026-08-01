@@ -1,4 +1,4 @@
-﻿# MapReduce, Lambda & Kappa (deep dive)
+# MapReduce, Lambda & Kappa (deep dive)
 
 > **Level:** 5 (Architecture Patterns) · **Prerequisites:** [Cache Strategies](05-cache-strategies.md)
 > **Navigation:** [← Previous: Cache Strategies](05-cache-strategies.md) · [Next → Level 6: Reliability](../06-reliability/README.md)
@@ -14,7 +14,7 @@ aggregate. Latency is high (minutes–hours) but it scales to petabytes by co-lo
 with data — the antidote to the ""network costs years"" lesson from Level 0.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Input["Input partitions<br/>(data-local)"] --> Map["Map tasks"]
   Map --> Shuffle["Shuffle by key"]

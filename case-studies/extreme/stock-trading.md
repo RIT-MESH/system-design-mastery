@@ -1,11 +1,11 @@
 # Case Study: Stock-Trading Platform
 
-> **Tier:** extreme · **Status:** draft · Original numbers and diagrams.
+> **Tier:** extreme · **Status:** beta · Original numbers and diagrams.
 
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Trader --> OE[Order entry] --> Match[Matching engine]
   Match --> Book[(Order book, in-memory)]
@@ -20,7 +20,7 @@ flowchart LR
 Standalone sources under `diagrams/case-studies/stock-trading/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Order entry
   participant P1 as Matching engine
@@ -29,7 +29,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Matching engine down"]
   R2["failover to standby replaying the order"]
@@ -43,7 +43,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 matching engine + book."]
   S2["Stage 2 per-symbol partitioning + failover."]

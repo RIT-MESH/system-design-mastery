@@ -1,11 +1,11 @@
 # Case Study: Banking Ledger
 
-> **Tier:** extreme · **Status:** draft · Original numbers and diagrams.
+> **Tier:** extreme · **Status:** beta · Original numbers and diagrams.
 
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Tx[Transfer tx] --> Valid[Validate + double-entry]
   Valid --> Ledger[(Append-only ledger, sync RF=3)]
@@ -19,7 +19,7 @@ flowchart LR
 Standalone sources under `diagrams/case-studies/banking-ledger/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Transfer tx
   participant P1 as Validate + double-entry
@@ -28,7 +28,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Mid-transfer failure"]
   R2["atomic rollback no partial"]
@@ -42,7 +42,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 double-entry ledger + sync replication."]
   S2["Stage 2 sharded by account + reconciliation."]

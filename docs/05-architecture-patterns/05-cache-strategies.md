@@ -1,4 +1,4 @@
-﻿# Cache Strategies, Shared-Nothing, Actor, Pipeline, MapReduce/Lambda/Kappa
+# Cache Strategies, Shared-Nothing, Actor, Pipeline, MapReduce/Lambda/Kappa
 
 > **Level:** 5 (Architecture Patterns) · **Prerequisites:** [Resilience Patterns](04-resilience-patterns.md)
 > **Navigation:** [← Previous: Resilience Patterns](04-resilience-patterns.md) · [Next → Level 6: Reliability](../06-reliability/README.md)
@@ -17,7 +17,7 @@
 | **Write-behind** | — | write cache first, async to store | fast writes; durability risk |
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   W["Write"] -.through.-> Both["cache + store (sync)"]
   W -.behind.-> Async["cache now, store later (async)"]
@@ -56,7 +56,7 @@ propagation between stages.
   stream. Simpler than Lambda (one code path) but requires replayable, retained streams.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   subgraph Lambda["Lambda (batch + speed)"]
     B["Batch layer"] & S["Speed layer"] --> Serv["Serving layer"]

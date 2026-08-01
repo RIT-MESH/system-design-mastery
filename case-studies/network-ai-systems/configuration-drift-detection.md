@@ -1,6 +1,6 @@
 # Case Study: Configuration Drift Detection Platform
 
-> **Tier:** network-ai-systems · **Status:** draft · Original numbers and diagrams.
+> **Tier:** network-ai-systems · **Status:** beta · Original numbers and diagrams.
 
 ## 11. High-level architecture
 

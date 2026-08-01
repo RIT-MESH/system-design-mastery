@@ -1,4 +1,4 @@
-﻿# Storage Classes: Object, Block, File
+# Storage Classes: Object, Block, File
 
 > **Level:** 2 (Core Components) · **Prerequisites:** [CDN & Caching](03-cdn-caching.md)
 > **Navigation:** [← Previous: CDN & Caching](03-cdn-caching.md) · [Next → Queues, Streams & Search](05-queues-streams-search.md)
@@ -18,7 +18,7 @@
   for legacy apps needing a shared filesystem, worse for massive scale.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   subgraph Object["Object storage"]
     O["immutable blobs via HTTP<br/>unlimited scale, cheap, high-latency"]

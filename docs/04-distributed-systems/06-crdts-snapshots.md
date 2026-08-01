@@ -1,4 +1,4 @@
-﻿# CRDTs & Distributed Snapshots
+# CRDTs & Distributed Snapshots
 
 > **Level:** 4 (Distributed Systems) · **Prerequisites:** [Delivery Semantics](05-delivery-semantics.md)
 > **Navigation:** [← Previous: Delivery Semantics](05-delivery-semantics.md) · [Next → Level 5: Architecture Patterns](../05-architecture-patterns/README.md)
@@ -17,7 +17,7 @@ text-editing structures (RGA) behind collaborative editors. CRDTs trade strong c
 for availability: any replica accepts writes, and merges converge.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   A["Replica A: add x"] --> M["merge"]
   B["Replica B: remove x"] --> M
@@ -39,7 +39,7 @@ state on receiving a **marker** and forwards markers, so the snapshot captures a
 through spacetime where in-flight messages are consistently accounted for.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   N1["Node 1: record state, send marker"] --> N2["Node 2: on marker, record state"]
   N2 --> N3["forward marker"]

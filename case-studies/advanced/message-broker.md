@@ -1,6 +1,6 @@
 # Case Study: Message Broker
 
-> **Tier:** advanced · **Status:** draft · Original numbers and diagrams.
+> **Tier:** advanced · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 
@@ -45,7 +45,7 @@ Topics partitioned by key into append-only logs; each partition is an ordered, r
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   P[Producers] --> Part[Partitioned logs (RF=3)]
   Part --> CG1[Consumer group A]
@@ -122,7 +122,7 @@ Clarify ordering scope (partition vs global), retention, delivery semantics, rep
 Standalone sources under `diagrams/case-studies/message-broker/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Producers
   participant P1 as Partitioned logs RF 3
@@ -131,7 +131,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Leader down"]
   R2["elect an ISR follower"]
@@ -145,7 +145,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 brokers + replicated logs."]
   S2["Stage 2 partitioning + consumer groups."]

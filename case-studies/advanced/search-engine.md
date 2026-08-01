@@ -1,11 +1,11 @@
 # Case Study: Search Engine
 
-> **Tier:** advanced · **Status:** draft · Original numbers and diagrams.
+> **Tier:** advanced · **Status:** beta · Original numbers and diagrams.
 
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Crawl[Crawl] --> Index[Index builder] --> Shards[Sharded inverted index]
   Query --> Qry[Query svc] --> Shards
@@ -18,7 +18,7 @@ flowchart LR
 Standalone sources under `diagrams/case-studies/search-engine/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Crawl
   participant P1 as Index builder
@@ -27,7 +27,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Shard down"]
   R2["partial results warn or fail"]
@@ -41,7 +41,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 crawl + index + query."]
   S2["Stage 2 sharded index + gather."]

@@ -1,4 +1,4 @@
-﻿# Normalization, Denormalization & Indexing
+# Normalization, Denormalization & Indexing
 
 > **Level:** 3 (Data & Storage) · **Prerequisites:** [RDBMS vs NoSQL](00-rdbms-vs-nosql.md)
 > **Navigation:** [← Previous: RDBMS vs NoSQL](00-rdbms-vs-nosql.md) · [Next → Replication](02-replication.md)
@@ -19,7 +19,7 @@ path. It optimizes for read latency and scale. The cost: writes must update mult
 (consistency maintenance), so writes become slower and more failure-prone.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Write["Write"] --> Norm["Normalized: update one fact"]
   Norm --> JoinRead["Read needs joins (slow at scale)"]
@@ -47,7 +47,7 @@ speeds reads but slows writes and uses storage.
 - **Partial/filtered index**: indexes only a subset, saving space for sparse predicates.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Q["WHERE a=? AND b=? ORDER BY c"] --> Idx["Composite (a,b,c)"]
   Idx --> Probe["probe a, then b, scan c sorted"]

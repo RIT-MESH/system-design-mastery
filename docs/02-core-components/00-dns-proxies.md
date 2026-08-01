@@ -1,4 +1,4 @@
-﻿# DNS, Forward & Reverse Proxies
+# DNS, Forward & Reverse Proxies
 
 > **Level:** 2 (Core Components) · **Prerequisites:** [Level 1](../01-foundations/README.md)
 > **Navigation:** ← Start of Level 2 · [Next → Load Balancers](01-load-balancers.md)
@@ -14,7 +14,7 @@ round-robin, weighted, latency-based, and geo-based records send users to nearby
 The key knob is the **TTL**: it bounds how long clients/resolvers cache a record.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   U["User in EU"] --> DNS["Geo DNS<br/>(short TTL)"]
   DNS --> EU["EU region"]
@@ -41,7 +41,7 @@ canonicalization of request/response shape. Reverse proxies (NGINX, Envoy, HAPro
 load balancers) are the standard edge of a service tier.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Client --> RP["Reverse proxy<br/>TLS terminate + route + rate-limit"]
   RP --> S1["Service A"]

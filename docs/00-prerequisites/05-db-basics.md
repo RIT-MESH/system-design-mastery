@@ -1,4 +1,4 @@
-﻿# Basic Database Concepts
+# Basic Database Concepts
 
 > **Level:** 0 (Prerequisites) · **Prerequisites:** [Complexity & Data Structures](03-complexity-data-structures.md)
 > **Navigation:** [← Previous: Complexity & Data Structures](03-complexity-data-structures.md) · [Next → Level 1: Requirements](../01-foundations/00-requirements-and-quality-attributes.md)
@@ -21,7 +21,7 @@ by **foreign keys**. This model is intuitive and keeps data structured, at the c
 needing joins and schemas.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 erDiagram
   USER ||--o{ PASTE : authors
   USER {
@@ -45,7 +45,7 @@ cost: every write must also update the index, so more indexes speed reads and sl
 the central read/write trade-off of storage.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Q["WHERE author_id = 7"] --> NoIdx["No index: scan all rows O(n)"]
   Q --> Idx["Index: B-tree probe O(log n)"]

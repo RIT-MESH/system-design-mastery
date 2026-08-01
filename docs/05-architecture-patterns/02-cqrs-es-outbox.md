@@ -1,4 +1,4 @@
-﻿# CQRS, Event Sourcing, Outbox, Inbox
+# CQRS, Event Sourcing, Outbox, Inbox
 
 > **Level:** 5 (Architecture Patterns) · **Prerequisites:** [Hexagonal/Clean/DDD](01-hexagonal-clean-onion-ddd.md)
 > **Navigation:** [← Previous: Hexagonal/Clean/DDD](01-hexagonal-clean-onion-ddd.md) · [Next → Strangler, Sidecar, BFF](03-strangler-sidecar-bff.md)
@@ -16,7 +16,7 @@ can't be optimal for both. CQRS lets each be tuned — often the read model is a
 eventually-consistent projection.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Cmd["Command<br/>(validate + apply)"] --> Write["Write model<br/>(source of truth)"]
   Write --"events / CDC"--> Proj["Read projections<br/>(denormalized)"]
@@ -32,7 +32,7 @@ queries ("state at time t"), and replay to rebuild any projection. Costs: comple
 ad-hoc queries.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   E1["evt: Created"] --> E2["evt: ItemAdded"]
   E2 --> E3["evt: Paid"]

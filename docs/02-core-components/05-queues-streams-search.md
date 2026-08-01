@@ -1,4 +1,4 @@
-﻿# Message Queues, Event Streams & Search Engines
+# Message Queues, Event Streams & Search Engines
 
 > **Level:** 2 (Core Components) · **Prerequisites:** [Storage Classes](04-storage-classes.md)
 > **Navigation:** [← Previous: Storage Classes](04-storage-classes.md) · [Next → Workers, Schedulers & Notifications](06-workers-schedulers-notifications.md)
@@ -15,7 +15,7 @@ leveling), lets producers and consumers scale independently, and lets a slow con
 to block a fast producer. Classic use: a worker pool processing jobs.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   P1["Producer"] --> Q["Queue"]
   P2["Producer"] --> Q
@@ -36,7 +36,7 @@ suit event-driven architectures, analytics, and CDC pipelines where multiple dow
 need the same events.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   P["Producers"] --> Log["Partitioned log<br/>(retained, replayable)"]
   Log --> A["Consumer group A"]

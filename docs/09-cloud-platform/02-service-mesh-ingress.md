@@ -1,4 +1,4 @@
-﻿# Service Mesh & Ingress
+# Service Mesh & Ingress
 
 > **Level:** 9 (Cloud-Native) · **Prerequisites:** [Kubernetes Architecture](01-k8s-architecture.md)
 > **Navigation:** [← Previous: Kubernetes Architecture](01-k8s-architecture.md) · [Next → Serverless & FaaS](03-serverless-faas.md)
@@ -15,7 +15,7 @@ without app code changes. It operationalizes zero-trust and resilience patterns 
 polyglot fleet via a uniform data plane.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Client --> Ingress["Ingress (north-south)"]
   Ingress --> A["Svc A + sidecar"]

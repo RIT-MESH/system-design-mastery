@@ -1,4 +1,4 @@
-﻿# Resilience Patterns: Bulkhead, Circuit Breaker, Retry, Timeout, Load Shedding
+# Resilience Patterns: Bulkhead, Circuit Breaker, Retry, Timeout, Load Shedding
 
 > **Level:** 5 (Architecture Patterns) · **Prerequisites:** [Strangler/Sidecar/BFF](03-strangler-sidecar-bff.md)
 > **Navigation:** [← Previous: Strangler/Sidecar/BFF](03-strangler-sidecar-bff.md) · [Next → Cache Strategies](05-cache-strategies.md)
@@ -15,7 +15,7 @@ dependency consumes all threads and takes down unrelated traffic. The failure-in
 example models this containment.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   App --> Pool1["Dep A pool"] --> A["Service A"]
   App --> Pool2["Dep B pool"] --> B["Service B"]
@@ -30,7 +30,7 @@ Stop calling a failing dependency for a cooldown to prevent cascading failure an
   example demonstrates tripping.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 stateDiagram-v2
   [*] --> Closed
   Closed --> Open: failures >= threshold
@@ -63,7 +63,7 @@ For bursty writes, put a queue between producers and workers so a burst is absor
   blocked. Trade: added latency and operational complexity (DLQs, ordering).
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   P["Producers (burst)"] --> Q["Queue<br/>(absorbs burst)"]
   Q --> W["Workers<br/>(steady rate)"]

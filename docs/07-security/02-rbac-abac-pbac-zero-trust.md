@@ -1,4 +1,4 @@
-﻿# RBAC, ABAC, PBAC, Zero-Trust, mTLS
+# RBAC, ABAC, PBAC, Zero-Trust, mTLS
 
 > **Level:** 7 (Security) · **Prerequisites:** [OAuth/OIDC/SAML/JWT](01-oauth-oidc-saml-jwt.md)
 > **Navigation:** [← Previous: OAuth/OIDC/SAML/JWT](01-oauth-oidc-saml-jwt.md) · [Next → Encryption, KMS, Secrets, Certs](03-encryption-kms-secrets.md)
@@ -19,7 +19,7 @@
   and versionable.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Req["Request: subject, action, resource"] --> Engine["Policy engine"]
   Engine -->|"roles (RBAC)"| Allow1["allow/deny"]

@@ -1,4 +1,4 @@
-﻿# Vector Search & Retrieval-Augmented Generation (RAG)
+# Vector Search & Retrieval-Augmented Generation (RAG)
 
 > **Level:** 10 (Extreme-Scale) · **Prerequisites:** [Distributed ML & Serving](06-ml-feature-stores-serving.md)
 > **Navigation:** [← Previous: Distributed ML & Serving](06-ml-feature-stores-serving.md) · [Next → GPU Clusters & Batch Scheduling](08-gpu-batch-scheduling.md)
@@ -20,7 +20,7 @@ an LLM to generate an answer grounded in that context. It reduces hallucination,
 private/up-to-date knowledge, and is the standard pattern for grounded LLM applications.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Q["User query"] --> EmbQ["Embed query"]
   EmbQ --> VS["Vector search<br/>(top-k relevant chunks)"]

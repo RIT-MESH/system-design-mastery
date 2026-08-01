@@ -1,4 +1,4 @@
-﻿# Capacity Planning
+# Capacity Planning
 
 > **Level:** 1 (Foundations) · **Prerequisites:** [Requirements & Quality Attributes](00-requirements-and-quality-attributes.md)
 > **Navigation:** [← Previous: Requirements](00-requirements-and-quality-attributes.md) · [Next → Scalability](02-scalability.md)
@@ -56,7 +56,7 @@ Imagine a paste service: users create text pastes and read them via short URLs.
   viral and a single paste drives millions of reads in an hour.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   U["10M users<br/>10% post 1/day"] --> W["1M writes/day<br/>~12/s avg"]
   W --> S["5 GB/day<br/>~9 TB over 5y"]

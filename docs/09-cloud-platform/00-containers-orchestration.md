@@ -1,4 +1,4 @@
-﻿# VMs, Containers & Container Orchestration
+# VMs, Containers & Container Orchestration
 
 > **Level:** 9 (Cloud-Native) · **Prerequisites:** [Level 8](../08-observability/README.md)
 > **Navigation:** ← Start of Level 9 · [Next → Kubernetes Architecture](01-k8s-architecture.md)
@@ -18,7 +18,7 @@
   failed, scales them, and connects them — turning a cluster into one logical machine.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart TB
   Metal["Physical fleet"] --> VMs["VMs (strong isolation,<br/>heavy)"]
   Metal --> Containers["Containers (light,<br/>shared kernel)"]

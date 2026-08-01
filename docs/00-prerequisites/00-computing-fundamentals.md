@@ -1,4 +1,4 @@
-﻿# Computing Fundamentals
+# Computing Fundamentals
 
 > **Level:** 0 (Prerequisites) · **Prerequisites:** none
 > **Navigation:** ← Start of Level 0 · [Next → Networking & HTTP](01-networking-http.md)
@@ -24,7 +24,7 @@ becomes live only when the operating system creates a **process** for it: an add
 a set of registers, an execution context, and at least one thread of control.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   A["Source code<br/>(file on disk)"] --> B["Compiler / interpreter"]
   B --> C["Executable / bytecode<br/>(file on disk)"]
@@ -49,7 +49,7 @@ the address space and can see each other's memory, which makes communication fas
 requires synchronization to avoid data races.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart TB
   subgraph P["Process (one address space)"]
     direction TB
@@ -92,7 +92,7 @@ touching the network is measured in *years*. This is why batching, caching, and
 co-locating compute with data are not optimizations — they are necessities.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   subgraph Fast["Latency grows by ~1000x at each step"]
     A["CPU / L1<br/>~ns"] --> B["Memory<br/>~100 ns"]

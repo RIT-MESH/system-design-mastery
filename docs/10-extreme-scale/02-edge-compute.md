@@ -1,4 +1,4 @@
-﻿# Edge Compute & Millions of Concurrent Connections
+# Edge Compute & Millions of Concurrent Connections
 
 > **Level:** 10 (Extreme-Scale) · **Prerequisites:** [Geo-Partitioning](01-geo-partitioning-sovereignty.md)
 > **Navigation:** [← Previous: Geo-Partitioning](01-geo-partitioning-sovereignty.md) · [Next → Billion-User & PB/EB Platforms](03-billion-user-pb-eb.md)
@@ -15,7 +15,7 @@ and lets the origin stay out of the hot path. Edge functions are short-lived, st
 (or with limited regional state), and limited in runtime — design accordingly.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   User --> Edge["Edge compute<br/>(personalize, auth, transform)"]
   Edge -->|"cache + compute"| Resp["response to user (fast)"]

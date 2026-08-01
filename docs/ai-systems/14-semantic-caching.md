@@ -17,7 +17,7 @@ On a request: normalize the prompt (strip whitespace, standardize casing); embed
 ## Architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Req[Request] --> Norm[Prompt normalization]
   Norm --> Embed[Embed query]

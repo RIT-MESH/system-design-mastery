@@ -1,4 +1,4 @@
-﻿# API Gateway & Service Discovery
+# API Gateway & Service Discovery
 
 > **Level:** 2 (Core Components) · **Prerequisites:** [Load Balancers](01-load-balancers.md)
 > **Navigation:** [← Previous: Load Balancers](01-load-balancers.md) · [Next → CDN & Caching](03-cdn-caching.md)
@@ -15,7 +15,7 @@ aggregation, and observability. It is the single external entry point for a micr
 fleet; clients talk to one API, the gateway fans out to internal services.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Client --> GW["API gateway"]
   GW -->|"authn/z"| Auth["Identity provider"]
@@ -41,7 +41,7 @@ current set of healthy instances.
 - **Client-side discovery**: the client queries a registry and picks an instance itself.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Client --> Reg["Service registry<br/>(consul/etcd/k8s DNS)"]
   Reg -- "list of healthy instances" --> Client

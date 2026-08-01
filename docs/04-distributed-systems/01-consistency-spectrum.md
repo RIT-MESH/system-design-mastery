@@ -1,4 +1,4 @@
-﻿# The Consistency Spectrum & Quorums
+# The Consistency Spectrum & Quorums
 
 > **Level:** 4 (Distributed Systems) · **Prerequisites:** [CAP & PACELC](00-cap-pacelc.md)
 > **Navigation:** [← Previous: CAP & PACELC](00-cap-pacelc.md) · [Next → Consensus: Locks, Leases, Raft, Paxos](02-consensus.md)
@@ -19,7 +19,7 @@
 - **Eventual**: given no new writes, replicas converge; but with no bound on staleness.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S["Strong/linearizable"] --> Seq["Sequential"]
   Seq --> Cau["Causal"]
@@ -46,7 +46,7 @@ overlaps the latest write (a majority-ish intersection). With W = R = majority o
 strong consistency at the cost of two round trips.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   W["Write to N=3"] --> Ack["await W=2 acks"]
   R["Read from N=3"] --> Q["take R=2 newest"]

@@ -1,6 +1,6 @@
 # Case Study: Social-Media Feed
 
-> **Tier:** intermediate · **Status:** draft · Original numbers and diagrams.
+> **Tier:** intermediate · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 Generate each user's personalized feed of posts from people/pages they follow, at scale and
@@ -43,7 +43,7 @@ ids])` (prebuilt for fan-out-on-write).
 
 ## 11. High-level architecture
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Author["Author posts"] --> PostSvc["Post service"]
   PostSvc --> Store[("Post store")]
@@ -126,7 +126,7 @@ hybrid celebrity handling — the core of this problem.
 Standalone sources under `diagrams/case-studies/social-media-feed/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Author posts
   participant P1 as Post service
@@ -135,7 +135,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Fan-out lag"]
   R2["feeds slightly stale acceptable, bounded"]
@@ -149,7 +149,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 pull-on-read simple, slow ."]
   S2["Stage 2 fan-out-on-write for normal users."]

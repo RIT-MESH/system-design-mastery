@@ -1,4 +1,4 @@
-﻿# Data Lakes, Lakehouses & Data Mesh
+# Data Lakes, Lakehouses & Data Mesh
 
 > **Level:** 10 (Extreme-Scale) · **Prerequisites:** [GPU Clusters & Batch](08-gpu-batch-scheduling.md)
 > **Navigation:** [← Previous: GPU Clusters & Batch](08-gpu-batch-scheduling.md) · [Next → Payment Systems, Ledgers & Fraud](10-payment-ledger-systems.md)
@@ -18,7 +18,7 @@
   governance.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Lake["Data lake (cheap object storage)"] --> Catalog["Catalog + metadata + ACID layer"]
   Catalog --> Lakehouse["Lakehouse: warehouse quality on lake storage"]

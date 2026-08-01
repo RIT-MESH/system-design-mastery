@@ -1,4 +1,4 @@
-﻿# Audit Logs, Data Masking, Privacy-by-Design, Threat Modeling (STRIDE)
+# Audit Logs, Data Masking, Privacy-by-Design, Threat Modeling (STRIDE)
 
 > **Level:** 7 (Security) · **Prerequisites:** [WAF/DDoS/Secure API](04-waf-ddos-secure-api.md)
 > **Navigation:** [← Previous: WAF/DDoS/Secure API](04-waf-ddos-secure-api.md) · [Next → Supply-Chain Security](06-supply-chain-security.md)
@@ -23,7 +23,7 @@ from operational logs: audit logs are about accountability, not debugging.
   be forgotten), and default to the least exposure.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Data["Data"] --> Class["Classify sensitivity"]
   Class --> Mask["Mask in logs/responses"]

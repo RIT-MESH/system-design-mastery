@@ -1,4 +1,4 @@
-﻿# Kubernetes Architecture
+# Kubernetes Architecture
 
 > **Level:** 9 (Cloud-Native) · **Prerequisites:** [Containers & Orchestration](00-containers-orchestration.md)
 > **Navigation:** [← Previous: Containers & Orchestration](00-containers-orchestration.md) · [Next → Service Mesh & Ingress](02-service-mesh-ingress.md)
@@ -16,7 +16,7 @@
   container runtime (runs containers).
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   subgraph CP["Control plane"]
     API["API server"] --> Etcd[("etcd (Raft)")]

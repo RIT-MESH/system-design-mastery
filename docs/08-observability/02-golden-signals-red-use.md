@@ -1,4 +1,4 @@
-﻿# Golden Signals, RED, USE, Alerting & Dashboards
+# Golden Signals, RED, USE, Alerting & Dashboards
 
 > **Level:** 8 (Observability) · **Prerequisites:** [OpenTelemetry](01-opentelemetry.md)
 > **Navigation:** [← Previous: OpenTelemetry](01-opentelemetry.md) · [Next → RCA, Incident Response](03-rca-incident-response.md)
@@ -20,7 +20,7 @@ RED fits services; USE fits the resources under them. Use both: RED for the user
 service, USE for the node/cluster it runs on.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Service["Service"] --> RED["RED: rate, errors, duration"]
   Node["Node/resource"] --> USE["USE: utilization, saturation, errors"]

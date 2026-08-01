@@ -17,7 +17,7 @@ Multi-region serving places replicas near users; the AI gateway routes by latenc
 ## Architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   User --> GW[Enterprise AI gateway]
   GW --> Route[Router: cost or latency or capability]

@@ -1,4 +1,4 @@
-﻿# Root-Cause Analysis & Incident Response
+# Root-Cause Analysis & Incident Response
 
 > **Level:** 8 (Observability) · **Prerequisites:** [Golden Signals](02-golden-signals-red-use.md)
 > **Navigation:** [← Previous: Golden Signals](02-golden-signals-red-use.md) · [Next → On-Call, Runbooks, Postmortems](04-on-call-runbooks-postmortems.md)
@@ -17,7 +17,7 @@
 4. **Learn** — postmortem (next chapter): what happened, why, and how to prevent it.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Detect["Detect"] --> Mit["Mitigate (stop bleeding)"]
   Mit --> Resolve["Resolve (real fix)"]

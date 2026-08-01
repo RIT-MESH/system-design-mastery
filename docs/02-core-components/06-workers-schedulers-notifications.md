@@ -1,4 +1,4 @@
-﻿# Workers, Schedulers, Cron & Notifications
+# Workers, Schedulers, Cron & Notifications
 
 > **Level:** 2 (Core Components) · **Prerequisites:** [Queues, Streams & Search](05-queues-streams-search.md)
 > **Navigation:** [← Previous: Queues, Streams & Search](05-queues-streams-search.md) · [Next → Level 3: Data & Storage](../03-data-storage/README.md)
@@ -15,7 +15,7 @@ number of concurrent connections to the database (which itself has limits). With
 spikes open thousands of connections and exhaust the database.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Apps["Many app instances"] --> Pool["Connection pool (bounded)"]
   Pool --> DB["Database (N connections)"]
@@ -39,7 +39,7 @@ Workers should be idempotent (redelivery is normal) and bounded (concurrency cap
   leader-elected or managed schedulers to avoid duplicate execution and to survive node loss.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Leader["Leader-elected scheduler"] -->|"owns the job lease"| Job["Run job once"]
   N1["Node 1"] -.lost lease.-> Skip["skip (no double-run)"]
@@ -52,7 +52,7 @@ many recipients, with delivery semantics, retry/backoff, and per-channel rate li
 SMS providers, push token limits). It is a fan-out + delivery-guarantee problem:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   E["Event: notify user"] --> Q["Notification queue"]
   Q --> W["Worker pool"]

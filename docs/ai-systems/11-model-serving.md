@@ -17,7 +17,7 @@ Requests arrive at a serving engine. Continuous batching groups new requests int
 ## Architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Req[Requests] --> Batch[Continuous batching]
   Batch --> Engine[Inference engine]

@@ -1,4 +1,4 @@
-﻿# Encryption in Transit & at Rest, KMS, Secrets, Certificates
+# Encryption in Transit & at Rest, KMS, Secrets, Certificates
 
 > **Level:** 7 (Security) · **Prerequisites:** [RBAC/ABAC/PBAC/Zero-Trust](02-rbac-abac-pbac-zero-trust.md)
 > **Navigation:** [← Previous: RBAC/ABAC/PBAC/Zero-Trust](02-rbac-abac-pbac-zero-trust.md) · [Next → WAF, DDoS, Secure API, Tenant Isolation](04-waf-ddos-secure-api.md)
@@ -22,7 +22,7 @@ offer transparent encryption keyed by a KMS key. Two models:
   control and field-level key separation.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   App --> KMS["KMS: generate/unwrap DEK"]
   KMS --"DEK (plaintext, in memory)"--> App

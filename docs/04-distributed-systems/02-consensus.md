@@ -1,4 +1,4 @@
-﻿# Consensus: Locks, Leases, Leader Election, Raft, Paxos, BFT
+# Consensus: Locks, Leases, Leader Election, Raft, Paxos, BFT
 
 > **Level:** 4 (Distributed Systems) · **Prerequisites:** [Consistency Spectrum](01-consistency-spectrum.md)
 > **Navigation:** [← Previous: Consistency Spectrum](01-consistency-spectrum.md) · [Next → Clocks, Gossip & Anti-entropy](03-clocks-gossip.md)
@@ -15,7 +15,7 @@ splits (two holders). The robust pattern is a **lease**: a time-bounded grant th
 auto-expires, so a crashed holder's lease ends after its TTL and another can take over.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant C as Coordinator
   participant A as Node A
@@ -59,7 +59,7 @@ trust each other (some blockchains, financial inter-org systems). For most inter
 systems, crash-fault tolerance (Raft/Paxos) suffices.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart TB
   F["Fault model"]
   F --> CFT["Crash-fault (nodes stop)<br/>2f+1 to tolerate f"]

@@ -1,11 +1,11 @@
 # Case Study: LLM API Gateway
 
-> **Tier:** ai-systems · **Status:** draft · Original numbers and diagrams.
+> **Tier:** ai-systems · **Status:** beta · Original numbers and diagrams.
 
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Client --> Auth[Auth + token budget]
   Auth --> Cache[Semantic cache]
@@ -25,7 +25,7 @@ flowchart LR
 Standalone sources under `diagrams/case-studies/llm-api-gateway/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Client
   participant P1 as LLM API Gateway
@@ -37,7 +37,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Provider down"]
   R2["failover"]
@@ -54,7 +54,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 unified API routing budgets."]
   S2["Stage 2 semantic cache failover PII redaction."]

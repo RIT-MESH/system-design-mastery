@@ -1,4 +1,4 @@
-﻿# Supply-Chain Security
+# Supply-Chain Security
 
 > **Level:** 7 (Security) · **Prerequisites:** [Audit/Privacy/STRIDE](05-audit-privacy-threat-modeling.md)
 > **Navigation:** [← Previous: Audit/Privacy/STRIDE](05-audit-privacy-threat-modeling.md) · [Next → Level 8: Observability](../08-observability/README.md)
@@ -27,7 +27,7 @@ compromises, not direct intrusions.
   pipelines.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Src["Source (signed commits)"] --> Build["Hermetic build"]
   Build --> Art["Signed artifact + provenance + SBOM"]

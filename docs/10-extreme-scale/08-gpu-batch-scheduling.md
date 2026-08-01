@@ -1,4 +1,4 @@
-﻿# GPU Clusters & Batch Scheduling
+# GPU Clusters & Batch Scheduling
 
 > **Level:** 10 (Extreme-Scale) · **Prerequisites:** [Vector Search & RAG](07-vector-search-rag.md)
 > **Navigation:** [← Previous: Vector Search & RAG](07-vector-search-rag.md) · [Next → Data Lakes, Lakehouses & Data Mesh](09-lakehouse-data-mesh.md)
@@ -21,7 +21,7 @@ handles preemption. Backfill packing improves utilization. Checkpointing enables
 preemption/resume for long training jobs.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Train["Training jobs"] --> Q["Priority queue"]
   Serv["Serving (latency)"] --> Alloc["GPU allocation"]

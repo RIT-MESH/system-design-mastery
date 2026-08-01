@@ -1,11 +1,11 @@
 # Case Study: Autonomous Support-Agent Team
 
-> **Tier:** ai-systems · **Status:** draft · Original numbers and diagrams.
+> **Tier:** ai-systems · **Status:** beta · Original numbers and diagrams.
 
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Ticket --> Triage[Triage agent]
   Triage --> Sup[Supervisor]
@@ -25,7 +25,7 @@ flowchart LR
 Standalone sources under `diagrams/case-studies/autonomous-support-agent-team/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Client
   participant P1 as Autonomous Support-Agent Tea
@@ -37,7 +37,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Agent fails"]
   R2["supervisor retries or escalates"]
@@ -54,7 +54,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 single agent RAG."]
   S2["Stage 2 multi-agent supervisor policy."]

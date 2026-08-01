@@ -1,6 +1,6 @@
 # Case Study: Payment Gateway
 
-> **Tier:** advanced · **Status:** draft · Original numbers and diagrams.
+> **Tier:** advanced · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 
@@ -45,7 +45,7 @@ payments(id, key, amount, status, token, ts); idempotency_keys(key -> payment_id
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Merch --> API[Payment API]
   API --> Idem[Idempotency check]
@@ -124,7 +124,7 @@ Clarify double-charge tolerance, bank timeouts, PCI. Surface idempotency, safe-f
 Standalone sources under `diagrams/case-studies/payment-gateway/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Client
   participant P1 as Payment Gateway
@@ -136,7 +136,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Bank timeout"]
   R2["safe-fail mark unknown, reconcile via we"]
@@ -150,7 +150,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 authorize capture + idempotency."]
   S2["Stage 2 tokenization + ledger sharding."]

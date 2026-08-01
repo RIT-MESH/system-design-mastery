@@ -17,7 +17,7 @@ Extract text from sources; chunk by fixed size with overlap, by structure (headi
 ## Architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Src[Sources] --> Extract[Extract text]
   Extract --> Chunk[Chunk: fixed or structural or semantic]

@@ -1,4 +1,4 @@
-﻿# OpenTelemetry
+# OpenTelemetry
 
 > **Level:** 8 (Observability) · **Prerequisites:** [Logs/Metrics/Traces](00-logs-metrics-traces.md)
 > **Navigation:** [← Previous: Logs/Metrics/Traces](00-logs-metrics-traces.md) · [Next → Golden Signals, RED, USE, Alerting, Dashboards](02-golden-signals-red-use.md)
@@ -20,7 +20,7 @@ ID) via headers (W3C Trace Context). The OTel SDKs inject context on send and ex
 receive, so a trace is one tree across services without custom plumbing.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   A["Service A: root span"] --"inject trace context"--> B["Service B: child span"]
   B --"inject"--> C["Service C: child span"]

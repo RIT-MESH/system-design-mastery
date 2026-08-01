@@ -1,4 +1,4 @@
-﻿# Large-Scale Graph Processing & Search
+# Large-Scale Graph Processing & Search
 
 > **Level:** 10 (Extreme-Scale) · **Prerequisites:** [Stream/Real-Time Analytics](04-stream-realtime-analytics.md)
 > **Navigation:** [← Previous: Stream/Real-Time Analytics](04-stream-realtime-analytics.md) · [Next → Distributed ML, Feature Stores, Model Serving](06-ml-feature-stores-serving.md)
@@ -18,7 +18,7 @@ Sharding a graph is hard: **locality** (co-locate a node with its edges) conflic
   accept cross-partition hops, caching hot neighborhoods.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Q["Traversal query"] --> Shard1["Graph shard 1"]
   Q --> Shard2["Graph shard 2"]

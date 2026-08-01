@@ -1,4 +1,4 @@
-﻿# Requirements & Quality Attributes
+# Requirements & Quality Attributes
 
 > **Level:** 1 (Foundations) · **Prerequisites:** [Level 0](../00-prerequisites/README.md)
 > **Navigation:** ← Start of Level 1 · [Next → Capacity Planning](01-capacity-planning.md)
@@ -44,7 +44,7 @@ architecture; if you decide them after building, you will rebuild.
 | **Throughput** | Operations per unit time | 20k requests/sec |
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   R["Requirements"] --> FR["Functional<br/>(what it does)"]
   R --> NFR["Non-functional<br/>(how well)"]
@@ -90,7 +90,7 @@ of the serving path (with downstream reconciliation).
   state, coordination, failure. This is where most of the curriculum's difficulty lives.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart TB
   Load["Growing load"] --> V["Vertical: bigger box"]
   Load --> H["Horizontal: more boxes"]
@@ -123,7 +123,7 @@ push state out of a service (into a cache, a database, a token), you gain scalab
   the page. (We expand this in Level 6.)
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Client --> LB["Load balancer"]
   LB --> R1["Replica 1"]

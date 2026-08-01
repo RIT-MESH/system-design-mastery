@@ -1,4 +1,4 @@
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Src[Sources] --> Ingest[Ingest (batch/stream)] --> Lake[(Object storage, partitioned)]
   Lake --> Catalog[Catalog + lineage]

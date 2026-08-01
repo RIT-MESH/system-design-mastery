@@ -1,4 +1,4 @@
-﻿# Geo-Partitioning & Data Sovereignty
+# Geo-Partitioning & Data Sovereignty
 
 > **Level:** 10 (Extreme-Scale) · **Prerequisites:** [Global Routing](00-global-routing-multi-region.md)
 > **Navigation:** [← Previous: Global Routing](00-global-routing-multi-region.md) · [Next → Edge Compute & Millions of Connections](02-edge-compute.md)
@@ -15,7 +15,7 @@ avoids the cross-region write-latency of multi-region-all data, at the cost of
 **cross-region reads** when a user is away from their data's home.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   EUUser["EU user"] --> EURegion["EU region (home for EU data)"]
   USUser["US user"] --> USRegion["US region (home for US data)"]

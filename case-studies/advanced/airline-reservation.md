@@ -1,6 +1,6 @@
 # Case Study: Airline-Reservation Platform
 
-> **Tier:** advanced · **Status:** draft · Original numbers and diagrams.
+> **Tier:** advanced · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 
@@ -45,7 +45,7 @@ inventory(flight, segment, seat, status); holds(id, flight, seat, exp); bookings
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   User --> Search --> Inv[Flight/seat inventory]
   User --> Hold --> Inv
@@ -124,7 +124,7 @@ Clarify multi-segment, seat inventory, overbooking. Surface atomic multi-segment
 Standalone sources under `diagrams/case-studies/airline-reservation/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Client
   participant P1 as Airline-Reservation Platform
@@ -136,7 +136,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["A segment unavailable mid-booking"]
   R2["release all held segments"]
@@ -147,7 +147,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 search+hold+book."]
   S2["Stage 2 segment-sharded inventory."]

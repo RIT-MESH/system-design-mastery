@@ -1,4 +1,4 @@
-﻿# Health, Readiness, Liveness, Backpressure, Overload Protection
+# Health, Readiness, Liveness, Backpressure, Overload Protection
 
 > **Level:** 6 (Reliability) · **Prerequisites:** [DR/RTO/RPO](01-dr-rto-rpo.md)
 > **Navigation:** [← Previous: DR/RTO/RPO](01-dr-rto-rpo.md) · [Next → Cascading Failure, Retry Storms, Split-brain](03-cascading-failure.md)
@@ -16,7 +16,7 @@ a dependency down) reports liveness failure and gets **restarted** — losing wa
 making things worse. Readiness off → LB stops sending; liveness off → orchestrator restarts.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   P["Probe"]
   P --> Live["Liveness: alive?<br/>fail -> restart"]
@@ -43,7 +43,7 @@ if you'd dropped traffic early. The right shape: shed low-priority traffic as yo
 the limit, keep the critical path fast, and recover quickly (no lingering hot state).
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Load["Rising load"] --> Shed["shed low priority"]
   Load --> Throttle["throttle per tenant"]

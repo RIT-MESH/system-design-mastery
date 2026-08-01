@@ -1,4 +1,4 @@
-﻿# Billion-User Systems & Petabyte/Exabyte Platforms
+# Billion-User Systems & Petabyte/Exabyte Platforms
 
 > **Level:** 10 (Extreme-Scale) · **Prerequisites:** [Edge Compute](02-edge-compute.md)
 > **Navigation:** [← Previous: Edge Compute](02-edge-compute.md) · [Next → Stream & Real-Time Analytics](04-stream-realtime-analytics.md)
@@ -25,7 +25,7 @@ degradation** so no single component sees the whole.
 - **Bulkheading everything** so a failure is a slice, not the whole (Level 5/6).
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart TB
   Billion["Billion users / PB-EB"]
   Billion --> Shards["massive sharding<br/>(no whole-system view)"]

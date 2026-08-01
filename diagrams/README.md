@@ -1,7 +1,7 @@
-﻿# Diagrams
+# Diagrams
 
 Original Mermaid diagrams for `system-design-mastery`. Every diagram is authored from the
-accompanying written explanation and includes a `%% origin: original to system-design-mastery`
+accompanying written explanation and includes a `%% created-for: system-design-mastery`
 comment. No diagram is traced, recolored, renamed, or lightly modified from any reference.
 
 ## Layout

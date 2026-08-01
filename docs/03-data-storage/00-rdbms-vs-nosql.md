@@ -1,4 +1,4 @@
-﻿# RDBMS and the NoSQL Families
+# RDBMS and the NoSQL Families
 
 > **Level:** 3 (Data & Storage) · **Prerequisites:** [Level 2](../02-core-components/README.md)
 > **Navigation:** ← Start of Level 3 · [Next → Normalization & Indexing](01-normalization-indexing.md)
@@ -52,7 +52,7 @@ dedup, and retrieval-augmented generation (Level 10). Trade: approximate results
 cost. Examples: Pinecone, Milvus, pgvector.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart TB
   Q{"What is the access pattern?"}
   Q -->|"key -> value lookup"| KV["Key-value"]

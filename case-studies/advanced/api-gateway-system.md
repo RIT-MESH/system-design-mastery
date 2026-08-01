@@ -1,6 +1,6 @@
 # Case Study: API Gateway
 
-> **Tier:** advanced · **Status:** draft · Original numbers and diagrams.
+> **Tier:** advanced · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 
@@ -45,7 +45,7 @@ routes(host,path -> backend, policy); quotas(client, limit); counters(client, wi
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Client --> GW[Gateway]
   GW --> Auth[AuthN/Z]
@@ -125,7 +125,7 @@ Clarify QPS, policies, aggregation. Surface stateless edge, hot-reload config, f
 Standalone sources under `diagrams/case-studies/api-gateway-system/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Client
   participant P1 as API Gateway
@@ -137,7 +137,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Counter store down"]
   R2["fail-open rate-limit over-allow to keep"]
@@ -151,7 +151,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 auth+route+ratelimit."]
   S2["Stage 2 aggregation + config hot-reload."]

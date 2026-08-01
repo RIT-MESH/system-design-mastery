@@ -1,4 +1,4 @@
-﻿# Payment Systems, Financial Ledgers & Fraud Detection
+# Payment Systems, Financial Ledgers & Fraud Detection
 
 > **Level:** 10 (Extreme-Scale) · **Prerequisites:** [Lakehouse & Data Mesh](09-lakehouse-data-mesh.md)
 > **Navigation:** [← Previous: Lakehouse & Data Mesh](09-lakehouse-data-mesh.md) · [Next → Identity, IoT, P2P & Blockchain](11-identity-iot-p2p-blockchain.md)
@@ -16,7 +16,7 @@ A financial **ledger** is an append-only record of immutable entries; balances a
   never lost — synchronous replication).
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Pay["Payment request<br/>(idempotency key)"] --> Tx["Ledger transaction<br/>(debit + credit)"]
   Tx --> Append["Append-only entries"]

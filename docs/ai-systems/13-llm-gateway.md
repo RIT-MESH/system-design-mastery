@@ -17,7 +17,7 @@ A client calls the gateway with a unified API. The gateway authenticates (API ke
 ## Architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Client --> Auth[Auth + API key]
   Auth --> Budget[Token budget + rate limit]

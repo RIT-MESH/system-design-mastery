@@ -1,4 +1,4 @@
-﻿# IaC, Immutable Infrastructure & GitOps
+# IaC, Immutable Infrastructure & GitOps
 
 > **Level:** 9 (Cloud-Native) · **Prerequisites:** [Serverless & FaaS](03-serverless-faas.md)
 > **Navigation:** [← Previous: Serverless & FaaS](03-serverless-faas.md) · [Next → CI/CD, Deployment Strategies, Feature Flags](05-ci-cd-deployment-feature-flags.md)
@@ -27,7 +27,7 @@ audit log; deploys are pull-based (the agent pulls), which is more secure and au
 push-based pipelines. It extends the Kubernetes reconcile model to delivery.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Dev["Engineer"] --> PR["PR to Git (desired state)"]
   PR --> Review["Review + merge"]

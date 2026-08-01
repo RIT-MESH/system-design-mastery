@@ -1,4 +1,4 @@
-﻿# Networking & HTTP
+# Networking & HTTP
 
 > **Level:** 0 (Prerequisites) · **Prerequisites:** [Computing Fundamentals](00-computing-fundamentals.md)
 > **Navigation:** [← Previous: Computing Fundamentals](00-computing-fundamentals.md) · [Next → OS & Linux](02-os-linux.md)
@@ -20,7 +20,7 @@ walks from a stub resolver to a recursive resolver, which queries root, top-leve
 authoritative servers, and the result is cached at every layer by time-to-live (TTL).
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant App as Application
   participant Stub as Stub resolver
@@ -63,7 +63,7 @@ modernized version of these mechanisms over UDP, enabling HTTP/3 to avoid some T
 head-of-line blocking.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   subgraph TCP["TCP: reliable, ordered"]
     A1["SYN"] --> A2["SYN-ACK"] --> A3["ACK"]
@@ -104,7 +104,7 @@ relative to the latency of the work the request triggers.
   is the usual choice for high-throughput internal APIs.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart TB
   subgraph Public["External / public clients"]
     R["REST over HTTPS<br/>JSON"]

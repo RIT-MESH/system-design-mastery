@@ -1,11 +1,11 @@
 # Case Study: Vector Database
 
-> **Tier:** extreme · **Status:** draft · Original numbers and diagrams.
+> **Tier:** extreme · **Status:** beta · Original numbers and diagrams.
 
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Ingest --> Store[(Vector store)] --> Index[ANN index builder]
   Query --> Search[ANN search] --> Index
@@ -18,7 +18,7 @@ flowchart LR
 Standalone sources under `diagrams/case-studies/vector-database/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Vector store
   participant P1 as ANN index builder
@@ -27,7 +27,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Shard down"]
   R2["partial results search surviving shards"]
@@ -41,7 +41,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 single index + search."]
   S2["Stage 2 sharded index + fan-out merge."]

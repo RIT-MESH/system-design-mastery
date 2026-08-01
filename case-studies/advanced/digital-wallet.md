@@ -1,6 +1,6 @@
 # Case Study: Digital Wallet
 
-> **Tier:** advanced · **Status:** draft · Original numbers and diagrams.
+> **Tier:** advanced · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 
@@ -45,7 +45,7 @@ accounts(user, balance); transfers(id, from, to, amount, status); ledger(id, acc
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   User --> API[Wallet API]
   API --> Tx[Transfer tx: debit + credit]
@@ -124,7 +124,7 @@ Clarify double-spend, latency, rails. Surface atomic debit/credit, the append-on
 Standalone sources under `diagrams/case-studies/digital-wallet/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Client
   participant P1 as Digital Wallet
@@ -136,7 +136,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Transfer mid-way fail"]
   R2["atomic rollback no partial"]
@@ -150,7 +150,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 balances + transfers."]
   S2["Stage 2 sharded accounts + ledger."]

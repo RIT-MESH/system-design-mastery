@@ -1,6 +1,6 @@
 # Case Study: Metrics Platform
 
-> **Tier:** advanced · **Status:** draft · Original numbers and diagrams.
+> **Tier:** advanced · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 
@@ -45,7 +45,7 @@ Series keyed by (metric, label set); points are (ts, value). Stored columnar/gor
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Src[Agents] --> Ingest[Ingest (batched)] --> Stream[Stream] --> Raw[Raw store (recent)]
   Stream --> Roll[Rollup workers] --> Cold[Downsampled store]
@@ -122,7 +122,7 @@ Clarify ingest rate, retention, cardinality, query patterns. Surface time-series
 Standalone sources under `diagrams/case-studies/metrics-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Agents
   participant P1 as Ingest batched
@@ -131,7 +131,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Ingest backlog"]
   R2["metrics lag alert on lag"]
@@ -145,7 +145,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 ingest + raw + query."]
   S2["Stage 2 rollups + tiering."]

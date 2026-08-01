@@ -17,7 +17,7 @@ Query transformation rewrites the user question for retrieval (hyde, multi-query
 ## Architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Q[User query] --> T[Query transform: hyde or sub-questions]
   T --> Route[Adaptive router]

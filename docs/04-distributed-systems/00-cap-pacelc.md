@@ -1,4 +1,4 @@
-﻿# CAP, PACELC, Partitions & Partial Failure
+# CAP, PACELC, Partitions & Partial Failure
 
 > **Level:** 4 (Distributed Systems) · **Prerequisites:** [Level 3](../03-data-storage/README.md)
 > **Navigation:** ← Start of Level 4 · [Next → The Consistency Spectrum](01-consistency-spectrum.md)
@@ -22,7 +22,7 @@ failure, because the system must keep serving with a subset of itself. Unlike a 
 machine (which works or doesn't), a distributed system is always *partially* something.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   subgraph G1["Partition group 1"]
     A & B
@@ -52,7 +52,7 @@ trade-off you actually face: even with no partition, stronger consistency costs 
   otherwise; pays higher latency.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart TB
   State{"State?"}
   State -->|"Partitioned (P)"| PAC["A or C"]

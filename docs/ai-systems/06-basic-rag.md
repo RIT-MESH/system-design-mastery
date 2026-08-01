@@ -17,7 +17,7 @@ Ingest chunks+embeddings ahead of time. At query time: embed the query; hybrid s
 ## Architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Q --> Embed[Embed query]
   Embed --> Ret[Hybrid retrieve top-k]

@@ -1,4 +1,4 @@
-﻿# Chaos Engineering, Fault Injection, Graceful Shutdown, Brownouts
+# Chaos Engineering, Fault Injection, Graceful Shutdown, Brownouts
 
 > **Level:** 6 (Reliability) · **Prerequisites:** [Cascading Failure](03-cascading-failure.md)
 > **Navigation:** [← Previous: Cascading Failure](03-cascading-failure.md) · [Next → Level 7: Security](../07-security/README.md)
@@ -16,7 +16,7 @@ first; expand blast radius as confidence grows. It is *not* breaking things rand
 controlled validation of expected behavior.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Hyp["Hypothesis: SLO holds if node X dies"]
   Hyp --> Inject["Inject: kill X / add latency"]

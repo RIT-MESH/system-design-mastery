@@ -1,4 +1,4 @@
-﻿# Logs, Metrics, Traces, Correlation IDs
+# Logs, Metrics, Traces, Correlation IDs
 
 > **Level:** 8 (Observability) · **Prerequisites:** [Level 7](../07-security/README.md)
 > **Navigation:** ← Start of Level 8 · [Next → OpenTelemetry](01-opentelemetry.md)
@@ -17,7 +17,7 @@
   multi-hop call." Span context propagates correlation IDs.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Req["Request"] --> Span["Trace: spans across services"]
   Span --> Metrics["Metrics: aggregated (rate, error, latency)"]

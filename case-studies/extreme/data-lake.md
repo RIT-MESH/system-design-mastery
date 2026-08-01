@@ -1,11 +1,11 @@
 # Case Study: Data Lake
 
-> **Tier:** extreme · **Status:** draft · Original numbers and diagrams.
+> **Tier:** extreme · **Status:** beta · Original numbers and diagrams.
 
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Src[Sources] --> Ingest[Ingest (batch/stream)] --> Lake[(Object storage, partitioned)]
   Lake --> Catalog[Catalog + lineage]
@@ -18,7 +18,7 @@ flowchart LR
 Standalone sources under `diagrams/case-studies/data-lake/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Sources
   participant P1 as Ingest batch stream
@@ -27,7 +27,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Catalog down"]
   R2["can't find data queries fail"]
@@ -41,7 +41,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 ingest + object storage + catalog."]
   S2["Stage 2 partitioning + scan engine."]

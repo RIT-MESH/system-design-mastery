@@ -1,4 +1,4 @@
-﻿# OAuth 2.0, OpenID Connect, SAML, JWT
+# OAuth 2.0, OpenID Connect, SAML, JWT
 
 > **Level:** 7 (Security) · **Prerequisites:** [AuthN/AuthZ](00-authn-authz.md)
 > **Navigation:** [← Previous: AuthN/AuthZ](00-authn-authz.md) · [Next → RBAC, ABAC, PBAC, Zero-Trust, mTLS](02-rbac-abac-pbac-zero-trust.md)
@@ -32,7 +32,7 @@ with corporate IdPs and SPs. Use it for enterprise SSO where the ecosystem deman
 OIDC/JWT for modern web/mobile.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant U as User/Client
   participant AS as Auth server

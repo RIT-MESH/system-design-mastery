@@ -1,4 +1,4 @@
-﻿# Load Balancers: Layer 4 vs Layer 7
+# Load Balancers: Layer 4 vs Layer 7
 
 > **Level:** 2 (Core Components) · **Prerequisites:** [DNS & Proxies](00-dns-proxies.md)
 > **Navigation:** [← Previous: DNS & Proxies](00-dns-proxies.md) · [Next → API Gateway & Service Discovery](02-api-gateway-service-discovery.md)
@@ -21,7 +21,7 @@ It also provides a single virtual endpoint so clients are insulated from backend
   rate limiting per route).
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Client --> LB{"LB"}
   LB -->|"L4: by IP:port"| B1["Backend 1"]

@@ -1,4 +1,4 @@
-﻿# Disaster Recovery, RTO/RPO, Active-Active/Passive, Failover
+# Disaster Recovery, RTO/RPO, Active-Active/Passive, Failover
 
 > **Level:** 6 (Reliability) · **Prerequisites:** [SLI/SLO/SLA](00-sli-slo-sla-error-budgets.md)
 > **Navigation:** [← Previous: SLI/SLO/SLA](00-sli-slo-sla-error-budgets.md) · [Next → Health, Readiness, Liveness, Overload](02-health-overload.md)
@@ -15,7 +15,7 @@
   restore + failover + warm-up. A cross-region backup reduces RTO after a region loss.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Fail["Failure"] --> Detect["Detect"]
   Detect --> Failover["Failover / restore"]
@@ -35,7 +35,7 @@ flowchart LR
   (often eventual/CRDT or a global consensus layer).
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Z["Multi-zone<br/>(zone failover)"] --> AP["Active-passive<br/>(region standby)"]
   AP --> AA["Active-active<br/>(multi-region serve)"]

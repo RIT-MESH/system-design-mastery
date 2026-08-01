@@ -1,4 +1,4 @@
-﻿# Distributed ML, Feature Stores & Model Serving
+# Distributed ML, Feature Stores & Model Serving
 
 > **Level:** 10 (Extreme-Scale) · **Prerequisites:** [Large-Scale Graph & Search](05-large-scale-graph-search.md)
 > **Navigation:** [← Previous: Large-Scale Graph & Search](05-large-scale-graph-search.md) · [Next → Vector Search & RAG](07-vector-search-rag.md)
@@ -15,7 +15,7 @@ batch/stream pipeline. Decouple them via a **feature store** (shared, consistent
 for both training and serving) to avoid train/serve skew.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Data["Data"] --> FS["Feature store"]
   FS --> Train["Distributed training (GPU cluster)"]

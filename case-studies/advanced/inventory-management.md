@@ -1,6 +1,6 @@
 # Case Study: Inventory-Management Platform
 
-> **Tier:** advanced · **Status:** draft · Original numbers and diagrams.
+> **Tier:** advanced · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 
@@ -45,7 +45,7 @@ stock(warehouse, sku, available, reserved); reservations(id, wh, sku, qty, statu
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Order --> Reserve[Reserve svc]
   Reserve --> Stock[(Stock store, atomic)]
@@ -124,7 +124,7 @@ Clarify oversell tolerance, warehouse model, transfers. Surface atomic reservati
 Standalone sources under `diagrams/case-studies/inventory-management/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Client
   participant P1 as Inventory-Management Platfor
@@ -136,7 +136,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Stock shard down"]
   R2["reserves for those SKUs fail no oversell"]
@@ -144,7 +144,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 stock + reserve."]
   S2["Stage 2 per-warehouse sharding + transfers."]

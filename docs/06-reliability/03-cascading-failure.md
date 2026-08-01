@@ -1,4 +1,4 @@
-﻿# Cascading Failure, Retry Storms, Thundering Herd, Split-brain
+# Cascading Failure, Retry Storms, Thundering Herd, Split-brain
 
 > **Level:** 6 (Reliability) · **Prerequisites:** [Health & Overload](02-health-overload.md)
 > **Navigation:** [← Previous: Health & Overload](02-health-overload.md) · [Next → Chaos, Fault Injection, Graceful Shutdown, Brownouts](04-chaos-graceful-shutdown.md)
@@ -15,7 +15,7 @@ and load shedding keeps the critical path alive. The failure-injection example m
 breaker containing a failing DB.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Slow["Slow dependency"] --> Threads["threads exhaust"]
   Threads --> Unrelated["unrelated traffic fails"]

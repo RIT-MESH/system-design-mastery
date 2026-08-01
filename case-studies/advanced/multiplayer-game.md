@@ -1,6 +1,6 @@
 # Case Study: Online Multiplayer Game
 
-> **Tier:** advanced · **Status:** draft · Original numbers and diagrams.
+> **Tier:** advanced · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 
@@ -45,7 +45,7 @@ match_state(match, authoritative); player profile; match results. State in-memor
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   P1 & P2 & P3 --> GS[Game server (authoritative, 60 tps)]
   GS -->|state delta (UDP)| P1 & P2 & P3
@@ -123,7 +123,7 @@ Clarify tick rate, latency, anti-cheat, region. Surface authoritative server, UD
 Standalone sources under `diagrams/case-studies/multiplayer-game/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Client
   participant P1 as Online Multiplayer Game
@@ -135,7 +135,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Game server crash"]
   R2["match ends or handoff to a standby for h"]
@@ -149,7 +149,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 authoritative servers + matchmaker."]
   S2["Stage 2 region placement + UDP state sync."]

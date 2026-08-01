@@ -17,7 +17,7 @@ Build golden (labeled) and adversarial (injection, PII) test sets. Run them befo
 ## Architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Golden[Golden set] & Adv[Adversarial set] --> Eval[Evaluation run]
   Eval --> Ret[Retrieval metrics]

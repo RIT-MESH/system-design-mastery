@@ -17,7 +17,7 @@ A model is loaded into GPU VRAM as weights. Each forward pass does matmuls (comp
 ## Architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Host[Host CPU and RAM] -->|PCIe| GPU[GPU: VRAM]
   GPU --> Cores[Cores and Tensor cores]

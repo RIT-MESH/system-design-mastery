@@ -1,4 +1,4 @@
-﻿# WAF, DDoS Protection, Secure API Design, Tenant Isolation
+# WAF, DDoS Protection, Secure API Design, Tenant Isolation
 
 > **Level:** 7 (Security) · **Prerequisites:** [Encryption/KMS/Secrets](03-encryption-kms-secrets.md)
 > **Navigation:** [← Previous: Encryption/KMS/Secrets](03-encryption-kms-secrets.md) · [Next → Audit, Privacy, Threat Modeling (STRIDE)](05-audit-privacy-threat-modeling.md)
@@ -26,7 +26,7 @@
   excessive data exposure, mass assignment, etc.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Client --> Edge["Edge: WAF + DDoS + rate limit"]
   Edge --> GW["Gateway: authn/z + validation + idempotency"]

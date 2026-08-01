@@ -1,4 +1,4 @@
-﻿# Operating-System & Linux Fundamentals
+# Operating-System & Linux Fundamentals
 
 > **Level:** 0 (Prerequisites) · **Prerequisites:** [Computing Fundamentals](00-computing-fundamentals.md)
 > **Navigation:** [← Previous: Networking & HTTP](01-networking-http.md) · [Next → Complexity & Data Structures](03-complexity-data-structures.md)
@@ -25,7 +25,7 @@ latency table in [Computing Fundamentals](00-computing-fundamentals.md)), a swap
 exhibits sudden, dramatic latency spikes.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   P["Process virtual address"] -->|page table| M["Physical RAM"]
   M -.miss.-> PF["Page fault"]
@@ -58,7 +58,7 @@ interrupt it. The two that matter most for graceful shutdown are:
   components.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 stateDiagram-v2
   [*] --> Created
   Created --> Running

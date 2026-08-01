@@ -1,4 +1,4 @@
-﻿# Monolith, Modular Monolith, Microservices, SOA, Event-Driven
+# Monolith, Modular Monolith, Microservices, SOA, Event-Driven
 
 > **Level:** 5 (Architecture Patterns) · **Prerequisites:** [Level 4](../04-distributed-systems/README.md)
 > **Navigation:** ← Start of Level 5 · [Next → Hexagonal, Clean, Onion, DDD](01-hexagonal-clean-onion-ddd.md)
@@ -24,7 +24,7 @@
   elastic, but harder to trace and reason about flow and ordering.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart TB
   Style{"Style"}
   Style --> Mono["Modular monolith<br/>(one deployable, strict modules)"]

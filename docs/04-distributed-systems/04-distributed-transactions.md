@@ -1,4 +1,4 @@
-﻿# Distributed Transactions: 2PC, 3PC, Saga, Orchestration vs Choreography
+# Distributed Transactions: 2PC, 3PC, Saga, Orchestration vs Choreography
 
 > **Level:** 4 (Distributed Systems) · **Prerequisites:** [Clocks & Gossip](03-clocks-gossip.md)
 > **Navigation:** [← Previous: Clocks & Gossip](03-clocks-gossip.md) · [Next → Delivery Semantics](05-delivery-semantics.md)
@@ -18,7 +18,7 @@ A **coordinator** asks all participants to *prepare* (phase 1); if all say yes, 
 them to *commit* (phase 2). If any says no, all abort.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant C as Coordinator
   participant A as Participant A
@@ -49,7 +49,7 @@ undo action). This trades atomicity for availability: there is no global lock, b
 system ends in a consistent state eventually.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   T1["1. reserve inventory"] --> T2["2. charge payment"]
   T2 --> T3["3. confirm order"]
@@ -71,7 +71,7 @@ step, which is real work.
   step"" logic is spread across services.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   subgraph Orch["Orchestration"]
     O["Orchestrator"] --> S1 & S2 & S3

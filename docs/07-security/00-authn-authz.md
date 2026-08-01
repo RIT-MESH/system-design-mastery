@@ -1,4 +1,4 @@
-﻿# Authentication, Authorization, Sessions, Cookies, Tokens, API Keys
+# Authentication, Authorization, Sessions, Cookies, Tokens, API Keys
 
 > **Level:** 7 (Security) · **Prerequisites:** [Level 6](../06-reliability/README.md)
 > **Navigation:** ← Start of Level 7 · [Next → OAuth 2.0, OIDC, SAML, JWT](01-oauth-oidc-saml-jwt.md)
@@ -24,7 +24,7 @@
   for service-to-service; rotate and scope carefully; a leaked key is a credential leak.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Browser -->|"cookie + session id"| Sess["Server session store<br/>(revocable)"]
   SPA["Client"] -->|"JWT (stateless)"| Svc["Service<br/>verifies signature"]

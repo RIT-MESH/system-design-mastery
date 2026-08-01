@@ -1,6 +1,6 @@
 # Case Study: Hotel-Booking Platform
 
-> **Tier:** advanced · **Status:** draft · Original numbers and diagrams.
+> **Tier:** advanced · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 
@@ -45,7 +45,7 @@ inventory(hotel, room, date, status); holds(id, hotel, room, dates, exp); bookin
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   User --> Search[Search svc] --> Inv[Inventory (date-range)]
   Search --> Results
@@ -123,7 +123,7 @@ Clarify date-range inventory, hold/expiry, overbooking. Surface atomic reservati
 Standalone sources under `diagrams/case-studies/hotel-booking/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Search svc
   participant P1 as Inventory date-range
@@ -132,7 +132,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Inventory shard down"]
   R2["bookings for those hotels fail no double"]
@@ -143,7 +143,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 search + hold + book."]
   S2["Stage 2 sharded date-range inventory."]

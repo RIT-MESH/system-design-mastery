@@ -1,6 +1,6 @@
 # Case Study: Notification Platform
 
-> **Tier:** beginner · **Status:** draft · Original numbers and diagrams.
+> **Tier:** beginner · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 Fan out notifications (email, SMS, push, in-app) to many recipients reliably, with retries,
@@ -41,7 +41,7 @@ unique index for dedup.
 
 ## 11. High-level architecture
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   App --> API["Notify API"]
   API --> Dedup["Dedup (event_id)"]
@@ -128,7 +128,7 @@ at-least-once + idempotency, and provider rate limits.
 Standalone sources under `diagrams/case-studies/notification-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Client
   participant P1 as Notification Platform
@@ -140,7 +140,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Provider down"]
   R2["backoff + queue backlog grows acceptable"]
@@ -152,7 +152,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 single queue + workers."]
   S2["Stage 2 per-channel queues + provider rate limiting."]

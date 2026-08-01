@@ -1,4 +1,4 @@
-﻿# Redundancy, Fault Tolerance & Graceful Degradation
+# Redundancy, Fault Tolerance & Graceful Degradation
 
 > **Level:** 1 (Foundations) · **Prerequisites:** [Scalability](02-scalability.md)
 > **Navigation:** [← Previous: Scalability](02-scalability.md) · [Next → Level 2: Core Components](../02-core-components/README.md)
@@ -20,7 +20,7 @@ box, ""what happens if this dies right now?"" If the answer is ""the system is d
 have a SPOF to address.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Client --> LB["LB (SPOF)"]
   LB --> DB["DB primary (SPOF)"]
@@ -41,7 +41,7 @@ service. The **replication factor (RF)** is how many copies you keep:
   coding).
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   W["Write"] --> R1["Replica 1"]
   W --> R2["Replica 2"]
@@ -64,7 +64,7 @@ to are theatre.
   comments during an upload surge while keeping reads working.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart TB
   Fail{"Dependency failing?"}
   Fail -->|"yes, critical"| FT["Failover / retry to replica"]

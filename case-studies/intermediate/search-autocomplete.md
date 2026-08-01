@@ -1,6 +1,6 @@
 # Case Study: Search Autocomplete
 
-> **Tier:** intermediate · **Status:** draft · Original numbers and diagrams.
+> **Tier:** intermediate · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 As a user types a query, return ranked prefix completions within ~50 ms. Latency-critical,
@@ -43,7 +43,7 @@ per-prefix precomputed top-k to make lookup O(1)-ish. Per-user recent terms list
 
 ## 11. High-level architecture
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Client --> CDN["Edge cache (prefix->top-k)"]
   CDN -.miss.-> Svc["Suggest service"]
@@ -120,7 +120,7 @@ in-memory index, and graceful degradation.
 Standalone sources under `diagrams/case-studies/search-autocomplete/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Client
   participant P1 as Search Autocomplete
@@ -132,7 +132,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Suggest service down"]
   R2["degrade to no-suggestions or static top"]
@@ -146,7 +146,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 in-memory trie + edge cache."]
   S2["Stage 2 sharded prefix index + read replicas."]

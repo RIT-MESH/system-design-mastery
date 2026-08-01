@@ -1,6 +1,6 @@
 # Case Study: Real-Time Analytics Platform
 
-> **Tier:** advanced · **Status:** draft · Original numbers and diagrams.
+> **Tier:** advanced · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 
@@ -45,7 +45,7 @@ events(stream, partitioned by key); aggregates(metric, window, value); dashboard
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Src[Sources] --> Stream[Stream] --> Proc[Stream processors]
   Proc --> Agg[Aggregates store]
@@ -124,7 +124,7 @@ Clarify event rate, dashboard latency, retention. Surface stream + aggregates + 
 Standalone sources under `diagrams/case-studies/real-time-analytics/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Sources
   participant P1 as Stream
@@ -133,7 +133,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Processor failure"]
   R2["restore from checkpoint, replay idempote"]
@@ -147,7 +147,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 stream + aggregates + dashboards."]
   S2["Stage 2 windowed processors + checkpointing."]

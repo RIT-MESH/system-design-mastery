@@ -1,4 +1,4 @@
-﻿# CDN & Caching
+# CDN & Caching
 
 > **Level:** 2 (Core Components) · **Prerequisites:** [API Gateway & Service Discovery](02-api-gateway-service-discovery.md)
 > **Navigation:** [← Previous: API Gateway & Service Discovery](02-api-gateway-service-discovery.md) · [Next → Storage Classes](04-storage-classes.md)
@@ -15,7 +15,7 @@ but CDNs also cache dynamic, cacheable responses and provide edge compute. For a
 global system, a CDN is often the highest-leverage single decision.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   U1["User, far"] --> Edge1["Edge POP (near user)"]
   U2["User, near origin"] --> Edge2["Edge POP"]
@@ -57,7 +57,7 @@ fetch refreshes), **early refresh with jitter**, and **locking**. This is one of
 common real-world cache failure modes.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant A as Client A
   participant B as Client B

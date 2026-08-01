@@ -1,4 +1,4 @@
-﻿# Complexity & Basic Data Structures
+# Complexity & Basic Data Structures
 
 > **Level:** 0 (Prerequisites) · **Prerequisites:** [Computing Fundamentals](00-computing-fundamentals.md)
 > **Navigation:** [← Previous: OS & Linux](02-os-linux.md) · [Next → DB Basics](05-db-basics.md)
@@ -27,7 +27,7 @@ gains on small inputs.
 | O(n²) | quadratic | nested loops over all pairs — beware at scale |
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   subgraph Growth["Cost growth as n rises"]
     O1["O(1) flat"] --> Olog["O(log n)"]
@@ -60,7 +60,7 @@ distributed systems: design for the tail, not the mean.
 | Bloom filter | ~O(k) | ~O(k) | cheap "definitely not present" pre-check |
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart TB
   Need{"What do you need?"}
   Need -->|"key→value, unordered"| HM["Hash map (cache)"]

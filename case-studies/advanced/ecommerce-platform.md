@@ -1,6 +1,6 @@
 # Case Study: E-commerce Platform
 
-> **Tier:** advanced · **Status:** draft · Original numbers and diagrams.
+> **Tier:** advanced · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 
@@ -45,7 +45,7 @@ products(id, attrs, stock); cart(user, items); orders(id, items, status, payment
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   User --> CDN[Catalog CDN] --> Catalog[Catalog/search]
   User --> Cart[Cart svc]
@@ -125,7 +125,7 @@ Clarify flash sales, oversell tolerance, checkout latency. Surface inventory ato
 Standalone sources under `diagrams/case-studies/ecommerce-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Catalog CDN
   participant P1 as Catalog search
@@ -134,7 +134,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Payment fail"]
   R2["release reservation"]
@@ -148,7 +148,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 catalog + checkout."]
   S2["Stage 2 search + CDN + sharded inventory."]

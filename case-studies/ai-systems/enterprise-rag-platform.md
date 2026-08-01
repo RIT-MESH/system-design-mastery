@@ -1,11 +1,11 @@
 # Case Study: Enterprise RAG Platform
 
-> **Tier:** ai-systems · **Status:** draft · Original numbers and diagrams.
+> **Tier:** ai-systems · **Status:** beta · Original numbers and diagrams.
 
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Client --> GW[AI gateway: auth + budget]
   GW --> Cache[Semantic cache]
@@ -23,7 +23,7 @@ flowchart LR
 Standalone sources under `diagrams/case-studies/enterprise-rag-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Ingest
   participant P1 as Chunk embed ACL
@@ -32,7 +32,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Cache miss"]
   R2["full LLM call slower, no failure"]
@@ -49,7 +49,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 basic RAG per-tenant isolation."]
   S2["Stage 2 semantic cache multi-model routing."]

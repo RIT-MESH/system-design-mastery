@@ -1,4 +1,4 @@
-﻿# Cloud Networking, VPC, Hybrid/Multi-Cloud & Edge
+# Cloud Networking, VPC, Hybrid/Multi-Cloud & Edge
 
 > **Level:** 9 (Cloud-Native) · **Prerequisites:** [Autoscaling](06-autoscaling.md)
 > **Navigation:** [← Previous: Autoscaling](06-autoscaling.md) · [Next → Platform Engineering & IDP](08-platform-engineering-idp.md)
@@ -15,7 +15,7 @@ per AZ gives zonal isolation; peering/transit gateways connect VPCs; egress cost
 architectures (co-locate, use CDNs).
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   subgraph VPC["VPC"]
     AZ1["AZ1 subnet"]

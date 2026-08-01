@@ -1,4 +1,4 @@
-﻿# Partitioning, Sharding & Consistent Hashing
+# Partitioning, Sharding & Consistent Hashing
 
 > **Level:** 3 (Data & Storage) · **Prerequisites:** [Replication](02-replication.md)
 > **Navigation:** [← Previous: Replication](02-replication.md) · [Next → CDC, Materialized Views & Lifecycle](04-cdc-materialized-views.md)
@@ -20,7 +20,7 @@ A **shard key** decides which node owns a row. A good key:
 - **Is stable** (a row's shard doesn't change on every write).
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   R["Row with key k"] --> H["hash(k) % N"]
   H --> S1["Shard 1"]
@@ -39,7 +39,7 @@ example: ~80% move). **Consistent hashing** places both nodes and keys on a ring
 or removing a node moves only the keys near it (~keys/N), not the whole keyspace.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   subgraph Ring["Consistent hash ring"]
     N1["node A"]

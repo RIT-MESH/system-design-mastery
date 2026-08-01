@@ -17,7 +17,7 @@ Estimate requests/s, average and peak input/output tokens, and the tail of conte
 ## Architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Req[Requests and context dist] --> Tps[Tokens/s]
   Tps --> GpuThrough[GPU tokens/s]

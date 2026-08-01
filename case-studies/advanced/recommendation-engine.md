@@ -1,6 +1,6 @@
 # Case Study: Recommendation Engine
 
-> **Tier:** advanced · **Status:** draft · Original numbers and diagrams.
+> **Tier:** advanced · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 
@@ -45,7 +45,7 @@ users(features); items(features, embeddings); interactions(user, item, action, t
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   User --> RecSvc[Rec service]
   RecSvc --> Retrieval[Retrieval (ann + filters)] --> Candidates
@@ -123,7 +123,7 @@ Clarify latency, item scale, freshness. Surface the retrieval+ranking funnel, fe
 Standalone sources under `diagrams/case-studies/recommendation-engine/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Interactions
   participant P1 as Training
@@ -132,7 +132,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["ANN shard down"]
   R2["partial candidates serve best-available"]
@@ -146,7 +146,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 retrieval + rank + serve."]
   S2["Stage 2 feature store + ANN sharding."]

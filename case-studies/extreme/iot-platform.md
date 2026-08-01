@@ -1,11 +1,11 @@
 # Case Study: Internet of Things Platform
 
-> **Tier:** extreme · **Status:** draft · Original numbers and diagrams.
+> **Tier:** extreme · **Status:** beta · Original numbers and diagrams.
 
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Dev[Devices, intermittent] --> GW[IoT gateway/broker]
   GW --> Twin[(Digital twins)]
@@ -19,7 +19,7 @@ flowchart LR
 Standalone sources under `diagrams/case-studies/iot-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Devices, intermittent
   participant P1 as IoT gateway broker
@@ -28,7 +28,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Broker down"]
   R2["devices reconnect to another stagger to"]
@@ -42,7 +42,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 gateway + twins + commands."]
   S2["Stage 2 sharded brokers + tiered telemetry."]

@@ -1,4 +1,4 @@
-﻿# On-Call, Runbooks, Postmortems, Capacity Monitoring
+# On-Call, Runbooks, Postmortems, Capacity Monitoring
 
 > **Level:** 8 (Observability) · **Prerequisites:** [RCA & Incident Response](03-rca-incident-response.md)
 > **Navigation:** [← Previous: RCA & Incident Response](03-rca-incident-response.md) · [Next → Cost, Synthetic/RUM, Profiling, Continuous Verification](05-cost-synthetic-rum-profiling.md)
@@ -32,7 +32,7 @@ you scale *before* saturation, not after. Capacity alerts should fire with enoug
 to react (see the storage-growth calculation).
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Alert["Alert"] --> RB["Runbook"]
   RB --> Mit["Mitigate"]

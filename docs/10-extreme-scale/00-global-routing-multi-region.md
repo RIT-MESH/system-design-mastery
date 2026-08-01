@@ -1,4 +1,4 @@
-﻿# Global Routing, Multi-Region Writes & Cross-Region Replication
+# Global Routing, Multi-Region Writes & Cross-Region Replication
 
 > **Level:** 10 (Extreme-Scale) · **Prerequisites:** [Level 9](../09-cloud-platform/README.md)
 > **Navigation:** ← Start of Level 10 · [Next → Geo-Partitioning & Data Sovereignty](01-geo-partitioning-sovereignty.md)
@@ -26,7 +26,7 @@ write latency. The cost: **cross-region consistency**. Options:
   via global consensus + TrueTime; pays cross-region round-trip latency on writes.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   GeoDNS["Geo-DNS / Anycast"] --> R1["Region A (write)"]
   GeoDNS --> R2["Region B (write)"]

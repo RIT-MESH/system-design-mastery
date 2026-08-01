@@ -17,7 +17,7 @@ Inventory discovers devices and records current firmware. A catalog tracks targe
 ## Architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Inv[Inventory and version tracking] --> Plan[Upgrade plan and risk scoring]
   Plan --> Backup[Config backup and checksum]

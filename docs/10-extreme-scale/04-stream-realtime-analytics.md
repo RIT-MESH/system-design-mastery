@@ -1,4 +1,4 @@
-﻿# High-Frequency Event Processing, Stream & Real-Time Analytics
+# High-Frequency Event Processing, Stream & Real-Time Analytics
 
 > **Level:** 10 (Extreme-Scale) · **Prerequisites:** [Billion-User/PB-EB](03-billion-user-pb-eb.md)
 > **Navigation:** [← Previous: Billion-User/PB-EB](03-billion-user-pb-eb.md) · [Next → Large-Scale Graph & Search](05-large-scale-graph-search.md)
@@ -21,7 +21,7 @@ when consumers can't keep up.
   with sub-second latency, often backed by a fast OLAP/serving store.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Src["Sources (millions/s)"] --> Stream["Partitioned stream"]
   Stream --> Proc["Stream processors (windowed, stateful)"]

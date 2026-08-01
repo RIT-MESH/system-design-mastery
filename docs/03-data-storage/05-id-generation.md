@@ -1,4 +1,4 @@
-﻿# ID Generation & Multi-tenancy
+# ID Generation & Multi-tenancy
 
 > **Level:** 3 (Data & Storage) · **Prerequisites:** [CDC & Materialized Views](04-cdc-materialized-views.md)
 > **Navigation:** [← Previous: CDC & Materialized Views](04-cdc-materialized-views.md) · [Next → Migrations, Backup & PITR](06-migrations-backups.md)
@@ -32,7 +32,7 @@ collision-free as long as worker_ids are unique and sequence doesn't overflow pe
 millisecond. The default choice for large-scale systems needing sortable, sharded IDs.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   T["Timestamp (~41 bits, ms)"] --> ID
   W["Worker id (~10 bits)"] --> ID["64-bit Snowflake ID"]
@@ -60,7 +60,7 @@ models, increasing isolation and cost:
 3. **Dedicated cluster per tenant** — strongest; for "noisy whales" or regulated tenants.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Shared["Shared schema<br/>row-level + tenant_id"] --> Mid["Schema per tenant"]
   Mid --> Dedicated["Dedicated cluster"]

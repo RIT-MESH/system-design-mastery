@@ -1,4 +1,4 @@
-﻿# Clocks, Gossip & Anti-entropy
+# Clocks, Gossip & Anti-entropy
 
 > **Level:** 4 (Distributed Systems) · **Prerequisites:** [Consensus](02-consensus.md)
 > **Navigation:** [← Previous: Consensus](02-consensus.md) · [Next → Distributed Transactions](04-distributed-transactions.md)
@@ -26,7 +26,7 @@ concurrency**: two events are concurrent iff neither's vector dominates the othe
 how systems detect conflicting writes for conflict resolution (e.g., Dynamo).
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   A["A: [1,0]"] --"send [1,0]"--> B["B: max + inc -> [1,1]"]
   B --"write2"--> B2["B: [1,2]"]
@@ -47,7 +47,7 @@ compare hashes at the root, descend only into subtrees that differ, and repair o
 keys. This makes reconciliation proportional to *differences*, not data size.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   N1["Replica A: Merkle root h"] --"compare roots"--> N2["Replica B: root h'"]
   N1 -.differ at subtree.-> Sub["descend to differing subtree"]

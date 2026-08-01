@@ -1,4 +1,4 @@
-﻿# Internet-Scale Identity, IoT/Digital Twins, P2P & Blockchain
+# Internet-Scale Identity, IoT/Digital Twins, P2P & Blockchain
 
 > **Level:** 10 (Extreme-Scale) · **Prerequisites:** [Payment/Ledger/Fraud](10-payment-ledger-systems.md)
 > **Navigation:** [← Previous: Payment/Ledger/Fraud](10-payment-ledger-systems.md) · [Next → (end of Level 10)]
@@ -23,7 +23,7 @@ constrained protocols. Patterns:
 - **Bidirectional command** to devices with acknowledged delivery.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Dev["Millions of devices<br/>(intermittent)"] --> GW["IoT gateway / broker"]
   GW --> Twin["Digital twins (per-device state)"]

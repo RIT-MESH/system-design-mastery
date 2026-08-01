@@ -1,6 +1,6 @@
 # Case Study: Photo-Sharing Platform
 
-> **Tier:** intermediate · **Status:** draft · Original numbers and diagrams.
+> **Tier:** intermediate · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 Users upload photos, followers view a feed of them. Storage- and bandwidth-dominated,
@@ -41,7 +41,7 @@ a sharded DB.
 
 ## 11. High-level architecture
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Up["Uploader"] --> API["API: presigned URL"]
   API --> Obj["Object storage (original)"]
@@ -123,7 +123,7 @@ dominance. Compare to the video-streaming case.
 Standalone sources under `diagrams/case-studies/photo-sharing-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Uploader
   participant P1 as API presigned URL
@@ -132,7 +132,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Thumb worker dies"]
   R2["requeue idempotent overwrite"]
@@ -146,7 +146,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 object storage + thumb workers + simple CDN."]
   S2["Stage 2 global CDN, multi-region"]

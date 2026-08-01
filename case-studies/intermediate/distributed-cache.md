@@ -1,6 +1,6 @@
-﻿# Case Study: Distributed Cache
+# Case Study: Distributed Cache
 
-> **Tier:** intermediate · **Status:** draft
+> **Tier:** intermediate · **Status:** beta
 > A complete intermediate case study demonstrating the 30-section template for a stateful,
 > consistency-sensitive system. All numbers and diagrams are original.
 
@@ -66,7 +66,7 @@ owns a contiguous range of a **consistent hash ring** (with vnodes for balance).
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Client --> CL["Client library / router<br/>(ring-aware)"]
   CL -->|"hash(key) -> ring"| N1["Node A (primary)"]
@@ -92,7 +92,7 @@ flowchart LR
 3. Primary acks once replication policy is satisfied.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant C as Client
   participant P as Primary
@@ -162,7 +162,7 @@ by extra replication, not by re-sharding (sharding can't fix a single hot key).
 | Rebalance storm | Throttle key migration; serve from old owner until moved. |
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   F{"Failure"}
   F -->|"primary down"| Promote["next replica -> primary"]
@@ -203,7 +203,7 @@ flowchart LR
 ## 24. Scaling stages
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1: single node<br/>(dev)"]
   S1 -->|"load grows"| S2["Stage 2: sharded ring<br/>+ RF=3"]

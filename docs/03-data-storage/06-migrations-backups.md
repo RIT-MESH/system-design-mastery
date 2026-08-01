@@ -1,4 +1,4 @@
-﻿# Database Migrations, Backup & Point-in-Time Recovery
+# Database Migrations, Backup & Point-in-Time Recovery
 
 > **Level:** 3 (Data & Storage) · **Prerequisites:** [ID Generation & Multi-tenancy](05-id-generation.md)
 > **Navigation:** [← Previous: ID Generation & Multi-tenancy](05-id-generation.md) · [Next → Level 4: Distributed Systems](../04-distributed-systems/README.md)
@@ -19,7 +19,7 @@ table or blocks writes during the deploy. The discipline is **expand/contract**:
 4. **Contract**: remove the old structure once nothing uses it.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   E["Expand:<br/>add new (no removal)"] --> B["Backfill:<br/>online, batched"]
   B --> S["Switch:<br/>code uses new"]
@@ -38,7 +38,7 @@ latest archived log. PITR is how you meet a small **RPO** (recovery point object
 maximum data loss you can tolerate.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Full["Full backup (daily)"] --> Logs["Continuous WAL/log archive"]
   Logs --> R["Restore to any t in [full, now]"]

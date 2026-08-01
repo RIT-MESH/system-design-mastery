@@ -1,6 +1,6 @@
 # Case Study: Web Crawler
 
-> **Tier:** beginner · **Status:** draft · Original numbers and diagrams.
+> **Tier:** beginner · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 Continuously fetch web pages at scale, extract links, and store content for indexing — a
@@ -41,7 +41,7 @@ Internal: enqueue URL; fetch worker pulls host-queue; store page; emit extracted
 
 ## 11. High-level architecture
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Seeds["Seed URLs"] --> Frontier["URL frontier<br/>(per-host queues)"]
   Frontier --> W["Fetch workers"]
@@ -123,7 +123,7 @@ politeness-vs-throughput trade.
 Standalone sources under `diagrams/case-studies/web-crawler/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Seed URLs
   participant P1 as URL frontier<br > per-host q
@@ -132,7 +132,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Worker dies mid-fetch"]
   R2["URL requeued idempotent fetch"]
@@ -146,7 +146,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 single queue + workers."]
   S2["Stage 2 per-host frontier for politeness."]

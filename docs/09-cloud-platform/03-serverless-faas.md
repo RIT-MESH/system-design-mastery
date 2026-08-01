@@ -1,4 +1,4 @@
-﻿# Serverless & Functions as a Service
+# Serverless & Functions as a Service
 
 > **Level:** 9 (Cloud-Native) · **Prerequisites:** [Service Mesh & Ingress](02-service-mesh-ingress.md)
 > **Navigation:** [← Previous: Service Mesh & Ingress](02-service-mesh-ingress.md) · [Next → IaC, Immutable Infra, GitOps](04-iac-immutable-gitops.md)
@@ -15,7 +15,7 @@ scaling, and invocation; you provide the handler. It's ideal for bursty, event-d
 short-lived, stateless work.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   E["Event (HTTP/queue/cron)"] --> Fx["FaaS: invokes handler"]
   Fx -->|"scale 0 -> N"| Instances["concurrent instances"]

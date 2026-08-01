@@ -1,4 +1,4 @@
-﻿# Delivery Semantics: Idempotency, Retries, DLQs, At-most/least/Exactly-once
+# Delivery Semantics: Idempotency, Retries, DLQs, At-most/least/Exactly-once
 
 > **Level:** 4 (Distributed Systems) · **Prerequisites:** [Distributed Transactions](04-distributed-transactions.md)
 > **Navigation:** [← Previous: Distributed Transactions](04-distributed-transactions.md) · [Next → CRDTs & Snapshots](06-crdts-snapshots.md)
@@ -19,7 +19,7 @@
   *effectively-once* (S-EXACTLYONCE).
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   D["Deliver"] --> A1["at-most-once<br/>(may drop)"]
   D --> A2["at-least-once<br/>(may duplicate)"]

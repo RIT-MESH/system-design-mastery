@@ -1,4 +1,4 @@
-﻿# SLI, SLO, SLA & Error Budgets
+# SLI, SLO, SLA & Error Budgets
 
 > **Level:** 6 (Reliability) · **Prerequisites:** [Level 5](../05-architecture-patterns/README.md)
 > **Navigation:** ← Start of Level 6 · [Next → DR, RTO, RPO, Failover](01-dr-rto-rpo.md)
@@ -17,7 +17,7 @@
   *looser* than the SLO so you have headroom.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   SLI["SLI (measure)"] --> SLO["SLO (internal target)"]
   SLO --> SLA["SLA (external contract,<br/>looser than SLO)"]
@@ -40,7 +40,7 @@ A fast burn over a short window catches acute outages; a slow burn over a long w
 catches chronic erosion. This avoids both paging on noise and missing slow degradations.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Burn["Error burn rate"] --> Short["short window<br/>(acute, page)"]
   Burn --> Long["long window<br/>(chronic, ticket)"]

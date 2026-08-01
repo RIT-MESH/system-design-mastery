@@ -17,7 +17,7 @@ The agent receives a goal. It reasons about what to do (ReAct: think about the q
 ## Architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Goal --> Agent[Agent: ReAct loop]
   Agent --> Think[Reason]

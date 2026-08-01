@@ -17,7 +17,7 @@ Run BM25/keyword and vector search in parallel; fuse (e.g., reciprocal-rank fusi
 ## Architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Q --> KW[Keyword search]
   Q --> VS[Vector search]

@@ -1,4 +1,4 @@
-﻿# Scalability: Stateless vs Stateful
+# Scalability: Stateless vs Stateful
 
 > **Level:** 1 (Foundations) · **Prerequisites:** [Capacity Planning](01-capacity-planning.md)
 > **Navigation:** [← Previous: Capacity Planning](01-capacity-planning.md) · [Next → Redundancy & Fault Tolerance](03-redundancy-fault-tolerance.md)
@@ -20,7 +20,7 @@ After this chapter you can:
   that fail independently stay consistent.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart TB
   Load["More load"] --> V["Vertical: bigger node"]
   Load --> H["Horizontal: more nodes"]
@@ -40,7 +40,7 @@ instances when load rises, remove when it falls. Session data, if needed, is sto
 externally (a cache or database) and referenced by a token.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C["Client (token)"] --> LB["Load balancer"]
   LB --> A["Instance A"]
@@ -82,7 +82,7 @@ Each externalization buys scalability but adds a dependency and a network hop. T
 usually worth it on the hot path.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S["Stateful service"] -->|"extract session"| C["Cache"]
   S -->|"extract uploads"| O["Object storage"]

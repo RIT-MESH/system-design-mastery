@@ -1,4 +1,4 @@
-﻿# Autoscaling: HPA, VPA, Cluster Autoscaling
+# Autoscaling: HPA, VPA, Cluster Autoscaling
 
 > **Level:** 9 (Cloud-Native) · **Prerequisites:** [CI/CD & Feature Flags](05-ci-cd-deployment-feature-flags.md)
 > **Navigation:** [← Previous: CI/CD & Feature Flags](05-ci-cd-deployment-feature-flags.md) · [Next → Cloud Networking, VPC, Hybrid/Multi-Cloud, Edge](07-cloud-networking.md)
@@ -18,7 +18,7 @@
   underused). Necessary because HPA needs somewhere to put new pods.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Load["Load rises"] --> HPA["HPA: more pods"]
   HPA -->|"no room"| Pending["pods pending"]

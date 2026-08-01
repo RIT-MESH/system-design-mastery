@@ -1,4 +1,4 @@
-﻿# Strangler, Sidecar, Ambassador, BFF, API Composition & Federation
+# Strangler, Sidecar, Ambassador, BFF, API Composition & Federation
 
 > **Level:** 5 (Architecture Patterns) · **Prerequisites:** [CQRS/ES/Outbox](02-cqrs-es-outbox.md)
 > **Navigation:** [← Previous: CQRS/ES/Outbox](02-cqrs-es-outbox.md) · [Next → Resilience Patterns](04-resilience-patterns.md)
@@ -14,7 +14,7 @@ rest still go to the legacy system. Over time the new system "strangles" the old
 old can be retired. Avoids a risky big-bang rewrite; each step is deployable and reversible.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Client --> Router["Routing layer"]
   Router -->|"rewritten routes"| New["New service"]
@@ -32,7 +32,7 @@ flowchart LR
   service.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   App["Application"] <--> Side["Sidecar<br/>(mTLS, metrics, retries)"]
   Side <--> Net["Network / peers"]
@@ -53,7 +53,7 @@ the backend services into exactly the shape that client needs. It avoids forcing
   federation layer and to N+1/caching concerns.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Web["Web client"] --> BFFw["Web BFF"]
   Mob["Mobile client"] --> BFFm["Mobile BFF"]

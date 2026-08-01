@@ -1,4 +1,4 @@
-﻿# Platform Engineering & Internal Developer Platforms
+# Platform Engineering & Internal Developer Platforms
 
 > **Level:** 9 (Cloud-Native) · **Prerequisites:** [Cloud Networking](07-cloud-networking.md)
 > **Navigation:** [← Previous: Cloud Networking](07-cloud-networking.md) · [Next → Level 10: Extreme-Scale](../10-extreme-scale/README.md)
@@ -21,7 +21,7 @@ service,"" ""add a queue""). It's faster and safer than DIY and bakes in the sta
 default.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Dev["Product team"] --> IDP["Internal Developer Platform"]
   IDP --> GP["Golden paths: deploy / db / queue / secrets / observe"]

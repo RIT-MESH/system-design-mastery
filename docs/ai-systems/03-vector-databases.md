@@ -17,7 +17,7 @@ Vectors are inserted with metadata; an index is built for fast ANN. Queries embe
 ## Architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Insert --> Store[Vector store]
   Store --> Index[ANN index: HNSW or IVF or PQ]

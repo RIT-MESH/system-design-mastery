@@ -1,6 +1,6 @@
 # Case Study: Identity & Access-Management Platform
 
-> **Tier:** advanced · **Status:** draft · Original numbers and diagrams.
+> **Tier:** advanced · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 
@@ -45,7 +45,7 @@ users(id, creds_hash, mfa); sessions(id, user, exp); tokens(jti, user, scopes, e
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   App --> IdP[IdP]
   IdP --> AuthN[AuthN + MFA]
@@ -125,7 +125,7 @@ Clarify availability target, revocation, MFA. Surface stateless JWKS validation,
 Standalone sources under `diagrams/case-studies/iam-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Client
   participant P1 as Identity Access-Management P
@@ -137,7 +137,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["IdP down"]
   R2["logins fail high impact so multi-AZ + re"]
@@ -145,7 +145,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 authN + sessions + tokens."]
   S2["Stage 2 stateless JWT validation JWKS + RBAC."]

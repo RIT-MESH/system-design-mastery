@@ -1,4 +1,4 @@
-﻿# Replication Topologies
+# Replication Topologies
 
 > **Level:** 3 (Data & Storage) · **Prerequisites:** [Normalization & Indexing](01-normalization-indexing.md)
 > **Navigation:** [← Previous: Normalization & Indexing](01-normalization-indexing.md) · [Next → Partitioning & Sharding](03-partitioning-sharding.md)
@@ -20,7 +20,7 @@ go to followers (read scale) or the leader (stronger consistency). Writes are se
 the leader, so no write conflicts.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   W["Write"] --> L["Leader"]
   L -->|"async log ship"| F1["Follower 1"]
@@ -48,7 +48,7 @@ resolved with read-repair and anti-entropy. Cost: weaker consistency guarantees 
 complexity of quorum arithmetic and conflict resolution.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   W["Write"] --> N1 & N2 & N3
   R["Read"] --> N1 & N2 & N3

@@ -1,4 +1,4 @@
-﻿# CI/CD, Deployment Strategies & Feature Flags
+# CI/CD, Deployment Strategies & Feature Flags
 
 > **Level:** 9 (Cloud-Native) · **Prerequisites:** [IaC/Immutable/GitOps](04-iac-immutable-gitops.md)
 > **Navigation:** [← Previous: IaC/Immutable/GitOps](04-iac-immutable-gitops.md) · [Next → Autoscaling](06-autoscaling.md)
@@ -22,7 +22,7 @@ change sits unshipped, the riskier it is.
   radius; needs good metrics to decide promote/abort. The progressive-delivery default.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   New["New version"]
   New --> Canary["Canary: 1% -> 5% -> 50% -> 100%"]

@@ -1,6 +1,6 @@
-﻿# Case Study: Video-Streaming Platform
+# Case Study: Video-Streaming Platform
 
-> **Tier:** advanced · **Status:** draft
+> **Tier:** advanced · **Status:** beta
 > A complete advanced case study demonstrating the 30-section template for a bandwidth- and
 > storage-dominated, globally-served system. All numbers and diagrams are original.
 
@@ -76,7 +76,7 @@ store for discovery (out of v1 scope).
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Up["Uploader"] --> API["API gateway"]
   API --> Obj["Object storage (raw)"]
@@ -100,7 +100,7 @@ segments from the CDN edge → edge serves cached segments or fetches from origi
 bitrate switches renditions as bandwidth changes → watch events emitted asynchronously.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P as Player
   participant CDN as Edge/CDN
@@ -170,7 +170,7 @@ pattern, cost); **rejected: a single origin without CDN** (egress cost, latency)
 | Upload part fails | Multipart resumes from the failed part, not the start |
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   F{"Failure"}
   F -->|"worker dies"| Req["requeue, idempotent re-transcode"]
@@ -208,7 +208,7 @@ flowchart LR
 ## 24. Scaling stages
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1: single region,<br/>transcode + object storage + simple CDN"]
   S1 -->|"viewers grow"| S2["Stage 2: global CDN<br/>+ multi-region origin"]

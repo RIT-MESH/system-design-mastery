@@ -1,6 +1,6 @@
-﻿# Case Study: URL Shortener
+# Case Study: URL Shortener
 
-> **Tier:** beginner · **Status:** draft
+> **Tier:** beginner · **Status:** beta
 > This is the canonical beginner case study demonstrating the [30-section template](../../templates/CASE-STUDY-TEMPLATE.md). All numbers and diagrams are original.
 
 ## 1. Problem statement
@@ -90,7 +90,7 @@ scales further. We pick a sharded key-value store with the short code as the par
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Client --> CDN["Edge cache / CDN<br/>(short_code -> long_url cached)"]
   CDN -.miss.-> GW["API gateway<br/>rate-limit + auth"]
@@ -123,7 +123,7 @@ flowchart LR
 5. Asynchronously emit a redirect event to the analytics queue.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant C as Client
   participant CDN as Edge cache
@@ -213,7 +213,7 @@ adding shards (sharding doesn't fix a single hot key).
 | Network partition between regions | Each region serves its own cached codes; writes route to the primary region. |
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   F{"Failure"}
   F -->|"KV leader down"| Promote["promote follower"]
@@ -255,7 +255,7 @@ flowchart LR
 ## 24. Scaling stages
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1: single region<br/>1 KV shard + cache + CDN"]
   S1 -->|"reads grow"| S2["Stage 2: add read replicas<br/>+ sharded KV by code"]

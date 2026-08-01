@@ -1,4 +1,4 @@
-﻿# CDC, Materialized Views & Data Lifecycle
+# CDC, Materialized Views & Data Lifecycle
 
 > **Level:** 3 (Data & Storage) · **Prerequisites:** [Partitioning & Sharding](03-partitioning-sharding.md)
 > **Navigation:** [← Previous: Partitioning & Sharding](03-partitioning-sharding.md) · [Next → ID Generation & Multi-tenancy](05-id-generation.md)
@@ -15,7 +15,7 @@ alternative to **dual-writes** (writing to two stores in application code), whic
 not-atomic: one write can fail, leaving the stores diverged silently.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   App["Application"] --> DB[("Primary DB<br/>(source of truth)")]
   DB -->|"CDC: tail the log"| Stream["Change stream / outbox"]
@@ -45,7 +45,7 @@ as access decays:
 - **Cold**: rarely accessed — object/archive storage, compressed.
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Hot["Hot<br/>(SSD/in-mem, days)"] -->|"age"| Warm["Warm<br/>(standard, weeks-months)"]
   Warm -->|"age"| Cold["Cold<br/>(object/archive, years)"]

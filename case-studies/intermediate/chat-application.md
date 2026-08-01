@@ -1,6 +1,6 @@
 # Case Study: Chat Application
 
-> **Tier:** intermediate · **Status:** draft · Original numbers and diagrams.
+> **Tier:** intermediate · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 Real-time 1:1 and group chat: low-latency message delivery, online presence, message
@@ -42,7 +42,7 @@ send. Presence via the connection layer.
 
 ## 11. High-level architecture
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Client --> Gateway["Connection gateway<br/>(stateful, async I/O)"]
   Gateway --> Presence["Presence store"]
@@ -128,7 +128,7 @@ fan-out, ordering, and at-least-once.
 Standalone sources under `diagrams/case-studies/chat-application/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Client
   participant P1 as Chat Application
@@ -140,7 +140,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Message store shard down"]
   R2["promote follower"]
@@ -151,7 +151,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 gateway + message store."]
   S2["Stage 2 shard by channel, connection-scale gateways."]

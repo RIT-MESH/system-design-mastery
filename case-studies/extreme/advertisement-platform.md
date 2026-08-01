@@ -1,11 +1,11 @@
 # Case Study: Advertisement Platform
 
-> **Tier:** extreme · **Status:** draft · Original numbers and diagrams.
+> **Tier:** extreme · **Status:** beta · Original numbers and diagrams.
 
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Page --> AdReq[Ad request] --> Match[Eligibility match]
   Match --> Auction[Auction] --> Serve[Serve ad]
@@ -19,7 +19,7 @@ flowchart LR
 Standalone sources under `diagrams/case-studies/advertisement-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Ad request
   participant P1 as Eligibility match
@@ -28,7 +28,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Auction slow"]
   R2["serve a default house ad latency, not er"]
@@ -42,7 +42,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 match + auction + serve."]
   S2["Stage 2 budget pacing + attribution."]

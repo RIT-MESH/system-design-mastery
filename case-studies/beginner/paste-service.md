@@ -1,6 +1,6 @@
 # Case Study: Paste Service
 
-> **Tier:** beginner · **Status:** draft · Original numbers and diagrams.
+> **Tier:** beginner · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 Users paste text (code, notes) and get a short URL to share; anyone with the URL reads the
@@ -40,7 +40,7 @@ an optional TTL. - Return 404 for unknown/expired.
 
 ## 11. High-level architecture
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Client --> Edge["Edge cache (code->body)"]
   Edge -.miss.-> GW["Gateway"]
@@ -119,7 +119,7 @@ read-heavy, cache-dominated shape first.
 Standalone sources under `diagrams/case-studies/paste-service/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Client
   participant P1 as Paste Service
@@ -131,7 +131,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["KV leader down"]
   R2["promote follower"]
@@ -145,7 +145,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 single region KV+cache+edge."]
   S2["Stage 2 shard KV by code, read replicas."]

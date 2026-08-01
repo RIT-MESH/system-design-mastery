@@ -17,7 +17,7 @@ Tokens are the units an LLM reads and writes; tokenization splits text into thes
 ## Architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Pretrain[Pretraining on broad data] --> Foundation[Foundation model]
   Foundation --> Tune[Fine-tune or instruct or RLHF]

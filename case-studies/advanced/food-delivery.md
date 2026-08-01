@@ -1,6 +1,6 @@
 # Case Study: Food-Delivery Platform
 
-> **Tier:** advanced · **Status:** draft · Original numbers and diagrams.
+> **Tier:** advanced · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 
@@ -45,7 +45,7 @@ restaurant(id, menu, loc); order(id, customer, restaurant, items, status, courie
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Cust --> Order[Order svc] --> Rest[Restaurant accept]
   Rest --> Dispatch[Dispatch svc] --> Geo[Courier geo index]
@@ -123,7 +123,7 @@ Clarify three-sided timing, dispatch radius, ETA. Surface geo dispatch, real-tim
 Standalone sources under `diagrams/case-studies/food-delivery/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Order svc
   participant P1 as Restaurant accept
@@ -132,7 +132,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["No courier nearby"]
   R2["expand radius + queue + notify customer"]
@@ -146,7 +146,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 order + dispatch."]
   S2["Stage 2 geo-partitioned dispatch + tracking."]

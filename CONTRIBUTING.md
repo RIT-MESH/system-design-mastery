@@ -12,7 +12,7 @@ Every contribution must be **original** to this repository. Concretely:
   tables, or diagrams from any other system-design repository, book, blog, or course.
 - **Do not re-trace, re-color, rename, or lightly modify** diagrams from elsewhere.
 - Mermaid diagrams must be constructed from your own written explanation and include an
-  `%% origin: original to system-design-mastery` comment.
+  `%% created-for: system-design-mastery` comment.
 - A permissive license (e.g., MIT) on a source does **not** waive this originality rule; it
   only governs attribution. We aim higher than the minimum license allows.
 - If a source has no clear license, treat it as **reference-only**: you may learn from it but

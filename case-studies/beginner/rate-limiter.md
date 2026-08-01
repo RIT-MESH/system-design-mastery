@@ -1,6 +1,6 @@
 # Case Study: Rate Limiter
 
-> **Tier:** beginner · **Status:** draft · Original numbers and diagrams.
+> **Tier:** beginner · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 Protect a service from abuse/overload by limiting request rate per client/tenant. A
@@ -43,7 +43,7 @@ Token bucket per key: `(tokens, last_refill_ts)`. In-memory store (Redis-like) k
 
 ## 11. High-level architecture
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   Client --> GW["Gateway"]
   GW --> RL["Rate limiter (in-process + shared store)"]
@@ -123,7 +123,7 @@ latency/availability-vs-exactness trade.
 Standalone sources under `diagrams/case-studies/rate-limiter/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Client
   participant P1 as Rate Limiter
@@ -135,7 +135,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Limiter store down"]
   R2["fail-open allow to avoid blocking all tr"]
@@ -146,7 +146,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 in-process buckets per gateway."]
   S2["Stage 2 shared store for cluster-wide limits."]

@@ -1,6 +1,6 @@
 # Case Study: Collaborative Document Editor
 
-> **Tier:** advanced · **Status:** draft · Original numbers and diagrams.
+> **Tier:** advanced · **Status:** beta · Original numbers and diagrams.
 
 ## 1. Problem statement
 
@@ -45,7 +45,7 @@ doc(id, crdt state, op log, snapshots); presence(user, doc, cursor). Op log is t
 ## 11. High-level architecture
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   U1 & U2 --> Relay[Op relay / gateway]
   Relay --> Doc[Doc service (CRDT/OT)]
@@ -123,7 +123,7 @@ Clarify offline, concurrency, no-lost-edits. Surface CRDT/OT, op log, offline me
 Standalone sources under `diagrams/case-studies/collaborative-document-editor/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. Additional diagrams for this case study:
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 sequenceDiagram
   participant P0 as Client
   participant P1 as Collaborative Document Edito
@@ -135,7 +135,7 @@ sequenceDiagram
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   C1["Relay down"]
   R2["clients reconnect to another"]
@@ -149,7 +149,7 @@ flowchart LR
 ```
 
 ```mermaid
-%% origin: original to system-design-mastery
+%% created-for: system-design-mastery
 flowchart LR
   S1["Stage 1 op relay + CRDT."]
   S2["Stage 2 per-doc sharding + snapshots."]
