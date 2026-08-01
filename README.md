@@ -6,7 +6,7 @@ System Design Mastery is a self-contained, vendor-neutral reference and learning
 
 The repository is deliberately a curriculum rather than a list of interview answers. Each chapter is independently navigable and follows a consistent structure — learning objectives, examples, trade-offs, a "common mistakes" section, failure modes, review questions, and further reading with citations — so a reader can open any chapter and learn the topic in context. The conceptual material is reinforced by practical components: capacity-estimation and availability worksheets, small Python simulations of real mechanisms (consistent hashing, token-bucket rate limiting, retry with jitter, and a circuit-breaker/failure-injection model), reusable templates (case study, architecture decision record, and design/security/reliability review checklists), and an interview framework with a timed mock-interview script. Forty-four case studies apply the method end to end, each written to a fixed thirty-section template.
 
-**Current status:** the original curriculum (Levels 0–10, 76 chapters; 44 case studies, each with the full 30-section content and four original Mermaid diagrams) is complete, along with the practical components, templates, interview framework, per-level exercises, references, and CI. This update adds a [Network & AI Operations](#network-and-ai-operations) track (complete) and an [AI Systems](#ai-systems-track) track with Milestones 1–2 complete; AI Milestones 3–8 are planned in [Planned Work](#planned-work) and [BACKLOG.md](BACKLOG.md). Original Mermaid diagrams are used throughout (212 standalone `.mmd` sources plus 303 inline diagram blocks).
+**Current status:** the repository is complete. It contains 97 curriculum chapters (76 across Levels 0–10, 15 in the AI Systems track, and 6 in the Network Operations area), 53 case studies (each with the full 30-section content and four original Mermaid diagrams), 19 runnable Python tools, 16 templates, and a full CI validation suite. The [Network & AI Operations](#network-and-ai-operations) track and the [AI Systems](#ai-systems-track) track (15 chapters covering all 8 AI milestones) are complete. Original Mermaid diagrams are used throughout (232 standalone `.mmd` sources plus 324 inline diagram blocks).
 
 **Purpose:** to give a beginner, a working engineer, and a senior architect a single coherent path that builds genuine design judgment — the ability to gather requirements, estimate, choose components, reason about consistency and failure, and justify trade-offs — rather than memorized answers to a fixed set of interview questions.
 
@@ -111,7 +111,7 @@ Top-level documents at a glance:
 
 ## Curriculum (Levels 0-10)
 
-The curriculum is eleven directories under [`docs/`](docs/), one per level. Every chapter is independently readable and ends with previous/next navigation. All 76 chapters share the same structure: learning objectives, examples, trade-offs, common mistakes, failure modes, review questions, and further reading with SOURCES.md citations. All 76 chapters contain trade-offs, common-mistakes, failure-mode, and review-question sections; 296 inline Mermaid diagrams and 181 standalone `.mmd` sources support them.
+The curriculum is eleven directories under [`docs/`](docs/), one per level. Every chapter is independently readable and ends with previous/next navigation. All 76 chapters share the same structure: learning objectives, examples, trade-offs, common mistakes, failure modes, review questions, and further reading with SOURCES.md citations. All 76 chapters contain trade-offs, common-mistakes, failure-mode, and review-question sections; 324 inline Mermaid diagrams and 232 standalone `.mmd` sources support them.
 
 ### Level 0 — Prerequisites (`docs/00-prerequisites/`)
 
@@ -245,7 +245,7 @@ Patterns and constraints that only matter past millions of users, petabytes, or 
 - [Internet-Scale Identity, IoT/Digital Twins, P2P & Blockchain](docs/10-extreme-scale/11-identity-iot-p2p-blockchain.md)
 ## Case Studies
 
-Forty-four case studies apply the design method end to end. Each follows the [thirty-section template](templates/CASE-STUDY-TEMPLATE.md) and contains original traffic/storage/bandwidth estimates, an API design, a data model, and four original Mermaid diagrams — a high-level architecture (context/component) diagram, a request-sequence diagram, a failure-flow diagram, and a scaling-evolution diagram — plus a request-flow description, failure-scenarios description, scaling stages, trade-offs, alternatives, interview discussion points, and exercises. Standalone diagram sources live under [`diagrams/case-studies/`](diagrams/case-studies/).
+Fifty-three case studies apply the design method end to end. Each follows the [thirty-section template](templates/CASE-STUDY-TEMPLATE.md) and contains original traffic/storage/bandwidth estimates, an API design, a data model, and four original Mermaid diagrams — a high-level architecture (context/component) diagram, a request-sequence diagram, a failure-flow diagram, and a scaling-evolution diagram — plus a request-flow description, failure-scenarios description, scaling stages, trade-offs, alternatives, interview discussion points, and exercises. Standalone diagram sources live under [`diagrams/case-studies/`](diagrams/case-studies/).
 
 ### Beginner ([`case-studies/beginner/`](case-studies/beginner/))
 
@@ -312,7 +312,7 @@ Banking ledger, stock-trading, fraud detection, advertisement platform, data lak
 
 ## Diagrams and Documentation Format
 
-The documentation is **Markdown** and diagrams are **Mermaid**. There are no committed PNG or SVG image files; diagrams are authored as Mermaid source so they stay in version control, render natively on GitHub, and are easy to revise. Each diagram carries an `%% origin: original to system-design-mastery` comment asserting it was drawn for this repository. One hundred and eighty-one standalone `.mmd` sources live under [`diagrams/`](diagrams/) (`foundations/`, `patterns/`, `case-studies/`), and 296 additional diagrams are embedded inline in the chapters and case studies. Diagram types include context/component, request-sequence, failure-flow, scaling-evolution, state-machine, and replication diagrams. Every case study includes the first four (context/component, request-sequence, failure-flow, scaling-evolution); state-machine, replication, and entity-relationship diagrams appear in the relevant chapters (for example, in [Consensus](docs/04-distributed-systems/02-consensus.md) and [Replication](docs/03-data-storage/02-replication.md)).
+The documentation is **Markdown** and diagrams are **Mermaid**. There are no committed PNG or SVG image files; diagrams are authored as Mermaid source so they stay in version control, render natively on GitHub, and are easy to revise. Each diagram carries an `%% origin: original to system-design-mastery` comment asserting it was drawn for this repository. Two hundred and thirty-two standalone `.mmd` sources live under [`diagrams/`](diagrams/) (`foundations/`, `patterns/`, `case-studies/`, `ai-systems/`), and 324 additional diagrams are embedded inline in the chapters and case studies. Diagram types include context/component, request-sequence, failure-flow, scaling-evolution, state-machine, and replication diagrams. Every case study includes the first four (context/component, request-sequence, failure-flow, scaling-evolution); state-machine, replication, and entity-relationship diagrams appear in the relevant chapters (for example, in [Consensus](docs/04-distributed-systems/02-consensus.md) and [Replication](docs/03-data-storage/02-replication.md)).
 
 Other formats present: Python code examples (the four simulations), Markdown calculation worksheets, and YAML GitHub Actions configuration.
 
@@ -460,12 +460,11 @@ Every status below is derived from the actual repository contents (files that ex
 | Level 8 — Observability | Complete | 6 chapters | — |
 | Level 9 — Cloud-Native | Complete | 9 chapters | — |
 | Level 10 — Extreme-Scale | Complete | 12 chapters | — |
-| Case studies | Complete | 44 studies, all 30 sections each | — |
-| Diagrams | Complete | 181 `.mmd` sources + 296 inline Mermaid blocks; every case study has context, request-sequence, failure-flow, and scaling-evolution | — |
+| Case studies | Complete | 53 studies (beginner, intermediate, advanced, extreme, network-AI, AI), all 30 sections, 4 diagrams each | — |
+| Diagrams | Complete | 232 `.mmd` sources + 324 inline Mermaid blocks; every case study has context, request-sequence, failure-flow, and scaling-evolution | — |
 | Per-level index pages | Complete | 11 `docs/<level>/README.md` indexes with correct chapter tables | — |
-| Network & AI Operations | Complete | 6 case studies + 6 templates + 4 tools + 6 area overviews | — |
-| AI Systems (M1–2) | Complete | 7 chapters + 5 templates + 2 tools | — |
-| AI Systems (M3–8) | Planned | Advanced RAG, agents, security, serving, extreme scale, case studies | Author per milestone |
+| Network & AI Operations | Complete | 6 case studies + 6 templates + 11 tools + 6 chapters + simulation READMEs | — |
+| AI Systems | Complete | 15 chapters + 3 case studies + 5 templates + 4 tools (all 8 AI milestones) | — |
 | Calculation worksheets | Complete | 5 worksheets | — |
 | Python simulations | Complete | 4 simulations (runnable, std-lib only) | — |
 | Templates | Complete | Case study, ADR, 3 review checklists | — |
