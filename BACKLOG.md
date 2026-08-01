@@ -1,4 +1,4 @@
-﻿# Backlog
+# Backlog
 
 The complete list of remaining chapters and case studies. Status:
 
@@ -193,6 +193,34 @@ sections and original Mermaid diagrams.
 | ✅ | Large-language-model inference platform |
 | ✅ | Internet of Things platform |
 | ✅ | Feature store / model-serving system |
+
+
+
+## Network & AI Operations extension
+
+| Status | Item |
+|:------:|------|
+| ✅ | `case-studies/network-ai-systems/`: intelligent-syslog-monitoring, device-upgrade-management, configuration-drift-detection, ai-assisted-noc, network-digital-twin, secure-network-agent (6 case studies, 4 diagrams each) |
+| ✅ | `templates/network/`: critical-incident-report, device-upgrade-plan, rollback-plan, configuration-change-review, post-upgrade-validation, network-ai-security-review (6 templates) |
+| ✅ | `examples/network/`: syslog_parser.py, alert_dedup.py, upgrade_risk.py, config_diff.py (4 runnable tools) |
+| ✅ | `docs/` network areas: network-foundations, network-observability, network-automation, network-security, firmware-lifecycle, ai-for-network-operations (6 overview READMEs) |
+| 🔲 | Remaining practical network tools (certificate-expiry monitor, end-of-support tracker, NOC summary generator, compliance checker, change-risk worksheet, etc.) |
+
+## AI Systems track
+
+| Status | Item |
+|:------:|------|
+| ✅ | `docs/ai-systems/` README + AI Milestone 1 chapters: 00-ai-ml-fundamentals, 01-ai-hardware, 02-ai-capacity-planning |
+| ✅ | AI Milestone 2 chapters: 03-vector-databases, 04-chunking-ingestion, 05-hybrid-search-reranking, 06-basic-rag |
+| ✅ | `templates/ai/`: rag-adr, ai-threat-model, evaluation-plan, prompt-change-review, ai-production-readiness (5 templates) |
+| ✅ | `examples/ai/`: token_cost.py, vram.py (2 runnable tools) |
+| 🔲 | AI Milestone 3 — Advanced RAG: query transformation, adaptive retrieval, GraphRAG, federated retrieval, permission-aware retrieval, grounding and verification |
+| 🔲 | AI Milestone 4 — Agentic systems: tool calling, workflow state, agent memory, ReAct, planner-executor, multi-agent, human approvals |
+| 🔲 | AI Milestone 5 — Security and evaluation: prompt injection, data poisoning, RBAC-aware RAG, PII, LLM tracing, RAG/agent evaluation, cost observability |
+| 🔲 | AI Milestone 6 — Model serving: inference engines, continuous batching, KV caching, quantization, distributed/multi-GPU inference, autoscaling |
+| 🔲 | AI Milestone 7 — Extreme scale: multi-region serving, billion-chunk retrieval, multi-LoRA, GPU scheduling, enterprise AI gateways, large-scale evaluation, AI governance |
+| 🔲 | AI Milestone 8 — Case studies and tools: enterprise RAG platform, autonomous support-agent team, LLM API gateway, chunking simulator, model-routing simulator, security and readiness templates |
+| 🔲 | `simulations/ai/` and `simulations/network/` interactive simulation sets |
 
 ## Practical components (M3–M8)
 | Status | File | Component |

@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Dev[Devices] --> Coll[Config collector]
+  Coll --> Diff[Diff vs baseline]
+  Diff --> Class[Rule + AI drift classifier]
+  Class --> Risk[Risk scorer]
+  Risk --> Ticket[Change ticket + context]
+  Risk --> Comp[Compliance report]
+  Baselines -.versioned.-> Diff

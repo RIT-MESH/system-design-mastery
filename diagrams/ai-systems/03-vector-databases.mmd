@@ -1,0 +1,8 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Insert --> Store[Vector store]
+  Store --> Index[ANN index: HNSW or IVF or PQ]
+  Query --> Search[ANN search]
+  Search --> Filter[Metadata filter]
+  Filter --> Topk[top-k]
+  ModelChange[Embedding model change] -.re-index.-> Index

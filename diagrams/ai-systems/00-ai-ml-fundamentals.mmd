@@ -1,0 +1,8 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Pretrain[Pretraining on broad data] --> Foundation[Foundation model]
+  Foundation --> Tune[Fine-tune or instruct or RLHF]
+  Tune --> Model[Served model]
+  Prompt --> Inference[Inference: tokens in, tokens out]
+  Inference --> Out[Text or structured or tool call]
+  Text --> Embed[Embeddings]

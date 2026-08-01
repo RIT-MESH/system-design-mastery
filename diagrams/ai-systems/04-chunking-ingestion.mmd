@@ -1,0 +1,8 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Src[Sources] --> Extract[Extract text]
+  Extract --> Chunk[Chunk: fixed or structural or semantic]
+  Chunk --> Embed[Embed]
+  Embed --> Meta[Attach metadata + ACLs]
+  Meta --> VDB[(Vector DB)]
+  ModelChange[Embedding model change] --> Rechunk[Re-chunk and re-embed]

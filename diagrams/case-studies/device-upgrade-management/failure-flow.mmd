@@ -1,0 +1,14 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Executor dies mid-upgrade"]
+  R2["device state machine resumes or rollback"]
+  C1 --> R2
+  C3["Validation fail"]
+  R4["rollback report"]
+  C3 --> R4
+  C5["Backup fail"]
+  R6["block upgrade"]
+  C5 --> R6
+  C7["Advisory unaddressed"]
+  R8["block plan."]
+  C7 --> R8

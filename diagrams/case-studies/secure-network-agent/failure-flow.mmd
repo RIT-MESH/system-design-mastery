@@ -1,0 +1,14 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["LLM down"]
+  R2["degrade to deterministic tools or queue"]
+  C1 --> R2
+  C3["Policy gateway down"]
+  R4["fail-closed no actions"]
+  C3 --> R4
+  C5["Tool fails"]
+  R6["report and retry"]
+  C5 --> R6
+  C7["Approval timeout"]
+  R8["no action."]
+  C7 --> R8

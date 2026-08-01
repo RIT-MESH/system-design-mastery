@@ -1,4 +1,4 @@
-﻿# Content Map
+# Content Map
 
 This is the canonical file inventory for `system-design-mastery`. Status markers:
 
@@ -66,3 +66,19 @@ Every chapter and case study must include:
 - A `## Further reading` section citing SOURCES.md IDs.
 - A `## Review questions` section.
 - **← Previous** / **Next →** links at the bottom.
+
+## Network & AI Operations extension
+| Path | Contents |
+|------|----------|
+| `case-studies/network-ai-systems/` | 6 network-AI case studies (4 diagrams each) |
+| `templates/network/` | 6 network templates |
+| `examples/network/` | 4 runnable network tools |
+| `docs/network-*`, `docs/firmware-lifecycle`, `docs/ai-for-network-operations` | 6 area overviews |
+
+## AI Systems track
+| Path | Contents |
+|------|----------|
+| `docs/ai-systems/` | README + 7 chapters (AI Milestones 1–2) |
+| `templates/ai/` | 5 AI templates |
+| `examples/ai/` | 2 runnable AI tools |
+| `diagrams/ai-systems/` | AI chapter diagrams |

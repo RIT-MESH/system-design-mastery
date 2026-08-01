@@ -1,0 +1,10 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Inv[Inventory + firmware tracking] --> Plan[Upgrade planner + risk analysis]
+  Plan --> Approve[Approval gate]
+  Approve --> Backup[Config backup + checksum]
+  Backup --> Exec[Execute upgrade]
+  Exec --> Watch[Monitor reboot + recovery]
+  Watch --> Validate[Post-upgrade validation]
+  Validate -.fail.-> Rollback[Rollback + report]
+  Validate -.pass.-> Report[Upgrade report]

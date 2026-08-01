@@ -1,0 +1,8 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Req[Requests and context dist] --> Tps[Tokens/s]
+  Tps --> GpuThrough[GPU tokens/s]
+  Concurrency --> KV[KV-cache VRAM]
+  KV & GpuThrough --> Fleet[GPU fleet size]
+  Fleet --> Cost[Token or GPU cost]
+  Budget --> Fleet

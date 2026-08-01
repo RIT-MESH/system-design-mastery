@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Collector can't reach device"]
+  R2["retry backoff, alert"]
+  C1 --> R2
+  C3["Classifier down"]
+  R4["fall back to rules"]
+  C3 --> R4
+  C5["Baseline missing"]
+  R6["block classification, alert."]
+  C5 --> R6

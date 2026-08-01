@@ -6,7 +6,7 @@ System Design Mastery is a self-contained, vendor-neutral reference and learning
 
 The repository is deliberately a curriculum rather than a list of interview answers. Each chapter is independently navigable and follows a consistent structure — learning objectives, examples, trade-offs, a "common mistakes" section, failure modes, review questions, and further reading with citations — so a reader can open any chapter and learn the topic in context. The conceptual material is reinforced by practical components: capacity-estimation and availability worksheets, small Python simulations of real mechanisms (consistent hashing, token-bucket rate limiting, retry with jitter, and a circuit-breaker/failure-injection model), reusable templates (case study, architecture decision record, and design/security/reliability review checklists), and an interview framework with a timed mock-interview script. Forty-four case studies apply the method end to end, each written to a fixed thirty-section template.
 
-**Current status:** the repository is complete against the original scope. All eleven curriculum levels (76 chapters), all 44 case studies (each with the full 30-section content and four original Mermaid diagrams), the practical components, the templates, the interview framework, per-level exercises, the references index, the per-level index pages, and a full CI validation suite are present. Original Mermaid diagrams are used throughout (181 standalone `.mmd` sources plus 296 inline diagram blocks). Optional future enhancements are listed in [Planned Work](#planned-work).
+**Current status:** the original curriculum (Levels 0–10, 76 chapters; 44 case studies, each with the full 30-section content and four original Mermaid diagrams) is complete, along with the practical components, templates, interview framework, per-level exercises, references, and CI. This update adds a [Network & AI Operations](#network-and-ai-operations) track (complete) and an [AI Systems](#ai-systems-track) track with Milestones 1–2 complete; AI Milestones 3–8 are planned in [Planned Work](#planned-work) and [BACKLOG.md](BACKLOG.md). Original Mermaid diagrams are used throughout (212 standalone `.mmd` sources plus 303 inline diagram blocks).
 
 **Purpose:** to give a beginner, a working engineer, and a senior architect a single coherent path that builds genuine design judgment — the ability to gather requirements, estimate, choose components, reason about consistency and failure, and justify trade-offs — rather than memorized answers to a fixed set of interview questions.
 
@@ -361,6 +361,81 @@ Use the repository as a design reference and a set of review checklists. Before 
 
 Read [`CONTRIBUTING.md`](CONTRIBUTING.md) first — it defines the originality requirements, the citation policy, and the chapter and case-study checklists, and it is required reading before opening a pull request. See [Contribution Guidelines](#contribution-guidelines) below.
 
+## Network and AI Operations
+
+> **Track:** Network & AI Operations (complete). Extends the curriculum with network-focused AI systems, infrastructure automation, log intelligence, and controlled device-management workflows.
+
+### Case studies ([`case-studies/network-ai-systems/`](case-studies/network-ai-systems/))
+
+Six case studies, each with 30 sections and four original Mermaid diagrams:
+
+| Case study | Problem | Status |
+|------------|---------|:------:|
+| [Intelligent Syslog Monitoring](case-studies/network-ai-systems/intelligent-syslog-monitoring.md) | Multi-vendor syslog ingest, rule+AI severity classification, structured /report, incident reporting | Complete |
+| [Device Upgrade Management](case-studies/network-ai-systems/device-upgrade-management.md) | Firmware/software upgrade planning, backup/rollback, HA-pair/cluster-aware execution | Complete |
+| [Configuration Drift Detection](case-studies/network-ai-systems/configuration-drift-detection.md) | Baseline comparison, drift classification, risk scoring, ticketing | Complete |
+| [AI-Assisted NOC](case-studies/network-ai-systems/ai-assisted-noc.md) | NOC copilot with multi-model routing, runbook RAG, voice agent, ticket creation | Complete |
+| [Network Digital Twin](case-studies/network-ai-systems/network-digital-twin.md) | Live topology model, change simulation, impact prediction, pre-change validation | Complete |
+| [Secure Network Agent](case-studies/network-ai-systems/secure-network-agent.md) | Tool-calling agent under policy gateway, approval workflow, full audit, RBAC | Complete |
+
+### Templates ([`templates/network/`](templates/network/))
+
+- [Critical incident report](templates/network/critical-incident-report.md)
+- [Device upgrade plan](templates/network/device-upgrade-plan.md)
+- [Rollback plan](templates/network/rollback-plan.md)
+- [Configuration change review](templates/network/configuration-change-review.md)
+- [Post-upgrade validation](templates/network/post-upgrade-validation.md)
+- [Network-AI security review](templates/network/network-ai-security-review.md)
+
+### Tools ([`examples/network/`](examples/network/))
+
+Four runnable Python tools (standard library only): `syslog_parser.py` (parse + classify severity), `alert_dedup.py` (dedup + correlation simulator), `upgrade_risk.py` (upgrade-risk calculator), `config_diff.py` (configuration-difference checker).
+
+### Design principle
+
+AI should assist network engineers, not bypass operational controls. Use AI for summarization, classification, retrieval, correlation, explanation, recommendation, and report generation. Use deterministic systems and human approval for firmware upgrades, routing changes, firewall changes, VPN changes, device reboots, configuration deployment, security-policy modification, and destructive or irreversible operations.
+
+## AI Systems Track
+
+> **Track:** AI Systems (Milestones 1–2 complete; Milestones 3–8 planned). First-class coverage of modern AI system architecture: LLM applications, RAG, agentic workflows, model serving, evaluation, security, and cost control. Vendor-neutral; vendor products appear only as implementation examples.
+
+### Chapters ([`docs/ai-systems/`](docs/ai-systems/))
+
+Seven chapters covering AI Milestones 1–2, each with learning objectives, overview, architecture diagram, capacity/latency/cost considerations, security risks, evaluation methodology, scaling, trade-offs, and a practical exercise:
+
+| Chapter | Milestone | Status |
+|---------|:---------:|:------:|
+| [AI and ML Fundamentals](docs/ai-systems/00-ai-ml-fundamentals.md) | M1 Foundations | Complete |
+| [AI Hardware](docs/ai-systems/01-ai-hardware.md) | M1 Foundations | Complete |
+| [AI Capacity Planning](docs/ai-systems/02-ai-capacity-planning.md) | M1 Foundations | Complete |
+| [Vector Databases](docs/ai-systems/03-vector-databases.md) | M2 Retrieval | Complete |
+| [Chunking and Ingestion](docs/ai-systems/04-chunking-ingestion.md) | M2 Retrieval | Complete |
+| [Hybrid Search and Reranking](docs/ai-systems/05-hybrid-search-reranking.md) | M2 Retrieval | Complete |
+| [Basic RAG](docs/ai-systems/06-basic-rag.md) | M2 Retrieval | Complete |
+
+### Templates ([`templates/ai/`](templates/ai/))
+
+- [RAG ADR](templates/ai/rag-adr.md) — RAG architecture decision record
+- [AI Threat Model](templates/ai/ai-threat-model.md) — STRIDE-for-AI threat model
+- [Evaluation Plan](templates/ai/evaluation-plan.md) — AI evaluation gates and metrics
+- [Prompt Change Review](templates/ai/prompt-change-review.md) — prompt/version change review
+- [AI Production Readiness](templates/ai/ai-production-readiness.md) — pre-production checklist
+
+### Tools ([`examples/ai/`](examples/ai/))
+
+Two runnable Python tools: `token_cost.py` (token-cost calculator showing why long-context tails dominate cost) and `vram.py` (VRAM calculator for model + KV-cache fit across precision).
+
+### Planned AI milestones
+
+- **AI Milestone 3** — Advanced RAG: query transformation, adaptive retrieval, GraphRAG, federated retrieval, permission-aware retrieval, grounding and verification
+- **AI Milestone 4** — Agentic systems: tool calling, workflow state, agent memory, ReAct, planner-executor, multi-agent, human approvals
+- **AI Milestone 5** — Security and evaluation: prompt injection, data poisoning, RBAC-aware RAG, PII, LLM tracing, RAG/agent evaluation, cost observability
+- **AI Milestone 6** — Model serving: inference engines, continuous batching, KV caching, quantization, distributed/multi-GPU inference, autoscaling
+- **AI Milestone 7** — Extreme scale: multi-region serving, billion-chunk retrieval, multi-LoRA, GPU scheduling, enterprise AI gateways, large-scale evaluation, AI governance
+- **AI Milestone 8** — Case studies and tools: enterprise RAG platform, autonomous support-agent team, LLM API gateway, chunking simulator, model-routing simulator, security and readiness templates
+
+See [BACKLOG.md](BACKLOG.md) for per-item status.
+
 ## Progress and Project Status
 
 Every status below is derived from the actual repository contents (files that exist and their section coverage), not from the milestone plan.
@@ -381,6 +456,9 @@ Every status below is derived from the actual repository contents (files that ex
 | Case studies | Complete | 44 studies, all 30 sections each | — |
 | Diagrams | Complete | 181 `.mmd` sources + 296 inline Mermaid blocks; every case study has context, request-sequence, failure-flow, and scaling-evolution | — |
 | Per-level index pages | Complete | 11 `docs/<level>/README.md` indexes with correct chapter tables | — |
+| Network & AI Operations | Complete | 6 case studies + 6 templates + 4 tools + 6 area overviews | — |
+| AI Systems (M1–2) | Complete | 7 chapters + 5 templates + 2 tools | — |
+| AI Systems (M3–8) | Planned | Advanced RAG, agents, security, serving, extreme scale, case studies | Author per milestone |
 | Calculation worksheets | Complete | 5 worksheets | — |
 | Python simulations | Complete | 4 simulations (runnable, std-lib only) | — |
 | Templates | Complete | Case study, ADR, 3 review checklists | — |

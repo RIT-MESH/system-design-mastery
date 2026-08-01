@@ -1,4 +1,31 @@
-﻿## [Unreleased] — Milestone 8 progress (project complete)
+## [Unreleased] — Network & AI Operations + AI Systems extension
+
+### Added — Network & AI Operations
+- 6 network-AI case studies under `case-studies/network-ai-systems/` (intelligent syslog
+  monitoring with a structured `/report`, device upgrade management, configuration drift
+  detection, AI-assisted NOC, network digital twin, secure network agent), each with 4
+  original Mermaid diagrams.
+- 6 network templates (critical-incident-report, device-upgrade-plan, rollback-plan,
+  configuration-change-review, post-upgrade-validation, network-ai-security-review).
+- 4 runnable network tools in `examples/network/` (syslog_parser, alert_dedup,
+  upgrade_risk, config_diff).
+- 6 network-area overview READMEs under `docs/` (network-foundations, network-observability,
+  network-automation, network-security, firmware-lifecycle, ai-for-network-operations).
+
+### Added — AI Systems track (Milestones 1–2)
+- `docs/ai-systems/` track README + 7 chapters: AI/ML fundamentals, AI hardware, AI
+  capacity planning, vector databases, chunking and ingestion, hybrid search and
+  reranking, basic RAG.
+- 5 AI templates (rag-adr, ai-threat-model, evaluation-plan, prompt-change-review,
+  ai-production-readiness) and 2 runnable AI tools (token_cost, vram).
+
+### Status
+- The original curriculum (Levels 0–10, 44 case studies) remains complete. The Network
+  & AI Operations extension is complete. The AI Systems track has Milestones 1–2
+  complete; Milestones 3–8 (advanced RAG, agentic systems, security/evaluation,
+  model serving, extreme scale, case studies/tools) are planned in `BACKLOG.md`.
+
+## [Unreleased] — Milestone 8 progress (project complete)
 
 ### Added
 - Per-level exercise sets under `exercises/<NN>-<area>/README.md` for Levels 0–10

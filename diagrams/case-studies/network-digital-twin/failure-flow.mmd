@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["State ingest lag"]
+  R2["twin stale alert, bound staleness"]
+  C1 --> R2
+  C3["Simulator fail"]
+  R4["retry or queue"]
+  C3 --> R4
+  C5["Graph store down"]
+  R6["degrade to last snapshot."]
+  C5 --> R6

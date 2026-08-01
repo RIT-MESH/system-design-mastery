@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Host[Host CPU and RAM] -->|PCIe| GPU[GPU: VRAM]
+  GPU --> Cores[Cores and Tensor cores]
+  GPU -.NVLink.-> GPU2[Peer GPU]
+  Weights --> VRAM[VRAM: weights + KV cache]
+  VRAM --> Bound{Bound?}
+  Bound -->|compute| CB[Compute-bound]
+  Bound -->|memory| MB[Memory-bound]

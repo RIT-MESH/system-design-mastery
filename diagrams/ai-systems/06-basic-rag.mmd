@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Q --> Embed[Embed query]
+  Embed --> Ret[Hybrid retrieve top-k]
+  Ret --> Ctx[Context + citations]
+  Ctx --> LLM[LLM generate]
+  LLM --> Ans[Grounded answer]
+  Corpus --> Ingest[Ingest chunk + embed] --> VDB[(Vector DB)]
+  Cache[Query cache] --> Q

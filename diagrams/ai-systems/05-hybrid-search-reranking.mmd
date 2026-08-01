@@ -1,0 +1,8 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Q --> KW[Keyword search]
+  Q --> VS[Vector search]
+  KW & VS --> Fuse[Reciprocal-rank fusion]
+  Fuse --> Filter[Metadata filter]
+  Filter --> Rerank[Reranker: cross-encoder]
+  Rerank --> Topk[top-k]

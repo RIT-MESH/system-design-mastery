@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  C1["Provider model down"]
+  R2["failover fallback model"]
+  C1 --> R2
+  C3["RAG down"]
+  R4["answer without runbook disclaimer"]
+  C3 --> R4
+  C5["Voice gateway down"]
+  R6["reconnect"]
+  C5 --> R6

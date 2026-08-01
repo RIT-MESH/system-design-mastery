@@ -1,0 +1,12 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Eng --> Agent[Agent planner-executor]
+  Agent --> Policy[AI safety policy gateway]
+  Policy --> Tools[Read and diagnostic tools]
+  Policy --> Draft[Draft change]
+  Policy --> Approve[Approval workflow]
+  Approve --> Exec[Change management]
+  Agent --> LLM[LLM local for configs]
+  Tools --> Audit[Audit log]
+  Draft --> Audit
+  Exec --> Audit

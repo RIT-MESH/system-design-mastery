@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Mon[Monitoring and config] --> Twin[Digital twin: topology and state and traffic]
+  Eng --> Sim[Change simulator]
+  Sim --> Twin
+  Sim --> Predict[Impact prediction]
+  Predict --> AI[AI what-if analysis]
+  AI --> Report[Pre-change validation report]
+  Report --> Deploy[Change management]

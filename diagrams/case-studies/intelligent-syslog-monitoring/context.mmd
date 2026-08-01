@@ -1,0 +1,13 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Dev[Network devices] --> Coll[Redundant collectors UDP/TCP/TLS]
+  Coll --> Norm[Normalize + enrich]
+  Norm --> Rules[Rule classifier]
+  Norm --> AI[AI classifier + summarizer]
+  Rules & AI --> Corr[Correlate + dedup]
+  Corr --> Store[(Event store + tiers)]
+  Corr -->|critical| Rep[/report critical/]
+  Rep --> Notif[Notify admins]
+  RAG[Runbook RAG] -.remediation.-> Rep
+  Notif --> Ops[Ack/escalate/resolve]
+  Ops --> Rep

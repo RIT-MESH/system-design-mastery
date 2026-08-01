@@ -80,3 +80,32 @@ the concepts and templates delivered in earlier ones.
 3. **Vendor-neutral core** — universal concepts separated from vendor implementations.
 4. **Navigable** — every chapter has prev/next links and a standalone reading order.
 5. **Validated** — markdown lint, link check, and Mermaid validation pass in CI.
+
+## AI Systems milestones
+
+### AI Milestone 1 — Foundations ✅
+AI/ML fundamentals, AI hardware, AI capacity planning.
+
+### AI Milestone 2 — Retrieval Systems ✅
+Vector databases, chunking and ingestion, hybrid search and reranking, basic RAG.
+
+### AI Milestone 3 — Advanced RAG 🔲
+Query transformation, adaptive retrieval, GraphRAG, federated retrieval, permission-aware retrieval, grounding and verification.
+
+### AI Milestone 4 — Agentic Systems 🔲
+Tool calling, workflow state, agent memory, ReAct, planner-executor, multi-agent, human approvals.
+
+### AI Milestone 5 — Security and Evaluation 🔲
+Prompt injection, data poisoning, RBAC-aware RAG, PII, LLM tracing, RAG/agent evaluation, cost observability.
+
+### AI Milestone 6 — Model Serving 🔲
+Inference engines, continuous batching, KV caching, quantization, distributed/multi-GPU inference, autoscaling.
+
+### AI Milestone 7 — Extreme Scale 🔲
+Multi-region serving, billion-chunk retrieval, multi-LoRA, GPU scheduling, enterprise AI gateways, large-scale evaluation, AI governance.
+
+### AI Milestone 8 — Case Studies and Tools 🔲
+Enterprise RAG platform, autonomous support-agent team, LLM API gateway, chunking simulator, model-routing simulator, security and readiness templates.
+
+## Network & AI Operations ✅
+6 network-AI case studies, 6 network templates, 4 network tools, and 6 network-area overviews.
