@@ -1,0 +1,8 @@
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Local GPU fails"]
+  R2["failover to backup local GPU or degrade"]
+  C1 --> R2
+  C3["Vector DB corruption"]
+  R4["restore from local backup"]
+  C3 --> R4

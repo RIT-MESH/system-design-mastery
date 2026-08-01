@@ -1,8 +1,14 @@
 %% created-for: system-design-mastery
-%% llm-inference failure flow
 flowchart LR
-  F{"Failure"}
-  F -->|"GPU crash"| Reroute["re-route in-flight; replace replica"]
-  F -->|"scarcity"| Four["429 (graceful), bounded queue"]
-  F -->|"cold start"| Floor["warm-floor replicas; scale up early"]
-  F -->|"quota store down"| Open["fail-open with cap + reconcile"]
+  C1["F -"]
+  R2["GPU crash Reroute re-route in-flight"]
+  C1 --> R2
+  C3["F -"]
+  R4["scarcity Four 429 graceful , bounded que"]
+  C3 --> R4
+  C5["F -"]
+  R6["cold start Floor warm-floor replicas"]
+  C5 --> R6
+  C7["F -"]
+  R8["quota store down Open fail-open with cap"]
+  C7 --> R8

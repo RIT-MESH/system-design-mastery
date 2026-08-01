@@ -1,0 +1,11 @@
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Graph down"]
+  R2["degrade to vector-only RAG"]
+  C1 --> R2
+  C3["NLP lag"]
+  R4["graph stale"]
+  C3 --> R4
+  C5["Query timeout"]
+  R6["partial"]
+  C5 --> R6

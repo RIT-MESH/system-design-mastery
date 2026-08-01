@@ -1,0 +1,8 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Doc --> Extract[Extract: text, images, tables]
+  Extract --> Index[Cross-modal index]
+  Q --> Retrieve[Multimodal retrieval]
+  Retrieve --> Context[Text + image regions]
+  Context --> MM[Multimodal LLM]
+  MM --> Answer[Answer + region citations]

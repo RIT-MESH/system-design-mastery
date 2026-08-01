@@ -1,9 +1,14 @@
 %% created-for: system-design-mastery
-%% distributed-cache failure flow
 flowchart LR
-  F{"Failure"}
-  F -->|"primary down"| Promote["next replica -> primary"]
-  F -->|"replica down"| Recruit["recruit + backfill"]
-  F -->|"split"| Side["each side serves owned keys"]
-  F -->|"hot key"| Extra["extra read replicas"]
-  Promote & Recruit --> Heal["re-merge on heal"]
+  C1["F -"]
+  R2["primary down Promote next replica -> pri"]
+  C1 --> R2
+  C3["F -"]
+  R4["replica down Recruit recruit backfill"]
+  C3 --> R4
+  C5["F -"]
+  R6["split Side each side serves owned keys"]
+  C5 --> R6
+  C7["F -"]
+  R8["hot key Extra extra read replicas"]
+  C7 --> R8

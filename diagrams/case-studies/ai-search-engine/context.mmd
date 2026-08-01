@@ -1,0 +1,8 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Q --> KW[BM25] & VS[Vector search]
+  KW & VS --> Fuse[RRF fusion]
+  Fuse --> Rerank[Cross-encoder]
+  Rerank --> Topk[Top-k]
+  Topk --> LLM[LLM answer synthesis]
+  LLM --> Answer[Answer + citations]

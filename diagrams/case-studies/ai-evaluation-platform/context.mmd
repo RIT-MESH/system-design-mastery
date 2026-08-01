@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Golden & Adv --> Run[Evaluation run]
+  Run --> Metrics[Metrics: retrieval, generation, cost, safety]
+  Metrics --> Gates{Release gates}
+  Gates -->|pass| Release[Release]
+  Gates -->|fail| Block[Block or rollback]
+  Sample -.continuous.-> Run
+  Results --> Dash[Dashboard]

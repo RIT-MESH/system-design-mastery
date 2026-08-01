@@ -1,0 +1,10 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Action --> Gateway[Policy gateway]
+  Gateway --> Classify[Classify risk]
+  Classify -->|read-only| Allow[Allow]
+  Classify -->|low/medium| PolicyCheck[Policy-controlled]
+  Classify -->|high| Approve[Human approval]
+  Classify -->|prohibited| Block[Block always]
+  Gateway -.error.-> FailClosed[Fail-closed: deny]
+  All --> Audit[Audit log]

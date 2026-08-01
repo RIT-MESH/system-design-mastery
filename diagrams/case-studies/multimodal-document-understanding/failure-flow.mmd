@@ -1,0 +1,11 @@
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Multimodal LLM down"]
+  R2["text-only answer disclaimer"]
+  C1 --> R2
+  C3["Image extraction fail"]
+  R4["text-only"]
+  C3 --> R4
+  C5["Index lag"]
+  R6["stale"]
+  C5 --> R6

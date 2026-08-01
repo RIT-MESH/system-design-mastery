@@ -1,9 +1,9 @@
 %% created-for: system-design-mastery
 flowchart LR
   C1["Provider down"]
-  R2["backoff + queue backlog grows acceptable"]
+  R2["backoff queue backlog grows acceptable,"]
   C1 --> R2
   C3["Worker loss"]
   C4["Queue full"]
-  R5["backpressure to API 429 ."]
+  R5["backpressure to API 429"]
   C4 --> R5

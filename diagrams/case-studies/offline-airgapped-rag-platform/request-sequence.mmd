@@ -1,0 +1,14 @@
+%% created-for: system-design-mastery
+sequenceDiagram
+  participant P0 as Client
+  participant P1 as Offline Air-Gapped RAG P
+  participant P2 as Store
+  P0 ->> P1: query
+  P1 ->> P2: look up or fetch
+  P2 -->> P1: response
+  P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end

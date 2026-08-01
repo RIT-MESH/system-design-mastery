@@ -2,5 +2,10 @@
 sequenceDiagram
   participant P0 as Sources
   participant P1 as Ingest batch stream
-  P0 ->> P1: request
+  P0 ->> P1: query
   P1 -->> P0: response
+  alt success
+    P0 -->> P0: done
+  else failure
+    P0 -->> P0: retry or fallback
+  end

@@ -1,0 +1,8 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Train[Training] & Batch[Batch] --> Q[Priority queue]
+  Serve[Serving reservations] --> Alloc[GPU allocation]
+  Q --> Sched[Scheduler: gang, backfill, preempt]
+  Sched --> Alloc
+  Alloc --> GPUs[GPU cluster]
+  GPUs -.utilization.-> Sched

@@ -1,0 +1,14 @@
+%% created-for: system-design-mastery
+flowchart LR
+  C1["STT error"]
+  R2["ask to repeat"]
+  C1 --> R2
+  C3["LLM down"]
+  R4["canned responses"]
+  C3 --> R4
+  C5["TTS down"]
+  R6["text-only"]
+  C5 --> R6
+  C7["Policy down"]
+  R8["fail-closed"]
+  C7 --> R8

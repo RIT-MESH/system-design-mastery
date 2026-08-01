@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  IDE --> GW[Code gateway]
+  GW --> Index[Codebase index]
+  Index --> Context[Relevant code]
+  Context --> LLM[Code model]
+  LLM --> Complete[Completion]
+  PR --> Review[Security review]
+  Review --> Findings

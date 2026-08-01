@@ -1,0 +1,11 @@
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Index stale"]
+  R2["old code completions"]
+  C1 --> R2
+  C3["LLM down"]
+  R4["keyword fallback"]
+  C3 --> R4
+  C5["Confidential repo"]
+  R6["local model"]
+  C5 --> R6

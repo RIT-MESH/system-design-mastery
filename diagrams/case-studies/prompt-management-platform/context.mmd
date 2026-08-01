@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Author --> Version[Version and eval]
+  Version --> Review[Change review]
+  Review --> Deploy[Deploy or A/B test]
+  Deploy --> Monitor[Monitor performance]
+  Monitor -.regression.-> Rollback[Rollback]
+  A/B --> Results[Compare]
+  Results --> Deploy

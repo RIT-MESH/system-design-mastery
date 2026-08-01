@@ -1,0 +1,9 @@
+%% created-for: system-design-mastery
+flowchart LR
+  S1["Stage 1 single local GPU local vector DB local LLM."]
+  S2["Stage 2 local HA 2-3 nodes local cache."]
+  S3["Stage 3 larger local model multi-GPU ."]
+  S4["Stage 4 local fleet with local scheduling."]
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4

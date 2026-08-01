@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Doc --> Embed[Local embedding model]
+  Embed --> VDB[(Local vector DB)]
+  Q --> LE[Local embed query]
+  LE --> VDB
+  VDB --> Context[Local context]
+  Context --> LLM[Local LLM on GPU]
+  LLM --> Answer[Answer + citations]
+  All --> Audit[Local audit log]
+  NoNet[No internet] -.air-gap.-> All

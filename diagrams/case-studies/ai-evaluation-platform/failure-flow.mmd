@@ -1,0 +1,11 @@
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Eval runner down"]
+  R2["block release"]
+  C1 --> R2
+  C3["Metric error"]
+  R4["false green alert on anomalies"]
+  C3 --> R4
+  C5["Test set stale"]
+  R6["overfitting rotate"]
+  C5 --> R6

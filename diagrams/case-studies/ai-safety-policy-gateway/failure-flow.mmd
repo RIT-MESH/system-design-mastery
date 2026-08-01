@@ -1,0 +1,11 @@
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Gateway down"]
+  R2["fail-closed all denied"]
+  C1 --> R2
+  C3["Policy registry down"]
+  R4["last cached fail-closed for unknown"]
+  C3 --> R4
+  C5["Approval timeout"]
+  R6["deny safe"]
+  C5 --> R6

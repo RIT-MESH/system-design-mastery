@@ -1,0 +1,9 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Goal --> Sup[Supervisor]
+  Sup --> A1 & A2 & A3[Specialist agents]
+  A1 & A2 & A3 --> Tools[Shared tool registry]
+  A1 & A2 & A3 --> Mem[Shared memory]
+  A1 & A2 & A3 --> Policy[Policy gateway]
+  Policy --> Exec[Execute or approve]
+  All --> Audit

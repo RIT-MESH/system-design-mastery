@@ -1,0 +1,11 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  User --> STT[Speech to text]
+  STT --> LLM[LLM + RAG]
+  LLM --> Policy[Policy gateway]
+  Policy --> Tools[Read tools]
+  Policy --> Draft[Draft high-risk]
+  Draft --> Approve[Human approval]
+  LLM --> TTS[Text to speech]
+  TTS --> User
+  All --> Audit[Audit log]

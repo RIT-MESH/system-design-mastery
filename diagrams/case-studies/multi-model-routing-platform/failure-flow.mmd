@@ -1,0 +1,11 @@
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Model down"]
+  R2["failover"]
+  C1 --> R2
+  C3["Budget store down"]
+  R4["fail-open with cap reconcile"]
+  C3 --> R4
+  C5["Router down"]
+  R6["default model"]
+  C5 --> R6

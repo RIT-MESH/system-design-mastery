@@ -1,0 +1,14 @@
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Scheduler down"]
+  R2["jobs continue allocations persist"]
+  C1 --> R2
+  C3["Gang deadlock"]
+  R4["timeout release"]
+  C3 --> R4
+  C5["GPU failure"]
+  R6["reallocate"]
+  C5 --> R6
+  C7["Checkpoint corrupt"]
+  R8["restart"]
+  C7 --> R8

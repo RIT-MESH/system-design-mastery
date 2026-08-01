@@ -1,8 +1,14 @@
 %% created-for: system-design-mastery
-%% video-streaming failure flow
 flowchart LR
-  F{"Failure"}
-  F -->|"worker dies"| Req["requeue, idempotent re-transcode"]
-  F -->|"origin down"| Edge["edge serves cache; failover origin"]
-  F -->|"edge down"| Alt["alternate edge/origin"]
-  F -->|"upload part fails"| Res["multipart resume from part"]
+  C1["F -"]
+  R2["worker dies Req requeue, idempotent re-t"]
+  C1 --> R2
+  C3["F -"]
+  R4["origin down Edge edge serves cache"]
+  C3 --> R4
+  C5["F -"]
+  R6["edge down Alt alternate edge origin"]
+  C5 --> R6
+  C7["F -"]
+  R8["upload part fails Res multipart resume f"]
+  C7 --> R8

@@ -1,0 +1,14 @@
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Eval fail"]
+  R2["block deploy"]
+  C1 --> R2
+  C3["A B inconclusive"]
+  R4["extend or default to control"]
+  C3 --> R4
+  C5["Performance regression"]
+  R6["rollback"]
+  C5 --> R6
+  C7["Cache stale"]
+  R8["TTL manual refresh"]
+  C7 --> R8

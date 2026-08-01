@@ -1,0 +1,14 @@
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Agent fails"]
+  R2["supervisor retries or escalates"]
+  C1 --> R2
+  C3["Memory down"]
+  R4["session-only context"]
+  C3 --> R4
+  C5["Policy down"]
+  R6["fail-closed"]
+  C5 --> R6
+  C7["LLM down"]
+  R8["queue"]
+  C7 --> R8

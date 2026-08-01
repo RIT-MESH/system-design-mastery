@@ -1,0 +1,7 @@
+%% origin: original to system-design-mastery
+flowchart LR
+  Client --> GW[AI gateway]
+  GW --> Cache[Semantic cache]
+  Cache -.miss.-> Ret[Permission-aware retrieve]
+  Ret --> LLM[Generate and cite]
+  LLM --> Resp

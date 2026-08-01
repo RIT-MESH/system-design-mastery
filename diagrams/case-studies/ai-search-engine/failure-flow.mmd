@@ -1,0 +1,14 @@
+%% created-for: system-design-mastery
+flowchart LR
+  C1["Vector shard down"]
+  R2["partial"]
+  C1 --> R2
+  C3["BM25 down"]
+  R4["partial"]
+  C3 --> R4
+  C5["LLM down"]
+  R6["links only"]
+  C5 --> R6
+  C7["Cache stale"]
+  R8["TTL"]
+  C7 --> R8

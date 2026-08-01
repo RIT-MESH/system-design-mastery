@@ -1,7 +1,7 @@
 %% created-for: system-design-mastery
 flowchart LR
   C1["Collector down"]
-  R2["peer buffer absorbs offline buffer reply"]
+  R2["peer buffer absorbs offline buffer repla"]
   C1 --> R2
   C3["AI classifier down"]
   R4["fall back to rules never block reporting"]
@@ -10,5 +10,5 @@ flowchart LR
   R6["reports omit remediation hints"]
   C5 --> R6
   C7["Store down"]
-  R8["buffer alert."]
+  R8["buffer alert"]
   C7 --> R8

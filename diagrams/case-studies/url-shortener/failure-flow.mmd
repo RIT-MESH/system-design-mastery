@@ -1,9 +1,14 @@
 %% created-for: system-design-mastery
-%% url-shortener failure flow
 flowchart LR
-  F{"Failure"}
-  F -->|"KV leader down"| Promote["promote follower"]
-  F -->|"cache down"| Direct["resolve from KV"]
-  F -->|"edge down"| GW["fall through to origin"]
-  F -->|"analytics down"| Lag["counts lag, redirect ok"]
-  Promote --> OK["redirects via cache during switch"]
+  C1["Edge cache unavailable Traffic falls thr"]
+  R2["cache→KV"]
+  C1 --> R2
+  C3["F -"]
+  R4["KV leader down Promote promote follower"]
+  C3 --> R4
+  C5["F -"]
+  R6["cache down Direct resolve from KV"]
+  C5 --> R6
+  C7["F -"]
+  R8["edge down GW fall through to origin"]
+  C7 --> R8
