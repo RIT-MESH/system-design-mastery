@@ -19,18 +19,18 @@ A free, open-source system design course. Start from nothing. End up designing s
 
 **No fluff. No copied content. No link dumps.** Just 97 chapters, 66 real-world case studies, and 19 runnable code examples — all original.
 
-## What will I learn?
+## What you will learn
 
-- How to **estimate** traffic, storage, and cost before writing code
-- How to **pick the right database** (SQL vs NoSQL vs vector vs graph)
-- How to **scale** from 100 users to a billion
-- How to **not lose data** when servers crash
-- How to **design APIs** people actually want to use
-- How to **survive interviews** with a repeatable method
+- **Estimate** traffic, storage, and cost before writing code
+- **Pick the right database** (SQL vs NoSQL vs vector vs graph)
+- **Scale** from 100 users to a billion
+- **Prevent data loss** when servers crash
+- **Design APIs** people actually want to use
+- **Survive interviews** with a repeatable method
 
-## Where do I start?
+## Where to start
 
-| You are... | Start here |
+| If you are... | Start here |
 |------------|-----------|
 | New to all this | [Level 0 — Basics](docs/00-prerequisites/) |
 | Know some backend | [Level 1 — Foundations](docs/01-foundations/) |
@@ -75,7 +75,7 @@ python examples/token_cost.py            # Calculate LLM costs
 python examples/vram.py                  # Check if a model fits in GPU memory
 ```
 
-## How does each case study work?
+## How case studies work
 
 Every case study follows the same structure so you learn a **repeatable method**:
 
@@ -83,7 +83,7 @@ Every case study follows the same structure so you learn a **repeatable method**
 
 **30 sections. 4 diagrams. Every time.**
 
-## Can I contribute?
+## Contributing
 
 Yes. Read [CONTRIBUTING.md](CONTRIBUTING.md) first — it explains the originality rules and review process.
 
