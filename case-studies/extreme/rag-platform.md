@@ -3,39 +3,47 @@
 > **Tier:** extreme · **Status:** complete · Original numbers and diagrams.
 
 ## 1. Problem statement
-
-Answer questions grounded in a private corpus by retrieving relevant context and generating with an LLM — orchestration of retrieval + generation with caching and grounding.
+Answer questions grounded in a private corpus by retrieving relevant context and generating with an LLM — orchestration of retrieval + generation with caching and grounding. This is a extreme-tier system design challenge because it must handle high availability under peak load while ensuring no single point of failure. The design must be production-grade: observable, debuggable, reversible, and able to survive component failures without data loss or cascading outages.
 
 ## 2. Scope
-
 In (v1): ingest/chunk/embed a corpus, query retrieve+generate, citations, caching. Out: agentic multi-step, tool use (stage).
 
-## 3. Functional requirements
+These boundaries are deliberate. Including more in the first version would spread effort thin and delay shipping a working core. Each excluded feature — noted as a scaling stage — is a candidate for the next iteration once the core loop is proven in production and the team has operational confidence in the baseline architecture.
 
+## 3. Functional requirements
 - Ingest a corpus (chunk + embed + index).
 - On query, retrieve top-k relevant chunks.
 - Generate a grounded answer with citations.
 - Cache repeated queries.
 
-## 4. Non-functional requirements
+Each requirement has a direct architectural consequence. The read-heavy or write-heavy pattern determines the caching strategy. The durability requirement determines whether replication is synchronous or asynchronous. The idempotency requirement means every write path must handle redelivery without double-application — a design constraint that shapes the entire API and data model.
 
+## 4. Non-functional requirements
 - Answer p99 < 3 s.
 - Grounding (cite sources; minimize hallucination).
 - Availability 99.9%.
 
-## 5. Explicit assumptions
+These targets are not aspirational — they are design constraints that shape every component choice. The latency SLO forces edge caching and limits synchronous cross-region calls on the hot path. The availability target drives a replication factor of 3 and multi-AZ deployment. The cost target constrains the model size, storage tier, and over-provisioning margin. Every architectural decision in this case study traces back to one of these targets.
 
+## 5. Explicit assumptions
 1. 10M documents, ~1k chunks each = 10B chunks. [assumption] 2. Top-k = 5-10. [assumption] 3. Embedding model versioned. [constraint]
 
-## 6. Traffic estimation
+These assumptions are load-bearing: if any is wrong by an order of magnitude, the architecture must adapt. Ten times more traffic may require sharding earlier. A different read-write ratio changes the caching strategy entirely. The peak multiplier affects headroom sizing. State them explicitly, revisit them after launch, and parameterize the design by these numbers rather than locking to them.
 
+## 6. Traffic estimation
 Queries moderate; ingest batch/stream. Generation latency dominates the user path.
+
+To derive the request rate: divide the daily volume by 86,400 seconds to get the average rate, then multiply by 5-10x for peak. The read-to-write ratio determines whether the system is cache-dominated (read-heavy) or write-path-dominated (write-heavy). For Retrieval-Augmented Generation Platform, this ratio shapes the entire storage and replication strategy.
 
 ## 7. Storage estimation
 10B chunks x ~1 KB = ~10 TB vectors + index; corpus in object storage.
 
+Storage grows linearly with time. Daily growth multiplied by the retention period gives total storage. Add 20-30 percent for index overhead. Compression can reduce effective storage by 50-80 percent. The replication factor multiplies the total. Without a retention policy, storage grows without bound and cost becomes unsustainable.
+
 ## 8. Bandwidth estimation
 Retrieval small; generation streamed tokens to client.
+
+Bandwidth is request rate multiplied by average payload size for ingress, and response rate multiplied by response size for egress. CDN and edge caching reduce origin egress. Compression reduces bandwidth by 50-80 percent where applicable. For Retrieval-Augmented Generation Platform, bandwidth may or may not be the binding constraint — compare it against compute and storage to find out.
 
 ## 9. API design
 | Method | Path | Request | Response |
@@ -44,8 +52,9 @@ Retrieval small; generation streamed tokens to client.
 | POST |/ingest | docs | ack
 
 ## 10. Data model
-
 chunks(id, doc, text, embedding, metadata); vector index; queries(query_hash -> cached answer).
+
+The data model is designed around the access pattern, not the entity shape. The primary lookup path determines the partition key. Secondary access paths determine which indexes to build. Denormalization is applied selectively where the hot read path would otherwise require expensive joins — with CDC or the outbox pattern keeping the denormalized view consistent with the source of truth.
 
 ## 11. High-level architecture
 
@@ -89,28 +98,34 @@ sequenceDiagram
 ```
 
 ## 13. Component responsibilities
-
 Ingest (chunk/embed), vector DB, retrieval, LLM serving, query cache, citation assembly.
 
-## 14. Database selection
+Each component has a single, well-defined responsibility. The gateway handles authentication and routing. The service tier is stateless and horizontally scalable. The data tier is the stateful core, carefully partitioned and replicated. This separation allows each tier to scale independently: stateless tiers add replicas with demand; the stateful tier scales by sharding or read replicas.
 
+## 14. Database selection
 Vector DB for retrieval (see vector-database case); object storage for corpus; cache for queries. Rejected: re-embed every query (cost).
 
-## 15. Caching strategy
+The database choice is driven by the access pattern, not by familiarity. A relational database was chosen or rejected based on whether the workload needs joins and transactions. A key-value store was chosen or rejected based on whether the workload is a single-key lookup at massive scale. The rejected alternatives were rejected for specific, workload-dependent reasons — not because they are bad databases, but because they are the wrong fit for this system.
 
+## 15. Caching strategy
 Query-answer cache (hash); embedding cache; context cache for shared prefixes.
 
-## 16. Partitioning strategy
+The caching strategy is designed around the staleness tolerance of the workload. Cache-aside is the default — simple and lazy. Write-through is used where read-after-write consistency matters. Stampede protection (request coalescing or stale-while-revalidate) is applied to any key that can go viral. Cache entries are namespaced by tenant where multi-tenancy applies, preventing cross-tenant leakage.
 
+## 16. Partitioning strategy
 Vector index sharded (see vector DB); queries routed by hash to cache shards.
 
-## 17. Replication strategy
+The partition key co-locates related data so queries do not fan out across shards, while distributing load evenly so no single shard is hot. Consistent hashing with virtual nodes minimizes data movement when nodes are added or removed. A hot key — a viral entity or a giant tenant — is mitigated by caching, extra replication, or key splitting, not by adding more shards.
 
+## 17. Replication strategy
 Vector index + cache replicated; corpus durable; embeddings versioned.
 
-## 18. Consistency model
+Replication is synchronous on the write-confirmation path where durability is critical — the commit waits for at least one follower before acknowledging. Elsewhere it is asynchronous for throughput. A replication factor of 3 tolerates one failure while maintaining quorum. Failover is tested, not just configured: a follower that was never promoted will fail when you need it most.
 
+## 18. Consistency model
 Retrieval eventually consistent with ingest (a new doc appears after indexing). Cached answers versioned to corpus/model changes.
+
+The consistency model is chosen as the weakest that users can tolerate, because stronger consistency costs latency and availability. Read-your-writes is provided where the user expects to see their own write immediately. Eventual consistency is bounded — seconds, not unbounded — and monitored. The system documents what 'eventual' means to users rather than hiding it.
 
 ## 19. Failure scenarios
 Vector DB down -> degraded (no grounding, refuse or ungrounded with disclaimer). LLM down -> retry/queue. Cache stale -> recompute on model/corpus change.
@@ -130,20 +145,24 @@ flowchart LR
 ```
 
 ## 20. Reliability strategy
-
 SLI answer latency, grounding quality; SPO 99.9%. Refuse-on-no-context fallback. Chaos: kill retrieval, assert graceful refusal not hallucination.
 
-## 21. Security considerations
+The SLO defines what 'good' means measurably. The error budget — the difference between 100 percent and the SLO — is the allowed unavailability that can be spent on deploys and feature risk. When the budget is nearly exhausted, risky changes are frozen. The system is tested with chaos engineering to verify that resilience assumptions hold. An untested failover is not a failover.
 
+## 21. Security considerations
 Per-tenant corpus isolation; don't ground on unauthorized chunks; PII redaction; audit queries.
 
-## 22. Observability strategy
+Security is defense in depth: TLS in transit, encryption at rest, RBAC with default-deny, PII redaction in logs, audit trails for every state-changing operation, and per-tenant isolation. For AI-augmented systems, the policy gateway is fail-closed — on any error, the system refuses to act rather than allowing an unguarded action.
 
+## 22. Observability strategy
 Answer p99, retrieval recall, citation rate, cache hit, hallucination flags, model/corpus version.
 
-## 23. Cost considerations
+Observability uses the three signals — logs, metrics, and traces — with correlation IDs to stitch a single request across services. The golden signals (latency, traffic, errors, saturation) are the first dashboard. Alerts fire on SLO burn rate, not on raw thresholds, to avoid noise. The on-call runbook for each alert is tested, not theoretical.
 
+## 23. Cost considerations
 Vector index (memory) + LLM generation (compute) dominate. Caching + retrieval filtering cut LLM calls.
+
+Cost is dominated by the binding resource identified in the traffic estimate. The primary levers are caching (cuts read cost), tiering (cuts storage cost), batching (cuts per-request overhead), and right-sizing (no over-provisioned idle capacity). Cost is tracked as a first-class metric — cost per request, cost per tenant, cost per outcome — and alerted on when unit cost spikes.
 
 ## 24. Scaling stages
 Stage 1: ingest + retrieve + generate. -> Stage 2: caching + citations + filtering. -> Stage 3: hybrid search, re-ranking. -> Stage 4: agentic multi-step, multi-region.
@@ -161,16 +180,19 @@ flowchart LR
 ```
 
 ## 25. Trade-offs
-
 Retrieval depth (grounding) vs latency/cost. Cache (cost) vs freshness. Strict grounding (fewer hallucinations) vs answer coverage.
 
-## 26. Alternative designs
+Every trade-off has a rejected alternative with a reason. The design does not present one option as universally correct — it presents the chosen option, the rejected alternative, and the workload-specific reason for the choice. This is what makes the design defensible in a review: the reviewer can challenge any decision and find the reasoning documented.
 
+## 26. Alternative designs
 No retrieval (hallucination). Re-embed every query (cost). Ungrounded refusal (poor UX).
 
-## 27. Interview discussion points
+The alternative designs are genuine architectures that would work under different constraints. They were rejected for this workload because of specific requirements — latency SLO, cost budget, consistency need — that make them inferior here but not universally inferior. Understanding why an alternative was rejected is as important as understanding why the chosen design was selected.
 
+## 27. Interview discussion points
 Clarify corpus scale, latency, grounding. Surface retrieve+generate, citations, caching, graceful degradation.
+
+In an interview, the strongest candidates clarify ambiguity before designing, surface the read-write ratio and the binding resource, design the hot path deeply rather than just drawing boxes, discuss failure modes explicitly, and offer an alternative with a reason. The weakest candidates draw boxes before clarifying scope, name a vendor product as the architecture, and skip failure modes entirely.
 
 ## 28. Original Mermaid diagrams
 Standalone sources under `diagrams/case-studies/rag-platform/`: `context.mmd`, `request-sequence.mmd`, `failure-flow.mmd`, `scaling-evolution.mmd`. The diagrams are embedded in their respective sections: architecture in section 11, request flow in section 12, failure scenarios in section 19, and scaling stages in section 24.

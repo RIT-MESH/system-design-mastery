@@ -17,6 +17,7 @@ playback, per-video metadata, basic DRM-ready hooks, watch analytics.
 **Out (v1):** live streaming, user-generated social features, ad insertion, full DRM
 license server — noted as scaling stages.
 
+These boundaries are deliberate. Including more in the first version would spread effort thin and delay shipping a working core. Each excluded feature — noted as a scaling stage — is a candidate for the next iteration once the core loop is proven in production and the team has operational confidence in the baseline architecture.
 
 ## 3. Functional requirements
 - The system **shall** accept an upload and store it durably.
@@ -161,6 +162,7 @@ pattern, cost); **rejected: a single origin without CDN** (egress cost, latency)
   storage handles distribution internally.
 - Metadata sharded by `video_id`; analytics partitioned by `(video_id, ts)`.
 
+The partition key co-locates related data so queries do not fan out across shards, while distributing load evenly so no single shard is hot. Consistent hashing with virtual nodes minimizes data movement when nodes are added or removed. A hot key — a viral entity or a giant tenant — is mitigated by caching, extra replication, or key splitting, not by adding more shards.
 
 ## 17. Replication strategy
 - Object storage provides durability internally (erasure coding across facilities) — no app

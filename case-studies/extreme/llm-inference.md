@@ -55,6 +55,8 @@ domain).
 - Input/output text is small (~KBs/request); bandwidth is trivial vs GPU compute. The
   binding resource is GPU compute, not network.
 
+Bandwidth is request rate multiplied by average payload size for ingress, and response rate multiplied by response size for egress. CDN and edge caching reduce origin egress. Compression reduces bandwidth by 50-80 percent where applicable. For Large-Language-Model Inference Platform, bandwidth may or may not be the binding constraint — compare it against compute and storage to find out.
+
 ## 9. API design
 | Method | Path | Request | Response |
 |--------|------|---------|----------|
