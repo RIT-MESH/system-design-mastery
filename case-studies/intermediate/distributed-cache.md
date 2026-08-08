@@ -182,12 +182,21 @@ by extra replication, not by re-sharding (sharding can't fix a single hot key).
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  F{"Failure"}
-  F -->|"primary down"| Promote["next replica -> primary"]
-  F -->|"replica down"| Recruit["recruit + backfill"]
-  F -->|"split"| Side["each side serves owned keys"]
-  F -->|"hot key"| Extra["extra read replicas"]
-  Promote & Recruit --> Heal["re-merge on heal"]
+  F1["Failure Response"]
+  M2["failover or degrade"]
+  F1 --> M2
+  F3["--------- ---------"]
+  M4["failover or degrade"]
+  F3 --> M4
+  F5["Primary down Promote next replica to primary"]
+  M6["failover or degrade"]
+  F5 --> M6
+  F7["recruit a new replica"]
+  M8["failover or degrade"]
+  F7 --> M8
+  F9["Replica down Recruit another node as replica"]
+  M10["failover or degrade"]
+  F9 --> M10
 ```
 
 

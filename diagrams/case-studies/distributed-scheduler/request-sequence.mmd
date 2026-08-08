@@ -2,10 +2,17 @@
 sequenceDiagram
   participant P0 as Jobs store
   participant P1 as Leader-elected scheduler
-  P0 ->> P1: query
+  participant P2 as Execute job
+  participant P3 as reassign lease
+  P0 ->> P1: submit request
+  P1 ->> P2: validate and process
+  P2 ->> P3: query or persist data
+  P3 -->> P2: result
+  P2 -->> P1: response
   P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
+  alt operation succeeds
+    P0 -->> P0: confirm to user
+  else operation fails
+    P3 -->> P3: log error and retry
+    P0 -->> P0: return error or fallback
   end

@@ -76,26 +76,27 @@ Order -> matching engine matches against the book in price-time priority -> trad
 ```mermaid
 %% created-for: system-design-mastery
 sequenceDiagram
-  participant C0 as Order entry
-  participant C1 as Matching engine
-  participant C2 as Order book, in-memory
-  participant C3 as Trades
-  participant C4 as Clearing positions
-  C0 ->> C1: send request
-  C1 ->> C2: validate and process
-  C2 ->> C3: query or persist
-  C3 ->> C4: acknowledge
-  C4 -->> C3: result
-  C3 -->> C2: response
-  C2 -->> C1: response
-  C1 -->> C0: response
+  participant P0 as Order entry
+  participant P1 as Matching engine
+  participant P2 as Order book, in-memory
+  participant P3 as Trades
+  participant P4 as Clearing positions
+  P0 ->> P1: submit request
+  P1 ->> P2: validate and process
+  P2 ->> P3: query or persist data
+  P3 ->> P4: acknowledge write
+  P4 -->> P3: result
+  P3 -->> P2: response
+  P2 -->> P1: response
+  P1 -->> P0: response
   alt operation succeeds
-    C0 -->> C0: confirm
+    P0 -->> P0: confirm to user
   else operation fails
-    C4 -->> C4: log error
-    C0 -->> C0: retry with backoff
+    P4 -->> P4: log error and retry
+    P0 -->> P0: return error or fallback
   end
 ```
+
 
 ## 13. Component responsibilities
 Order entry, matching engine, order book (in-memory), clearing, market-data fan-out.

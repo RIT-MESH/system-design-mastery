@@ -74,17 +74,18 @@ Request -> router evaluates task, tokens, privacy -> cheapest capable model -> o
 ```mermaid
 %% created-for: system-design-mastery
 sequenceDiagram
-  participant C0 as Router complexity or cos
-  participant C1 as Cost budget
-  C0 ->> C1: send request
-  C1 -->> C0: result
+  participant P0 as Router complexity or cos
+  participant P1 as Cost budget
+  P0 ->> P1: submit request
+  P1 -->> P0: result
   alt operation succeeds
-    C0 -->> C0: confirm
+    P0 -->> P0: confirm to user
   else operation fails
-    C1 -->> C1: log error
-    C0 -->> C0: retry with backoff
+    P1 -->> P1: log error and retry
+    P0 -->> P0: return error or fallback
   end
 ```
+
 
 ## 13. Component responsibilities
 Model registry, router, cost tracker, budget enforcer, failover, audit.

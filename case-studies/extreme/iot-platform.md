@@ -72,26 +72,27 @@ Devices connect (when online), push telemetry -> gateway updates the twin + stor
 ```mermaid
 %% created-for: system-design-mastery
 sequenceDiagram
-  participant C0 as Devices, intermittent
-  participant C1 as IoT gateway broker
-  participant C2 as Digital twins
-  participant C3 as Apps analytics
-  participant C4 as Telemetry -> cold tier
-  C0 ->> C1: send request
-  C1 ->> C2: validate and process
-  C2 ->> C3: query or persist
-  C3 ->> C4: acknowledge
-  C4 -->> C3: result
-  C3 -->> C2: response
-  C2 -->> C1: response
-  C1 -->> C0: response
+  participant P0 as Devices, intermittent
+  participant P1 as IoT gateway broker
+  participant P2 as Digital twins
+  participant P3 as Apps analytics
+  participant P4 as Telemetry -> cold tier
+  P0 ->> P1: submit request
+  P1 ->> P2: validate and process
+  P2 ->> P3: query or persist data
+  P3 ->> P4: acknowledge write
+  P4 -->> P3: result
+  P3 -->> P2: response
+  P2 -->> P1: response
+  P1 -->> P0: response
   alt operation succeeds
-    C0 -->> C0: confirm
+    P0 -->> P0: confirm to user
   else operation fails
-    C4 -->> C4: log error
-    C0 -->> C0: retry with backoff
+    P4 -->> P4: log error and retry
+    P0 -->> P0: return error or fallback
   end
 ```
+
 
 ## 13. Component responsibilities
 Device gateway/broker, twin store, telemetry store, command queue, fan-out analytics.

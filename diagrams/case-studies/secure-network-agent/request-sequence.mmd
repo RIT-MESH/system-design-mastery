@@ -1,15 +1,21 @@
 %% created-for: system-design-mastery
 sequenceDiagram
-  participant P0 as Client
-  participant P1 as Secure Network Agent
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
-  P2 ->> P1: data
+  participant P0 as Agent planner-executor
+  participant P1 as AI safety policy gateway
+  participant P2 as Read and diagnostic tool
+  participant P3 as Draft change
+  participant P4 as Approval workflow
+  P0 ->> P1: submit request
+  P1 ->> P2: validate and process
+  P2 ->> P3: query or persist data
+  P3 ->> P4: acknowledge write
+  P4 -->> P3: result
+  P3 -->> P2: response
   P2 -->> P1: response
   P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
+  alt operation succeeds
+    P0 -->> P0: confirm to user
+  else operation fails
+    P4 -->> P4: log error and retry
+    P0 -->> P0: return error or fallback
   end

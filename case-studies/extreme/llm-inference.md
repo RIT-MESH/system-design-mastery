@@ -169,12 +169,23 @@ failover = re-route to another replica (and, if needed, scale up).
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  F{"Failure"}
-  F -->|"GPU crash"| Reroute["re-route in-flight; replace replica"]
-  F -->|"scarcity"| Four["429 - graceful, bounded queue"]
-  F -->|"cold start"| Floor["warm-floor replicas; scale up early"]
-  F -->|"quota store down"| Open["fail-open with cap + reconcile"]
+  F1["Failure Response"]
+  M2["failover or degrade"]
+  F1 --> M2
+  F3["--------- ---------"]
+  M4["failover or degrade"]
+  F3 --> M4
+  F5["GPU replica crashes Router re-routes in-fligh"]
+  M6["failover or degrade"]
+  F5 --> M6
+  F7["autoscaler replaces it"]
+  M8["failover or degrade"]
+  F7 --> M8
+  F9["GPU scarcity no capacity Return 429 graceful"]
+  M10["failover or degrade"]
+  F9 --> M10
 ```
+
 
 ## 20. Reliability strategy
 - SLI: first-token latency, inter-token latency, 429 vs 5xx rate; SLO 99.9% availability.

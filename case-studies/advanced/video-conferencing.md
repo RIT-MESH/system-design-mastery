@@ -70,23 +70,24 @@ Participants signal to a room -> media sent to an SFU (not a mesh) -> SFU select
 ```mermaid
 %% created-for: system-design-mastery
 sequenceDiagram
-  participant C0 as Selective forwarding uni
-  participant C1 as Signaling
-  participant C2 as Room svc
-  participant C3 as Presence
-  C0 ->> C1: send request
-  C1 ->> C2: validate and process
-  C2 ->> C3: query or persist
-  C3 -->> C2: result
-  C2 -->> C1: response
-  C1 -->> C0: response
+  participant P0 as Selective forwarding uni
+  participant P1 as Signaling
+  participant P2 as Room svc
+  participant P3 as Presence
+  P0 ->> P1: submit request
+  P1 ->> P2: validate and process
+  P2 ->> P3: query or persist data
+  P3 -->> P2: result
+  P2 -->> P1: response
+  P1 -->> P0: response
   alt operation succeeds
-    C0 -->> C0: confirm
+    P0 -->> P0: confirm to user
   else operation fails
-    C3 -->> C3: log error
-    C0 -->> C0: retry with backoff
+    P3 -->> P3: log error and retry
+    P0 -->> P0: return error or fallback
   end
 ```
+
 
 ## 13. Component responsibilities
 Signaling, room service, presence, SFU (media), recording (optional).

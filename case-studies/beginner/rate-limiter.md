@@ -77,23 +77,24 @@ consume and allow; else return 429 with Retry-After.
 ```mermaid
 %% created-for: system-design-mastery
 sequenceDiagram
-  participant C0 as Gateway
-  participant C1 as Rate limiter in-process
-  participant C2 as Counter bucket store
-  participant C3 as Backend
-  C0 ->> C1: send request
-  C1 ->> C2: validate and process
-  C2 ->> C3: query or persist
-  C3 -->> C2: result
-  C2 -->> C1: response
-  C1 -->> C0: response
+  participant P0 as Gateway
+  participant P1 as Rate limiter - in-proces
+  participant P2 as Counter bucket store
+  participant P3 as Backend
+  P0 ->> P1: submit request
+  P1 ->> P2: validate and process
+  P2 ->> P3: query or persist data
+  P3 -->> P2: result
+  P2 -->> P1: response
+  P1 -->> P0: response
   alt operation succeeds
-    C0 -->> C0: confirm
+    P0 -->> P0: confirm to user
   else operation fails
-    C3 -->> C3: log error
-    C0 -->> C0: retry with backoff
+    P3 -->> P3: log error and retry
+    P0 -->> P0: return error or fallback
   end
 ```
+
 
 ## 13. Component responsibilities
 Gateway: enforce the limit decision. Limiter: bucket logic. Store: shared counters across

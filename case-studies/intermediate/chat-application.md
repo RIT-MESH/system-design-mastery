@@ -81,26 +81,27 @@ REST on scroll.
 ```mermaid
 %% created-for: system-design-mastery
 sequenceDiagram
-  participant C0 as Connection gateway<br >
-  participant C1 as Presence store
-  participant C2 as Message service
-  participant C3 as Message store
-  participant C4 as Fanout channel router
-  C0 ->> C1: send request
-  C1 ->> C2: validate and process
-  C2 ->> C3: query or persist
-  C3 ->> C4: acknowledge
-  C4 -->> C3: result
-  C3 -->> C2: response
-  C2 -->> C1: response
-  C1 -->> C0: response
+  participant P0 as Connection gateway<br >
+  participant P1 as Presence store
+  participant P2 as Message service
+  participant P3 as Message store
+  participant P4 as Fanout channel router
+  P0 ->> P1: submit request
+  P1 ->> P2: validate and process
+  P2 ->> P3: query or persist data
+  P3 ->> P4: acknowledge write
+  P4 -->> P3: result
+  P3 -->> P2: response
+  P2 -->> P1: response
+  P1 -->> P0: response
   alt operation succeeds
-    C0 -->> C0: confirm
+    P0 -->> P0: confirm to user
   else operation fails
-    C4 -->> C4: log error
-    C0 -->> C0: retry with backoff
+    P4 -->> P4: log error and retry
+    P0 -->> P0: return error or fallback
   end
 ```
+
 
 ## 13. Component responsibilities
 Connection gateway: hold connections (stateful, async). Message service: persist + fanout.

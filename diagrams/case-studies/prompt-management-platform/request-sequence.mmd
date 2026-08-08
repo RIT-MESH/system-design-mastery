@@ -1,14 +1,21 @@
 %% created-for: system-design-mastery
 sequenceDiagram
-  participant P0 as Client
-  participant P1 as Prompt-Management Platfo
-  participant P2 as Store
-  P0 ->> P1: query
-  P1 ->> P2: look up or fetch
+  participant P0 as Version and eval
+  participant P1 as Change review
+  participant P2 as Deploy or A B test
+  participant P3 as Monitor performance
+  participant P4 as Rollback
+  P0 ->> P1: submit request
+  P1 ->> P2: validate and process
+  P2 ->> P3: query or persist data
+  P3 ->> P4: acknowledge write
+  P4 -->> P3: result
+  P3 -->> P2: response
   P2 -->> P1: response
   P1 -->> P0: response
-  alt success
-    P0 -->> P0: done
-  else failure
-    P0 -->> P0: retry or fallback
+  alt operation succeeds
+    P0 -->> P0: confirm to user
+  else operation fails
+    P4 -->> P4: log error and retry
+    P0 -->> P0: return error or fallback
   end

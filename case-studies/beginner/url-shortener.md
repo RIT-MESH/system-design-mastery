@@ -233,12 +233,21 @@ adding shards (sharding doesn't fix a single hot key).
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  F{"Failure"}
-  F -->|"KV leader down"| Promote["promote follower"]
-  F -->|"cache down"| Direct["resolve from KV"]
-  F -->|"edge down"| GW["fall through to origin"]
-  F -->|"analytics down"| Lag["counts lag, redirect ok"]
-  Promote --> OK["redirects via cache during switch"]
+  F1["Failure System response"]
+  M2["failover or degrade"]
+  F1 --> M2
+  F3["--------- ------------------"]
+  M4["failover or degrade"]
+  F3 --> M4
+  F5["A KV shard leader down Promote a follower"]
+  M6["failover or degrade"]
+  F5 --> M6
+  F7["redirects continue from edge cache"]
+  M8["failover or degrade"]
+  F7 --> M8
+  F9["Edge cache unavailable Traffic falls through"]
+  M10["cache→KV"]
+  F9 --> M10
 ```
 
 

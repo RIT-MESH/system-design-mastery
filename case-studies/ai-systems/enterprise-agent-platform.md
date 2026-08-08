@@ -76,26 +76,27 @@ Goal -> supervisor decomposes -> routes to specialists -> each calls tools from 
 ```mermaid
 %% created-for: system-design-mastery
 sequenceDiagram
-  participant C0 as Supervisor
-  participant C1 as Specialist agents
-  participant C2 as Shared tool registry
-  participant C3 as Shared memory
-  participant C4 as Policy gateway
-  C0 ->> C1: send request
-  C1 ->> C2: validate and process
-  C2 ->> C3: query or persist
-  C3 ->> C4: acknowledge
-  C4 -->> C3: result
-  C3 -->> C2: response
-  C2 -->> C1: response
-  C1 -->> C0: response
+  participant P0 as Supervisor
+  participant P1 as Specialist agents
+  participant P2 as Shared tool registry
+  participant P3 as Shared memory
+  participant P4 as Policy gateway
+  P0 ->> P1: submit request
+  P1 ->> P2: validate and process
+  P2 ->> P3: query or persist data
+  P3 ->> P4: acknowledge write
+  P4 -->> P3: result
+  P3 -->> P2: response
+  P2 -->> P1: response
+  P1 -->> P0: response
   alt operation succeeds
-    C0 -->> C0: confirm
+    P0 -->> P0: confirm to user
   else operation fails
-    C4 -->> C4: log error
-    C0 -->> C0: retry with backoff
+    P4 -->> P4: log error and retry
+    P0 -->> P0: return error or fallback
   end
 ```
+
 
 ## 13. Component responsibilities
 Agent builder, supervisor, specialist agents, shared tool registry, shared memory (vector + KV), policy gateway, approval workflow, audit.

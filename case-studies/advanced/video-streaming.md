@@ -192,11 +192,21 @@ For Video-Streaming Platform, the partition key balances query locality with eve
 ```mermaid
 %% created-for: system-design-mastery
 flowchart LR
-  F{"Failure"}
-  F -->|"worker dies"| Req["requeue, idempotent re-transcode"]
-  F -->|"origin down"| Edge["edge serves cache; failover origin"]
-  F -->|"edge down"| Alt["alternate edge/origin"]
-  F -->|"upload part fails"| Res["multipart resume from part"]
+  F1["Failure Response"]
+  M2["failover or degrade"]
+  F1 --> M2
+  F3["--------- ---------"]
+  M4["failover or degrade"]
+  F3 --> M4
+  F5["Transcode worker dies mid-job Requeue"]
+  M6["failover or degrade"]
+  F5 --> M6
+  F7["renditions overwrite idempotent"]
+  M8["failover or degrade"]
+  F7 --> M8
+  F9["Origin region down Edge keeps serving cached"]
+  M10["failover or degrade"]
+  F9 --> M10
 ```
 
 

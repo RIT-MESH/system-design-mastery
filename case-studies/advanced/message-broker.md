@@ -74,26 +74,27 @@ Produce: route by key to a partition leader, append, replicate to followers, ack
 ```mermaid
 %% created-for: system-design-mastery
 sequenceDiagram
-  participant C0 as Producers
-  participant C1 as Partitioned logs RF 3
-  participant C2 as Consumer group A
-  participant C3 as Consumer group B
-  participant C4 as Object storage
-  C0 ->> C1: send request
-  C1 ->> C2: validate and process
-  C2 ->> C3: query or persist
-  C3 ->> C4: acknowledge
-  C4 -->> C3: result
-  C3 -->> C2: response
-  C2 -->> C1: response
-  C1 -->> C0: response
+  participant P0 as Producers
+  participant P1 as Partitioned logs - RF 3
+  participant P2 as Consumer group A
+  participant P3 as Consumer group B
+  participant P4 as Object storage
+  P0 ->> P1: submit request
+  P1 ->> P2: validate and process
+  P2 ->> P3: query or persist data
+  P3 ->> P4: acknowledge write
+  P4 -->> P3: result
+  P3 -->> P2: response
+  P2 -->> P1: response
+  P1 -->> P0: response
   alt operation succeeds
-    C0 -->> C0: confirm
+    P0 -->> P0: confirm to user
   else operation fails
-    C4 -->> C4: log error
-    C0 -->> C0: retry with backoff
+    P4 -->> P4: log error and retry
+    P0 -->> P0: return error or fallback
   end
 ```
+
 
 ## 13. Component responsibilities
 Brokers (partition leaders/followers), partition log store, consumer-group coordinator (offsets), tiering job, controller (metadata).

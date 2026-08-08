@@ -83,26 +83,27 @@ Inventory + firmware tracking -> planner checks targets/advisories/compatibility
 ```mermaid
 %% created-for: system-design-mastery
 sequenceDiagram
-  participant C0 as Inventory firmware track
-  participant C1 as Upgrade planner risk ana
-  participant C2 as Approval gate
-  participant C3 as Config backup checksum
-  participant C4 as Execute upgrade
-  C0 ->> C1: send request
-  C1 ->> C2: validate and process
-  C2 ->> C3: query or persist
-  C3 ->> C4: acknowledge
-  C4 -->> C3: result
-  C3 -->> C2: response
-  C2 -->> C1: response
-  C1 -->> C0: response
+  participant P0 as Inventory firmware track
+  participant P1 as Upgrade planner risk ana
+  participant P2 as Approval gate
+  participant P3 as Config backup checksum
+  participant P4 as Execute upgrade
+  P0 ->> P1: submit request
+  P1 ->> P2: validate and process
+  P2 ->> P3: query or persist data
+  P3 ->> P4: acknowledge write
+  P4 -->> P3: result
+  P3 -->> P2: response
+  P2 -->> P1: response
+  P1 -->> P0: response
   alt operation succeeds
-    C0 -->> C0: confirm
+    P0 -->> P0: confirm to user
   else operation fails
-    C4 -->> C4: log error
-    C0 -->> C0: retry with backoff
+    P4 -->> P4: log error and retry
+    P0 -->> P0: return error or fallback
   end
 ```
+
 
 ## 13. Component responsibilities
 Inventory service, firmware/advisory catalog, planner/risk engine, approval workflow, backup service, executor, monitor/validator, rollback, report.
